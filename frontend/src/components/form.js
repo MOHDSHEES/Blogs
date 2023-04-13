@@ -40,10 +40,10 @@ const Form = () => {
   }
 
   async function editBlog() {
-    const { data } = await axios.post("/api/blog/titles");
-    setTitles(data);
     setFlag(1);
     setUpdateFlag(1);
+    const { data } = await axios.post("/api/blog/titles");
+    setTitles(data);
   }
   async function searchHandler(e, search) {
     e.preventDefault();
