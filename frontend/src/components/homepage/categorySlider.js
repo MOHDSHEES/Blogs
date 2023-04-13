@@ -1,0 +1,199 @@
+import React from "react";
+import OwlCarousel from "react-owl-carousel";
+// import "owl.carousel/dist/assets/owl.carousel.css";
+// import "owl.carousel/dist/assets/owl.theme.default.css";
+const CategorySlider = () => {
+  return (
+    <div class="pt-3">
+      {/* <div class="container-fluid">
+        <div class="container"> */}
+      <div class="row">
+        <div class="col-lg-6 py-3">
+          <div class="bg-light py-2 px-4 mb-3">
+            <h3 class="m-0">Business</h3>
+          </div>
+          <OwlCarousel
+            className="owl-theme owl-carousel-3 carousel-item-2 position-relative "
+            // style={{ marginLeft: "20px" }}
+            // items={2}
+            loop
+            autoplay
+            autoplayTimeout={3000}
+            dots={false}
+            margin={10}
+            nav={false}
+            responsive={{
+              0: {
+                items: 1,
+                dots: true,
+              },
+              480: {
+                items: 1,
+                dots: true,
+              },
+              768: {
+                items: 2,
+              },
+              992: {
+                items: 2,
+              },
+              1280: {
+                items: 2,
+              },
+            }}
+          >
+            {/* <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative"> */}
+            <div class="position-relative">
+              <img
+                class="img-fluid w-100"
+                src="img/news-500x280-1.jpg"
+                style={{ objectFit: "cover" }}
+              />
+              <div class="overlay position-relative bg-light">
+                <div class="mb-2" style={{ fontSize: "13px" }}>
+                  <a href="">Technology</a>
+                  <span class="px-1">/</span>
+                  <span>January 01, 2045</span>
+                </div>
+                <a class="h4 m-0" href="">
+                  The impact of changing consumer behaviors on business
+                  strategies
+                </a>
+              </div>
+            </div>
+            <div class="position-relative">
+              <img
+                class="img-fluid w-100"
+                src="img/news-500x280-2.jpg"
+                style={{ objectFit: "cover" }}
+              />
+              <div class="overlay position-relative bg-light">
+                <div class="mb-2" style={{ fontSize: "13px" }}>
+                  <a href="">Technology</a>
+                  <span class="px-1">/</span>
+                  <span>January 01, 2045</span>
+                </div>
+                <a class="h4 m-0" href="">
+                  The importance of digital marketing and SEO for businesses
+                </a>
+              </div>
+            </div>
+            <div class="position-relative">
+              <img
+                class="img-fluid w-100"
+                src="img/news-500x280-1.jpg"
+                style={{ objectFit: "cover" }}
+              />
+              <div class="overlay position-relative bg-light">
+                <div class="mb-2" style={{ fontSize: "13px" }}>
+                  <a href="">Technology</a>
+                  <span class="px-1">/</span>
+                  <span>January 01, 2045</span>
+                </div>
+                <a class="h4 m-0" href="">
+                  The role of artificial intelligence in streamlining business
+                  operations
+                </a>
+              </div>
+            </div>
+            {/* </div> */}
+          </OwlCarousel>
+        </div>
+        <div class="col-lg-6 py-3">
+          <div class="bg-light py-2 px-4 mb-3">
+            <h3 class="m-0">Technology</h3>
+          </div>
+          <OwlCarousel
+            className="owl-theme "
+            // style={{ marginLeft: "20px" }}
+            items={2}
+            loop
+            autoplay
+            autoplayTimeout={3000}
+            dots={false}
+            margin={10}
+            nav={false}
+            responsive={{
+              0: {
+                items: 1,
+                dots: true,
+              },
+              480: {
+                items: 1,
+                dots: true,
+              },
+              768: {
+                items: 2,
+              },
+              992: {
+                items: 2,
+              },
+              1280: {
+                items: 2,
+              },
+            }}
+          >
+            {/* <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative"> */}
+            <div class="position-relative">
+              <img
+                class="img-fluid w-100"
+                src="/img/news-500x280-4.jpg"
+                style={{ objectFit: "cover" }}
+              />
+              <div class="overlay position-relative bg-light">
+                <div class="mb-2" style={{ fontSize: "13px" }}>
+                  <a href="">Technology</a>
+                  <span class="px-1">/</span>
+                  <span>January 01, 2045</span>
+                </div>
+                <a class="h4 m-0" href="">
+                  The importance of software localization and
+                  internationalization
+                </a>
+              </div>
+            </div>
+            <div class="position-relative">
+              <img
+                class="img-fluid w-100"
+                src="img/news-500x280-1.jpg"
+                style={{ objectFit: "cover" }}
+              />
+              <div class="overlay position-relative bg-light">
+                <div class="mb-2" style={{ fontSize: "13px" }}>
+                  <a href="">Technology</a>
+                  <span class="px-1">/</span>
+                  <span>January 01, 2045</span>
+                </div>
+                <a class="h4 m-0" href="">
+                  The role of gamification in software development
+                </a>
+              </div>
+            </div>
+            <div class="position-relative">
+              <img
+                class="img-fluid w-100"
+                src="img/news-500x280-2.jpg"
+                style={{ objectFit: "cover" }}
+              />
+              <div class="overlay position-relative bg-light">
+                <div class="mb-2" style={{ fontSize: "13px" }}>
+                  <a href="">Technology</a>
+                  <span class="px-1">/</span>
+                  <span>January 01, 2045</span>
+                </div>
+                <a class="h4 m-0" href="">
+                  The importance of user research in UX design
+                </a>
+              </div>
+            </div>
+            {/* </div> */}
+          </OwlCarousel>
+        </div>
+      </div>
+    </div>
+    //   </div>
+    // </div>
+  );
+};
+
+export default CategorySlider;

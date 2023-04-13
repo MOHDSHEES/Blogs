@@ -1,0 +1,23 @@
+import React from "react";
+import Form from "./components/form";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import BlogDetail from "./components/blog/singleBlog/blogDetail";
+import Homepage from "./components/homepage/homepage";
+
+// import Sidebar from "./components/sidebar";
+
+function App() {
+  return (
+    <div>
+      {/* <Form /> */}
+
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/blog/:id" element={<BlogDetail />} />
+        <Route path="/add" element={<Form />} />
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
