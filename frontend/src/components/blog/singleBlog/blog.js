@@ -10,9 +10,11 @@ const Blog = () => {
   const { id } = useParams();
   // console.log(id);
   const [blog, setblog] = useState(null);
+  // console.log(blog);
   useEffect(() => {
     if (state && Object.keys(state).length !== 0) setblog(state);
     else if (id) {
+      // console.log("in");
       (async () => {
         const { data } = await axios.post("/api/find/blog/id", {
           id: id,
@@ -56,8 +58,9 @@ const Blog = () => {
                 return (
                   <div>
                     {bl.tag === "P" ? (
-                      <p>{bl.text}</p>
-                    ) : bl.tag === "IT" ? (
+                      bl.text.split("\n").map((str) => <p>{str}</p>)
+                    ) : // <p>{bl.text}</p>
+                    bl.tag === "IT" ? (
                       <>
                         {" "}
                         <img
@@ -65,7 +68,10 @@ const Blog = () => {
                           src={bl.img}
                           alt={bl.img}
                         />
-                        <p>{bl.text}</p>
+                        {bl.text.split("\n").map((str) => (
+                          <p>{str}</p>
+                        ))}
+                        {/* <p>{bl.text}</p> */}
                       </>
                     ) : bl.tag === "TI" ? (
                       <>
@@ -75,7 +81,11 @@ const Blog = () => {
                           src={bl.img}
                           alt={bl.img}
                         />
-                        <p>{bl.text}</p>
+                        <p>
+                          {bl.text.split("\n").map((str) => (
+                            <p>{str}</p>
+                          ))}
+                        </p>
                       </>
                     ) : (
                       bl.tag === "H" && <h4 class="mb-3">{bl.text}</h4>

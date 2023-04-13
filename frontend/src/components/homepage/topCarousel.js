@@ -3,6 +3,7 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const TopCarousel = () => {
   const [blogs, setblogs] = useState(null);
@@ -16,7 +17,7 @@ const TopCarousel = () => {
       // }
     })();
   }, []);
-  // console.log(blogs);
+  // console.log(blogs && blogs[0]);
   return (
     <div>
       {/* <div class="container-fluid py-3">
@@ -54,7 +55,12 @@ const TopCarousel = () => {
         >
           {blogs.map((blog) => {
             return (
-              <div id={blog._id} className="item">
+              <Link
+                to={"/blog/" + blog._id}
+                state={blog}
+                id={blog._id}
+                className="item"
+              >
                 <div class="d-flex">
                   <img
                     src={blog.mainImg}
@@ -73,7 +79,7 @@ const TopCarousel = () => {
                     </a>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
           {/* <div className="item">
