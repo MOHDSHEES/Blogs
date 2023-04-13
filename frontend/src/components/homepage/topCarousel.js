@@ -74,9 +74,9 @@ const TopCarousel = () => {
                     class="d-flex align-items-center bg-light px-3"
                     style={{ height: "80px", width: "80%" }}
                   >
-                    <a class="text-secondary font-weight-semi-bold" href="">
+                    <p class="text-secondary font-weight-semi-bold">
                       {blog.title}
-                    </a>
+                    </p>
                   </div>
                 </div>
               </Link>
