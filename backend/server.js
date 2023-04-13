@@ -38,9 +38,9 @@ app.use("/api", blogRoute);
 // app.use("/api/seller", sellerRoutes);
 // app.use("/api", emailRoutes);
 // app.use("/api/payment", paymentRoutes);
-// app.get("*", (req, res) =>
-//   res.sendFile(path.join(__dirname, "./frontend/build/index.html"))
-// );
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "./frontend/build/index.html"))
+);
 
 app.post("/api", async (req, res) => {
   console.log("test");
