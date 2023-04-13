@@ -215,6 +215,7 @@ const Form = () => {
                 value={title}
                 onChange={(e) => settitle(e.target.value)}
                 placeholder="Please enter the title of the blog..."
+                autocomplete="off"
                 required
               />
 
@@ -228,6 +229,7 @@ const Form = () => {
                 value={mainImg}
                 onChange={(e) => setmainImg(e.target.value)}
                 placeholder="Please enter the URL of main image..."
+                autocomplete="off"
                 required
               />
 
@@ -241,6 +243,7 @@ const Form = () => {
                 value={category}
                 onChange={(e) => setcategory(e.target.value)}
                 placeholder="Please enter the category of the blog..."
+                autocomplete="off"
                 required
               />
             </div>
@@ -294,6 +297,7 @@ const Form = () => {
                         value={bl.text || ""}
                         onChange={(e) => handleChange(idx, e)}
                         placeholder="Please enter the heading..."
+                        autocomplete="off"
                         required
                       />
                     </div>
@@ -331,6 +335,7 @@ const Form = () => {
                           value={bl.img || ""}
                           onChange={(e) => handleChange(idx, e, true)}
                           placeholder="Please enter the URL of image..."
+                          autocomplete="off"
                           required
                         />
                       </div>
@@ -368,6 +373,7 @@ const Form = () => {
                           value={bl.img || ""}
                           onChange={(e) => handleChange(idx, e, true)}
                           placeholder="Please enter the URL of image..."
+                          autocomplete="off"
                           required
                         />
                       </div>
