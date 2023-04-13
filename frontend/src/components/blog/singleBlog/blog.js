@@ -38,7 +38,7 @@ const Blog = () => {
       <div class="position-relative mb-3">
         <img
           class="img-fluid w-100"
-          src="/img/news-700x435-1.jpg"
+          src={blog && blog.mainImg}
           alt=""
           style={{ objectFit: "cover" }}
         />
@@ -62,7 +62,7 @@ const Blog = () => {
                         {" "}
                         <img
                           class="img-fluid w-50 float-left mr-4 mb-2"
-                          src="/img/news-500x280-1.jpg"
+                          src={bl.img}
                           alt={bl.img}
                         />
                         <p>{bl.text}</p>
@@ -72,7 +72,7 @@ const Blog = () => {
                         {" "}
                         <img
                           class="img-fluid w-50 float-right ml-4 mb-2"
-                          src="/img/news-500x280-2.jpg"
+                          src={bl.img}
                           alt={bl.img}
                         />
                         <p>{bl.text}</p>

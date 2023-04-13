@@ -65,6 +65,16 @@ router.post("/blog/titles", async (req, res) => {
     res.send({ msg: error.message });
   }
 });
+// 5 recent blogs
+// db.collection.find().limit(5).sort({$natural:-1})
+router.post("/recent/blogs", async (req, res) => {
+  try {
+    const resu = await Blogs.find().limit(6).sort({ $natural: -1 });
+    res.json(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // find blog by title
 router.post("/find/blog", async (req, res) => {
   try {

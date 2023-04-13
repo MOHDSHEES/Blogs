@@ -62,7 +62,7 @@ const NavBar = ({ searchHandler }) => {
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
-                  Offcanvas
+                  OFFTHEWEB
                 </Offcanvas.Title>
                 {/* <button
                   type="button"
@@ -78,7 +78,7 @@ const NavBar = ({ searchHandler }) => {
                   // style={{ maxHeight: "100px" }}
                   // navbarScroll
                 >
-                  <Nav.Link className="nav-item  active" href="#action1">
+                  <Nav.Link className="nav-item  active" href="/">
                     Home
                   </Nav.Link>
                   <Nav.Link href="#action3" className="nav-item ">
