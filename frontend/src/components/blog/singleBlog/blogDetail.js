@@ -62,8 +62,8 @@ const BlogDetail = () => {
         </Alert>
       )}
       <Breadcrumb />
-      <div class="container-fluid py-3">
-        <div class="container">
+      <div style={{ padding: "1rem 15px" }} class="container-fluid ">
+        <div style={{ padding: "0" }} class="container">
           <div class="row">
             <div class="col-lg-8">
               <Blog />
