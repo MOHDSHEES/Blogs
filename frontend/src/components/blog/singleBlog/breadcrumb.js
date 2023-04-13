@@ -3,8 +3,8 @@ import React from "react";
 const Breadcrumb = () => {
   return (
     <div>
-      <div class="container-fluid">
-        <div class="container">
+      <div style={{ padding: "1rem 15px" }} class="container-fluid">
+        <div style={{ padding: "0" }} class="container">
           <nav class="breadcrumb bg-transparent m-0 p-0">
             <a class="breadcrumb-item a" href="#!">
               Home
