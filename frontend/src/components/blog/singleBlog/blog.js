@@ -9,17 +9,17 @@ const Blog = () => {
   // console.log(state);
   const { id } = useParams();
   // console.log(id);
-  const [data, setData] = useState(null);
+  const [blog, setblog] = useState(null);
   useEffect(() => {
-    if (state && Object.keys(state).length !== 0) setData(state);
+    if (state && Object.keys(state).length !== 0) setblog(state);
     else if (id) {
       (async () => {
         const { data } = await axios.post("/api/find/blog/id", {
           id: id,
         });
-        if (data && data[0]) setData(data[0]);
+        if (data && data[0]) setblog(data[0]);
         else {
-          // navigate("/");
+          navigate("/");
         }
       })();
     }
@@ -44,15 +44,15 @@ const Blog = () => {
         />
         <div class="overlay position-relative bg-light">
           <div class="mb-3">
-            <a href="#!">{data && data.category}</a>
+            <a href="#!">{blog && blog.category}</a>
             <span class="px-1">/</span>
             <span>January 01, 2045</span>
           </div>
           <div>
-            <h3 class="mb-3">{data && data.title}</h3>
-            {data &&
-              data.blog &&
-              data.blog.map((bl) => {
+            <h3 class="mb-3">{blog && blog.title}</h3>
+            {blog &&
+              blog.blog &&
+              blog.blog.map((bl) => {
                 return (
                   <div>
                     {bl.tag === "P" ? (
