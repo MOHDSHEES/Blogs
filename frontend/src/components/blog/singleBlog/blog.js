@@ -58,18 +58,16 @@ const Blog = () => {
                 return (
                   <div>
                     {bl.tag === "P" ? (
-                      bl.text
-                        .split("\n")
-                        .map((str) => (
-                          <p
-                            style={{
-                              whiteSpace: "break-spaces",
-                              textAlign: "justify",
-                            }}
-                          >
-                            {str}
-                          </p>
-                        ))
+                      bl.text.split("\n").map((str) => (
+                        <p
+                          style={{
+                            // whiteSpace: "break-spaces",
+                            textAlign: "justify",
+                          }}
+                        >
+                          {str}
+                        </p>
+                      ))
                     ) : // <p>{bl.text}</p>
                     bl.tag === "IT" ? (
                       <>
@@ -82,7 +80,7 @@ const Blog = () => {
                         {bl.text.split("\n").map((str) => (
                           <p
                             style={{
-                              whiteSpace: "break-spaces",
+                              // whiteSpace: "break-spaces",
                               textAlign: "justify",
                             }}
                           >
@@ -102,7 +100,7 @@ const Blog = () => {
                         {bl.text.split("\n").map((str) => (
                           <p
                             style={{
-                              whiteSpace: "break-spaces",
+                              // whiteSpace: "break-spaces",
                               textAlign: "justify",
                             }}
                           >
