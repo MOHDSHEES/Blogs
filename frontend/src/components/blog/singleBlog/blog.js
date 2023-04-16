@@ -61,7 +61,14 @@ const Blog = () => {
                       bl.text
                         .split("\n")
                         .map((str) => (
-                          <p style={{ whiteSpace: "break-spaces" }}>{str}</p>
+                          <p
+                            style={{
+                              whiteSpace: "break-spaces",
+                              textAlign: "justify",
+                            }}
+                          >
+                            {str}
+                          </p>
                         ))
                     ) : // <p>{bl.text}</p>
                     bl.tag === "IT" ? (
@@ -73,7 +80,14 @@ const Blog = () => {
                           alt={bl.img}
                         />
                         {bl.text.split("\n").map((str) => (
-                          <p style={{ whiteSpace: "break-spaces" }}>{str}</p>
+                          <p
+                            style={{
+                              whiteSpace: "break-spaces",
+                              textAlign: "justify",
+                            }}
+                          >
+                            {str}
+                          </p>
                         ))}
                         {/* <p>{bl.text}</p> */}
                       </>
@@ -86,7 +100,14 @@ const Blog = () => {
                           alt={bl.img}
                         />
                         {bl.text.split("\n").map((str) => (
-                          <p style={{ whiteSpace: "break-spaces" }}>{str}</p>
+                          <p
+                            style={{
+                              whiteSpace: "break-spaces",
+                              textAlign: "justify",
+                            }}
+                          >
+                            {str}
+                          </p>
                         ))}
                       </>
                     ) : (

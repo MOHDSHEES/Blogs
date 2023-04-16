@@ -65,7 +65,7 @@ router.post("/blog/titles", async (req, res) => {
     res.send({ msg: error.message });
   }
 });
-// 5 recent blogs
+// 6 recent blogs
 // db.collection.find().limit(5).sort({$natural:-1})
 router.post("/recent/blogs", async (req, res) => {
   try {

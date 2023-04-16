@@ -15,7 +15,7 @@ const Breadcrumb = () => {
             <a class="breadcrumb-item a" href="#!">
               Technology
             </a>
-            <span class="breadcrumb-item">News Title</span>
+            {/* <span class="breadcrumb-item">News Title</span> */}
           </nav>
         </div>
       </div>
