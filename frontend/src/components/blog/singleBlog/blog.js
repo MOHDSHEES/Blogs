@@ -86,7 +86,7 @@ const Blog = () => {
                               textAlign: "justify",
                             }}
                           >
-                            {str}
+                            {parse(str)}
                           </p>
                         ))}
                         {/* <p>{bl.text}</p> */}
@@ -106,14 +106,14 @@ const Blog = () => {
                               textAlign: "justify",
                             }}
                           >
-                            {str}
+                            {parse(str)}
                           </p>
                         ))}
                       </>
                     ) : (
                       bl.tag === "H" && (
                         <h4 style={{ whiteSpace: "break-spaces" }} class="mb-3">
-                          {bl.text}
+                          {parse(bl.text)}
                         </h4>
                       )
                     )}
