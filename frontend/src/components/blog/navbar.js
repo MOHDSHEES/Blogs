@@ -8,7 +8,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const NavBar = ({ searchHandler }) => {
   function searchHandle(e, search) {
@@ -43,12 +43,12 @@ const NavBar = ({ searchHandler }) => {
           <Container fluid>
             <Navbar.Brand className="navbar-brand d-block d-lg-none" href="#">
               {" "}
-              <Link to="/">
+              <a href="/">
                 <h2 style={{ fontWeight: "600" }} class="m-0  text-uppercase">
                   <span class="text-primary">OFF</span>THE
                   <span class="text-primary">WEB</span>
                 </h2>
-              </Link>
+              </a>
             </Navbar.Brand>
             <Navbar.Toggle
               onClick={() => setExpanded(expanded ? false : "expanded")}

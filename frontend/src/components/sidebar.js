@@ -41,11 +41,11 @@ const Sidebar = ({ onClickH, onClickIT, onClickP, onClickTI, onClickEdit }) => {
           <nav class="nav">
             <div>
               {" "}
-              <Link to="/" class="nav_logo">
+              <a href="/" class="nav_logo">
                 {" "}
                 <i class="bx bx-layer nav_logo-icon"></i>{" "}
                 <span class="nav_logo-name">Off The Web</span>{" "}
-              </Link>
+              </a>
               <div class="nav_list">
                 <Link onClick={onClickH} class="nav_link">
                   {" "}

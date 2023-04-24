@@ -4,82 +4,87 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import TopCarouselSkeleton from "../skeleton/topCarouselSkeleton";
 
 const TopCarousel = () => {
   const [blogs, setblogs] = useState(null);
+  const [loading, setloading] = useState(false);
   useEffect(() => {
     (async () => {
+      setloading(true);
       const { data } = await axios.post("/api/recent/blogs");
       // console.log(data);
       if (data && data.length) setblogs(data);
+      setloading(false);
     })();
   }, []);
   // console.log(blogs && blogs[0]);
   return (
     <div>
-      {/* <div class="container-fluid py-3">
-        <div class="container"> */}
-      {blogs && (
-        <OwlCarousel
-          className="owl-theme "
-          // style={{ marginLeft: "20px" }}
-          items={3}
-          loop
-          autoplay
-          autoplayTimeout={3000}
-          // dots={false}
-          margin={10}
-          nav={false}
-          responsive={{
-            0: {
-              items: 1,
-              dots: false,
-            },
-            480: {
-              items: 1,
-              dots: false,
-            },
-            768: {
-              items: 2,
-            },
-            992: {
-              items: 3,
-            },
-            1280: {
-              items: 3,
-            },
-          }}
-        >
-          {blogs.map((blog) => {
-            return (
-              <Link
-                to={"/blog/" + blog._id}
-                state={blog}
-                id={blog._id}
-                className="item"
-              >
-                <div class="d-flex">
-                  <img
-                    src={blog.mainImg}
-                    style={{
-                      width: "80px",
-                      height: "80px",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <div
-                    class="d-flex align-items-center bg-light px-3"
-                    style={{ height: "80px", width: "80%" }}
-                  >
-                    <p class="text-secondary font-weight-semi-bold">
-                      {blog.title}
-                    </p>
+      {loading ? (
+        <TopCarouselSkeleton />
+      ) : (
+        blogs && (
+          <OwlCarousel
+            className="owl-theme "
+            // style={{ marginLeft: "20px" }}
+            items={3}
+            loop
+            autoplay
+            autoplayTimeout={3000}
+            // dots={false}
+            margin={10}
+            nav={false}
+            responsive={{
+              0: {
+                items: 1,
+                dots: false,
+              },
+              480: {
+                items: 1,
+                dots: false,
+              },
+              768: {
+                items: 2,
+              },
+              992: {
+                items: 3,
+              },
+              1280: {
+                items: 3,
+              },
+            }}
+          >
+            {blogs.map((blog) => {
+              return (
+                <Link
+                  to={"/blog/" + blog._id}
+                  state={blog}
+                  id={blog._id}
+                  className="item"
+                >
+                  <div class="d-flex">
+                    <img
+                      src={blog.mainImg}
+                      style={{
+                        width: "80px",
+                        height: "80px",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <div
+                      class="d-flex align-items-center bg-light px-3"
+                      style={{ height: "80px", width: "80%" }}
+                    >
+                      <p class="text-secondary font-weight-semi-bold">
+                        {blog.title}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            );
-          })}
-          {/* <div className="item">
+                </Link>
+              );
+            })}
+            {/* <div className="item">
           <div class="d-flex">
             <img
               src="img/news-100x100-1.jpg"
@@ -95,7 +100,7 @@ const TopCarousel = () => {
             </div>
           </div>
         </div> */}
-          {/* <div className="item">
+            {/* <div className="item">
           <div class="d-flex">
             <img
               src="img/news-100x100-1.jpg"
@@ -111,7 +116,8 @@ const TopCarousel = () => {
             </div>
           </div>
         </div> */}
-        </OwlCarousel>
+          </OwlCarousel>
+        )
       )}
     </div>
     //   </div>
