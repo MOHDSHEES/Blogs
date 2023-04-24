@@ -8,13 +8,13 @@ import MainImgSlider from "./mainImgSlider";
 import TopCarousel from "./topCarousel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Alert from "react-bootstrap/Alert";
+// import Alert from "react-bootstrap/Alert";
 import { closeMessage } from "../functions/message";
 import { message } from "antd";
 // import CategorySkeleton from "../skeleton/categorySkeleton";
 
 const Homepage = () => {
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   async function searchHandler(search) {

@@ -70,6 +70,7 @@ const TopCarousel = ({ data }) => {
                   <div class="d-flex">
                     <img
                       src={blog.mainImg}
+                      alt="mainImg"
                       style={{
                         width: "80px",
                         height: "80px",
@@ -80,7 +81,10 @@ const TopCarousel = ({ data }) => {
                       class="d-flex align-items-center bg-light px-3"
                       style={{ height: "80px", width: "80%" }}
                     >
-                      <p class="text-secondary font-weight-semi-bold">
+                      <p
+                        style={{ marginBottom: 0, padding: "5px" }}
+                        class="text-secondary font-weight-semi-bold"
+                      >
                         {blog.title}
                       </p>
                     </div>

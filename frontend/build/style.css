@@ -171,6 +171,7 @@ a {
 }
 /* autocomplete */
 .no-suggestions {
+  background-color: white;
   position: absolute;
   color: #999;
   padding: 0.5rem;
