@@ -2,26 +2,30 @@ import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import axios from "axios";
+// import axios from "axios";
 import { Link } from "react-router-dom";
 import TopCarouselSkeleton from "../skeleton/topCarouselSkeleton";
 
-const TopCarousel = () => {
+const TopCarousel = ({ data }) => {
   const [blogs, setblogs] = useState(null);
-  const [loading, setloading] = useState(false);
+  // const [loading, setloading] = useState(false);
+
   useEffect(() => {
-    (async () => {
-      setloading(true);
-      const { data } = await axios.post("/api/recent/blogs");
-      // console.log(data);
-      if (data && data.length) setblogs(data);
-      setloading(false);
-    })();
-  }, []);
+    setblogs(data);
+  }, [data]);
+  // useEffect(() => {
+  //   (async () => {
+  //     setloading(true);
+  //     const { data } = await axios.post("/api/recent/blogs");
+  //     // console.log(data);
+  //     if (data && data.length) setblogs(data);
+  //     setloading(false);
+  //   })();
+  // }, []);
   // console.log(blogs && blogs[0]);
   return (
     <div>
-      {loading ? (
+      {!blogs ? (
         <TopCarouselSkeleton />
       ) : (
         blogs && (
