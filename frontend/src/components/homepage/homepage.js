@@ -19,6 +19,7 @@ const Homepage = () => {
     const { data } = await axios.post("/api/find/blog", {
       title: search,
     });
+
     // console.log(data);
     if (data.length) {
       const blog = data[0];
@@ -51,7 +52,15 @@ const Homepage = () => {
           <TopCarousel />
           <MainImgSlider />
           <Featured />
-          <CategorySlider />
+          <div class="pt-3">
+            <div class="row">
+              {["Technology", "cyber security", "Trending", "business"].map(
+                (category) => {
+                  return <CategorySlider category={category} />;
+                }
+              )}
+            </div>
+          </div>
         </div>
       </div>
       <Footer />

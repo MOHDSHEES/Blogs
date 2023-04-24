@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import parse from "html-react-parser";
 
 const Blog = () => {
   const navigate = useNavigate();
@@ -64,8 +65,9 @@ const Blog = () => {
                             // whiteSpace: "break-spaces",
                             textAlign: "justify",
                           }}
+                          // dangerouslySetInnerHTML={{ __html: str }}
                         >
-                          {str}
+                          {parse(str)}
                         </p>
                       ))
                     ) : // <p>{bl.text}</p>

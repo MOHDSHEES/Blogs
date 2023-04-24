@@ -12,9 +12,6 @@ const TopCarousel = () => {
       const { data } = await axios.post("/api/recent/blogs");
       // console.log(data);
       if (data && data.length) setblogs(data);
-      // else {
-      //   navigate("/");
-      // }
     })();
   }, []);
   // console.log(blogs && blogs[0]);

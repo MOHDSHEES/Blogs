@@ -75,6 +75,21 @@ router.post("/recent/blogs", async (req, res) => {
     res.send({ msg: error.message });
   }
 });
+
+// find blogs by category max:6
+router.post("/category/blogs", async (req, res) => {
+  try {
+    const resu = await Blogs.find({ category: req.body.category })
+      .limit(6)
+      .collation({
+        locale: "en",
+        strength: 2,
+      });
+    res.json(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // find blog by title
 router.post("/find/blog", async (req, res) => {
   try {

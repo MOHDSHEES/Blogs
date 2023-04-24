@@ -10059,3 +10059,10 @@ h6,
   padding: 0;
   list-style-type: none;
 }
+@media (max-width:768px) {
+  .overlay {
+  
+    padding: 30px 15px;
+  
+  }
+}
