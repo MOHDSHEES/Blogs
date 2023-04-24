@@ -9,6 +9,7 @@ import TopCarousel from "./topCarousel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
+// import CategorySkeleton from "../skeleton/categorySkeleton";
 
 const Homepage = () => {
   const [show, setShow] = useState(false);
@@ -54,6 +55,7 @@ const Homepage = () => {
           <Featured />
           <div class="pt-3">
             <div class="row">
+              {/* <CategorySkeleton /> */}
               {["Technology", "cyber security", "Trending", "business"].map(
                 (category) => {
                   return <CategorySlider category={category} />;

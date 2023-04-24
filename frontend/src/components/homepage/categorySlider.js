@@ -2,137 +2,93 @@ import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import CategorySkeleton from "../skeleton/categorySkeleton";
 
 const CategorySlider = ({ category }) => {
   //   console.log(category);
   const [blog, setblog] = useState(null);
+  const [loading, setloading] = useState(false);
   //   console.log(blog);
 
   useEffect(() => {
     (async () => {
+      setloading(true);
       const { data } = await axios.post("/api/category/blogs", {
         category: category,
       });
       // console.log(data);
       if (data && data.length) setblog(data);
+      setloading(false);
     })();
-  }, []);
+  }, [category]);
   return (
     <div class="col-lg-6 py-3">
-      {blog && blog.length && (
-        <>
-          <div class="bg-light py-2 px-4 mb-3">
-            <h3 class="m-0">{category}</h3>
-          </div>
+      {loading ? (
+        <CategorySkeleton />
+      ) : (
+        blog &&
+        blog.length && (
+          <>
+            <div class="bg-light py-2 px-4 mb-3">
+              <h3 class="m-0">{category}</h3>
+            </div>
 
-          <OwlCarousel
-            className="owl-theme owl-carousel-3 carousel-item-2 position-relative "
-            // style={{ marginLeft: "20px" }}
-            // items={2}
-            loop
-            autoplay
-            autoplayTimeout={3000}
-            dots={false}
-            margin={10}
-            nav={false}
-            responsive={{
-              0: {
-                items: 1,
-                dots: true,
-              },
-              480: {
-                items: 1,
-                dots: true,
-              },
-              768: {
-                items: 2,
-              },
-              992: {
-                items: 2,
-              },
-              1280: {
-                items: 2,
-              },
-            }}
-          >
-            {/* <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative"> */}
-            {blog.map((bl) => {
-              return (
-                <div id={bl._id} class="position-relative">
-                  <img
-                    class="img-fluid w-100"
-                    src={bl.mainImg}
-                    alt={bl.category}
-                    style={{ objectFit: "cover" }}
-                  />
-                  <div class="overlay position-relative bg-light">
-                    {/* <div class="mb-2" style={{ fontSize: "13px" }}>
+            <OwlCarousel
+              className="owl-theme owl-carousel-3 carousel-item-2 position-relative "
+              // style={{ marginLeft: "20px" }}
+              // items={2}
+              loop
+              autoplay
+              autoplayTimeout={3000}
+              dots={false}
+              margin={10}
+              nav={false}
+              responsive={{
+                0: {
+                  items: 1,
+                  dots: true,
+                },
+                480: {
+                  items: 1,
+                  dots: true,
+                },
+                768: {
+                  items: 2,
+                },
+                992: {
+                  items: 2,
+                },
+                1280: {
+                  items: 2,
+                },
+              }}
+            >
+              {/* <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative"> */}
+              {blog.map((bl) => {
+                return (
+                  <div id={bl._id} class="position-relative">
+                    <img
+                      class="img-fluid w-100"
+                      src={bl.mainImg}
+                      alt={bl.category}
+                      style={{ objectFit: "cover" }}
+                    />
+                    <div class="overlay position-relative bg-light">
+                      {/* <div class="mb-2" style={{ fontSize: "13px" }}>
             <a href="">Technology</a>
             <span class="px-1">/</span>
             <span>January 01, 2045</span>
           </div> */}
-                    <Link class="h4 m-0" to={"/blog/" + bl._id} state={bl}>
-                      {bl.title}
-                    </Link>
+                      <Link class="h4 m-0" to={"/blog/" + bl._id} state={bl}>
+                        {bl.title}
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-            {/* <div class="position-relative">
-              <img
-                class="img-fluid w-100"
-                src="img/news-500x280-1.jpg"
-                style={{ objectFit: "cover" }}
-              />
-              <div class="overlay position-relative bg-light">
-                <div class="mb-2" style={{ fontSize: "13px" }}>
-                  <a href="">Technology</a>
-                  <span class="px-1">/</span>
-                  <span>January 01, 2045</span>
-                </div>
-                <a class="h4 m-0" href="">
-                  The impact of changing consumer behaviors on business
-                  strategies
-                </a>
-              </div>
-            </div>
-            <div class="position-relative">
-              <img
-                class="img-fluid w-100"
-                src="img/news-500x280-2.jpg"
-                style={{ objectFit: "cover" }}
-              />
-              <div class="overlay position-relative bg-light">
-                <div class="mb-2" style={{ fontSize: "13px" }}>
-                  <a href="">Technology</a>
-                  <span class="px-1">/</span>
-                  <span>January 01, 2045</span>
-                </div>
-                <a class="h4 m-0" href="">
-                  The importance of digital marketing and SEO for businesses
-                </a>
-              </div>
-            </div>
-            <div class="position-relative">
-              <img
-                class="img-fluid w-100"
-                src="img/news-500x280-1.jpg"
-                style={{ objectFit: "cover" }}
-              />
-              <div class="overlay position-relative bg-light">
-                <div class="mb-2" style={{ fontSize: "13px" }}>
-                  <a href="">Technology</a>
-                  <span class="px-1">/</span>
-                  <span>January 01, 2045</span>
-                </div>
-                <a class="h4 m-0" href="">
-                  The role of artificial intelligence in streamlining business
-                  operations
-                </a>
-              </div>
-            </div> */}
-          </OwlCarousel>
-        </>
+                );
+              })}
+            </OwlCarousel>
+          </>
+        )
       )}
     </div>
     // <div class="col-lg-6 py-3">
