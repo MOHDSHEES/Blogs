@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../blog/navbar";
 import Topbar from "../blog/topbar";
 import Footer from "../footer/footer";
@@ -31,6 +31,19 @@ const Homepage = () => {
       setShow(true);
     }
   }
+
+  // for main Img slider recent blogs
+  const [blogs, setblogs] = useState(null);
+  const [loading, setloading] = useState(false);
+  useEffect(() => {
+    (async () => {
+      setloading(true);
+      const { data } = await axios.post("/api/recent/blogs");
+      // console.log(data);
+      if (data && data.length) setblogs(data);
+      setloading(false);
+    })();
+  }, []);
   return (
     <div>
       <Topbar />
@@ -51,7 +64,7 @@ const Homepage = () => {
       <div style={{ padding: "1rem 15px" }} class="container-fluid ">
         <div style={{ padding: "0" }} class="container">
           <TopCarousel />
-          <MainImgSlider />
+          <MainImgSlider data={blogs} />
           <Featured />
           <div class="pt-3">
             <div class="row">

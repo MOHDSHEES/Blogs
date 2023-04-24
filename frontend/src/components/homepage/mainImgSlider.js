@@ -1,28 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-const MainImgSlider = () => {
+const MainImgSlider = ({ data }) => {
+  // console.log(data);
+  useEffect(() => {
+    setblogs(data);
+  }, [data]);
+  const [blogs, setblogs] = useState(null);
+  // console.log(blogs);
   return (
     <div className="pt-3">
       {/* <div style={{ padding: "1rem 15px" }} class="container-fluid ">
         <div style={{ padding: "0" }} class="container"> */}
       <div class="row">
         <div class="col-lg-8">
-          <OwlCarousel
-            className="owl-theme "
-            // style={{ marginLeft: "20px" }}
-            items={1}
-            loop
-            autoplay
-            autoplayTimeout={3000}
-            // dots={false}
-            margin={10}
-            nav={false}
-          >
-            {/* <div class="owl-carousel owl-carousel-2 carousel-item-1 position-relative mb-3 mb-lg-0"> */}
-            <div
+          {!blogs ? (
+            <Skeleton
+              baseColor="#cdcbcb"
+              highlightColor="#e6e5e5"
+              // width={window.screen.width < 775 ? 280 : 490}
+              height={500}
+              duration={2}
+            />
+          ) : (
+            <OwlCarousel
+              className="owl-theme "
+              // style={{ marginLeft: "20px" }}
+              items={1}
+              loop
+              autoplay
+              autoplayTimeout={3000}
+              // dots={false}
+              margin={10}
+              nav={false}
+            >
+              {blogs.length
+                ? blogs.map((blog) => {
+                    return (
+                      <div
+                        key={blog._id}
+                        class="position-relative overflow-hidden"
+                        style={{ height: "435px" }}
+                      >
+                        <img
+                          class="img-fluid h-100"
+                          src={blog.mainImg}
+                          style={{ objectFit: "cover" }}
+                          alt={blog.category}
+                        />
+                        <div class="overlay">
+                          <div class="mb-1">
+                            <a class="text-white" href="">
+                              {blog.category} cfggh h
+                            </a>
+                            <span class="px-2 text-white">/</span>
+                            <a class="text-white" href="">
+                              April 01, 2023
+                            </a>
+                          </div>
+                          <Link
+                            class="h2 m-0 text-white font-weight-bold"
+                            to={"/blog/" + blog._id}
+                            state={blog}
+                          >
+                            {blog.title}
+                          </Link>
+                        </div>
+                      </div>
+                    );
+                  })
+                : ""}
+              {/* <div
               class="position-relative overflow-hidden"
               style={{ height: "435px" }}
             >
@@ -69,9 +122,10 @@ const MainImgSlider = () => {
                   How technology is changing the way we learn and educate
                 </a>
               </div>
-            </div>
-            {/* </div> */}
-          </OwlCarousel>
+            </div> */}
+              {/* </div> */}
+            </OwlCarousel>
+          )}
         </div>
         <div class="col-lg-4">
           <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
