@@ -12,12 +12,15 @@ import Topbar from "../topbar";
 import Trending from "../trending";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Alert from "react-bootstrap/Alert";
+// import Alert from "react-bootstrap/Alert";
+import { message } from "antd";
+import { closeMessage } from "../../functions/message";
 
 const BlogDetail = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   // const [blog, setBlog] = useState(null);
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   async function searchHandler(search) {
     // e.preventDefault();
     // console.log(search);
@@ -40,16 +43,22 @@ const BlogDetail = () => {
       // setUpdateFlag(0);
     } else {
       // console.log("else");
-      setShow(true);
+      closeMessage(
+        messageApi,
+        "Oops! Blog not found. Try searching another keyword.",
+        "error"
+      );
+      // setShow(true);
       // reset();
     }
   }
 
   return (
     <div>
+      {contextHolder}
       <Topbar />
       <Navbar searchHandler={searchHandler} />
-      {show && (
+      {/* {show && (
         <Alert
           style={{ zIndex: "3" }}
           className="alert1"
@@ -57,10 +66,9 @@ const BlogDetail = () => {
           onClose={() => setShow(false)}
           dismissible
         >
-          {/* <Alert.Heading>Oh snap! You got an error!</Alert.Heading> */}
           <p>Oops! Blog not found. Try searching another keyword. </p>
         </Alert>
-      )}
+      )} */}
       <Breadcrumb />
       <div style={{ padding: "1rem 15px" }} class="container-fluid ">
         <div style={{ padding: "0" }} class="container">

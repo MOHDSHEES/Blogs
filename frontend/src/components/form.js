@@ -19,6 +19,7 @@ const Form = () => {
   const [title, settitle] = useState("");
   const [mainImg, setmainImg] = useState("");
   const [category, setcategory] = useState("");
+  const [messageApi, contextHolder] = message.useMessage();
 
   function reset() {
     setUpdateFlag(1);
@@ -118,7 +119,7 @@ const Form = () => {
       }
     }
   }
-  const [messageApi, contextHolder] = message.useMessage();
+
   async function saveBlog(e) {
     e.preventDefault();
     openMessage(messageApi, "Saving...");

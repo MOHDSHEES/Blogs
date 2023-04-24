@@ -9,10 +9,13 @@ import TopCarousel from "./topCarousel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
+import { closeMessage } from "../functions/message";
+import { message } from "antd";
 // import CategorySkeleton from "../skeleton/categorySkeleton";
 
 const Homepage = () => {
   const [show, setShow] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   async function searchHandler(search) {
     // e.preventDefault();
@@ -28,7 +31,12 @@ const Homepage = () => {
         state: blog,
       });
     } else {
-      setShow(true);
+      closeMessage(
+        messageApi,
+        "Oops! Blog not found. Try searching another keyword.",
+        "error"
+      );
+      // setShow(true);
     }
   }
 
@@ -46,9 +54,10 @@ const Homepage = () => {
   }, []);
   return (
     <div>
+      {contextHolder}
       <Topbar />
       <NavBar searchHandler={searchHandler} />
-      {show && (
+      {/* {show && (
         <Alert
           style={{ zIndex: "3" }}
           className="alert1"
@@ -56,10 +65,9 @@ const Homepage = () => {
           onClose={() => setShow(false)}
           dismissible
         >
-          {/* <Alert.Heading>Oh snap! You got an error!</Alert.Heading> */}
           <p>Oops! Blog not found. Try searching another keyword. </p>
         </Alert>
-      )}
+      )} */}
 
       <div style={{ padding: "1rem 15px" }} class="container-fluid ">
         <div style={{ padding: "0" }} class="container">
@@ -69,7 +77,7 @@ const Homepage = () => {
           <div class="pt-3">
             <div class="row">
               {/* <CategorySkeleton /> */}
-              {["Technology", "cyber security", "Trending", "business"].map(
+              {["Technology", "Cyber Security", "Trending", "Business"].map(
                 (category) => {
                   return <CategorySlider category={category} />;
                 }

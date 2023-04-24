@@ -9,7 +9,8 @@ const Footer = () => {
           <div class="col-lg-3 col-md-6 mb-5">
             <Link to="/" class="navbar-brand">
               <h2 class="mb-2 mt-n2  text-uppercase">
-                <span class="text-primary">News</span>Room
+                <span class="text-primary">OFF</span>THE
+                <span class="text-primary">WEB</span>
               </h2>
             </Link>
             <p>
