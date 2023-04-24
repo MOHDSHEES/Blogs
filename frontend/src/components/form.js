@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import Sidebar from "./sidebar";
 import axios from "axios";
 import Autocomplete from "./autocomplete/autocomplete";
-import Alert from "react-bootstrap/Alert";
+// import Alert from "react-bootstrap/Alert";
+import { openMessage, closeMessage } from "./functions/message";
+import { message } from "antd";
 
 const Form = () => {
-  const [status, setStatus] = useState(null);
-  const [show, setShow] = useState(false);
+  // const [status, setStatus] = useState(null);
+  const [disabled, setdisabled] = useState(false);
+  // const [show, setShow] = useState(false);
   const [titles, setTitles] = useState([]);
   // const [search, setSearch] = useState("");
   const [id, setId] = useState(null);
@@ -58,10 +61,11 @@ const Form = () => {
       settitle(data[0].title);
       setUpdateFlag(0);
     } else {
-      setStatus({ msg: "Blog not Found." });
+      // setStatus({ msg: "Blog not Found." });
+      closeMessage(messageApi, "Blog not Found", "error");
       // var modal = document.getElementById("alert");
       // modal.classList.toggle("show");
-      setShow(true);
+      // setShow(true);
       reset();
     }
   }
@@ -96,24 +100,30 @@ const Form = () => {
   }
   async function deleteBlog(e) {
     e.preventDefault();
+    openMessage(messageApi, "Deleting...");
     let text = "Are you sure you want to delete this blog.\n";
     if (window.confirm(text) === true) {
       const { data } = await axios.post("/api/delete/blog", {
         id: id,
       });
       if (data.status) {
-        setStatus(data);
-        setShow(true);
+        closeMessage(messageApi, data.msg, "success");
+        // setStatus(data);
+        // setShow(true);
         newBlog();
       } else {
-        setStatus(data);
-        setShow(true);
+        closeMessage(messageApi, data.msg, "error");
+        // setStatus(data);
+        // setShow(true);
       }
     }
   }
-
+  const [messageApi, contextHolder] = message.useMessage();
   async function saveBlog(e) {
     e.preventDefault();
+    openMessage(messageApi, "Saving...");
+    setdisabled(true);
+
     // console.log(flag);
 
     if (flag) {
@@ -124,8 +134,9 @@ const Form = () => {
         category,
         blog,
       });
-      setStatus(data);
-      setShow(true);
+      // setStatus(data);
+      // setShow(true);
+      closeMessage(messageApi, data.msg, "success");
       // reset();
     } else {
       const { data } = await axios.post("/api/add/blog", {
@@ -134,13 +145,16 @@ const Form = () => {
         category,
         blog,
       });
-      setStatus(data);
-      setShow(true);
+      // setStatus(data);
+      // setShow(true);
+      closeMessage(messageApi, data.msg, "success");
       newBlog();
     }
+    setdisabled(false);
   }
   return (
     <div className="body">
+      {contextHolder}
       <Sidebar
         onClickH={handleAddH}
         onClickP={handleAddP}
@@ -149,7 +163,7 @@ const Form = () => {
         onClickEdit={editBlog}
       />
       <div>
-        {show && (
+        {/* {show && (
           <Alert
             style={{ zIndex: "3" }}
             className="alert1"
@@ -157,10 +171,9 @@ const Form = () => {
             onClose={() => setShow(false)}
             dismissible
           >
-            {/* <Alert.Heading>Oh snap! You got an error!</Alert.Heading> */}
             <p>{status && status.msg}</p>
           </Alert>
-        )}
+        )} */}
 
         {/* <div
           id="alert"
@@ -382,7 +395,11 @@ const Form = () => {
                 </div>
               );
             })}
-            <button type="submit" class="m-3 btn btn-primary">
+            <button
+              type="submit"
+              disabled={disabled}
+              class="m-3 btn btn-primary"
+            >
               {flag ? "Update" : "Save"}
             </button>
             {/* {title && (
