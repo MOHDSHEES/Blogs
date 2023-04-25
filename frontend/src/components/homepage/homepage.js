@@ -77,7 +77,7 @@ const Homepage = () => {
           <div class="pt-3">
             <div class="row">
               {/* <CategorySkeleton /> */}
-              {["Technology", "Cyber Security", "Trending", "Business"].map(
+              {["Technology", "Cyber Security", "Business"].map(
                 (category, idx) => {
                   return <CategorySlider key={idx} category={category} />;
                 }
