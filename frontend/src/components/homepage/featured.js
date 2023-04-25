@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Featured = () => {
+  const [blogs, setblogs] = useState(null);
+  // const [loading, setloading] = useState(false);
+  useEffect(() => {
+    (async () => {
+      // setloading(true);
+      const { data } = await axios.post("/api/blog/trending");
+      // console.log(data);
+      if (data && data.length) setblogs(data);
+      // setloading(false);
+    })();
+  }, []);
+  // console.log(blogs);
   return (
     <div class="pt-4">
       {/* <div class="container-fluid py-3">
@@ -47,8 +63,60 @@ const Featured = () => {
           },
         }}
       >
-        {/* <div class="owl-carousel owl-carousel-2 carousel-item-4 position-relative"> */}
-        <div
+        {!(blogs && blogs.length) ? (
+          <Skeleton
+            baseColor="#cdcbcb"
+            highlightColor="#e6e5e5"
+            // width={window.screen.width < 775 ? 280 : 490}
+            height={290}
+            duration={2}
+          />
+        ) : (
+          blogs.map((blog) => {
+            return (
+              <div
+                key={blog._id}
+                class="position-relative overflow-hidden"
+                style={{ height: "300px" }}
+              >
+                <img
+                  class="img-fluid w-100 h-100"
+                  src={blog.mainImg}
+                  alt={blog.category}
+                  style={{ objectFit: "cover" }}
+                />
+                <div class="overlay">
+                  <div class="mb-1" style={{ fontSize: "13px" }}>
+                    <Link
+                      class="text-white"
+                      to={"/blog/" + blog._id}
+                      state={blog}
+                    >
+                      {blog.category}
+                    </Link>
+                    <span class="px-1 text-white">/</span>
+                    <Link
+                      class="text-white"
+                      to={"/blog/" + blog._id}
+                      state={blog}
+                    >
+                      Views: {blog.views}
+                    </Link>
+                  </div>
+                  <Link
+                    class="h4 m-0 text-white"
+                    to={"/blog/" + blog._id}
+                    state={blog}
+                  >
+                    {blog.title}
+                  </Link>
+                </div>
+              </div>
+            );
+          })
+        )}
+
+        {/* <div
           class="position-relative overflow-hidden"
           style={{ height: "300px" }}
         >
@@ -167,7 +235,7 @@ const Featured = () => {
               The benefits of learning to code
             </a>
           </div>
-        </div>
+        </div> */}
         {/* </div> */}
       </OwlCarousel>
     </div>

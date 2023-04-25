@@ -56,6 +56,17 @@ router.post("/add/blog", async (req, res) => {
     res.send({ status: 0, msg: error.message });
   }
 });
+// find trending blogs with most views
+router.post("/blog/trending", async (req, res) => {
+  try {
+    const resu = await Blogs.find({}).sort({ views: -1 }).limit(6);
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+    res.json(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // find titles
 router.post("/blog/titles", async (req, res) => {
   try {
