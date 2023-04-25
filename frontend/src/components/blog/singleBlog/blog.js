@@ -14,18 +14,19 @@ const Blog = () => {
   // console.log(blog);
   useEffect(() => {
     if (state && Object.keys(state).length !== 0) setblog(state);
-    else if (id) {
-      // console.log("in");
-      (async () => {
-        const { data } = await axios.post("/api/find/blog/id", {
-          id: id,
-        });
-        if (data && data[0]) setblog(data[0]);
-        else {
-          navigate("/");
-        }
-      })();
-    }
+    // else if (id) {
+    // console.log("in");
+    (async () => {
+      const { data } = await axios.post("/api/find/blog/id", {
+        id: id,
+      });
+      // console.log(data);
+      if (data && data) setblog(data);
+      else {
+        navigate("/");
+      }
+    })();
+    // }
   }, [state, id, navigate]);
   // console.log(data);
   // useEffect(() => {
@@ -49,7 +50,8 @@ const Blog = () => {
           <div class="mb-3">
             <a href="#!">{blog && blog.category}</a>
             <span class="px-1">/</span>
-            <span>January 01, 2045</span>
+            {/* <span>January 01, 2045</span> */}
+            <span>Total Views: {blog && blog.views}</span>
           </div>
           <div>
             <h3 class="mb-3">{blog && blog.title}</h3>

@@ -48,6 +48,7 @@ router.post("/add/blog", async (req, res) => {
       mainImg: req.body.mainImg,
       category: req.body.category,
       blog: req.body.blog,
+      views: 0,
     });
     const status = await blog.save();
     res.json({ status: 1, msg: "Blog saved successfully." });
@@ -105,7 +106,11 @@ router.post("/find/blog", async (req, res) => {
 // find blog by id
 router.post("/find/blog/id", async (req, res) => {
   try {
-    const blog = await Blogs.find({ _id: req.body.id });
+    const blog = await Blogs.findOneAndUpdate(
+      { _id: req.body.id },
+      { $inc: { views: 1 } }
+    );
+    // console.log(blog);
     res.json(blog);
   } catch (error) {
     res.send({ msg: error.message });
