@@ -200,7 +200,11 @@ const Form = () => {
           closeMessage(messageApi, data.msg, "error");
         }
       } else {
-        closeMessage(messageApi, "Both Fields are required", "error");
+        closeMessage(
+          messageApi,
+          "Both category name and category Img are required",
+          "error"
+        );
       }
     } else if (checkBox) {
       closeMessage(messageApi, "Category Already Exsists", "success");
