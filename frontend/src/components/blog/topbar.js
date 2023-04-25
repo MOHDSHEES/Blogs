@@ -16,6 +16,7 @@ const Topbar = () => {
       // setloading(false);
     })();
   }, []);
+  // console.log(blogs);
   return (
     <div>
       <div class="container-fluid">
@@ -32,42 +33,34 @@ const Topbar = () => {
                 Trending
               </div>
               <div style={{ width: "500px", padding: "10px" }}>
-                <OwlCarousel
-                  className="owl-theme  "
-                  // style={{ marginLeft: "20px" }}
-                  items={1}
-                  loop
-                  autoplay
-                  autoplayTimeout={3000}
-                  dots={false}
-                  margin={10}
-                  nav={false}
-                >
-                  {blogs &&
-                    blogs.map((blog) => {
-                      return (
-                        <div className="item break-line-2">
-                          <Link
-                            to={"/blog/" + blog._id}
-                            state={blog}
-                            class="text-secondary"
-                          >
-                            {blog.title}
-                          </Link>
-                        </div>
-                      );
-                    })}
-                  {/* <div className="item break-line-2">
-                    <a class="text-secondary  " href="">
-                      The impact of artificial intelligence on the job market
-                    </a>
-                  </div>
-                  <div className="item break-line-2">
-                    <a class="text-secondary  " href="">
-                      The future of cybersecurity in the age of remote work
-                    </a>
-                  </div> */}
-                </OwlCarousel>
+                {blogs && (
+                  <OwlCarousel
+                    className="owl-theme  "
+                    // style={{ marginLeft: "20px" }}
+                    items={1}
+                    loop
+                    autoplay
+                    autoplayTimeout={3000}
+                    dots={false}
+                    margin={10}
+                    nav={false}
+                  >
+                    {blogs.length &&
+                      blogs.map((blog) => {
+                        return (
+                          <div key={blog._id} className="item break-line-1">
+                            <Link
+                              to={"/blog/" + blog._id}
+                              state={blog}
+                              class="text-secondary"
+                            >
+                              {blog.title}
+                            </Link>
+                          </div>
+                        );
+                      })}
+                  </OwlCarousel>
+                )}
               </div>
 
               {/* <div

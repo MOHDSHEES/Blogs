@@ -208,9 +208,9 @@ a {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-.break-line-2 {
+.break-line-1 {
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }

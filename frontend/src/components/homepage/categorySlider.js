@@ -64,7 +64,7 @@ const CategorySlider = ({ category }) => {
             {/* <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative"> */}
             {blog.map((bl) => {
               return (
-                <div id={bl._id} class="position-relative">
+                <div key={bl._id} class="position-relative">
                   <img
                     class="img-fluid w-100"
                     src={bl.mainImg}
