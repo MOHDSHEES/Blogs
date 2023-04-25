@@ -56,11 +56,11 @@ const MainImgSlider = ({ data }) => {
                         <div class="overlay">
                           <div class="mb-1">
                             <a class="text-white" href="">
-                              {blog.category} cfggh h
+                              {blog.category}
                             </a>
                             <span class="px-2 text-white">/</span>
                             <a class="text-white" href="">
-                              April 01, 2023
+                              {blog.createdDate}
                             </a>
                           </div>
                           <Link

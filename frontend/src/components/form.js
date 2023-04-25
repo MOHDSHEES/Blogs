@@ -19,8 +19,10 @@ const Form = () => {
   const [title, settitle] = useState("");
   const [mainImg, setmainImg] = useState("");
   const [category, setcategory] = useState("");
+  const [categories, setCategories] = useState(null);
   const [messageApi, contextHolder] = message.useMessage();
   const [checkBox, setcheckBox] = useState(false);
+  const [categoryImg, setcategoryImg] = useState("");
   function reset() {
     setUpdateFlag(1);
     setblog([{ tag: "P" }]);
@@ -42,7 +44,7 @@ const Form = () => {
 
     setblog(values);
   }
-  const [categories, setCategories] = useState(null);
+
   useEffect(() => {
     if (!categories) {
       (async () => {
@@ -178,20 +180,27 @@ const Form = () => {
     // console.log("inj");
     // e.preventDefault();
     const result = categories.findIndex(
-      (item) => category.toLowerCase() === item.toLowerCase()
+      (item) => category.toLowerCase() === item.category.toLowerCase()
     );
     if (result === -1) {
-      // console.log("-1");
-      const { data } = await axios.post("/api/add/category", {
-        category: category,
-      });
-      if (data.status) {
-        setCategories([...categories, category]);
-        setcheckBox(false);
-        setdisabled(false);
-        closeMessage(messageApi, data.msg, "success");
+      if (!(category.trim() === "") && !(categoryImg.trim() === "")) {
+        // console.log("-1");
+        const { data } = await axios.post("/api/add/category", {
+          category: { category: category, categoryImg: categoryImg },
+        });
+        if (data.status) {
+          setCategories([
+            ...categories,
+            { category: category, categoryImg: categoryImg },
+          ]);
+          setcheckBox(false);
+          setdisabled(false);
+          closeMessage(messageApi, data.msg, "success");
+        } else {
+          closeMessage(messageApi, data.msg, "error");
+        }
       } else {
-        closeMessage(messageApi, data.msg, "error");
+        closeMessage(messageApi, "Both Fields are required", "error");
       }
     } else if (checkBox) {
       closeMessage(messageApi, "Category Already Exsists", "success");
@@ -310,31 +319,48 @@ const Form = () => {
                     Please select the category of the blog...
                   </option>
                   {categories &&
-                    categories.map((category) => {
-                      return <option value={category}>{category}</option>;
+                    categories.map((category, idx) => {
+                      return (
+                        <option key={idx + "id"} value={category.category}>
+                          {category.category}
+                        </option>
+                      );
                     })}
                 </select>
               ) : (
                 // <form id="categoryForm" onSubmit={(e) => addCategory(e)}>
-                <div class="input-group">
+
+                <div>
                   <input
+                    style={{ marginBottom: "5px" }}
                     className="form-control"
                     // id={"p" + idx}
-                    value={category}
-                    onChange={(e) => setcategory(e.target.value)}
-                    placeholder="Please enter the category of the blog..."
+                    value={categoryImg}
+                    onChange={(e) => setcategoryImg(e.target.value)}
+                    placeholder="Please enter the URL of category image..."
                     autocomplete="off"
                     required
                   />
-                  <button
-                    type="button"
-                    onClick={addCategory}
-                    form="categoryForm"
-                    // disabled={disabled}
-                    class="btn btn-primary input-group-text"
-                  >
-                    Add Category
-                  </button>
+                  <div class="input-group">
+                    <input
+                      className="form-control"
+                      // id={"p" + idx}
+                      value={category}
+                      onChange={(e) => setcategory(e.target.value)}
+                      placeholder="Please enter the category of the blog..."
+                      autocomplete="off"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={addCategory}
+                      form="categoryForm"
+                      // disabled={disabled}
+                      class="btn btn-primary input-group-text"
+                    >
+                      Add Category
+                    </button>
+                  </div>
                 </div>
                 // {/* </form> */}
               )}

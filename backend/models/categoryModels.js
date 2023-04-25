@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 // mongoose.set("useCreateIndex", true);
 // schema.index({ title: "text" });
 const categoriesSchema = new mongoose.Schema({
-  categories: [],
+  categories: [{}],
 });
 
 // productsSchema.index({ name: "text", category: "text" });

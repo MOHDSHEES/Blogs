@@ -34,6 +34,7 @@ router.post("/add/category", async (req, res) => {
       { _id: "644779adaba2893aa8117eb4" },
       { $push: { categories: req.body.category } }
     );
+    // console.log(data);
     if (data.modifiedCount) {
       res.json({ status: 1, msg: "Category Added Successfully" });
     } else {
@@ -47,12 +48,21 @@ router.post("/add/category", async (req, res) => {
 // create blog
 router.post("/add/blog", async (req, res) => {
   try {
+    const date =
+      new Date().toLocaleString("en-US", { weekday: "long" }) +
+      ", " +
+      new Date().toLocaleString("en-US", { month: "long" }) +
+      ", " +
+      new Date().getDate() +
+      ", " +
+      new Date().getFullYear();
     const blog = new Blogs({
       title: req.body.title,
       mainImg: req.body.mainImg,
       category: req.body.category,
       blog: req.body.blog,
       views: 0,
+      createdDate: date,
     });
     const status = await blog.save();
     res.json({ status: 1, msg: "Blog saved successfully." });
@@ -136,7 +146,7 @@ router.post("/find/blog/id", async (req, res) => {
 router.post("/delete/blog", async (req, res) => {
   try {
     const stat = await Blogs.deleteOne({ _id: req.body.id });
-    console.log(stat);
+    // console.log(stat);
     if (stat.deletedCount) {
       res.json({ status: 1, msg: "Blog Deleted Successfully" });
     } else {
@@ -150,6 +160,15 @@ router.post("/delete/blog", async (req, res) => {
 //  Update blog
 router.post("/update/blog", async (req, res) => {
   try {
+    const date =
+      new Date().toLocaleString("en-US", { weekday: "long" }) +
+      ", " +
+      new Date().toLocaleString("en-US", { month: "long" }) +
+      ", " +
+      new Date().getDate() +
+      ", " +
+      new Date().getFullYear();
+    // console.log(date);
     const updated = await Blogs.updateOne(
       { _id: req.body.id },
       {
@@ -157,6 +176,7 @@ router.post("/update/blog", async (req, res) => {
         mainImg: req.body.mainImg,
         category: req.body.category,
         blog: req.body.blog,
+        updatedDate: date,
       }
     );
     if (updated.modifiedCount) {

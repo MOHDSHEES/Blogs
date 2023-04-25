@@ -50,7 +50,7 @@ const Blog = () => {
           <div class="mb-3">
             <a href="#!">{blog && blog.category}</a>
             <span class="px-1">/</span>
-            {/* <span>January 01, 2045</span> */}
+            <span>{blog && blog.createdDate} / </span>
             <span>Total Views: {blog && blog.views}</span>
           </div>
           <div>
