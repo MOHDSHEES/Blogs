@@ -47,9 +47,13 @@ const Trending = () => {
                       {blog.category}
                     </Link>
                     <span class="px-1">/</span>
-                    <span>{blog.createdDate}</span>
+                    <span>views: {blog.views}</span>
                   </div>
-                  <Link class="h6 m-0" to={"/blog/" + blog._id} state={blog}>
+                  <Link
+                    className="h6 m-0 break-line-3 "
+                    to={"/blog/" + blog._id}
+                    state={blog}
+                  >
                     {blog.title}
                   </Link>
                 </div>

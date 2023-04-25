@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Topbar = () => {
+  const [blogs, setblogs] = useState(null);
+  // const [loading, setloading] = useState(false);
+  useEffect(() => {
+    (async () => {
+      // setloading(true);
+      const { data } = await axios.post("/api/recent/blogs");
+      // console.log(data);
+      if (data && data.length) setblogs(data);
+      // setloading(false);
+    })();
+  }, []);
   return (
     <div>
       <div class="container-fluid">
@@ -31,20 +43,30 @@ const Topbar = () => {
                   margin={10}
                   nav={false}
                 >
-                  <div className="item">
-                    <div class="text-truncate">
-                      <a class="text-secondary" href="">
-                        The impact of artificial intelligence on the job market
-                      </a>
-                    </div>
+                  {blogs &&
+                    blogs.map((blog) => {
+                      return (
+                        <div className="item break-line-2">
+                          <Link
+                            to={"/blog/" + blog._id}
+                            state={blog}
+                            class="text-secondary"
+                          >
+                            {blog.title}
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  {/* <div className="item break-line-2">
+                    <a class="text-secondary  " href="">
+                      The impact of artificial intelligence on the job market
+                    </a>
                   </div>
-                  <div className="item">
-                    <div class="text-truncate">
-                      <a class="text-secondary" href="">
-                        The future of cybersecurity in the age of remote work
-                      </a>
-                    </div>
-                  </div>
+                  <div className="item break-line-2">
+                    <a class="text-secondary  " href="">
+                      The future of cybersecurity in the age of remote work
+                    </a>
+                  </div> */}
                 </OwlCarousel>
               </div>
 

@@ -83,7 +83,7 @@ const TopCarousel = ({ data }) => {
                     >
                       <p
                         style={{ marginBottom: 0, padding: "5px" }}
-                        class="text-secondary font-weight-semi-bold"
+                        class="text-secondary font-weight-semi-bold break-line-3 "
                       >
                         {blog.title}
                       </p>
