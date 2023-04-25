@@ -1,5 +1,6 @@
 import express from "express";
 import Blogs from "../models/blogModel.js";
+import Categories from "../models/categoryModels.js";
 // import Products from "../models/productModel.js";
 // import Category from "../models/categoriesModel.js";
 // import Items from "../models/ItemsModel.js";
@@ -14,32 +15,35 @@ import Blogs from "../models/blogModel.js";
 // import twilio from "twilio";
 const router = express.Router();
 
-// import { CourierClient } from "@trycourier/courier";
-// router.post("/api/contact/sendema", async (req, res) => {
-//   const courier = CourierClient({
-//     authorizationToken: "dk_prod_C2CRTQJJH94A6EKTK68P1KDMYP5K",
-//   });
-
-//   const messageId = await courier
-//     .send({
-//       eventId: "personalized-welcome-email",
-//       recipientId: "Google_105778057172273250440",
-//       profile: {},
-//       data: {
-//         subject: "Test",
-//         name: "MOHD",
-//         email: "mohd.sh@g.c",
-//         message: "dfdf",
-//       },
-//     })
-//     .then((resp) => {
-//       console.log("Email sent", resp);
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// });
-
+// find categories
+router.post("/find/categories", async (req, res) => {
+  try {
+    const resu = await Categories.findOne({ _id: "644779adaba2893aa8117eb4" });
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu.categories);
+    res.json(resu.categories);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
+// add new categories
+router.post("/add/category", async (req, res) => {
+  try {
+    // console.log(req.body.category);
+    const data = await Categories.updateOne(
+      { _id: "644779adaba2893aa8117eb4" },
+      { $push: { categories: req.body.category } }
+    );
+    if (data.modifiedCount) {
+      res.json({ status: 1, msg: "Category Added Successfully" });
+    } else {
+      res.json({ status: 0, msg: "Something went Wrong" });
+    }
+    // console.log(data);
+  } catch (error) {
+    res.send({ status: 0, msg: error.message });
+  }
+});
 // create blog
 router.post("/add/blog", async (req, res) => {
   try {

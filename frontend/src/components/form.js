@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./sidebar";
 import axios from "axios";
 import Autocomplete from "./autocomplete/autocomplete";
@@ -20,7 +20,7 @@ const Form = () => {
   const [mainImg, setmainImg] = useState("");
   const [category, setcategory] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
-
+  const [checkBox, setcheckBox] = useState(false);
   function reset() {
     setUpdateFlag(1);
     setblog([{ tag: "P" }]);
@@ -42,6 +42,18 @@ const Form = () => {
 
     setblog(values);
   }
+  const [categories, setCategories] = useState(null);
+  useEffect(() => {
+    if (!categories) {
+      (async () => {
+        // setloading(true);
+        const { data } = await axios.post("/api/find/categories", {
+          category: category,
+        });
+        setCategories(data);
+      })();
+    }
+  }, [category, categories]);
 
   async function editBlog() {
     setFlag(1);
@@ -153,6 +165,40 @@ const Form = () => {
     }
     setdisabled(false);
   }
+
+  function checkBoxHandle(e) {
+    setcheckBox(e.target.checked);
+    if (e.target.checked) {
+      setdisabled(true);
+    } else {
+      setdisabled(false);
+    }
+  }
+  async function addCategory() {
+    // console.log("inj");
+    // e.preventDefault();
+    const result = categories.findIndex(
+      (item) => category.toLowerCase() === item.toLowerCase()
+    );
+    if (result === -1) {
+      // console.log("-1");
+      const { data } = await axios.post("/api/add/category", {
+        category: category,
+      });
+      if (data.status) {
+        setCategories([...categories, category]);
+        setcheckBox(false);
+        setdisabled(false);
+        closeMessage(messageApi, data.msg, "success");
+      } else {
+        closeMessage(messageApi, data.msg, "error");
+      }
+    } else if (checkBox) {
+      closeMessage(messageApi, "Category Already Exsists", "success");
+      setcheckBox(false);
+      setdisabled(false);
+    }
+  }
   return (
     <div className="body">
       {contextHolder}
@@ -250,8 +296,71 @@ const Form = () => {
               <div style={{ margin: "10px 0 5px" }}>
                 <small>Category</small>
               </div>
-
-              <input
+              {!checkBox ? (
+                <select
+                  name="brand"
+                  // onChange={(e) => setbrand(e.target.value)}
+                  value={category}
+                  onChange={(e) => setcategory(e.target.value)}
+                  id="inputState"
+                  className="form-select"
+                  required
+                >
+                  <option value="">
+                    Please select the category of the blog...
+                  </option>
+                  {categories &&
+                    categories.map((category) => {
+                      return <option value={category}>{category}</option>;
+                    })}
+                </select>
+              ) : (
+                // <form id="categoryForm" onSubmit={(e) => addCategory(e)}>
+                <div class="input-group">
+                  <input
+                    className="form-control"
+                    // id={"p" + idx}
+                    value={category}
+                    onChange={(e) => setcategory(e.target.value)}
+                    placeholder="Please enter the category of the blog..."
+                    autocomplete="off"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={addCategory}
+                    form="categoryForm"
+                    // disabled={disabled}
+                    class="btn btn-primary input-group-text"
+                  >
+                    Add Category
+                  </button>
+                </div>
+                // {/* </form> */}
+              )}
+              <div className="pl-4 pt-2">
+                <input
+                  className="form-check-input "
+                  type="checkbox"
+                  checked={checkBox}
+                  // disabled={!details.name && true}
+                  // onChange={(e) => setcheckBox(e.target.checked)}
+                  onChange={(e) => checkBoxHandle(e)}
+                />
+                <label
+                  onClick={() => {
+                    setcheckBox(!checkBox);
+                    setdisabled(!disabled);
+                  }}
+                  className="form-check-label"
+                  htmlFor="defaultCheck1"
+                >
+                  <small>
+                    Tick the checkbox if category is not in the list.{" "}
+                  </small>
+                </label>
+              </div>
+              {/* <input
                 className="form-control"
                 // id={"p" + idx}
                 value={category}
@@ -259,7 +368,7 @@ const Form = () => {
                 placeholder="Please enter the category of the blog..."
                 autocomplete="off"
                 required
-              />
+              /> */}
             </div>
             {blog.map((bl, idx) => {
               return (

@@ -25,13 +25,13 @@ const Featured = () => {
       {/* <div class="container-fluid py-3">
         <div class="container"> */}
       <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-        <h3 class="m-0">Featured</h3>
-        <a
+        <h3 class="m-0">Trending</h3>
+        {/* <a
           class="text-secondary font-weight-medium text-decoration-none"
           href=""
         >
           View All
-        </a>
+        </a> */}
       </div>
       <OwlCarousel
         className="owl-theme "

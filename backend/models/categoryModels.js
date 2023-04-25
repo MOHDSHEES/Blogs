@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 // mongoose.set("useCreateIndex", true);
 // schema.index({ title: "text" });
-const titleSchema = new mongoose.Schema({
-  title: [],
+const categoriesSchema = new mongoose.Schema({
+  categories: [],
 });
 
 // productsSchema.index({ name: "text", category: "text" });
-const titleModel = mongoose.model("Titles", titlesSchema);
+const categoriesModel = mongoose.model("Categories", categoriesSchema);
 
-export default titleModel;
+export default categoriesModel;

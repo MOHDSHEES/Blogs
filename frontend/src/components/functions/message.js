@@ -13,7 +13,7 @@ function closeMessage(messageApi, msg, type) {
     key: "updatable",
     type: type,
     content: msg,
-    duration: 2,
+    duration: 3,
   });
 }
 
