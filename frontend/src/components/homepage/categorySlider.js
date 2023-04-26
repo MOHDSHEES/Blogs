@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import CategorySkeleton from "../skeleton/categorySkeleton";
+import CategorySkeleton from "../skeleton/categoryHomepageSkeleton";
 
 const CategorySlider = ({ category }) => {
   //   console.log(category);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CategoryPageSkeleton from "../skeleton/categoryPageSkeleton";
 
 const Categories = ({ blog }) => {
   const [blogs, setblogs] = useState(null);
@@ -20,41 +21,45 @@ const Categories = ({ blog }) => {
             </a> */}
           </div>
         </div>
-        {blogs &&
-          blogs.map((blog, idx) => {
-            return (
-              <div key={blog.category + idx} class="col-lg-6">
-                <div class="position-relative mb-3">
-                  <img
-                    class="img-fluid w-100"
-                    src={blog.mainImg}
-                    alt={blog.category}
-                    style={{ objectFit: "cover" }}
-                  />
-                  <div class="overlay position-relative bg-light">
-                    <div class="mb-2" style={{ fontSize: "14px" }}>
-                      <Link to={"/blog/" + blog._id} state={blog}>
-                        {blog.category}
+
+        {!blogs
+          ? [0, 1].map((c) => {
+              return <CategoryPageSkeleton key={c} />;
+            })
+          : blogs.map((blog, idx) => {
+              return (
+                <div key={blog.category + idx} class="col-lg-6">
+                  <div class="position-relative mb-3">
+                    <img
+                      class="img-fluid w-100"
+                      src={blog.mainImg}
+                      alt={blog.category}
+                      style={{ objectFit: "cover" }}
+                    />
+                    <div class="overlay position-relative bg-light">
+                      <div class="mb-2" style={{ fontSize: "14px" }}>
+                        <Link to={"/blog/" + blog._id} state={blog}>
+                          {blog.category}
+                        </Link>
+                        <span class="px-1">/</span>
+                        <span>{blog.createdDate}</span>
+                      </div>
+                      <Link to={"/blog/" + blog._id} state={blog} class="h4">
+                        {blog.title}
                       </Link>
-                      <span class="px-1">/</span>
-                      <span>{blog.createdDate}</span>
+                      <Link
+                        to={"/blog/" + blog._id}
+                        state={blog}
+                        style={{ color: "#6c757d" }}
+                        class="h6 m-0 break-line-3"
+                      >
+                        {blog.blog[0].text}
+                      </Link>
                     </div>
-                    <Link to={"/blog/" + blog._id} state={blog} class="h4">
-                      {blog.title}
-                    </Link>
-                    <Link
-                      to={"/blog/" + blog._id}
-                      state={blog}
-                      style={{ color: "#6c757d" }}
-                      class="h6 m-0 break-line-3"
-                    >
-                      {blog.blog[0].text}
-                    </Link>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         {/* 
         <div class="col-lg-6">
           <div class="position-relative mb-3">
