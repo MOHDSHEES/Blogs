@@ -230,7 +230,7 @@ const Form = ({ cate }) => {
       setdisabled(false);
     }
   }
-  console.log(blog);
+  // console.log(blog);
   function handleDragEnd(result) {
     if (!result.destination) return;
 
@@ -251,50 +251,10 @@ const Form = ({ cate }) => {
         onClickEdit={editBlog}
       />
       <div>
-        {/* {show && (
-          <Alert
-            style={{ zIndex: "3" }}
-            className="alert1"
-            variant="primary"
-            onClose={() => setShow(false)}
-            dismissible
-          >
-            <p>{status && status.msg}</p>
-          </Alert>
-        )} */}
-
-        {/* <div
-          id="alert"
-          style={{ zIndex: "3" }}
-          class="alert alert1 alert-primary alert-dismissible fade"
-          role="alert"
-        >
-          {status && status.msg}
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-          ></button>
-        </div> */}
         {flag ? (
           <div style={{ marginTop: "80px" }}>
-            {/* <form class="mb-1 " onSubmit={searchHandler}> */}
-            {/* <div class="input-group mt-3"> */}
             <Autocomplete searchHandler={searchHandler} suggestions={titles} />
-            {/* <input
-                  className="form-control"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Please enter the title to search the blogs... "
-                  required
-                /> */}
-            {/* <button type="submit" class="input-group-text btn btn-primary">
-                  Search
-                </button> */}
-            {/* <span class="" id="basic-addon2">@example.com</span> */}
-            {/* </div> */}
-            {/* </form> */}
+
             <a onClick={newBlog} href="" className="ms-2">
               Write a new Blog?
             </a>
@@ -363,6 +323,9 @@ const Form = ({ cate }) => {
                 // <form id="categoryForm" onSubmit={(e) => addCategory(e)}>
 
                 <div>
+                  <div style={{ margin: "10px 0 5px" }}>
+                    <small>Enter Image URL</small>
+                  </div>
                   <input
                     style={{ marginBottom: "5px" }}
                     className="form-control"
@@ -373,6 +336,9 @@ const Form = ({ cate }) => {
                     autocomplete="off"
                     required
                   />
+                  <div style={{ margin: "10px 0 5px" }}>
+                    <small>Enter Category</small>
+                  </div>
                   <div class="input-group">
                     <input
                       className="form-control"
