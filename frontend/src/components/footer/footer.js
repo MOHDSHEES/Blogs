@@ -65,13 +65,13 @@ const Footer = ({ cate }) => {
               {categories &&
                 categories.map((category, idx) => {
                   return (
-                    <a
+                    <Link
                       key={idx}
-                      href="#!"
+                      to={"/blogs/" + category.category}
                       class="btn btn-sm btn-outline-secondary m-1"
                     >
                       {category.category}
-                    </a>
+                    </Link>
                   );
                 })}
               {/* <a href="#!" class="btn btn-sm btn-outline-secondary m-1">
