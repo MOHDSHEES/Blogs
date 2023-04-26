@@ -9,15 +9,13 @@ import axios from "axios";
 
 const MainImgSlider = ({ data, cate }) => {
   // console.log(data);
-  useEffect(() => {
-    setblogs(data);
-  }, [data]);
   const [blogs, setblogs] = useState(null);
-
   const [categories, setcategories] = useState(null);
   useEffect(() => {
+    setblogs(data);
     setcategories(cate);
-  }, [cate]);
+  }, [data, cate]);
+
   // useEffect(() => {
   //   (async () => {
   //     // setloading(true);
@@ -96,12 +94,12 @@ const MainImgSlider = ({ data, cate }) => {
         <div class="col-lg-4">
           <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
             <h3 class="m-0">Categories</h3>
-            <a
+            <Link
               class="text-secondary font-weight-medium text-decoration-none"
-              href=""
+              to="/categories"
             >
               View All
-            </a>
+            </Link>
           </div>
           {!categories
             ? [0, 1, 2, 3].map((c) => {

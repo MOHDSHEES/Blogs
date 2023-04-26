@@ -7,6 +7,7 @@ import CompleteNavbarAndFooter from "./components/completeNavbarAndFooter";
 import axios from "axios";
 import CategoryPage from "./components/categoryPageComponents/categoryPage";
 import Contactform from "./components/contactComponent/contactform";
+import MoreCategoriesPage from "./components/categoryPageComponents/moreCategoriesPage";
 
 // import Sidebar from "./components/sidebar";
 
@@ -60,11 +61,16 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/blogs/:category" element={<CategoryPage />} />
           <Route path="/contact" element={<Contactform />} />
+          <Route
+            path="/categories"
+            element={<MoreCategoriesPage cate={categories} />}
+          />
         </Route>
         <Route path="/add" element={<Form cate={categories} />} />
         {/* <Route path="/" element={<Homepage />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="/add" element={<Form />} /> */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );

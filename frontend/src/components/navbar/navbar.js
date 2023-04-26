@@ -81,10 +81,10 @@ const NavBar = ({ searchHandler }) => {
                   <Nav.Link className="nav-item active " href="/">
                     Home
                   </Nav.Link>
-                  <Nav.Link href="#action3" className="nav-item ">
+                  <Nav.Link href="/categories" className="nav-item ">
                     Categories
                   </Nav.Link>
-                  <Nav.Link href="#action4" className="nav-item ">
+                  <Nav.Link href="#" className="nav-item ">
                     Single Blog
                   </Nav.Link>
                   <Nav.Link href="/contact" class="nav-item ">
