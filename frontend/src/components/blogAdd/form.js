@@ -429,14 +429,14 @@ const Form = ({ cate }) => {
                 style={{ margin: 0 }}
                 onClick={() => handleAddInBetween(tagId, "P")}
               >
-                P : Paragraph Iput
+                P : Paragraph Input
               </p>
               <p
                 style={{ margin: 0 }}
                 className="p-link"
                 onClick={() => handleAddInBetween(tagId, "H")}
               >
-                H : Heading Iput
+                H : Heading Input
               </p>
               <p
                 style={{ margin: 0 }}
