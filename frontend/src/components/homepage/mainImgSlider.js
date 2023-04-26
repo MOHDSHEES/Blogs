@@ -7,7 +7,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import axios from "axios";
 
-const MainImgSlider = ({ data }) => {
+const MainImgSlider = ({ data, cate }) => {
   // console.log(data);
   useEffect(() => {
     setblogs(data);
@@ -16,14 +16,17 @@ const MainImgSlider = ({ data }) => {
 
   const [categories, setcategories] = useState(null);
   useEffect(() => {
-    (async () => {
-      // setloading(true);
-      const { data } = await axios.post("/api/find/categories");
-      // console.log(data);
-      if (data && data.length) setcategories(data);
-      // setloading(false);
-    })();
-  }, []);
+    setcategories(cate);
+  }, [cate]);
+  // useEffect(() => {
+  //   (async () => {
+  //     // setloading(true);
+  //     const { data } = await axios.post("/api/find/categories");
+  //     // console.log(data);
+  //     if (data && data.length) setcategories(data);
+  //     // setloading(false);
+  //   })();
+  // }, []);
   // console.log(blogs);
   return (
     <div className="pt-3">

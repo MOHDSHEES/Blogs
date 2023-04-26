@@ -8,7 +8,7 @@ import MainImgSlider from "./mainImgSlider";
 import TopCarousel from "./topCarousel";
 import axios from "axios";
 
-const Homepage = ({ trend }) => {
+const Homepage = ({ trend, cate }) => {
   // for main Img slider top carousel recent blogs
   const [blogs, setblogs] = useState(null);
   // const [loading, setloading] = useState(false);
@@ -41,7 +41,7 @@ const Homepage = ({ trend }) => {
       <div style={{ padding: "1rem 15px" }} class="container-fluid ">
         <div style={{ padding: "0" }} class="container">
           <TopCarousel data={blogs} />
-          <MainImgSlider data={blogs} />
+          <MainImgSlider data={blogs} cate={cate} />
           <Featured trend={trend} />
           <div class="pt-3">
             <div class="row">

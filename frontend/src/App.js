@@ -21,6 +21,18 @@ function App() {
     })();
   }, []);
 
+  // finding categories
+  const [categories, setcategories] = useState(null);
+  useEffect(() => {
+    (async () => {
+      // setloading(true);
+      const { data } = await axios.post("/api/find/categories");
+      // console.log(data);
+      if (data && data.length) setcategories(data);
+      // setloading(false);
+    })();
+  }, []);
+
   function ScrollToTop() {
     const { pathname } = useLocation();
     useEffect(() => {
@@ -33,11 +45,19 @@ function App() {
       {/* <Form /> */}
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<CompleteNavbarAndFooter trend={trending} />}>
-          <Route path="/" element={<Homepage trend={trending} />} />
+        <Route
+          path="/"
+          element={
+            <CompleteNavbarAndFooter cate={categories} trend={trending} />
+          }
+        >
+          <Route
+            path="/"
+            element={<Homepage trend={trending} cate={categories} />}
+          />
           <Route path="/blog/:id" element={<BlogDetail />} />
         </Route>
-        <Route path="/add" element={<Form />} />
+        <Route path="/add" element={<Form cate={categories} />} />
         {/* <Route path="/" element={<Homepage />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="/add" element={<Form />} /> */}

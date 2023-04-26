@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+const Footer = ({ cate }) => {
+  const [categories, setcategories] = useState(null);
+  useEffect(() => {
+    setcategories(cate);
+  }, [cate]);
   return (
     <div>
       <div class="container-fluid bg-light pt-5 px-sm-3 px-md-5">
-        <div class="row">
+        <div class="row justify-content-between">
           <div class="col-lg-3 col-md-6 mb-5">
             <Link to="/" class="navbar-brand">
               <h2 class="mb-2 mt-n2  text-uppercase">
@@ -58,7 +62,19 @@ const Footer = () => {
           <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Categories</h4>
             <div class="d-flex flex-wrap m-n1">
-              <a href="#!" class="btn btn-sm btn-outline-secondary m-1">
+              {categories &&
+                categories.map((category, idx) => {
+                  return (
+                    <a
+                      key={idx}
+                      href="#!"
+                      class="btn btn-sm btn-outline-secondary m-1"
+                    >
+                      {category.category}
+                    </a>
+                  );
+                })}
+              {/* <a href="#!" class="btn btn-sm btn-outline-secondary m-1">
                 Politics
               </a>
               <a href="#!" class="btn btn-sm btn-outline-secondary m-1">
@@ -93,10 +109,10 @@ const Footer = () => {
               </a>
               <a href="#!" class="btn btn-sm btn-outline-secondary m-1">
                 Lifestyle
-              </a>
+              </a> */}
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 mb-5">
+          {/* <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Tags</h4>
             <div class="d-flex flex-wrap m-n1">
               <a href="#!" class="btn btn-sm btn-outline-secondary m-1">
@@ -136,7 +152,7 @@ const Footer = () => {
                 Lifestyle
               </a>
             </div>
-          </div>
+          </div> */}
           <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Quick Links</h4>
             <div class="d-flex flex-column justify-content-start">

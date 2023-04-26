@@ -6,7 +6,7 @@ import Autocomplete from "./autocomplete/autocomplete";
 import { openMessage, closeMessage } from "./functions/message";
 import { message } from "antd";
 
-const Form = () => {
+const Form = ({ cate }) => {
   // const [status, setStatus] = useState(null);
   const [disabled, setdisabled] = useState(false);
   // const [show, setShow] = useState(false);
@@ -46,16 +46,17 @@ const Form = () => {
   }
 
   useEffect(() => {
-    if (!categories) {
-      (async () => {
-        // setloading(true);
-        const { data } = await axios.post("/api/find/categories", {
-          category: category,
-        });
-        setCategories(data);
-      })();
-    }
-  }, [category, categories]);
+    setCategories(cate);
+  }, [cate]);
+  // useEffect(() => {
+  //   if (!categories) {
+  //     (async () => {
+  //       // setloading(true);
+  //       const { data } = await axios.post("/api/find/categories");
+  //       setCategories(data);
+  //     })();
+  //   }
+  // }, [categories]);
 
   async function editBlog() {
     setFlag(1);
