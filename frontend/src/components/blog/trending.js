@@ -9,7 +9,7 @@ const Trending = () => {
   useEffect(() => {
     (async () => {
       setloading(true);
-      const { data } = await axios.post("/api/recent/blogs");
+      const { data } = await axios.post("/api/blog/trending");
       // console.log(data);
       if (data && data.length) setblogs(data);
       setloading(false);

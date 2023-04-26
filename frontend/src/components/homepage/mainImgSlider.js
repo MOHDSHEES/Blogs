@@ -100,29 +100,43 @@ const MainImgSlider = ({ data }) => {
               View All
             </a>
           </div>
-          {categories &&
-            categories.slice(0, 4).map((c, idx) => {
-              return (
-                <div
-                  key={idx + "id"}
-                  class="position-relative overflow-hidden mb-3"
-                  style={{ height: "80px" }}
-                >
-                  <img
-                    class="img-fluid w-100 h-100"
-                    src={c.categoryImg}
-                    alt={c.category}
-                    style={{ objectFit: "cover" }}
-                  />
-                  <a
-                    href=""
-                    class="overlay align-items-center justify-content-center h4 m-0 text-white text-decoration-none"
+          {!categories
+            ? [0, 1, 2, 3].map((c) => {
+                return (
+                  <div className="mb-3">
+                    <Skeleton
+                      key={c}
+                      baseColor="#cdcbcb"
+                      highlightColor="#e6e5e5"
+                      // width={window.screen.width < 775 ? 280 : 490}
+                      height={80}
+                      duration={2}
+                    />
+                  </div>
+                );
+              })
+            : categories.slice(0, 4).map((c, idx) => {
+                return (
+                  <div
+                    key={idx + "id"}
+                    class="position-relative overflow-hidden mb-3"
+                    style={{ height: "80px" }}
                   >
-                    {c.category}
-                  </a>
-                </div>
-              );
-            })}
+                    <img
+                      class="img-fluid w-100 h-100"
+                      src={c.categoryImg}
+                      alt={c.category}
+                      style={{ objectFit: "cover" }}
+                    />
+                    <a
+                      href=""
+                      class="overlay align-items-center justify-content-center h4 m-0 text-white text-decoration-none"
+                    >
+                      {c.category}
+                    </a>
+                  </div>
+                );
+              })}
           {/* <div
             class="position-relative overflow-hidden mb-3"
             style={{ height: "80px" }}
