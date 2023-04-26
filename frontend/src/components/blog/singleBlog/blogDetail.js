@@ -83,7 +83,7 @@ const BlogDetail = () => {
               <Newsletter />
               <div class="mb-3 pb-3">
                 <a href="#!">
-                  <img class="img-fluid" src="img/news-500x280-2.jpg" alt="" />
+                  <img class="img-fluid" src="/img/news-500x280-2.jpg" alt="" />
                 </a>
               </div>
               <Trending />

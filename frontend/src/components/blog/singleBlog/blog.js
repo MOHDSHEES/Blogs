@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import parse from "html-react-parser";
 
@@ -18,7 +17,8 @@ const Blog = () => {
       const { data } = await axios.post("/api/find/blog/id", {
         id: id,
       });
-      if (data && data) setblog(data);
+      // console.log(data);
+      if (data && data._id) setblog(data);
       else {
         navigate("/");
       }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./sidebar";
 import axios from "axios";
-import Autocomplete from "./autocomplete/autocomplete";
+import Autocomplete from "../autocomplete/autocomplete";
 // import Alert from "react-bootstrap/Alert";
-import { openMessage, closeMessage } from "./functions/message";
+import { openMessage, closeMessage } from "../functions/message";
 import { message } from "antd";
 
 const Form = ({ cate }) => {

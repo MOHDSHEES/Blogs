@@ -5,9 +5,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 const TrendingSkeleton = () => {
   return (
     <div>
-      {[1, 2, 3, 4].map(() => {
+      {[1, 2, 3, 4].map((c) => {
         return (
-          <div class="d-flex mb-3">
+          <div key={c} class="d-flex mb-3">
             <Skeleton
               baseColor="#cdcbcb"
               highlightColor="#e6e5e5"

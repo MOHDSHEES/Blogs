@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import NavBar from "./blog/navbar";
-import Topbar from "./blog/topbar";
+import NavBar from "./navbar/navbar";
+import Topbar from "./navbar/topbar";
 import { useNavigate } from "react-router-dom";
 // import Alert from "react-bootstrap/Alert";
 import { message } from "antd";

@@ -131,12 +131,12 @@ const MainImgSlider = ({ data, cate }) => {
                       alt={c.category}
                       style={{ objectFit: "cover" }}
                     />
-                    <a
-                      href=""
+                    <Link
+                      to={"/blogs/" + c.category}
                       class="overlay align-items-center justify-content-center h4 m-0 text-white text-decoration-none"
                     >
                       {c.category}
-                    </a>
+                    </Link>
                   </div>
                 );
               })}

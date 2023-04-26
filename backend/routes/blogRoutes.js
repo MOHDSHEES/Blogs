@@ -15,6 +15,17 @@ import Categories from "../models/categoryModels.js";
 // import twilio from "twilio";
 const router = express.Router();
 
+// find all blogs by categories
+router.post("/find/blog/categories", async (req, res) => {
+  try {
+    const resu = await Blogs.find({ category: req.body.category });
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+    res.json(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // find categories
 router.post("/find/categories", async (req, res) => {
   try {

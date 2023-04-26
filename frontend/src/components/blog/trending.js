@@ -26,9 +26,9 @@ const Trending = () => {
           <TrendingSkeleton />
         ) : (
           blogs &&
-          blogs.map((blog) => {
+          blogs.map((blog, idx) => {
             return (
-              <div class="d-flex mb-3">
+              <div key={"id" + idx} class="d-flex mb-3">
                 <img
                   src={blog.mainImg}
                   alt={blog.category}

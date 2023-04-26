@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Form from "./components/form";
+import Form from "./components/blogAdd/form";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import BlogDetail from "./components/blog/singleBlog/blogDetail";
 import Homepage from "./components/homepage/homepage";
 import CompleteNavbarAndFooter from "./components/completeNavbarAndFooter";
 import axios from "axios";
+import CategoryPage from "./components/categoryPageComponents/categoryPage";
 
 // import Sidebar from "./components/sidebar";
 
@@ -56,6 +57,7 @@ function App() {
             element={<Homepage trend={trending} cate={categories} />}
           />
           <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route path="/blogs/:category" element={<CategoryPage />} />
         </Route>
         <Route path="/add" element={<Form cate={categories} />} />
         {/* <Route path="/" element={<Homepage />} />
