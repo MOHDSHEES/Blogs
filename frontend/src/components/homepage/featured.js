@@ -2,23 +2,26 @@ import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import axios from "axios";
+// import axios from "axios";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const Featured = () => {
+const Featured = ({ trend }) => {
   const [blogs, setblogs] = useState(null);
   // const [loading, setloading] = useState(false);
+  // useEffect(() => {
+  //   (async () => {
+  //     // setloading(true);
+  //     const { data } = await axios.post("/api/blog/trending");
+  //     // console.log(data);
+  //     if (data && data.length) setblogs(data);
+  //     // setloading(false);
+  //   })();
+  // }, []);
   useEffect(() => {
-    (async () => {
-      // setloading(true);
-      const { data } = await axios.post("/api/blog/trending");
-      // console.log(data);
-      if (data && data.length) setblogs(data);
-      // setloading(false);
-    })();
-  }, []);
+    setblogs(trend);
+  }, [trend]);
   // console.log(blogs);
   return (
     <div class="pt-4">
@@ -33,90 +36,90 @@ const Featured = () => {
           View All
         </a> */}
       </div>
-      <OwlCarousel
-        className="owl-theme "
-        // style={{ marginLeft: "20px" }}
-        items={4}
-        loop
-        autoplay
-        autoplayTimeout={3000}
-        // dots={false}
-        margin={10}
-        nav={false}
-        responsive={{
-          0: {
-            items: 1,
-            dots: true,
-          },
-          480: {
-            items: 1,
-            dots: true,
-          },
-          768: {
-            items: 3,
-          },
-          992: {
-            items: 4,
-          },
-          1280: {
-            items: 4,
-          },
-        }}
-      >
-        {!(blogs && blogs.length) ? (
-          <Skeleton
-            baseColor="#cdcbcb"
-            highlightColor="#e6e5e5"
-            // width={window.screen.width < 775 ? 280 : 490}
-            height={290}
-            duration={2}
-          />
-        ) : (
-          blogs.map((blog) => {
-            return (
-              <div
-                key={blog._id}
-                class="position-relative overflow-hidden"
-                style={{ height: "300px" }}
-              >
-                <img
-                  class="img-fluid w-100 h-100"
-                  src={blog.mainImg}
-                  alt={blog.category}
-                  style={{ objectFit: "cover" }}
-                />
-                <div class="overlay">
-                  <div class="mb-1" style={{ fontSize: "13px" }}>
+      {!blogs ? (
+        <Skeleton
+          baseColor="#cdcbcb"
+          highlightColor="#e6e5e5"
+          // width={window.screen.width < 775 ? 280 : 490}
+          height={290}
+          duration={2}
+        />
+      ) : (
+        <OwlCarousel
+          className="owl-theme "
+          // style={{ marginLeft: "20px" }}
+          items={4}
+          loop
+          autoplay
+          autoplayTimeout={3000}
+          // dots={false}
+          margin={10}
+          nav={false}
+          responsive={{
+            0: {
+              items: 1,
+              dots: true,
+            },
+            480: {
+              items: 1,
+              dots: true,
+            },
+            768: {
+              items: 3,
+            },
+            992: {
+              items: 4,
+            },
+            1280: {
+              items: 4,
+            },
+          }}
+        >
+          {blogs.length &&
+            blogs.map((blog) => {
+              return (
+                <div
+                  key={blog._id}
+                  class="position-relative overflow-hidden"
+                  style={{ height: "300px" }}
+                >
+                  <img
+                    class="img-fluid w-100 h-100"
+                    src={blog.mainImg}
+                    alt={blog.category}
+                    style={{ objectFit: "cover" }}
+                  />
+                  <div class="overlay">
+                    <div class="mb-1" style={{ fontSize: "13px" }}>
+                      <Link
+                        class="text-white"
+                        to={"/blog/" + blog._id}
+                        state={blog}
+                      >
+                        {blog.category}
+                      </Link>
+                      <span class="px-1 text-white">/</span>
+                      <Link
+                        class="text-white"
+                        to={"/blog/" + blog._id}
+                        state={blog}
+                      >
+                        Views: {blog.views}
+                      </Link>
+                    </div>
                     <Link
-                      class="text-white"
+                      class="h4 m-0 text-white"
                       to={"/blog/" + blog._id}
                       state={blog}
                     >
-                      {blog.category}
-                    </Link>
-                    <span class="px-1 text-white">/</span>
-                    <Link
-                      class="text-white"
-                      to={"/blog/" + blog._id}
-                      state={blog}
-                    >
-                      Views: {blog.views}
+                      {blog.title}
                     </Link>
                   </div>
-                  <Link
-                    class="h4 m-0 text-white"
-                    to={"/blog/" + blog._id}
-                    state={blog}
-                  >
-                    {blog.title}
-                  </Link>
                 </div>
-              </div>
-            );
-          })
-        )}
+              );
+            })}
 
-        {/* <div
+          {/* <div
           class="position-relative overflow-hidden"
           style={{ height: "300px" }}
         >
@@ -236,8 +239,9 @@ const Featured = () => {
             </a>
           </div>
         </div> */}
-        {/* </div> */}
-      </OwlCarousel>
+          {/* </div> */}
+        </OwlCarousel>
+      )}
     </div>
     //   </div>
     // </div>

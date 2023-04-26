@@ -7,40 +7,9 @@ import Featured from "./featured";
 import MainImgSlider from "./mainImgSlider";
 import TopCarousel from "./topCarousel";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-// import Alert from "react-bootstrap/Alert";
-// import { closeMessage } from "../functions/message";
-// import { message } from "antd";
-// import CategorySkeleton from "../skeleton/categorySkeleton";
 
-const Homepage = () => {
-  // const [show, setShow] = useState(false);
-  // const [messageApi, contextHolder] = message.useMessage();
-  // const navigate = useNavigate();
-  // async function searchHandler(search) {
-  //   // e.preventDefault();
-  //   // console.log(search);
-  //   const { data } = await axios.post("/api/find/blog", {
-  //     title: search,
-  //   });
-
-  //   // console.log(data);
-  //   if (data.length) {
-  //     const blog = data[0];
-  //     navigate("/blog/" + data[0]._id, {
-  //       state: blog,
-  //     });
-  //   } else {
-  //     closeMessage(
-  //       messageApi,
-  //       "Oops! Blog not found. Try searching another keyword.",
-  //       "error"
-  //     );
-  //     // setShow(true);
-  //   }
-  // }
-
-  // for main Img slider recent blogs
+const Homepage = ({ trend }) => {
+  // for main Img slider top carousel recent blogs
   const [blogs, setblogs] = useState(null);
   // const [loading, setloading] = useState(false);
   useEffect(() => {
@@ -73,7 +42,7 @@ const Homepage = () => {
         <div style={{ padding: "0" }} class="container">
           <TopCarousel data={blogs} />
           <MainImgSlider data={blogs} />
-          <Featured />
+          <Featured trend={trend} />
           <div class="pt-3">
             <div class="row">
               {/* <CategorySkeleton /> */}
