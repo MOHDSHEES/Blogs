@@ -169,9 +169,9 @@ const Footer = ({ cate }) => {
                 <i class="fa fa-angle-right text-dark mr-2"></i>Terms &
                 conditions
               </a>
-              <a class="text-secondary" href="#!">
+              <Link class="text-secondary" to="/contact">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Contact
-              </a>
+              </Link>
             </div>
           </div>
         </div>

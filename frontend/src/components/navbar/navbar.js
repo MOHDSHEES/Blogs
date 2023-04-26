@@ -17,18 +17,18 @@ const NavBar = ({ searchHandler }) => {
     searchHandler(search);
     setExpanded(false);
   }
+  const [titles, setTitles] = useState([]);
   const [expanded, setExpanded] = useState(false);
   useEffect(() => {
-    async function editBlog() {
+    async function blogTitles() {
       const { data } = await axios.post("/api/blog/titles");
       setTitles(data);
     }
     if (titles.length === 0) {
-      editBlog();
+      blogTitles();
     }
-  }, []);
+  }, [titles.length]);
 
-  const [titles, setTitles] = useState([]);
   return (
     <div>
       <div class="container-fluid p-0 mb-3">
@@ -78,16 +78,16 @@ const NavBar = ({ searchHandler }) => {
                   // style={{ maxHeight: "100px" }}
                   // navbarScroll
                 >
-                  <Nav.Link className="nav-item  active" href="/">
+                  <Nav.Link className="nav-item  " href="/">
                     Home
                   </Nav.Link>
-                  <Nav.Link href="#action3" className="nav-item ">
+                  <Nav.Link href="#action3" className="nav-item active">
                     Categories
                   </Nav.Link>
                   <Nav.Link href="#action4" className="nav-item ">
                     Single Blog
                   </Nav.Link>
-                  <Nav.Link href="#" class="nav-item ">
+                  <Nav.Link href="/contact" class="nav-item ">
                     Contact
                   </Nav.Link>
 

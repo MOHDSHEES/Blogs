@@ -75,8 +75,8 @@ const BlogDetail = () => {
           <div class="row">
             <div class="col-lg-8">
               <Blog />
-              <Comments />
-              <CommentModal />
+              {/* <Comments />
+              <CommentModal /> */}
             </div>
             <div class="col-lg-4 pt-3 pt-lg-0">
               <Socialfollow />
