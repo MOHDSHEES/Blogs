@@ -78,10 +78,10 @@ const NavBar = ({ searchHandler }) => {
                   // style={{ maxHeight: "100px" }}
                   // navbarScroll
                 >
-                  <Nav.Link className="nav-item  " href="/">
+                  <Nav.Link className="nav-item active " href="/">
                     Home
                   </Nav.Link>
-                  <Nav.Link href="#action3" className="nav-item active">
+                  <Nav.Link href="#action3" className="nav-item ">
                     Categories
                   </Nav.Link>
                   <Nav.Link href="#action4" className="nav-item ">
