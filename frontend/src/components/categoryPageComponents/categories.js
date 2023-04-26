@@ -12,7 +12,7 @@ const Categories = ({ blog }) => {
       <div class="row">
         <div class="col-12">
           <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-            <h3 class="m-0">Technology</h3>
+            <h3 class="m-0">{!blogs ? "Loading..." : blogs[0].category}</h3>
             {/* <a
               class="text-secondary font-weight-medium text-decoration-none"
               href=""
