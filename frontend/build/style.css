@@ -214,3 +214,10 @@ a {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+.p-link {
+  padding: 5px;
+  cursor: pointer;
+}
+.p-link:hover {
+  background-color: #999;
+}

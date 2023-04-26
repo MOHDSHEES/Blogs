@@ -4,7 +4,8 @@ import axios from "axios";
 import Autocomplete from "../autocomplete/autocomplete";
 // import Alert from "react-bootstrap/Alert";
 import { openMessage, closeMessage } from "../functions/message";
-import { message } from "antd";
+import { message, Popover, Drawer } from "antd";
+import { Link } from "react-router-dom";
 
 const Form = ({ cate }) => {
   // const [status, setStatus] = useState(null);
@@ -23,6 +24,9 @@ const Form = ({ cate }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [checkBox, setcheckBox] = useState(false);
   const [categoryImg, setcategoryImg] = useState("");
+  const [openpopover, setopenpopover] = useState(false);
+
+  const [tagId, setTagId] = useState(null);
   function reset() {
     setUpdateFlag(1);
     setblog([{ tag: "P" }]);
@@ -114,6 +118,18 @@ const Form = ({ cate }) => {
     values.splice(i, 1);
     setblog(values);
   }
+
+  function handleAddInBetween(i, tag) {
+    // const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    // console.log(i);
+    const values = [...blog];
+    values.splice(i, 0, { tag: tag });
+    setblog(values);
+    setopenpopover(false);
+    // console.log(arr);
+  }
+
+  console.log(blog);
   async function deleteBlog(e) {
     e.preventDefault();
     openMessage(messageApi, "Deleting...");
@@ -401,138 +417,186 @@ const Form = ({ cate }) => {
                 required
               /> */}
             </div>
+            <Drawer
+              title="Select the Input Type"
+              height={230}
+              placement="top"
+              onClose={() => setopenpopover(false)}
+              open={openpopover}
+            >
+              <p
+                className="p-link "
+                style={{ margin: 0 }}
+                onClick={() => handleAddInBetween(tagId, "P")}
+              >
+                P : Paragraph Iput
+              </p>
+              <p
+                style={{ margin: 0 }}
+                className="p-link"
+                onClick={() => handleAddInBetween(tagId, "H")}
+              >
+                H : Heading Iput
+              </p>
+              <p
+                style={{ margin: 0 }}
+                className="p-link"
+                onClick={() => handleAddInBetween(tagId, "TI")}
+              >
+                TI : Text on Left and Image on Right
+              </p>
+              <p
+                style={{ margin: 0 }}
+                className="p-link"
+                onClick={() => handleAddInBetween(tagId, "IT")}
+              >
+                IT : Image on Left and Text on Right
+              </p>
+            </Drawer>
             {blog.map((bl, idx) => {
               return (
-                <div class="my-3 p-3 bg-light">
-                  {bl.tag === "P" ? (
-                    <div class=" my-2">
-                      <div style={{ marginBottom: "5px" }}>
-                        <small>Paragraph Text Box</small>
-                        {blog.length !== 1 && (
-                          <button
-                            type="button"
-                            className="cancel-btn btn btn-outline-danger input-group-text"
-                            onClick={() => handleRemove(idx)}
-                          >
-                            X
-                          </button>
-                        )}
-                      </div>
+                <div>
+                  <div
+                    // onClick={() => handleAddInBetween(idx)}
+                    onClick={() => {
+                      setopenpopover(true);
+                      setTagId(idx);
+                    }}
+                    className="p-2"
+                    // style={{ height: "20px", width: "100%" }}
+                  ></div>
+                  {/* </Popover> */}
+                  <div class=" p-3 bg-light">
+                    {bl.tag === "P" ? (
+                      <div class=" my-2">
+                        <div style={{ marginBottom: "5px" }}>
+                          <small>Paragraph Text Box</small>
+                          {blog.length !== 1 && (
+                            <button
+                              type="button"
+                              className="cancel-btn btn btn-outline-danger input-group-text"
+                              onClick={() => handleRemove(idx)}
+                            >
+                              X
+                            </button>
+                          )}
+                        </div>
 
-                      <textarea
-                        className="form-control"
-                        id={"p" + idx}
-                        value={bl.text || ""}
-                        onChange={(e) => handleChange(idx, e)}
-                        placeholder="Please enter the paragraph text..."
-                        required
-                        rows="10"
-                        cols="50"
-                      />
-                    </div>
-                  ) : bl.tag === "H" ? (
-                    <div class=" my-2">
-                      <div style={{ marginBottom: "5px" }}>
-                        <small>Heading Input</small>
-                        {blog.length !== 1 && (
-                          <button
-                            type="button"
-                            className="cancel-btn btn btn-outline-danger input-group-text"
-                            onClick={() => handleRemove(idx)}
-                          >
-                            X
-                          </button>
-                        )}
+                        <textarea
+                          className="form-control"
+                          id={"p" + idx}
+                          value={bl.text || ""}
+                          onChange={(e) => handleChange(idx, e)}
+                          placeholder="Please enter the paragraph text..."
+                          required
+                          rows="10"
+                          cols="50"
+                        />
                       </div>
+                    ) : bl.tag === "H" ? (
+                      <div class=" my-2">
+                        <div style={{ marginBottom: "5px" }}>
+                          <small>Heading Input</small>
+                          {blog.length !== 1 && (
+                            <button
+                              type="button"
+                              className="cancel-btn btn btn-outline-danger input-group-text"
+                              onClick={() => handleRemove(idx)}
+                            >
+                              X
+                            </button>
+                          )}
+                        </div>
 
-                      <input
-                        className="form-control"
-                        id={"h" + idx}
-                        value={bl.text || ""}
-                        onChange={(e) => handleChange(idx, e)}
-                        placeholder="Please enter the heading..."
-                        autocomplete="off"
-                        required
-                      />
-                    </div>
-                  ) : bl.tag === "IT" ? (
-                    <div class="form-group my-2">
-                      <div style={{ marginBottom: "5px" }}>
-                        <small>Image on Left and Text on Right</small>
-                        {blog.length !== 1 && (
-                          <button
-                            type="button"
-                            className="cancel-btn btn btn-outline-danger input-group-text"
-                            onClick={() => handleRemove(idx)}
-                          >
-                            X
-                          </button>
-                        )}
-                      </div>
-                      {/* <div class="input-group"> */}
-                      <textarea
-                        className="form-control"
-                        id={"it" + idx}
-                        value={bl.text || ""}
-                        onChange={(e) => handleChange(idx, e)}
-                        placeholder="Please enter the text to be displayed on right side of image..."
-                        required
-                        rows="10"
-                        cols="50"
-                      />
-
-                      <div class="mt-2">
                         <input
-                          type="text"
+                          className="form-control"
+                          id={"h" + idx}
+                          value={bl.text || ""}
+                          onChange={(e) => handleChange(idx, e)}
+                          placeholder="Please enter the heading..."
+                          autocomplete="off"
+                          required
+                        />
+                      </div>
+                    ) : bl.tag === "IT" ? (
+                      <div class="form-group my-2">
+                        <div style={{ marginBottom: "5px" }}>
+                          <small>Image on Left and Text on Right</small>
+                          {blog.length !== 1 && (
+                            <button
+                              type="button"
+                              className="cancel-btn btn btn-outline-danger input-group-text"
+                              onClick={() => handleRemove(idx)}
+                            >
+                              X
+                            </button>
+                          )}
+                        </div>
+                        {/* <div class="input-group"> */}
+                        <textarea
                           className="form-control"
                           id={"it" + idx}
-                          value={bl.img || ""}
-                          onChange={(e) => handleChange(idx, e, true)}
-                          placeholder="Please enter the URL of image..."
-                          autocomplete="off"
+                          value={bl.text || ""}
+                          onChange={(e) => handleChange(idx, e)}
+                          placeholder="Please enter the text to be displayed on right side of image..."
                           required
+                          rows="10"
+                          cols="50"
                         />
-                      </div>
-                    </div>
-                  ) : (
-                    <div class="form-group my-2">
-                      <div style={{ marginBottom: "5px" }}>
-                        <small>Text on Left and Image on Right</small>
-                        {blog.length !== 1 && (
-                          <button
-                            type="button"
-                            className="cancel-btn btn btn-outline-danger input-group-text"
-                            onClick={() => handleRemove(idx)}
-                          >
-                            X
-                          </button>
-                        )}
-                      </div>
-                      <textarea
-                        className="form-control"
-                        id={"ti" + idx}
-                        value={bl.text || ""}
-                        onChange={(e) => handleChange(idx, e)}
-                        placeholder="Please enter the text to be displayed on left side of image..."
-                        required
-                        rows="10"
-                        cols="50"
-                      />
 
-                      <div class="mt-2">
-                        <input
-                          type="text"
+                        <div class="mt-2">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id={"it" + idx}
+                            value={bl.img || ""}
+                            onChange={(e) => handleChange(idx, e, true)}
+                            placeholder="Please enter the URL of image..."
+                            autocomplete="off"
+                            required
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div class="form-group my-2">
+                        <div style={{ marginBottom: "5px" }}>
+                          <small>Text on Left and Image on Right</small>
+                          {blog.length !== 1 && (
+                            <button
+                              type="button"
+                              className="cancel-btn btn btn-outline-danger input-group-text"
+                              onClick={() => handleRemove(idx)}
+                            >
+                              X
+                            </button>
+                          )}
+                        </div>
+                        <textarea
                           className="form-control"
                           id={"ti" + idx}
-                          value={bl.img || ""}
-                          onChange={(e) => handleChange(idx, e, true)}
-                          placeholder="Please enter the URL of image..."
-                          autocomplete="off"
+                          value={bl.text || ""}
+                          onChange={(e) => handleChange(idx, e)}
+                          placeholder="Please enter the text to be displayed on left side of image..."
                           required
+                          rows="10"
+                          cols="50"
                         />
+
+                        <div class="mt-2">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id={"ti" + idx}
+                            value={bl.img || ""}
+                            onChange={(e) => handleChange(idx, e, true)}
+                            placeholder="Please enter the URL of image..."
+                            autocomplete="off"
+                            required
+                          />
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               );
             })}
