@@ -87,7 +87,7 @@ const BlogDetail = () => {
                 </a>
               </div>
               <Trending />
-              <Tags />
+              {/* <Tags /> */}
             </div>
           </div>
         </div>
