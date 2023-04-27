@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import parse from "html-react-parser";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { Link } from "react-router-dom";
 
 const Blog = ({ blogs }) => {
   const [blog, setblog] = useState(null);
@@ -52,7 +53,9 @@ const Blog = ({ blogs }) => {
         )}
         <div class="overlay position-relative bg-light">
           <div class="mb-3">
-            <a href="#!">{blog && blog.category}</a>
+            {blog && (
+              <Link to={"/blogs/" + blog.category}>{blog.category}</Link>
+            )}
             <span class="px-1">/</span>
             <span>{blog && blog.createdDate} / </span>
             <span>Total Views: {blog && blog.views}</span>
