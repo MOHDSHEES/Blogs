@@ -624,13 +624,7 @@ const Form = ({ cate }) => {
                 )}
               </Droppable>
             </DragDropContext>
-            <button
-              type="submit"
-              disabled={disabled}
-              class="m-3 btn btn-primary"
-            >
-              {flag ? "Update" : "Save"}
-            </button>
+
             {/* {title && (
               <Link
                 to={{
@@ -648,26 +642,35 @@ const Form = ({ cate }) => {
                 Preview
               </Link>
             )} */}
-            {flag ? (
-              <div>
-                <button
-                  onClick={reset}
-                  type="button"
-                  class="m-3 btn btn-danger"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={(e) => deleteBlog(e)}
-                  type="button"
-                  class="m-3 btn btn-danger"
-                >
-                  Delete
-                </button>
-              </div>
-            ) : (
-              ""
-            )}
+            <div className="form-fixed-btn">
+              <button
+                type="submit"
+                disabled={disabled}
+                class="m-3 btn btn-primary"
+              >
+                {flag ? "Update" : "Save"}
+              </button>
+              {flag ? (
+                <>
+                  <button
+                    onClick={reset}
+                    type="button"
+                    class="m-3 btn btn-danger"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={(e) => deleteBlog(e)}
+                    type="button"
+                    class="m-3 btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </>
+              ) : (
+                ""
+              )}
+            </div>
           </form>
         ) : (
           ""

@@ -224,3 +224,9 @@ a {
 .p-link:hover {
   background-color: #999;
 }
+.form-fixed-btn {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  text-align: center;
+}
