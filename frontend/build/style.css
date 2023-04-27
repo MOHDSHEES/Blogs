@@ -14,6 +14,9 @@
 ::after {
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: unset !important;
+}
 body {
   position: relative;
   /* margin: var(--header-height) 0 0 0; */
