@@ -31,9 +31,9 @@ const CategoryPage = () => {
       <div class="container" style={{ padding: "0" }}>
         <div class="row">
           <div class="col-lg-8">
-            <Categories blog={blogs && blogs.slice(0, 4)} />
+            <Categories blog={blogs && blogs.slice(-4)} />
             {blogs && blogs.length > 4 && (
-              <MoreCategories blog={blogs && blogs.slice(4)} />
+              <MoreCategories blog={blogs && blogs.slice(0, -4)} />
             )}
           </div>
           <div class="col-lg-4 pt-3 pt-lg-0">
