@@ -26,7 +26,7 @@ const Categories = ({ blog }) => {
           ? [0, 1].map((c) => {
               return <CategoryPageSkeleton key={c} />;
             })
-          : blogs.map((blog, idx) => {
+          : blogs.reverse().map((blog, idx) => {
               return (
                 <div key={blog.category + idx} class="col-lg-6">
                   <div class="position-relative mb-3">
