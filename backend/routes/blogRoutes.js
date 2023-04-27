@@ -60,6 +60,7 @@ router.post("/add/blog", async (req, res) => {
     const blog = new Blogs({
       title: req.body.title,
       mainImg: req.body.mainImg,
+      keywords: req.body.keywords,
       category: req.body.category,
       blog: req.body.blog,
       views: 0,
@@ -176,6 +177,7 @@ router.post("/update/blog", async (req, res) => {
         title: req.body.title,
         mainImg: req.body.mainImg,
         category: req.body.category,
+        keywords: req.body.keywords,
         blog: req.body.blog,
         updatedDate: date,
       }

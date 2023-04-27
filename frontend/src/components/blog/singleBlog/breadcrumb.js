@@ -1,21 +1,26 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Breadcrumb = () => {
+const Breadcrumb = ({ category }) => {
+  // const [Category, setCategory] = useState(null);
+  // useEffect(() => {
+  //   setCategory(category);
+  // }, [category]);
   return (
     <div>
       <div style={{ padding: "1rem 15px" }} class="container-fluid">
         <div style={{ padding: "0" }} class="container">
           <nav class="breadcrumb bg-transparent m-0 p-0">
-            <a class="breadcrumb-item a" href="#!">
+            <Link class="breadcrumb-item a" to="/">
               Home
-            </a>
-            <a class="breadcrumb-item a" href="#!">
+            </Link>
+            <Link class="breadcrumb-item a" to="/categories">
               Category
-            </a>
-            <a class="breadcrumb-item a" href="#!">
-              Technology
-            </a>
-            {/* <span class="breadcrumb-item">News Title</span> */}
+            </Link>
+            <Link class="breadcrumb-item a" to={"/blogs/" + category}>
+              {category}
+            </Link>
+            {/* <span class="breadcrumb-item">{category}</span> */}
           </nav>
         </div>
       </div>

@@ -1,39 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+// import { useLocation, useParams, useNavigate } from "react-router-dom";
+// import axios from "axios";
 import parse from "html-react-parser";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-const Blog = () => {
-  const navigate = useNavigate();
-  const { state } = useLocation();
-  // console.log(state);
-  const { id } = useParams();
-  // console.log(id);
+const Blog = ({ blogs }) => {
   const [blog, setblog] = useState(null);
-  // console.log(blog);
   useEffect(() => {
-    if (state && Object.keys(state).length !== 0) setblog(state);
-    (async () => {
-      const { data } = await axios.post("/api/find/blog/id", {
-        id: id,
-      });
-      // console.log(data);
-      if (data && data._id) setblog(data);
-      else {
-        navigate("/");
-      }
-    })();
-  }, [state, id, navigate]);
+    setblog(blogs);
+  }, [blogs]);
+  // const navigate = useNavigate();
+  // const { state } = useLocation();
+  // // console.log(state);
+  // const { id } = useParams();
+  // // console.log(id);
+  // const [blog, setblog] = useState(null);
+  // // console.log(blog);
+  // useEffect(() => {
+  //   if (state && Object.keys(state).length !== 0) setblog(state);
+  //   (async () => {
+  //     const { data } = await axios.post("/api/find/blog/id", {
+  //       id: id,
+  //     });
+  //     // console.log(data);
+  //     if (data && data._id) setblog(data);
+  //     else {
+  //       navigate("/");
+  //     }
+  //   })();
+  // }, [state, id, navigate]);
 
   return (
     <div>
       <div class="position-relative mb-3">
-        <img
-          class="img-fluid w-100"
-          src={blog && blog.mainImg}
-          alt=""
-          style={{ objectFit: "cover" }}
-        />
+        {!(blog && blog.mainImg) ? (
+          <Skeleton
+            baseColor="#cdcbcb"
+            highlightColor="#e6e5e5"
+            // width={window.screen.width < 775 ? 280 : 490}
+            height={400}
+            duration={2}
+          />
+        ) : (
+          <img
+            class="img-fluid w-100"
+            src={blog && blog.mainImg}
+            alt=""
+            style={{ objectFit: "cover" }}
+          />
+        )}
         <div class="overlay position-relative bg-light">
           <div class="mb-3">
             <a href="#!">{blog && blog.category}</a>
@@ -41,6 +57,19 @@ const Blog = () => {
             <span>{blog && blog.createdDate} / </span>
             <span>Total Views: {blog && blog.views}</span>
           </div>
+          {/* <div class="mb-3">
+            {blog &&
+              blog.keywords
+                .split(",")
+                .slice(0, 3)
+                .map((str) => {
+                  return (
+                    <span class="btn btn-sm btn-outline-secondary m-1">
+                      {str}
+                    </span>
+                  );
+                })}
+          </div> */}
           <div>
             <h3 class="mb-3">{blog && blog.title}</h3>
             {blog &&

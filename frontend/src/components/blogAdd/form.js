@@ -20,6 +20,7 @@ const Form = ({ cate }) => {
   const [blog, setblog] = useState([{ tag: "P" }]);
   const [title, settitle] = useState("");
   const [mainImg, setmainImg] = useState("");
+  const [keywords, setkeywords] = useState("");
   const [category, setcategory] = useState("");
   const [categories, setCategories] = useState(null);
   const [messageApi, contextHolder] = message.useMessage();
@@ -79,6 +80,7 @@ const Form = ({ cate }) => {
       setblog(data[0].blog);
       setcategory(data[0].category);
       setmainImg(data[0].mainImg);
+      setkeywords(data[0].keywords);
       settitle(data[0].title);
       setUpdateFlag(0);
     } else {
@@ -164,6 +166,7 @@ const Form = ({ cate }) => {
         id: id,
         title,
         mainImg,
+        keywords,
         category,
         blog,
       });
@@ -175,6 +178,7 @@ const Form = ({ cate }) => {
       const { data } = await axios.post("/api/add/blog", {
         title,
         mainImg,
+        keywords,
         category,
         blog,
       });
@@ -290,6 +294,19 @@ const Form = ({ cate }) => {
                 value={mainImg}
                 onChange={(e) => setmainImg(e.target.value)}
                 placeholder="Please enter the URL of main image..."
+                autocomplete="off"
+                required
+              />
+              <div style={{ margin: "10px 0 5px" }}>
+                <small>Keywords</small>
+              </div>
+
+              <input
+                className="form-control"
+                // id={"p" + idx}
+                value={keywords}
+                onChange={(e) => setkeywords(e.target.value)}
+                placeholder="Please enter keywords seperated by comma"
                 autocomplete="off"
                 required
               />

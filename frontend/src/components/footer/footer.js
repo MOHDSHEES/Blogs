@@ -18,8 +18,8 @@ const Footer = ({ cate }) => {
               </h2>
             </Link>
             <p>
-              Volup amet magna clita tempor. Tempor sea eos vero ipsum. Lorem
-              lorem sit sed elitr sed kasd et
+              Stay ahead of the curve with OFFTHEWEB - your source for the
+              latest in tech and beyond.
             </p>
             <div class="d-flex justify-content-start mt-4">
               <a
