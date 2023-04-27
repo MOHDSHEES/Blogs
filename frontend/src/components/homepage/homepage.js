@@ -7,6 +7,7 @@ import Featured from "./featured";
 import MainImgSlider from "./mainImgSlider";
 import TopCarousel from "./topCarousel";
 import axios from "axios";
+import CategorySkeleton from "../skeleton/categoryHomepageSkeleton";
 
 const Homepage = ({ trend, cate }) => {
   // const items = ["Item 1", "Item 2", "Item 3"];
@@ -22,6 +23,7 @@ const Homepage = ({ trend, cate }) => {
       // setloading(false);
     })();
   }, []);
+  console.log(cate);
   return (
     <div>
       {/* {contextHolder} */}
@@ -47,11 +49,16 @@ const Homepage = ({ trend, cate }) => {
           <div class="pt-3">
             <div class="row">
               {/* <CategorySkeleton /> */}
-              {["Technology", "Cyber Security", "Business"].map(
-                (category, idx) => {
-                  return <CategorySlider key={idx} category={category} />;
-                }
-              )}
+
+              {cate
+                ? cate.map((category, idx) => {
+                    return (
+                      <CategorySlider key={idx} category={category.category} />
+                    );
+                  })
+                : [0, 1, 2, 3].map((c) => {
+                    return <CategorySkeleton key={c} />;
+                  })}
             </div>
           </div>
         </div>

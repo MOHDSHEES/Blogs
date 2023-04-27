@@ -27,8 +27,15 @@ const CategorySlider = ({ category }) => {
     <div class="col-lg-6 py-3">
       {blog && blog.length && (
         <>
-          <div class="bg-light py-2 px-4 mb-3">
+          <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
             <h3 class="m-0">{category}</h3>
+
+            <Link
+              class="text-secondary font-weight-medium text-decoration-none"
+              to={"/blogs/" + category}
+            >
+              View All
+            </Link>
           </div>
 
           <OwlCarousel
@@ -62,28 +69,31 @@ const CategorySlider = ({ category }) => {
             }}
           >
             {/* <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative"> */}
-            {blog.reverse().map((bl) => {
-              return (
-                <div key={bl._id} class="position-relative">
-                  <img
-                    class="img-fluid w-100"
-                    src={bl.mainImg}
-                    alt={bl.category}
-                    style={{ objectFit: "cover" }}
-                  />
-                  <div class="overlay position-relative bg-light">
-                    {/* <div class="mb-2" style={{ fontSize: "13px" }}>
+            {blog
+              .slice(-5)
+              .reverse()
+              .map((bl) => {
+                return (
+                  <div key={bl._id} class="position-relative">
+                    <img
+                      class="img-fluid w-100"
+                      src={bl.mainImg}
+                      alt={bl.category}
+                      style={{ objectFit: "cover" }}
+                    />
+                    <div class="overlay position-relative bg-light">
+                      {/* <div class="mb-2" style={{ fontSize: "13px" }}>
             <a href="">Technology</a>
             <span class="px-1">/</span>
             <span>January 01, 2045</span>
           </div> */}
-                    <Link class="h4 m-0" to={"/blog/" + bl._id} state={bl}>
-                      {bl.title}
-                    </Link>
+                      <Link class="h4 m-0" to={"/blog/" + bl._id} state={bl}>
+                        {bl.title}
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </OwlCarousel>
         </>
       )}
