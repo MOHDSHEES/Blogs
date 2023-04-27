@@ -175,6 +175,12 @@ const Footer = ({ cate }) => {
             </div>
           </div>
         </div>
+        <div style={{ borderTop: "0.1rem solid #ebebeb" }}>
+          {/* <hr /> */}
+          <p style={{ textAlign: "center", margin: 0, padding: "10px" }}>
+            Copyright © 2023 OFFTHEWEB. All Rights Reserved.
+          </p>
+        </div>
       </div>
     </div>
   );
