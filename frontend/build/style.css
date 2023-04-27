@@ -225,6 +225,7 @@ a {
   background-color: #999;
 }
 .form-fixed-btn {
+  box-shadow: #cfc8c8 0px -1px 5px;
   position: sticky;
   bottom: 0;
   background-color: white;
