@@ -33,6 +33,7 @@ const Form = ({ cate }) => {
     setUpdateFlag(1);
     setblog([{ tag: "P" }]);
     setcategory("");
+    setkeywords("");
     setmainImg("");
     settitle("");
   }
@@ -135,9 +136,10 @@ const Form = ({ cate }) => {
   // console.log(blog);
   async function deleteBlog(e) {
     e.preventDefault();
-    openMessage(messageApi, "Deleting...");
+
     let text = "Are you sure you want to delete this blog.\n";
     if (window.confirm(text) === true) {
+      openMessage(messageApi, "Deleting...");
       const { data } = await axios.post("/api/delete/blog", {
         id: id,
       });
