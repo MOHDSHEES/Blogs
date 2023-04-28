@@ -27,15 +27,17 @@ const MoreCategories = ({ blog }) => {
                   style={{ height: "100px" }}
                 >
                   <div class="mb-1" style={{ fontSize: "13px" }}>
-                    <Link to={"/blog/" + blog._id} state={blog}>
+                    <Link
+                      to={"/blog/" + blog._id + "/" + blog.title}
+                      state={blog}
+                    >
                       {blog.category}
                     </Link>
                     <span class="px-1">/</span>
                     <span>{blog.createdDate}</span>
                   </div>
                   <Link
-                    Link
-                    to={"/blog/" + blog._id}
+                    to={"/blog/" + blog._id + "/" + blog.title}
                     state={blog}
                     class="h6 m-0 break-line-3"
                   >

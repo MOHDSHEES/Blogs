@@ -87,7 +87,11 @@ const CategorySlider = ({ category }) => {
             <span class="px-1">/</span>
             <span>January 01, 2045</span>
           </div> */}
-                      <Link class="h4 m-0" to={"/blog/" + bl._id} state={bl}>
+                      <Link
+                        class="h4 m-0"
+                        to={"/blog/" + bl._id + "/" + bl.title}
+                        state={bl}
+                      >
                         {bl.title}
                       </Link>
                     </div>

@@ -93,7 +93,7 @@ const Featured = ({ trend }) => {
                     <div class="mb-1" style={{ fontSize: "13px" }}>
                       <Link
                         class="text-white"
-                        to={"/blog/" + blog._id}
+                        to={"/blog/" + blog._id + "/" + blog.title}
                         state={blog}
                       >
                         {blog.category}
@@ -101,7 +101,7 @@ const Featured = ({ trend }) => {
                       <span class="px-1 text-white">/</span>
                       <Link
                         class="text-white"
-                        to={"/blog/" + blog._id}
+                        to={"/blog/" + blog._id + "/" + blog.title}
                         state={blog}
                       >
                         Views: {blog.views}
@@ -109,7 +109,7 @@ const Featured = ({ trend }) => {
                     </div>
                     <Link
                       class="h4 m-0 text-white"
-                      to={"/blog/" + blog._id}
+                      to={"/blog/" + blog._id + "/" + blog.title}
                       state={blog}
                     >
                       {blog.title}

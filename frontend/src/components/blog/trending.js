@@ -43,7 +43,10 @@ const Trending = () => {
                   style={{ height: "100px" }}
                 >
                   <div class="mb-1" style={{ fontSize: "13px" }}>
-                    <Link to={"/blog/" + blog._id} state={blog}>
+                    <Link
+                      to={"/blog/" + blog._id + "/" + blog.title}
+                      state={blog}
+                    >
                       {blog.category}
                     </Link>
                     <span class="px-1">/</span>
@@ -51,7 +54,7 @@ const Trending = () => {
                   </div>
                   <Link
                     className="h6 m-0 break-line-3 "
-                    to={"/blog/" + blog._id}
+                    to={"/blog/" + blog._id + "/" + blog.title}
                     state={blog}
                   >
                     {blog.title}

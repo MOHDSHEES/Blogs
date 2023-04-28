@@ -118,7 +118,7 @@ router.post("/category/blogs", async (req, res) => {
     res.send({ msg: error.message });
   }
 });
-// find blog by title
+// find blog by title for search input
 router.post("/find/blog", async (req, res) => {
   try {
     const blog = await Blogs.find({ title: req.body.title }).collation({
@@ -130,7 +130,7 @@ router.post("/find/blog", async (req, res) => {
     res.send({ msg: error.message });
   }
 });
-// find blog by id
+// find blog by id for blog page
 router.post("/find/blog/id", async (req, res) => {
   try {
     const blog = await Blogs.findOneAndUpdate(

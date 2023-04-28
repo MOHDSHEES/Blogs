@@ -58,7 +58,7 @@ function App() {
             path="/"
             element={<Homepage trend={trending} cate={categories} />}
           />
-          <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route path="/blog/:id/:title" element={<BlogDetail />} />
           <Route path="/blogs/:category" element={<CategoryPage />} />
           <Route path="/contact" element={<Contactform />} />
           <Route

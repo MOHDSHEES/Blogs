@@ -62,7 +62,7 @@ const TopCarousel = ({ data }) => {
             {blogs.map((blog) => {
               return (
                 <Link
-                  to={"/blog/" + blog._id}
+                  to={"/blog/" + blog._id + "/" + blog.title}
                   state={blog}
                   key={blog._id}
                   className="item"

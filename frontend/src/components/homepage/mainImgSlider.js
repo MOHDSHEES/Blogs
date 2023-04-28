@@ -78,7 +78,7 @@ const MainImgSlider = ({ data, cate }) => {
                           </div>
                           <Link
                             class="h2 m-0 text-white font-weight-bold"
-                            to={"/blog/" + blog._id}
+                            to={"/blog/" + blog._id + "/" + blog.title}
                             state={blog}
                           >
                             {blog.title}
@@ -104,9 +104,8 @@ const MainImgSlider = ({ data, cate }) => {
           {!categories
             ? [0, 1, 2, 3].map((c) => {
                 return (
-                  <div className="mb-3">
+                  <div key={c} className="mb-3">
                     <Skeleton
-                      key={c}
                       baseColor="#cdcbcb"
                       highlightColor="#e6e5e5"
                       // width={window.screen.width < 775 ? 280 : 490}

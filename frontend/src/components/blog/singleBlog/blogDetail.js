@@ -23,6 +23,7 @@ const BlogDetail = () => {
   // console.log(state);
   const { id } = useParams();
   // console.log(id);
+  // console.log(id);
   const [blog, setblog] = useState(null);
   // console.log(blog);
   useEffect(() => {

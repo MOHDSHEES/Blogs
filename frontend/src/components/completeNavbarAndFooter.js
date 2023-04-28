@@ -21,7 +21,7 @@ const CompleteNavbarAndFooter = ({ trend, cate }) => {
     // console.log(data);
     if (data.length) {
       const blog = data[0];
-      navigate("/blog/" + data[0]._id, {
+      navigate("/blog/" + data[0]._id + "/" + data[0].title, {
         state: blog,
       });
     } else {

@@ -55,7 +55,7 @@ const Topbar = ({ trend }) => {
                         return (
                           <div key={blog._id} className="item break-line-1">
                             <Link
-                              to={"/blog/" + blog._id}
+                              to={"/blog/" + blog._id + "/" + blog.title}
                               state={blog}
                               class="text-secondary"
                             >
