@@ -144,15 +144,7 @@ const Blog = ({ blogs }) => {
                       </h4>
                     ) : (
                       bl.tag === "TW" && (
-                        <div
-                          style={{
-                            margin: "auto",
-                            maxWidth: "300px",
-                            maxHeight: "400px",
-                            overflow: "auto",
-                          }}
-                          class="mb-3"
-                        >
+                        <div class="mb-3 scrollbarT">
                           <TwitterTweetEmbed
                             placeholder={
                               <Skeleton
