@@ -238,28 +238,28 @@ a {
   width: auto;
   max-width: 350px;
   max-height: 400px;
-  overflow: hidden scroll;
+  overflow: hidden auto;
 }
-/* .scrollbarT::-webkit-scrollbar {
-  width: 10px;
+.scrollbarT::-webkit-scrollbar {
+  width: 7px;
 }
 
 .scrollbarT::-webkit-scrollbar-track {
-  background: rgb(179, 177, 177);
+  background: rgb(249, 248, 248);
   border-radius: 10px;
 }
 
 .scrollbarT::-webkit-scrollbar-thumb {
-  background: rgb(136, 136, 136);
+  background: rgb(184, 184, 184);
   border-radius: 10px;
 }
 
 .scrollbarT::-webkit-scrollbar-thumb:hover {
-  background: rgb(100, 100, 100);
+  background: rgb(155, 154, 154);
   border-radius: 10px;
 }
 
 .scrollbarT::-webkit-scrollbar-thumb:active {
-  background: rgb(68, 68, 68);
+  background: rgb(155, 154, 154);
   border-radius: 10px;
-} */
+}
