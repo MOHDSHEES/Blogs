@@ -5,8 +5,14 @@ import parse from "html-react-parser";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Link } from "react-router-dom";
+import loadTwitter from "../../functions/twitter";
 
 const Blog = ({ blogs }) => {
+  useEffect(() => {
+    loadTwitter(() => {
+      console.log("loaded");
+    });
+  });
   const [blog, setblog] = useState(null);
   useEffect(() => {
     setblog(blogs);

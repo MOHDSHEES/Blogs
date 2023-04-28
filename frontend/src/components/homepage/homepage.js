@@ -13,6 +13,7 @@ const Homepage = ({ trend, cate }) => {
   // const items = ["Item 1", "Item 2", "Item 3"];
   // for main Img slider top carousel recent blogs
   const [blogs, setblogs] = useState(null);
+
   // const [loading, setloading] = useState(false);
   useEffect(() => {
     (async () => {
@@ -23,7 +24,7 @@ const Homepage = ({ trend, cate }) => {
       // setloading(false);
     })();
   }, []);
-  console.log(cate);
+  // console.log(cate);
   return (
     <div>
       {/* {contextHolder} */}
