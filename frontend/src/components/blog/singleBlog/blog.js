@@ -144,7 +144,15 @@ const Blog = ({ blogs }) => {
                       </h4>
                     ) : (
                       bl.tag === "TW" && (
-                        <h4 style={{ whiteSpace: "break-spaces" }} class="mb-3">
+                        <div
+                          style={{
+                            margin: "auto",
+                            maxWidth: "300px",
+                            maxHeight: "400px",
+                            overflow: "auto",
+                          }}
+                          class="mb-3"
+                        >
                           <TwitterTweetEmbed
                             placeholder={
                               <Skeleton
@@ -158,7 +166,7 @@ const Blog = ({ blogs }) => {
                             }
                             tweetId={bl.text}
                           />
-                        </h4>
+                        </div>
                       )
                     )}
                   </div>
