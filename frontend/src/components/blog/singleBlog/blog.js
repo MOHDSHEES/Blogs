@@ -11,7 +11,7 @@ const Blog = ({ blogs }) => {
   useEffect(() => {
     loadTwitter(() => {
       console.log("loaded");
-    });
+    }, []);
   });
   const [blog, setblog] = useState(null);
   useEffect(() => {

@@ -27,6 +27,7 @@ const Form = ({ cate }) => {
   const [checkBox, setcheckBox] = useState(false);
   const [categoryImg, setcategoryImg] = useState("");
   const [openpopover, setopenpopover] = useState(false);
+  const [disabledCategoryBtn, setdisabledCategoryBtn] = useState(false);
 
   const [tagId, setTagId] = useState(null);
   function reset() {
@@ -208,6 +209,8 @@ const Form = ({ cate }) => {
     );
     if (result === -1) {
       if (!(category.trim() === "") && !(categoryImg.trim() === "")) {
+        setdisabledCategoryBtn(true);
+        openMessage(messageApi, "Adding Category...");
         // console.log("-1");
         const { data } = await axios.post("/api/add/category", {
           category: { category: category, categoryImg: categoryImg },
@@ -218,10 +221,13 @@ const Form = ({ cate }) => {
             { category: category, categoryImg: categoryImg },
           ]);
           setcheckBox(false);
+          setdisabledCategoryBtn(false);
           setdisabled(false);
           closeMessage(messageApi, data.msg, "success");
         } else {
           closeMessage(messageApi, data.msg, "error");
+          setdisabledCategoryBtn(false);
+          setdisabled(false);
         }
       } else {
         closeMessage(
@@ -372,7 +378,7 @@ const Form = ({ cate }) => {
                       type="button"
                       onClick={addCategory}
                       form="categoryForm"
-                      // disabled={disabled}
+                      disabled={disabledCategoryBtn}
                       class="btn btn-primary input-group-text"
                     >
                       Add Category
