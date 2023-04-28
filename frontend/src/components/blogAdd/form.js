@@ -4,16 +4,12 @@ import axios from "axios";
 import Autocomplete from "../autocomplete/autocomplete";
 // import Alert from "react-bootstrap/Alert";
 import { openMessage, closeMessage } from "../functions/message";
-import { message, Popover, Drawer } from "antd";
-import { Link } from "react-router-dom";
+import { message, Drawer } from "antd";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const Form = ({ cate }) => {
-  // const [status, setStatus] = useState(null);
   const [disabled, setdisabled] = useState(false);
-  // const [show, setShow] = useState(false);
   const [titles, setTitles] = useState([]);
-  // const [search, setSearch] = useState("");
   const [id, setId] = useState(null);
   const [flag, setFlag] = useState(0);
   const [updateFlag, setUpdateFlag] = useState(0);
@@ -56,16 +52,6 @@ const Form = ({ cate }) => {
   useEffect(() => {
     setCategories(cate);
   }, [cate]);
-  // useEffect(() => {
-  //   if (!categories) {
-  //     (async () => {
-  //       // setloading(true);
-  //       const { data } = await axios.post("/api/find/categories");
-  //       setCategories(data);
-  //     })();
-  //   }
-  // }, [categories]);
-
   async function editBlog() {
     setFlag(1);
     setUpdateFlag(1);
@@ -86,15 +72,10 @@ const Form = ({ cate }) => {
       settitle(data[0].title);
       setUpdateFlag(0);
     } else {
-      // setStatus({ msg: "Blog not Found." });
       closeMessage(messageApi, "Blog not Found", "error");
-      // var modal = document.getElementById("alert");
-      // modal.classList.toggle("show");
-      // setShow(true);
       reset();
     }
   }
-
   // adding new color input field
   function handleAddP() {
     const values = [...blog];
@@ -106,7 +87,6 @@ const Form = ({ cate }) => {
     values.push({ tag: "IT" });
     setblog(values);
   }
-
   function handleAddTI() {
     const values = [...blog];
     values.push({ tag: "TI" });
@@ -117,7 +97,11 @@ const Form = ({ cate }) => {
     values.push({ tag: "H" });
     setblog(values);
   }
-  // removing color input field
+  function handleAddTW() {
+    const values = [...blog];
+    values.push({ tag: "TW" });
+    setblog(values);
+  }
   function handleRemove(i) {
     const values = [...blog];
     values.splice(i, 1);
@@ -125,19 +109,13 @@ const Form = ({ cate }) => {
   }
 
   function handleAddInBetween(i, tag) {
-    // const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    // console.log(i);
     const values = [...blog];
     values.splice(i, 0, { tag: tag });
     setblog(values);
     setopenpopover(false);
-    // console.log(arr);
   }
-
-  // console.log(blog);
   async function deleteBlog(e) {
     e.preventDefault();
-
     let text = "Are you sure you want to delete this blog.\n";
     if (window.confirm(text) === true) {
       openMessage(messageApi, "Deleting...");
@@ -146,24 +124,16 @@ const Form = ({ cate }) => {
       });
       if (data.status) {
         closeMessage(messageApi, data.msg, "success");
-        // setStatus(data);
-        // setShow(true);
         newBlog();
       } else {
         closeMessage(messageApi, data.msg, "error");
-        // setStatus(data);
-        // setShow(true);
       }
     }
   }
-
   async function saveBlog(e) {
     e.preventDefault();
     openMessage(messageApi, "Saving...");
     setdisabled(true);
-
-    // console.log(flag);
-
     if (flag) {
       const { data } = await axios.post("/api/update/blog", {
         id: id,
@@ -173,10 +143,7 @@ const Form = ({ cate }) => {
         category,
         blog,
       });
-      // setStatus(data);
-      // setShow(true);
       closeMessage(messageApi, data.msg, "success");
-      // reset();
     } else {
       const { data } = await axios.post("/api/add/blog", {
         title,
@@ -185,14 +152,11 @@ const Form = ({ cate }) => {
         category,
         blog,
       });
-      // setStatus(data);
-      // setShow(true);
       closeMessage(messageApi, data.msg, "success");
       newBlog();
     }
     setdisabled(false);
   }
-
   function checkBoxHandle(e) {
     setcheckBox(e.target.checked);
     if (e.target.checked) {
@@ -202,8 +166,6 @@ const Form = ({ cate }) => {
     }
   }
   async function addCategory() {
-    // console.log("inj");
-    // e.preventDefault();
     const result = categories.findIndex(
       (item) => category.toLowerCase() === item.category.toLowerCase()
     );
@@ -211,7 +173,6 @@ const Form = ({ cate }) => {
       if (!(category.trim() === "") && !(categoryImg.trim() === "")) {
         setdisabledCategoryBtn(true);
         openMessage(messageApi, "Adding Category...");
-        // console.log("-1");
         const { data } = await axios.post("/api/add/category", {
           category: { category: category, categoryImg: categoryImg },
         });
@@ -242,10 +203,8 @@ const Form = ({ cate }) => {
       setdisabled(false);
     }
   }
-  // console.log(blog);
   function handleDragEnd(result) {
     if (!result.destination) return;
-
     const items = Array.from(blog);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
@@ -260,13 +219,13 @@ const Form = ({ cate }) => {
         onClickP={handleAddP}
         onClickIT={handleAddIT}
         onClickTI={handleAddTI}
+        onClickTW={handleAddTW}
         onClickEdit={editBlog}
       />
       <div>
         {flag ? (
           <div style={{ marginTop: "80px" }}>
             <Autocomplete searchHandler={searchHandler} suggestions={titles} />
-
             <a onClick={newBlog} href="" className="ms-2">
               Write a new Blog?
             </a>
@@ -274,31 +233,25 @@ const Form = ({ cate }) => {
         ) : (
           ""
         )}
-
         {!updateFlag ? (
           <form onSubmit={saveBlog} style={{ marginTop: "80px" }}>
             <div class="p-3 bg-light">
               <div style={{ marginBottom: "5px" }}>
                 <small>Title</small>
               </div>
-
               <input
                 className="form-control"
-                // id={"p" + idx}
                 value={title}
                 onChange={(e) => settitle(e.target.value)}
                 placeholder="Please enter the title of the blog..."
                 autocomplete="off"
                 required
               />
-
               <div style={{ margin: "10px 0 5px" }}>
                 <small>Main Image</small>
               </div>
-
               <input
                 className="form-control"
-                // id={"p" + idx}
                 value={mainImg}
                 onChange={(e) => setmainImg(e.target.value)}
                 placeholder="Please enter the URL of main image..."
@@ -308,24 +261,20 @@ const Form = ({ cate }) => {
               <div style={{ margin: "10px 0 5px" }}>
                 <small>Keywords</small>
               </div>
-
               <input
                 className="form-control"
-                // id={"p" + idx}
                 value={keywords}
                 onChange={(e) => setkeywords(e.target.value)}
                 placeholder="Please enter keywords seperated by comma"
                 autocomplete="off"
                 required
               />
-
               <div style={{ margin: "10px 0 5px" }}>
                 <small>Category</small>
               </div>
               {!checkBox ? (
                 <select
                   name="brand"
-                  // onChange={(e) => setbrand(e.target.value)}
                   value={category}
                   onChange={(e) => setcategory(e.target.value)}
                   id="inputState"
@@ -345,8 +294,6 @@ const Form = ({ cate }) => {
                     })}
                 </select>
               ) : (
-                // <form id="categoryForm" onSubmit={(e) => addCategory(e)}>
-
                 <div>
                   <div style={{ margin: "10px 0 5px" }}>
                     <small>Enter Image URL</small>
@@ -354,7 +301,6 @@ const Form = ({ cate }) => {
                   <input
                     style={{ marginBottom: "5px" }}
                     className="form-control"
-                    // id={"p" + idx}
                     value={categoryImg}
                     onChange={(e) => setcategoryImg(e.target.value)}
                     placeholder="Please enter the URL of category image..."
@@ -367,7 +313,6 @@ const Form = ({ cate }) => {
                   <div class="input-group">
                     <input
                       className="form-control"
-                      // id={"p" + idx}
                       value={category}
                       onChange={(e) => setcategory(e.target.value)}
                       placeholder="Please enter the category of the blog..."
@@ -385,15 +330,12 @@ const Form = ({ cate }) => {
                     </button>
                   </div>
                 </div>
-                // {/* </form> */}
               )}
               <div className="pl-4 pt-2">
                 <input
                   className="form-check-input "
                   type="checkbox"
                   checked={checkBox}
-                  // disabled={!details.name && true}
-                  // onChange={(e) => setcheckBox(e.target.checked)}
                   onChange={(e) => checkBoxHandle(e)}
                 />
                 <label
@@ -409,19 +351,10 @@ const Form = ({ cate }) => {
                   </small>
                 </label>
               </div>
-              {/* <input
-                className="form-control"
-                // id={"p" + idx}
-                value={category}
-                onChange={(e) => setcategory(e.target.value)}
-                placeholder="Please enter the category of the blog..."
-                autocomplete="off"
-                required
-              /> */}
             </div>
             <Drawer
               title="Select the Input Type"
-              height={230}
+              height={250}
               placement="top"
               onClose={() => setopenpopover(false)}
               open={openpopover}
@@ -454,8 +387,14 @@ const Form = ({ cate }) => {
               >
                 IT : Image on Left and Text on Right
               </p>
+              <p
+                style={{ margin: 0 }}
+                className="p-link"
+                onClick={() => handleAddInBetween(tagId, "TW")}
+              >
+                TW : Twitter Tweet Input
+              </p>
             </Drawer>
-
             <DragDropContext onDragEnd={handleDragEnd}>
               <Droppable droppableId="list">
                 {(provided) => (
@@ -474,15 +413,12 @@ const Form = ({ cate }) => {
                               {...provided.dragHandleProps}
                             >
                               <div
-                                // onClick={() => handleAddInBetween(idx)}
                                 onClick={() => {
                                   setopenpopover(true);
                                   setTagId(idx);
                                 }}
                                 className="p-2"
-                                // style={{ height: "20px", width: "100%" }}
                               ></div>
-                              {/* </Popover> */}
                               <div class=" p-3 bg-light">
                                 {bl.tag === "P" ? (
                                   <div class=" my-2">
@@ -498,7 +434,6 @@ const Form = ({ cate }) => {
                                         </button>
                                       )}
                                     </div>
-
                                     <textarea
                                       className="form-control"
                                       id={"p" + idx}
@@ -524,7 +459,6 @@ const Form = ({ cate }) => {
                                         </button>
                                       )}
                                     </div>
-
                                     <input
                                       className="form-control"
                                       id={"h" + idx}
@@ -551,7 +485,6 @@ const Form = ({ cate }) => {
                                         </button>
                                       )}
                                     </div>
-                                    {/* <div class="input-group"> */}
                                     <textarea
                                       className="form-control"
                                       id={"it" + idx}
@@ -562,7 +495,6 @@ const Form = ({ cate }) => {
                                       rows="10"
                                       cols="50"
                                     />
-
                                     <div class="mt-2">
                                       <input
                                         type="text"
@@ -578,7 +510,7 @@ const Form = ({ cate }) => {
                                       />
                                     </div>
                                   </div>
-                                ) : (
+                                ) : bl.tag === "IT" ? (
                                   <div class="form-group my-2">
                                     <div style={{ marginBottom: "5px" }}>
                                       <small>
@@ -604,7 +536,6 @@ const Form = ({ cate }) => {
                                       rows="10"
                                       cols="50"
                                     />
-
                                     <div class="mt-2">
                                       <input
                                         type="text"
@@ -620,6 +551,30 @@ const Form = ({ cate }) => {
                                       />
                                     </div>
                                   </div>
+                                ) : (
+                                  <div class=" my-2">
+                                    <div style={{ marginBottom: "5px" }}>
+                                      <small>Tweet Input</small>
+                                      {blog.length !== 1 && (
+                                        <button
+                                          type="button"
+                                          className="cancel-btn btn btn-outline-danger input-group-text"
+                                          onClick={() => handleRemove(idx)}
+                                        >
+                                          X
+                                        </button>
+                                      )}
+                                    </div>
+                                    <input
+                                      className="form-control"
+                                      id={"tw" + idx}
+                                      value={bl.text || ""}
+                                      onChange={(e) => handleChange(idx, e)}
+                                      placeholder="Please enter the Id of the Tweet..."
+                                      autocomplete="off"
+                                      required
+                                    />
+                                  </div>
                                 )}
                               </div>
                             </div>
@@ -632,24 +587,6 @@ const Form = ({ cate }) => {
                 )}
               </Droppable>
             </DragDropContext>
-
-            {/* {title && (
-              <Link
-                to={{
-                  pathname: "/blog/preview",
-                  query: {
-                    title: title,
-                    category: category,
-                    mainImg: mainImg,
-                    blog: blog,
-                  },
-                }}
-                target="_blank"
-                class="m-3 btn btn-primary"
-              >
-                Preview
-              </Link>
-            )} */}
             <div className="form-fixed-btn">
               <button
                 type="submit"

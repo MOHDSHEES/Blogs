@@ -5,14 +5,14 @@ import parse from "html-react-parser";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Link } from "react-router-dom";
-import loadTwitter from "../../functions/twitter";
+import { TwitterTweetEmbed } from "react-twitter-embed";
 
 const Blog = ({ blogs }) => {
-  useEffect(() => {
-    loadTwitter(() => {
-      console.log("loaded");
-    }, []);
-  });
+  // useEffect(() => {
+  //   loadTwitter(() => {
+  //     console.log("loaded");
+  //   }, []);
+  // });
   const [blog, setblog] = useState(null);
   useEffect(() => {
     setblog(blogs);
@@ -138,10 +138,26 @@ const Blog = ({ blogs }) => {
                           </p>
                         ))}
                       </>
+                    ) : bl.tag === "H" ? (
+                      <h4 style={{ whiteSpace: "break-spaces" }} class="mb-3">
+                        {parse(bl.text)}
+                      </h4>
                     ) : (
-                      bl.tag === "H" && (
+                      bl.tag === "TW" && (
                         <h4 style={{ whiteSpace: "break-spaces" }} class="mb-3">
-                          {parse(bl.text)}
+                          <TwitterTweetEmbed
+                            placeholder={
+                              <Skeleton
+                                baseColor="#cdcbcb"
+                                highlightColor="#e6e5e5"
+                                // width={window.screen.width < 775 ? 280 : 490}
+                                height={200}
+                                width={300}
+                                duration={2}
+                              />
+                            }
+                            tweetId={bl.text}
+                          />
                         </h4>
                       )
                     )}

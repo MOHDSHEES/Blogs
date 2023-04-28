@@ -2,7 +2,14 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 // import Form from "./form";
 
-const Sidebar = ({ onClickH, onClickIT, onClickP, onClickTI, onClickEdit }) => {
+const Sidebar = ({
+  onClickH,
+  onClickIT,
+  onClickP,
+  onClickTI,
+  onClickEdit,
+  onClickTW,
+}) => {
   useEffect(() => {
     /*===== LINK ACTIVE =====*/
     const linkColor = document.querySelectorAll(".nav_link");
@@ -83,6 +90,11 @@ const Sidebar = ({ onClickH, onClickIT, onClickP, onClickTI, onClickEdit }) => {
                   </span>
                   {/* <i class="bx bx-message-square-detail nav_icon"></i>{" "} */}
                   <span class="nav_name">Image on Right</span>{" "}
+                </Link>{" "}
+                <Link onClick={onClickTW} class="nav_link">
+                  {" "}
+                  <i class="bx bxl-twitter nav_icon"></i>{" "}
+                  <span class="nav_name">Twitter Tweet</span>{" "}
                 </Link>{" "}
                 {/* <Link class="nav_link">
                   <i class="bx bx-image-alt nav_icon"></i>
