@@ -16,6 +16,15 @@ const BlogIndex = ({ blog }) => {
         <h5 style={{ color: "#ed1c24" }}>Index</h5>
       </div>
       <ul style={{ paddingLeft: "24px" }}>
+        <li className="index-ul">
+          <Link
+            onClick={() => handleClickScroll(blog.title)}
+            //   href={"#" + blog.text}
+            className="text-secondary mb-2 "
+          >
+            Introduction
+          </Link>
+        </li>
         {blog &&
           blog.blog &&
           blog.blog.map((blog) => {

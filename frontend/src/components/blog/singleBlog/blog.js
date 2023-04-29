@@ -82,7 +82,9 @@ const Blog = ({ blogs }) => {
           </div> */}
           <div>
             <BlogIndex blog={blog} />
-            <h3 class="mb-3">{blog && blog.title}</h3>
+            <h3 id={blog && blog.title} class="mb-3">
+              {blog && blog.title}
+            </h3>
             {blog &&
               blog.blog &&
               blog.blog.map((bl, key) => {
