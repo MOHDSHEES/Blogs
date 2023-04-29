@@ -12,10 +12,10 @@ const BlogIndex = ({ blog }) => {
   console.log(blog);
   return (
     <div className="blog-index mb-3">
-      <ul style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center" }}>
         <h5 style={{ color: "#ed1c24" }}>Index</h5>
-      </ul>
-      <ul>
+      </div>
+      <ul style={{ paddingLeft: "24px" }}>
         {blog &&
           blog.blog &&
           blog.blog.map((blog) => {
