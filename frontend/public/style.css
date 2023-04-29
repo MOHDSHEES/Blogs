@@ -217,14 +217,7 @@ a {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-@media (max-width: 768px) {
-  .break-line-4-3 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-}
+
 .break-line-1 {
   overflow: hidden;
   display: -webkit-box;
@@ -244,6 +237,20 @@ a {
   bottom: 0;
   background-color: white;
   text-align: center;
+}
+.category-slide-text {
+  height: 180px;
+}
+@media (max-width: 768px) {
+  .break-line-4-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .category-slide-text {
+    height: 140px;
+  }
 }
 
 /* scroll bar */

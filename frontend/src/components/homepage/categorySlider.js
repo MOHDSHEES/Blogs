@@ -85,8 +85,8 @@ const CategorySlider = ({ category }) => {
                         />
                       </div>
                       <div
-                        class="overlay position-relative bg-light "
-                        style={{ height: "200px", justifyContent: "start" }}
+                        class="overlay position-relative bg-light category-slide-text"
+                        style={{ justifyContent: "start" }}
                       >
                         {/* <div class="mb-2" style={{ fontSize: "13px" }}>
             <a href="">Technology</a>
