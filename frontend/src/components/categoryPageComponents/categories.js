@@ -34,7 +34,7 @@ const Categories = ({ blog }) => {
                       class="img-fluid w-100"
                       src={blog.mainImg}
                       alt={blog.category}
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: "cover", height: "250px" }}
                     />
                     <div class="overlay position-relative bg-light">
                       <div class="mb-2" style={{ fontSize: "14px" }}>
