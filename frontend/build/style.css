@@ -253,6 +253,16 @@ a {
   }
 }
 
+.index-ul {
+  list-style-type: circle;
+}
+.blog-index {
+  padding: 10px;
+  border: 1px solid #b8b9ba;
+  border-radius: 2px;
+  background-color: #fbf8f8;
+}
+
 /* scroll bar */
 .scrollbarT {
   margin: auto;

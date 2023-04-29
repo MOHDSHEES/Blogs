@@ -6,6 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Link } from "react-router-dom";
 import { TwitterTweetEmbed } from "react-twitter-embed";
+import BlogIndex from "./blogIndex";
 
 const Blog = ({ blogs }) => {
   // useEffect(() => {
@@ -80,12 +81,13 @@ const Blog = ({ blogs }) => {
                 })}
           </div> */}
           <div>
+            <BlogIndex blog={blog} />
             <h3 class="mb-3">{blog && blog.title}</h3>
             {blog &&
               blog.blog &&
-              blog.blog.map((bl) => {
+              blog.blog.map((bl, key) => {
                 return (
-                  <div>
+                  <div key={key}>
                     {bl.tag === "P" ? (
                       bl.text.split("\n").map((str) => (
                         <p
@@ -139,7 +141,11 @@ const Blog = ({ blogs }) => {
                         ))}
                       </>
                     ) : bl.tag === "H" ? (
-                      <h4 style={{ whiteSpace: "break-spaces" }} class="mb-3">
+                      <h4
+                        id={bl.text}
+                        style={{ whiteSpace: "break-spaces" }}
+                        class="mb-3"
+                      >
                         {parse(bl.text)}
                       </h4>
                     ) : (
