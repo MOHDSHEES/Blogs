@@ -74,26 +74,33 @@ const CategorySlider = ({ category }) => {
               .reverse()
               .map((bl) => {
                 return (
-                  <div key={bl._id} class="position-relative">
-                    <img
-                      class="img-fluid w-100"
-                      src={bl.mainImg}
-                      alt={bl.category}
-                      style={{ objectFit: "cover" }}
-                    />
-                    <div class="overlay position-relative bg-light">
-                      {/* <div class="mb-2" style={{ fontSize: "13px" }}>
+                  <div key={bl._id}>
+                    <div class="position-relative">
+                      <div style={{ height: "200px" }}>
+                        <img
+                          class="img-fluid w-100 h-100"
+                          src={bl.mainImg}
+                          alt={bl.category}
+                          style={{ objectFit: "cover" }}
+                        />
+                      </div>
+                      <div
+                        class="overlay position-relative bg-light "
+                        style={{ height: "200px", justifyContent: "start" }}
+                      >
+                        {/* <div class="mb-2" style={{ fontSize: "13px" }}>
             <a href="">Technology</a>
             <span class="px-1">/</span>
             <span>January 01, 2045</span>
           </div> */}
-                      <Link
-                        class="h4 m-0"
-                        to={"/blog/" + bl._id + "/" + bl.title}
-                        state={bl}
-                      >
-                        {bl.title}
-                      </Link>
+                        <Link
+                          class="h4 m-0 break-line-4-3"
+                          to={"/blog/" + bl._id + "/" + bl.title}
+                          state={bl}
+                        >
+                          {bl.title}
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 );
