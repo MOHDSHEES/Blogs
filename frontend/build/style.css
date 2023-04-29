@@ -241,7 +241,7 @@ a {
   overflow: hidden auto;
 }
 .scrollbarT::-webkit-scrollbar {
-  width: 7px;
+  width: 3px;
 }
 
 .scrollbarT::-webkit-scrollbar-track {
