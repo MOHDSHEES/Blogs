@@ -25,7 +25,7 @@ const Footer = ({ cate }) => {
               <a
                 class="btn btn-outline-secondary text-center mr-2 px-0"
                 style={{ width: "38px", height: "38px" }}
-                href="#!"
+                href="https://twitter.com/_OFFTHEWEB"
               >
                 <i class="bx bxl-twitter"></i>
               </a>
@@ -39,14 +39,14 @@ const Footer = ({ cate }) => {
               <a
                 class="btn btn-outline-secondary text-center mr-2 px-0"
                 style={{ width: "38px", height: "38px" }}
-                href="#!"
+                href="https://www.linkedin.com/company/offtheweb/"
               >
                 <i class="bx bxl-linkedin"></i>
               </a>
               <a
                 class="btn btn-outline-secondary text-center mr-2 px-0"
                 style={{ width: "38px", height: "38px" }}
-                href="#!"
+                href="https://www.instagram.com/_offtheweb/"
               >
                 <i class="bx bxl-instagram"></i>
               </a>
@@ -156,19 +156,19 @@ const Footer = ({ cate }) => {
           <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Quick Links</h4>
             <div class="d-flex flex-column justify-content-start">
-              <a class="text-secondary mb-2" href="#!">
+              {/* <a class="text-secondary mb-2" href="#!">
                 <i class="fa fa-angle-right text-dark mr-2"></i>About
-              </a>
-              <a class="text-secondary mb-2" href="#!">
+              </a> */}
+              <Link class="text-secondary mb-2" to="/advertise/policies">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Advertise
-              </a>
-              <a class="text-secondary mb-2" href="#!">
+              </Link>
+              <Link class="text-secondary mb-2" to="">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Privacy & policy
-              </a>
-              <a class="text-secondary mb-2" href="#!">
+              </Link>
+              <Link class="text-secondary mb-2" to="/termsandcondition">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Terms &
                 conditions
-              </a>
+              </Link>
               <Link class="text-secondary" to="/contact">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Contact
               </Link>

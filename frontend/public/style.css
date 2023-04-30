@@ -262,6 +262,9 @@ a {
   border-radius: 2px;
   background-color: #fbf8f8;
 }
+.terms-ul {
+  list-style-type: none;
+}
 
 /* scroll bar */
 .scrollbarT {

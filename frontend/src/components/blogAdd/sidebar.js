@@ -50,8 +50,8 @@ const Sidebar = ({
               {" "}
               <a href="/" class="nav_logo">
                 {" "}
-                {/* <img src="/logo512.png" height={30} /> */}
-                <i class="bx bx-layer nav_logo-icon"></i>{" "}
+                <img src="/logo.png" height={30} />
+                {/* <i class="bx bx-layer nav_logo-icon"></i>{" "} */}
                 <span class="nav_logo-name">Off The Web</span>{" "}
               </a>
               <div class="nav_list">
