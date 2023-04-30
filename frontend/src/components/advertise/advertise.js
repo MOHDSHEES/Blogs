@@ -6,7 +6,7 @@ const Advertise = () => {
     <div style={{ padding: "1rem 15px" }} class="container-fluid ">
       <div style={{ padding: "0" }} class="container">
         <div
-          className="bg-light py-4 px-4 mb-3"
+          className="bg-light py-3 px-4 mb-3"
           style={{ textAlign: "center" }}
         >
           <h3 className="mb4">Advertise Policies</h3>
