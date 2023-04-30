@@ -145,7 +145,7 @@ const Form = ({ cate }) => {
       closeMessage(messageApi, data.msg, "success");
     } else {
       const { data } = await axios.post("/api/add/blog", {
-        title,
+        title: title.trim(),
         mainImg,
         keywords,
         category,
