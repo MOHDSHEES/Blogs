@@ -39,7 +39,6 @@ const Form = ({ cate }) => {
     setUpdateFlag(0);
     setFlag(0);
   }
-
   function handleChange(i, event, img = false) {
     const values = [...blog];
     if (img) {
@@ -137,7 +136,7 @@ const Form = ({ cate }) => {
     if (flag) {
       const { data } = await axios.post("/api/update/blog", {
         id: id,
-        title,
+        title: title.trim(),
         mainImg,
         keywords,
         category,
