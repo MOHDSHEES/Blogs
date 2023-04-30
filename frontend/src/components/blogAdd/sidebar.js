@@ -51,10 +51,11 @@ const Sidebar = ({
               <a href="/" class="nav_logo">
                 {" "}
                 <img
-                  style={{ marginLeft: "-17px" }}
-                  className="nav_icon"
+                  style={{ marginLeft: "-30px" }}
+                  className="nav_logo-icon"
+                  alt="OFFTHEWEB"
                   src="/logo.png"
-                  height={50}
+                  height={70}
                 />
                 {/* <i class="bx bx-layer nav_logo-icon"></i>{" "} */}
                 <span class="nav_logo-name">Off The Web</span>{" "}

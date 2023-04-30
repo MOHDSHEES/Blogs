@@ -13,14 +13,22 @@ function Autocomplete({ suggestions, searchHandler }) {
   // filtering the suggestions according to user
   const onChange = (e) => {
     const userInput = e.target.value;
+
+    const inputWords = userInput.trim().toLowerCase().split(" ");
+    let filtered = suggestions;
+    inputWords.forEach((word) => {
+      filtered = suggestions.filter((suggestion) =>
+        suggestion.toLowerCase().includes(word)
+      );
+    });
     // Filter our suggestions that don't contain the user's input
-    const unLinked = suggestions.filter(
-      (suggestion) =>
-        suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
+    // const unLinked = suggestions.filter(
+    //   (suggestion) =>
+    //     suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+    // );
 
     setInput(e.target.value);
-    setFilteredSuggestions(unLinked.slice(0, 3));
+    setFilteredSuggestions(filtered.slice(0, 3));
     setActiveSuggestionIndex(0);
     setShowSuggestions(true);
   };
