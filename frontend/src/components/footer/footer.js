@@ -162,10 +162,10 @@ const Footer = ({ cate }) => {
               <Link class="text-secondary mb-2" to="/advertise/policies">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Advertise
               </Link>
-              <Link class="text-secondary mb-2" to="">
+              <Link class="text-secondary mb-2" to="/privacy/policies">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Privacy & policy
               </Link>
-              <Link class="text-secondary mb-2" to="/termsandcondition">
+              <Link class="text-secondary mb-2" to="/terms/condition">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Terms &
                 conditions
               </Link>

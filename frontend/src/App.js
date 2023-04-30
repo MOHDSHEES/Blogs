@@ -10,6 +10,7 @@ import Contactform from "./components/contactComponent/contactform";
 import MoreCategoriesPage from "./components/categoryPageComponents/moreCategoriesPage";
 import Terms from "./components/terms";
 import Advertise from "./components/advertise/advertise";
+import PrivacyPolicy from "./components/privacyPolicy";
 
 // import Sidebar from "./components/sidebar";
 
@@ -63,7 +64,8 @@ function App() {
           <Route path="/blog/:id/:title" element={<BlogDetail />} />
           <Route path="/blogs/:category" element={<CategoryPage />} />
           <Route path="/contact" element={<Contactform />} />
-          <Route path="/termsandcondition" element={<Terms />} />
+          <Route path="/terms/condition" element={<Terms />} />
+          <Route path="/privacy/policies" element={<PrivacyPolicy />} />
           <Route path="/advertise/policies" element={<Advertise />} />
           <Route
             path="/categories"

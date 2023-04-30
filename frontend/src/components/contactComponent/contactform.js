@@ -46,7 +46,7 @@ const Contactform = () => {
     <div class="container-fluid" style={{ padding: "1rem 15px" }}>
       {contextHolder}
       <div class="container" style={{ padding: "0" }}>
-        <div class="bg-light py-2 px-4 mb-3">
+        <div class="bg-light py-3 px-4 mb-3">
           <h3 class="m-0">Contact Us For Any Queries</h3>
         </div>
         <div class="row" style={{ flexWrap: "wrap-reverse" }}>
@@ -54,22 +54,27 @@ const Contactform = () => {
             <div class="bg-light mb-3" style={{ padding: "30px" }}>
               <h6 class="font-weight-bold">Get in touch</h6>
               <p>
-                Labore ipsum ipsum rebum erat amet nonumy, nonumy erat justo sit
-                dolor ipsum sed, kasd lorem sit et duo dolore justo lorem stet
-                labore, diam dolor et diam dolor eos magna, at vero lorem elitr
+                We welcome your feedback, questions, and suggestions. If you
+                have any inquiries or would like to get in touch with us, please
+                fill out the contact form and we will get back to you as soon as
+                possible. Thank you for your interest in OFFTHEWEB.
               </p>
               <div class="d-flex align-items-center mb-3">
                 <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
                 <div class="d-flex flex-column">
                   <h6 class="font-weight-bold">Our Office</h6>
-                  <p class="m-0">123 Street, New York, USA</p>
+                  <p class="m-0">Noida</p>
                 </div>
               </div>
               <div class="d-flex align-items-center mb-3">
                 <i class="fa fa-2x fa-envelope-open text-primary mr-3"></i>
                 <div class="d-flex flex-column">
                   <h6 class="font-weight-bold">Email Us</h6>
-                  <p class="m-0">info@example.com</p>
+                  <p class="m-0">
+                    <a href="mailto:official.offtheweb@gmail.com">
+                      official.offtheweb@gmail.com
+                    </a>
+                  </p>
                 </div>
               </div>
               <div class="d-flex align-items-center">

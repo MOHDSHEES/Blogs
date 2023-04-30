@@ -84,23 +84,23 @@ const NavBar = ({ searchHandler }) => {
                   <Nav.Link href="/categories" className="nav-item ">
                     Categories
                   </Nav.Link>
-                  <Nav.Link href="#" className="nav-item ">
+                  {/* <Nav.Link href="#" className="nav-item ">
                     Single Blog
-                  </Nav.Link>
+                  </Nav.Link> */}
                   <Nav.Link href="/contact" class="nav-item ">
                     Contact
                   </Nav.Link>
 
-                  <NavDropdown title="Dropdown" id="navbarScrollingDropdown">
-                    <NavDropdown.Item href="#action3">
-                      Dropdown
+                  <NavDropdown title="Policies" id="navbarScrollingDropdown">
+                    <NavDropdown.Item href="/privacy/policies">
+                      Privacy Policies
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
-                      Another action
+                    {/* <NavDropdown.Divider /> */}
+                    <NavDropdown.Item href="/terms/condition">
+                      Terms And Conditions
                     </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">
-                      Something else here
+                    <NavDropdown.Item href="/advertise/policies">
+                      Advertise
                     </NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
