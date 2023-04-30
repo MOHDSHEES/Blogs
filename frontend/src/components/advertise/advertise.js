@@ -5,8 +5,13 @@ const Advertise = () => {
   return (
     <div style={{ padding: "1rem 15px" }} class="container-fluid ">
       <div style={{ padding: "0" }} class="container">
-        <div className="bg-light py-4 px-4 mb-3">
+        <div
+          className="bg-light py-4 px-4 mb-3"
+          style={{ textAlign: "center" }}
+        >
           <h3 className="mb4">Advertise Policies</h3>
+        </div>
+        <div className="bg-light py-5 px-4 mb-3">
           <p>
             Thank you for choosing OffTheWeb for your blogging needs! Please
             find below the terms and conditions for advertising on our website:
@@ -58,6 +63,12 @@ const Advertise = () => {
             By placing an advertisement on OffTheWeb, you agree to these terms
             and conditions. If you have any questions or concerns, please do not
             hesitate to <Link to="/contact">contact us</Link>.
+          </p>
+          <p>
+            Email:{" "}
+            <a href="mailto:official.offtheweb@gmail.com">
+              official.offtheweb@gmail.com{" "}
+            </a>
           </p>
         </div>
       </div>
