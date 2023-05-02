@@ -53,7 +53,7 @@ const Footer = ({ cate }) => {
               <a
                 class="btn btn-outline-secondary text-center mr-2 px-0"
                 style={{ width: "38px", height: "38px" }}
-                href="#!"
+                href="https://www.youtube.com/channel/UC0BxUqApESxQZ49REib5ELQ"
               >
                 <i class="bx bxl-youtube"></i>
               </a>
