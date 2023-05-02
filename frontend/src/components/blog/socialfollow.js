@@ -17,7 +17,7 @@ const Socialfollow = () => {
             <small>12,345 Fans</small>
           </a>
           <a
-            href=""
+            href="https://twitter.com/_OFFTHEWEB"
             class="d-block w-50 py-2 px-3 text-white text-decoration-none ml-2"
             style={{ background: "#52AAF4" }}
           >
@@ -27,7 +27,7 @@ const Socialfollow = () => {
         </div>
         <div class="d-flex mb-3">
           <a
-            href=""
+            href="https://www.linkedin.com/company/offtheweb/"
             class="d-block w-50 py-2 px-3 text-white text-decoration-none mr-2"
             style={{ background: "#0185AE" }}
           >
@@ -35,7 +35,7 @@ const Socialfollow = () => {
             <small>12,345 Connects</small>
           </a>
           <a
-            href=""
+            href="https://www.instagram.com/_offtheweb/"
             class="d-block w-50 py-2 px-3 text-white text-decoration-none ml-2"
             style={{ background: "#C8359D" }}
           >
@@ -45,21 +45,21 @@ const Socialfollow = () => {
         </div>
         <div class="d-flex mb-3">
           <a
-            href=""
+            href="https://www.youtube.com/channel/UC0BxUqApESxQZ49REib5ELQ"
             class="d-block w-50 py-2 px-3 text-white text-decoration-none mr-2"
             style={{ background: "#DC472E" }}
           >
             <small class="fab fa-youtube mr-2"></small>
             <small>12,345 Subscribers</small>
           </a>
-          <a
+          {/* <a
             href=""
             class="d-block w-50 py-2 px-3 text-white text-decoration-none ml-2"
             style={{ background: "#1AB7EA" }}
           >
             <small class="fab fa-vimeo-v mr-2"></small>
             <small>12,345 Followers</small>
-          </a>
+          </a> */}
         </div>
       </div>
     </div>
