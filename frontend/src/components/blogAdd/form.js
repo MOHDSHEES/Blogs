@@ -509,7 +509,7 @@ const Form = ({ cate }) => {
                                       />
                                     </div>
                                   </div>
-                                ) : bl.tag === "IT" ? (
+                                ) : bl.tag === "TI" ? (
                                   <div class="form-group my-2">
                                     <div style={{ marginBottom: "5px" }}>
                                       <small>
