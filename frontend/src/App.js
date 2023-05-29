@@ -11,6 +11,7 @@ import MoreCategoriesPage from "./components/categoryPageComponents/moreCategori
 import Terms from "./components/terms";
 import Advertise from "./components/advertise/advertise";
 import PrivacyPolicy from "./components/privacyPolicy";
+import { Analytics } from "@vercel/analytics/react";
 
 // import Sidebar from "./components/sidebar";
 
@@ -78,6 +79,7 @@ function App() {
         <Route path="/add" element={<Form />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <Analytics />
     </div>
   );
 }
