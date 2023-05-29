@@ -3,6 +3,7 @@ import OwlCarousel from "react-owl-carousel";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import CategorySkeleton from "../skeleton/categoryHomepageSkeleton";
+import resizeImg from "../functions/resizeImg";
 
 const CategorySlider = ({ category }) => {
   //   console.log(category);
@@ -79,7 +80,8 @@ const CategorySlider = ({ category }) => {
                       <div style={{ height: "200px" }}>
                         <img
                           class="img-fluid w-100 h-100"
-                          src={bl.mainImg}
+                          src={resizeImg(bl.mainImg, 6, "h_200,c_scale")}
+                          // src={bl.mainImg}
                           alt={bl.category}
                           style={{ objectFit: "cover" }}
                         />

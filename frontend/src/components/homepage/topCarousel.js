@@ -5,6 +5,7 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 // import axios from "axios";
 import { Link } from "react-router-dom";
 import TopCarouselSkeleton from "../skeleton/topCarouselSkeleton";
+import resizeImg from "../functions/resizeImg";
 
 const TopCarousel = ({ data }) => {
   const [blogs, setblogs] = useState(null);
@@ -69,7 +70,8 @@ const TopCarousel = ({ data }) => {
                 >
                   <div class="d-flex">
                     <img
-                      src={blog.mainImg}
+                      src={resizeImg(blog.mainImg, 6, "h_100,c_scale")}
+                      // src={blog.mainImg}
                       alt="mainImg"
                       style={{
                         width: "80px",

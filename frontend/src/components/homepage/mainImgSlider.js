@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import axios from "axios";
+import resizeImg from "../functions/resizeImg";
 
 const MainImgSlider = ({ data, cate }) => {
   // console.log(data);
@@ -45,6 +46,7 @@ const MainImgSlider = ({ data, cate }) => {
               className="owl-theme "
               // style={{ marginLeft: "20px" }}
               items={1}
+              autoplayHoverPause
               loop
               autoplay
               autoplayTimeout={3000}
@@ -62,7 +64,8 @@ const MainImgSlider = ({ data, cate }) => {
                       >
                         <img
                           class="img-fluid h-100"
-                          src={blog.mainImg}
+                          src={resizeImg(blog.mainImg, 6, "h_350,c_scale")}
+                          // src={blog.mainImg}
                           style={{ objectFit: "cover" }}
                           alt={blog.category}
                         />
@@ -124,7 +127,8 @@ const MainImgSlider = ({ data, cate }) => {
                   >
                     <img
                       class="img-fluid w-100 h-100"
-                      src={c.categoryImg}
+                      src={resizeImg(c.categoryImg, 6, "h_100,c_scale")}
+                      // src={c.categoryImg}
                       alt={c.category}
                       style={{ objectFit: "cover" }}
                     />

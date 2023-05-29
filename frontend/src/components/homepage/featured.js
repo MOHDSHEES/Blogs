@@ -6,6 +6,7 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import resizeImg from "../functions/resizeImg";
 
 const Featured = ({ trend }) => {
   const [blogs, setblogs] = useState(null);
@@ -85,7 +86,8 @@ const Featured = ({ trend }) => {
                 >
                   <img
                     class="img-fluid w-100 h-100"
-                    src={blog.mainImg}
+                    src={resizeImg(blog.mainImg, 6, "h_250,c_scale")}
+                    // src={blog.mainImg}
                     alt={blog.category}
                     style={{ objectFit: "cover" }}
                   />

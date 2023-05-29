@@ -130,7 +130,8 @@ const Blog = ({ blogs }) => {
                         {" "}
                         <img
                           class="img-fluid w-50 float-right ml-4 mb-2"
-                          src={bl.img}
+                          src={resizeImg(bl.img, 6, "h_200,c_scale")}
+                          // src={bl.img}
                           alt={bl.img}
                         />
                         {bl.text.split("\n").map((str) => (
