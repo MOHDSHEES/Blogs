@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import resizeImg from "../functions/resizeImg";
 import CategoryPageSkeleton from "../skeleton/categoryPageSkeleton";
 
 const Categories = ({ blog }) => {
@@ -27,16 +28,12 @@ const Categories = ({ blog }) => {
               return <CategoryPageSkeleton key={c} />;
             })
           : blogs.reverse().map((blog, idx) => {
-              let url = blog.mainImg.split("/");
-              url.splice(6, 0, "h_250,c_scale");
-              let imgUrl = url.join("/");
-
               return (
                 <div key={blog.category + idx} class="col-lg-6">
                   <div class="position-relative mb-3">
                     <img
                       class="img-fluid w-100"
-                      src={imgUrl}
+                      src={resizeImg(blog.mainImg, 6, "h_250,c_scale")}
                       // src={blog.mainImg}
                       alt={blog.category}
                       style={{ objectFit: "cover", height: "250px" }}

@@ -7,6 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { Link } from "react-router-dom";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 import BlogIndex from "./blogIndex";
+import resizeImg from "../../functions/resizeImg";
 
 const Blog = ({ blogs }) => {
   // useEffect(() => {
@@ -108,7 +109,8 @@ const Blog = ({ blogs }) => {
                         {" "}
                         <img
                           class="img-fluid w-50 float-left mr-4 mb-2"
-                          src={bl.img}
+                          src={resizeImg(bl.img, 6, "h_200,c_scale")}
+                          // src={bl.img}
                           alt={bl.img}
                         />
                         {bl.text.split("\n").map((str) => (
