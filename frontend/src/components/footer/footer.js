@@ -29,13 +29,13 @@ const Footer = ({ cate }) => {
               >
                 <i class="bx bxl-twitter"></i>
               </a>
-              <a
+              {/* <a
                 class="btn btn-outline-secondary text-center mr-2 px-0"
                 style={{ width: "38px", height: "38px" }}
                 href="#!"
               >
                 <i class="bx bxl-facebook"></i>
-              </a>
+              </a> */}
               <a
                 class="btn btn-outline-secondary text-center mr-2 px-0"
                 style={{ width: "38px", height: "38px" }}

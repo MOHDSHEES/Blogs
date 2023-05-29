@@ -9,7 +9,7 @@ const BlogIndex = ({ blog }) => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-  console.log(blog);
+  // console.log(blog);
   return (
     <div className="blog-index mb-3">
       <div style={{ textAlign: "center" }}>
