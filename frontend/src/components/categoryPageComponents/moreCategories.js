@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import resizeImg from "../functions/resizeImg";
 
 const MoreCategories = ({ blog }) => {
   const [blogs, setblogs] = useState(null);
@@ -14,7 +15,8 @@ const MoreCategories = ({ blog }) => {
             <div key={blog._id} class="col-lg-6">
               <div class="d-flex mb-3">
                 <img
-                  src={blog.mainImg}
+                  src={resizeImg(blog.mainImg, 6, "h_150,c_scale")}
+                  // src={blog.mainImg}
                   alt={blog.category}
                   style={{
                     width: "100px",

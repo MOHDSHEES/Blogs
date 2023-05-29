@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import TrendingSkeleton from "../skeleton/trendingSkeleton";
+import resizeImg from "../functions/resizeImg";
 
 const Trending = () => {
   const [blogs, setblogs] = useState(null);
@@ -30,7 +31,8 @@ const Trending = () => {
             return (
               <div key={"id" + idx} class="d-flex mb-3">
                 <img
-                  src={blog.mainImg}
+                  src={resizeImg(blog.mainImg, 6, "h_150,c_scale")}
+                  // src={blog.mainImg}
                   alt={blog.category}
                   style={{
                     width: "100px",
