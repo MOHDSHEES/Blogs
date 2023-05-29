@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import resizeImg from "../functions/resizeImg";
 
 const MoreCategoriesPage = ({ cate }) => {
   const [categories, setcategories] = useState(null);
@@ -42,7 +43,8 @@ const MoreCategoriesPage = ({ cate }) => {
                     >
                       <img
                         class="img-fluid w-100 h-100"
-                        src={c.categoryImg}
+                        src={resizeImg(c.categoryImg, 6, "h_100,c_scale")}
+                        // src={c.categoryImg}
                         alt={c.category}
                         style={{ objectFit: "cover" }}
                       />
