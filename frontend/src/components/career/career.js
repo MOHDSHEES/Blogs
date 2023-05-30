@@ -77,7 +77,7 @@ const Career = () => {
               </div>
             </div>
           </div>
-          <div class="accordion-item">
+          <div class="accordion-item mt-2">
             <h2 class="accordion-header ">
               <button
                 class="accordion-button collapsed"
