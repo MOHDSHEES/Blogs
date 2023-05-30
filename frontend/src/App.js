@@ -12,6 +12,7 @@ import Terms from "./components/terms";
 import Advertise from "./components/advertise/advertise";
 import PrivacyPolicy from "./components/privacyPolicy";
 import { Analytics } from "@vercel/analytics/react";
+import Career from "./components/career/career";
 
 // import Sidebar from "./components/sidebar";
 
@@ -72,6 +73,7 @@ function App() {
             path="/categories"
             element={<MoreCategoriesPage cate={categories} />}
           />
+          <Route path="/career" element={<Career />} />
         </Route>
         <Route path="/add" element={<Form cate={categories} />} />
         {/* <Route path="/" element={<Homepage />} />
