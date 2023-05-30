@@ -298,6 +298,10 @@ a {
   border-radius: 10px;
 }
 .accordion-button.collapsed {
-  background: #e9fff5;
+  background: #e5efff;
   color: #033a20;
+}
+.accordion-button:not(.collapsed) {
+  color: black;
+  background-color: #b3cffe;
 }
