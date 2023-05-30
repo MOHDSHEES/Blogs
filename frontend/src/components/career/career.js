@@ -5,9 +5,8 @@ const Career = () => {
     <div style={{ padding: "1rem 15px" }} class="container-fluid ">
       <div style={{ padding: "0" }} class="container">
         <div style={{ textAlign: "center" }}>
-          <h3 className="mb-4 mt-4">
-            Career Opportunities <br /> Current Openings{" "}
-          </h3>
+          <h3 className=" mt-4">Career Opportunities </h3>
+          <h4 className="mb-4"> Current Openings</h4>
         </div>
 
         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -73,7 +72,10 @@ const Career = () => {
                 <br />
                 <br />
                 <strong>To Apply:</strong> Please send your resume and cover
-                letter to [email protected]
+                letter to{" "}
+                <a href="mailto:official.offtheweb@gmail.com">
+                  official.offtheweb@gmail.com
+                </a>
               </div>
             </div>
           </div>
@@ -87,7 +89,7 @@ const Career = () => {
                 aria-expanded="false"
                 aria-controls="panelsStayOpen-collapseTwo"
               >
-                2) Social Digital Marketing & SEO Intern
+                2) Digital Marketing & SEO Intern
               </button>
             </h2>
             <div
@@ -104,12 +106,12 @@ const Career = () => {
                 <br />
                 <strong>Summary:</strong>
                 <br />
-                The Social Digital Marketing & SEO Intern is responsible for
-                supporting the marketing team in the development and execution
-                of social media marketing campaigns, as well as the optimization
-                of the company's website for search engines. The intern will be
-                responsible for creating and scheduling social media posts,
-                conducting keyword research, and optimizing website content.
+                The Digital Marketing & SEO Intern is responsible for supporting
+                the marketing team in the development and execution of marketing
+                campaigns, as well as the optimization of the company's website
+                for search engines. The intern will be responsible for creating
+                and scheduling posts, conducting keyword research, and
+                optimizing website content.
                 <br />
                 <br />
                 <strong>Responsibilities:</strong>
@@ -123,8 +125,8 @@ const Career = () => {
                 * Track social media analytics to measure the success of
                 campaigns.
                 <br />
-                * Assist with the development and execution of social media
-                marketing campaigns.
+                * Assist with the development and execution of marketing
+                campaigns.
                 <br />
                 <br />
                 <strong>Qualifications:</strong>
@@ -159,7 +161,10 @@ const Career = () => {
                 <br />
                 <br />
                 <strong>To Apply:</strong>
-                Please send your resume and cover letter to [email protected]
+                Please send your resume and cover letter to{" "}
+                <a href="mailto:official.offtheweb@gmail.com">
+                  official.offtheweb@gmail.com
+                </a>
               </div>
             </div>
           </div>
