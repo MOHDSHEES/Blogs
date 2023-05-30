@@ -5,29 +5,28 @@ const Career = () => {
     <div style={{ padding: "1rem 15px" }} class="container-fluid ">
       <div style={{ padding: "0" }} class="container">
         <div style={{ textAlign: "center" }}>
-          <h3 className="mb-4 mt-5">
+          <h3 className="mb-4 mt-4">
             Career Opportunities <br /> Current Openings{" "}
           </h3>
         </div>
 
-        <div class="accordion" id="accordionExample">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button
                 class="accordion-button"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#collapseOne"
+                data-bs-target="#panelsStayOpen-collapseOne"
                 aria-expanded="true"
-                aria-controls="collapseOne"
+                aria-controls="panelsStayOpen-collapseOne"
               >
                 1) Social Media Management Intern
               </button>
             </h2>
             <div
-              id="collapseOne"
-              class="accordion-collapse collapse "
-              data-bs-parent="#accordionExample"
+              id="panelsStayOpen-collapseOne"
+              class="accordion-collapse collapse show"
             >
               <div class="accordion-body">
                 <strong>Department:</strong> Marketing
@@ -79,22 +78,22 @@ const Career = () => {
             </div>
           </div>
           <div class="accordion-item">
-            <h2 class="accordion-header">
+            <h2 class="accordion-header ">
               <button
                 class="accordion-button collapsed"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo"
+                data-bs-target="#panelsStayOpen-collapseTwo"
                 aria-expanded="false"
-                aria-controls="collapseTwo"
+                aria-controls="panelsStayOpen-collapseTwo"
               >
                 2) Social Digital Marketing & SEO Intern
               </button>
             </h2>
             <div
-              id="collapseTwo"
+              id="panelsStayOpen-collapseTwo"
               class="accordion-collapse collapse"
-              data-bs-parent="#accordionExample"
+              //   data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
                 <strong>Department:</strong> Marketing

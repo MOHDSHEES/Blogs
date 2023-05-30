@@ -297,3 +297,7 @@ a {
   background: rgb(155, 154, 154);
   border-radius: 10px;
 }
+.accordion-button.collapsed {
+  background: #e9fff5;
+  color: #033a20;
+}
