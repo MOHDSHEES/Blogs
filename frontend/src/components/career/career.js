@@ -103,6 +103,7 @@ const Career = () => {
                 <br />
                 <br />
                 <strong>Summary:</strong>
+                <br />
                 The Social Digital Marketing & SEO Intern is responsible for
                 supporting the marketing team in the development and execution
                 of social media marketing campaigns, as well as the optimization
@@ -112,6 +113,7 @@ const Career = () => {
                 <br />
                 <br />
                 <strong>Responsibilities:</strong>
+                <br />
                 * Create and schedule social media posts that are aligned with
                 the company's brand and marketing goals.
                 <br />
@@ -126,6 +128,7 @@ const Career = () => {
                 <br />
                 <br />
                 <strong>Qualifications:</strong>
+                <br />
                 * Enrolled in a college or university with a major in marketing,
                 communications, or a related field.
                 <br />
@@ -144,6 +147,7 @@ const Career = () => {
                 <br />
                 <br />
                 <strong>Benefits:</strong>
+                <br />
                 * Unpaid internship.
                 <br />
                 * Opportunity to gain experience in social media marketing and
