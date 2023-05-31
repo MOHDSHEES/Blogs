@@ -94,7 +94,7 @@ const Career = () => {
                   </div>
                 </div>
               </div>
-              <div class="accordion-item mt-2 mb-5">
+              <div class="accordion-item mt-2 ">
                 <h2 class="accordion-header ">
                   <button
                     class="accordion-button collapsed"
@@ -174,6 +174,100 @@ const Career = () => {
                     * Chance to work with a team of experienced professionals.
                     <br />
                     * Discounts on company products and services.
+                    <br />
+                    <br />
+                    <strong>To Apply:</strong>
+                    Please send your resume and cover letter to{" "}
+                    <a href="mailto:official.offtheweb@gmail.com">
+                      official.offtheweb@gmail.com
+                    </a>
+                    <br />
+                    Fill out this form:{" "}
+                    <a
+                      href="https://forms.gle/6NzowPd3wMZXHgek6"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      https://forms.gle/6NzowPd3wMZXHgek6
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item mt-2 mb-5">
+                <h2 class="accordion-header ">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseThree"
+                    aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseThree"
+                  >
+                    3) Content Writer Intern
+                  </button>
+                </h2>
+                <div
+                  id="panelsStayOpen-collapseThree"
+                  class="accordion-collapse collapse"
+                  //   data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    <br />
+                    <strong>Department:</strong> Marketing
+                    <br />
+                    <br />
+                    <strong>Reports To:</strong> Content Manager
+                    <br />
+                    <br />
+                    <strong>Summary:</strong>
+                    <br />
+                    The Content Writer Intern will be responsible for writing
+                    and editing content for the company's website, blog, and
+                    social media channels. The intern will work closely with the
+                    Content Manager to develop and execute content marketing
+                    campaigns.
+                    <br />
+                    <br />
+                    <strong>Responsibilities:</strong>
+                    <br />
+                    * Write and edit blog posts, website copy, and social media
+                    posts.
+                    <br />
+                    * Conduct research and develop content ideas.
+                    <br />* Collaborate with the Content Manager and other team
+                    members to create and execute content marketing campaigns.
+                    <br /> * Stay up-to-date on industry trends and best
+                    practices.
+                    <br /> * Maintain a positive and professional attitude.
+                    <br />
+                    <br />
+                    <strong>Qualifications:</strong>
+                    <br />
+                    * Strong writing and editing skills.
+                    <br />
+                    * Excellent research and organizational skills.
+                    <br />
+                    * Ability to work independently and as part of a team.
+                    <br />
+                    * Passion for content marketing and social media.
+                    <br />
+                    * Strong attention to detail.
+                    <br />
+                    * Proficiency in Microsoft Office Suite.
+                    <br />
+                    <br />
+                    <strong>Benefits:</strong>
+                    <br />
+                    * Unpaid internship.
+                    <br />
+                    * Opportunity to learn from experienced content writers and
+                    marketers.
+                    <br />
+                    * Gain valuable experience in the content marketing
+                    industry.
+                    <br />
+                    * Build your portfolio and network with industry
+                    professionals.
                     <br />
                     <br />
                     <strong>To Apply:</strong>
