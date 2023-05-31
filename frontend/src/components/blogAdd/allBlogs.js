@@ -32,7 +32,7 @@ const AllBlogs = ({ blog }) => {
             state={blog}
             class="h6 m-0 break-line-3"
           > */}
-        {blog.title}
+        <p class="h6 m-0 break-line-3">{blog.title}</p>
         {/* </Link> */}
       </div>
     </div>
