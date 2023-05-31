@@ -82,6 +82,15 @@ const Career = () => {
                     <a href="mailto:official.offtheweb@gmail.com">
                       official.offtheweb@gmail.com
                     </a>
+                    <br />
+                    Fill out this form:{" "}
+                    <a
+                      href="https://forms.gle/6NzowPd3wMZXHgek6"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      https://forms.gle/6NzowPd3wMZXHgek6
+                    </a>
                   </div>
                 </div>
               </div>
@@ -171,6 +180,15 @@ const Career = () => {
                     Please send your resume and cover letter to{" "}
                     <a href="mailto:official.offtheweb@gmail.com">
                       official.offtheweb@gmail.com
+                    </a>
+                    <br />
+                    Fill out this form:{" "}
+                    <a
+                      href="https://forms.gle/6NzowPd3wMZXHgek6"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      https://forms.gle/6NzowPd3wMZXHgek6
                     </a>
                   </div>
                 </div>
