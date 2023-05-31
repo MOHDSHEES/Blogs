@@ -5,6 +5,17 @@ import sgMail from "@sendgrid/mail";
 
 const router = express.Router();
 
+// all blogs
+router.post("/find/blog/all", async (req, res) => {
+  try {
+    const resu = await Blogs.find({});
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+    res.json(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // find all blogs for particular category
 router.post("/find/blog/categories", async (req, res) => {
   try {

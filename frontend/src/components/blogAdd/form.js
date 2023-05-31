@@ -6,6 +6,9 @@ import Autocomplete from "../autocomplete/autocomplete";
 import { openMessage, closeMessage } from "../functions/message";
 import { message, Drawer } from "antd";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Link } from "react-router-dom";
+import AllBlogs from "./allBlogs";
+import MoreCategories from "../categoryPageComponents/moreCategories";
 
 const Form = ({ cate }) => {
   const [disabled, setdisabled] = useState(false);
@@ -48,6 +51,13 @@ const Form = ({ cate }) => {
     setblog(values);
   }
 
+  const [allBlogs, setAllBlogs] = useState(null);
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.post("/api/find/blog/all");
+      setAllBlogs(data);
+    })();
+  }, []);
   useEffect(() => {
     setCategories(cate);
   }, [cate]);
@@ -57,19 +67,30 @@ const Form = ({ cate }) => {
     const { data } = await axios.post("/api/blog/titles");
     setTitles(data);
   }
+
+  function updateForm(data) {
+    setId(data._id);
+    setblog(data.blog);
+    setcategory(data.category);
+    setmainImg(data.mainImg);
+    setkeywords(data.keywords);
+    settitle(data.title);
+    setUpdateFlag(0);
+  }
   async function searchHandler(e, search) {
     e.preventDefault();
     const { data } = await axios.post("/api/find/blog", {
       title: search,
     });
     if (data.length) {
-      setId(data[0]._id);
-      setblog(data[0].blog);
-      setcategory(data[0].category);
-      setmainImg(data[0].mainImg);
-      setkeywords(data[0].keywords);
-      settitle(data[0].title);
-      setUpdateFlag(0);
+      updateForm(data[0]);
+      // setId(data[0]._id);
+      // setblog(data[0].blog);
+      // setcategory(data[0].category);
+      // setmainImg(data[0].mainImg);
+      // setkeywords(data[0].keywords);
+      // settitle(data[0].title);
+      // setUpdateFlag(0);
     } else {
       closeMessage(messageApi, "Blog not Found", "error");
       reset();
@@ -117,44 +138,54 @@ const Form = ({ cate }) => {
     e.preventDefault();
     let text = "Are you sure you want to delete this blog.\n";
     if (window.confirm(text) === true) {
-      openMessage(messageApi, "Deleting...");
-      const { data } = await axios.post("/api/delete/blog", {
-        id: id,
-      });
-      if (data.status) {
-        closeMessage(messageApi, data.msg, "success");
-        newBlog();
-      } else {
-        closeMessage(messageApi, data.msg, "error");
+      var code = window.prompt("Enter Code:", "");
+      if (code === "#offtheweb@delete") {
+        openMessage(messageApi, "Deleting...");
+        const { data } = await axios.post("/api/delete/blog", {
+          id: id,
+        });
+        if (data.status) {
+          closeMessage(messageApi, data.msg, "success");
+          newBlog();
+        } else {
+          closeMessage(messageApi, data.msg, "error");
+        }
+      } else if (code !== null) {
+        closeMessage(messageApi, "Authentication failed", "error");
       }
     }
   }
   async function saveBlog(e) {
     e.preventDefault();
-    openMessage(messageApi, "Saving...");
-    setdisabled(true);
-    if (flag) {
-      const { data } = await axios.post("/api/update/blog", {
-        id: id,
-        title: title.trim(),
-        mainImg,
-        keywords,
-        category,
-        blog,
-      });
-      closeMessage(messageApi, data.msg, "success");
-    } else {
-      const { data } = await axios.post("/api/add/blog", {
-        title: title.trim(),
-        mainImg,
-        keywords,
-        category,
-        blog,
-      });
-      closeMessage(messageApi, data.msg, "success");
-      newBlog();
+    var code = window.prompt("Enter Code:", "");
+    if (code === "#offtheweb@") {
+      openMessage(messageApi, "Saving...");
+      setdisabled(true);
+      if (flag) {
+        const { data } = await axios.post("/api/update/blog", {
+          id: id,
+          title: title.trim(),
+          mainImg,
+          keywords,
+          category,
+          blog,
+        });
+        closeMessage(messageApi, data.msg, "success");
+      } else {
+        const { data } = await axios.post("/api/add/blog", {
+          title: title.trim(),
+          mainImg,
+          keywords,
+          category,
+          blog,
+        });
+        closeMessage(messageApi, data.msg, "success");
+        newBlog();
+      }
+      setdisabled(false);
+    } else if (code !== null) {
+      closeMessage(messageApi, "Authentication failed", "error");
     }
-    setdisabled(false);
   }
   function checkBoxHandle(e) {
     setcheckBox(e.target.checked);
@@ -170,24 +201,29 @@ const Form = ({ cate }) => {
     );
     if (result === -1) {
       if (!(category.trim() === "") && !(categoryImg.trim() === "")) {
-        setdisabledCategoryBtn(true);
-        openMessage(messageApi, "Adding Category...");
-        const { data } = await axios.post("/api/add/category", {
-          category: { category: category, categoryImg: categoryImg },
-        });
-        if (data.status) {
-          setCategories([
-            ...categories,
-            { category: category, categoryImg: categoryImg },
-          ]);
-          setcheckBox(false);
-          setdisabledCategoryBtn(false);
-          setdisabled(false);
-          closeMessage(messageApi, data.msg, "success");
-        } else {
-          closeMessage(messageApi, data.msg, "error");
-          setdisabledCategoryBtn(false);
-          setdisabled(false);
+        var code = window.prompt("Enter Code:", "");
+        if (code === "#offtheweb@category") {
+          setdisabledCategoryBtn(true);
+          openMessage(messageApi, "Adding Category...");
+          const { data } = await axios.post("/api/add/category", {
+            category: { category: category, categoryImg: categoryImg },
+          });
+          if (data.status) {
+            setCategories([
+              ...categories,
+              { category: category, categoryImg: categoryImg },
+            ]);
+            setcheckBox(false);
+            setdisabledCategoryBtn(false);
+            setdisabled(false);
+            closeMessage(messageApi, data.msg, "success");
+          } else {
+            closeMessage(messageApi, data.msg, "error");
+            setdisabledCategoryBtn(false);
+            setdisabled(false);
+          }
+        } else if (code !== null) {
+          closeMessage(messageApi, "Authentication failed", "error");
         }
       } else {
         closeMessage(
@@ -210,6 +246,7 @@ const Form = ({ cate }) => {
 
     setblog(items);
   }
+
   return (
     <div className="body">
       {contextHolder}
@@ -225,9 +262,34 @@ const Form = ({ cate }) => {
         {flag ? (
           <div style={{ marginTop: "80px" }}>
             <Autocomplete searchHandler={searchHandler} suggestions={titles} />
-            <a onClick={newBlog} href="" className="ms-2">
+            <a
+              onClick={newBlog}
+              href=""
+              className="ms-2"
+              style={{ marginRight: "10px" }}
+            >
               Write a new Blog?
             </a>
+            {updateFlag === 1 && (
+              <div className="mt-4 p-2">
+                {/* <MoreCategories blog={allBlogs} /> */}
+                <div class="row">
+                  {allBlogs &&
+                    allBlogs.map((blog, idx) => {
+                      return (
+                        <div
+                          onClick={(e) => updateForm(blog)}
+                          class="col-lg-6"
+                          style={{ cursor: "pointer" }}
+                          key={idx + "Allblogs"}
+                        >
+                          <AllBlogs blog={blog} />
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           ""
