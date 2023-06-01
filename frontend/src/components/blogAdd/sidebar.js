@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import Form from "./form";
 
 const Sidebar = ({
@@ -36,6 +36,13 @@ const Sidebar = ({
     // add padding to header
     header.current.classList.toggle("body-pd");
   }
+
+  let navigate = useNavigate();
+  function logoutHandler() {
+    console.log("in");
+    localStorage.removeItem("token");
+    navigate("/", { replace: true });
+  }
   return (
     <div>
       <div ref={bodyPd} id="body-pd">
@@ -43,6 +50,9 @@ const Sidebar = ({
           <div onClick={showNavbar} class="header_toggle">
             <i class="bx bx-menu" ref={headerToggle} id="header-toggle"></i>
           </div>
+          <p className="text-link" onClick={logoutHandler}>
+            Logout
+          </p>
         </header>
         <div class="l-navbar" ref={Navbar} id="nav-bar">
           <nav class="nav">

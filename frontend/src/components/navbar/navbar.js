@@ -90,6 +90,9 @@ const NavBar = ({ searchHandler }) => {
                   <Nav.Link href="/contact" class="nav-item ">
                     Contact
                   </Nav.Link>
+                  <Nav.Link href="/add" class="nav-item ">
+                    Add Blog
+                  </Nav.Link>
 
                   <NavDropdown title="Policies" id="navbarScrollingDropdown">
                     <NavDropdown.Item href="/privacy/policies">

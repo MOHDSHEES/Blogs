@@ -12,6 +12,7 @@ const blogSchema = new mongoose.Schema({
   views: { type: Number },
   comments: [],
   blog: [],
+  user: { type: String, required: true },
 });
 
 // productsSchema.index({ name: "text", category: "text" });

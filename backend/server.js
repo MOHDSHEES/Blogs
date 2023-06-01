@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import http from "http";
-import config from "./config.js";
+// import config from "./config.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import blogRoute from "./routes/blogRoutes.js";
@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 dotenv.config();
-const mongodbUrl = config.MONGODB_URL;
+const mongodbUrl = process.env.MONGODB_URL;
 mongoose.connect(mongodbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

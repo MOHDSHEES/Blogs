@@ -13,6 +13,10 @@ import Advertise from "./components/advertise/advertise";
 import PrivacyPolicy from "./components/privacyPolicy";
 import { Analytics } from "@vercel/analytics/react";
 import Career from "./components/career/career";
+import Signup from "./components/login/signup";
+import Login from "./components/login/login";
+import { message } from "antd";
+import ProtectedRoute from "./components/functions/protectedRoute";
 
 // import Sidebar from "./components/sidebar";
 
@@ -48,10 +52,12 @@ function App() {
     }, [pathname]);
     return null;
   }
+  const [messageApi, contextHolder] = message.useMessage();
   return (
     <div>
       {/* <Form /> */}
       <ScrollToTop />
+      {contextHolder}
       <Routes>
         <Route
           path="/"
@@ -63,6 +69,8 @@ function App() {
             path="/"
             element={<Homepage trend={trending} cate={categories} />}
           />
+          <Route path="/signup" element={<Signup message={messageApi} />} />
+          <Route path="/login" element={<Login message={messageApi} />} />
           <Route path="/blog/:id/:title" element={<BlogDetail />} />
           <Route path="/blogs/:category" element={<CategoryPage />} />
           <Route path="/contact" element={<Contactform />} />
@@ -75,7 +83,12 @@ function App() {
           />
           <Route path="/career" element={<Career />} />
         </Route>
-        <Route path="/add" element={<Form cate={categories} />} />
+        {/* <Route path="/add" element={<Form cate={categories} />} />
+        <ProtectedRoute path="/add" categories={categories} /> */}
+        <Route path="/add" element={<ProtectedRoute />}>
+          <Route path="/add" element={<Form cate={categories} />} />
+        </Route>
+        {/* <Route path="/add" element={<ProtectedRoute />} /> */}
         {/* <Route path="/" element={<Homepage />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="/add" element={<Form />} /> */}
