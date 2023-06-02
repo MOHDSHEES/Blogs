@@ -1,9 +1,11 @@
 import express from "express";
 import Blogs from "../models/blogModel.js";
+import HomepageData from "../models/homepageDataModel.js";
 import Users from "../models/userModel.js";
 import Categories from "../models/categoryModels.js";
 import sgMail from "@sendgrid/mail";
 import { getToken, verifyToken } from "../jwt.js";
+import { category, trending } from "./data.js";
 
 const router = express.Router();
 
@@ -110,6 +112,23 @@ router.post("/find/blog/categories", async (req, res) => {
   }
 });
 
+// data for homepage
+router.post("/find/data/homepage", async (req, res) => {
+  try {
+    // const user1 = await new HomepageData({
+    //   recent: trending,
+    //   categoryData: category,
+    // });
+    // const newUser = await user1.save();
+    // console.log(newUser);
+    const resu = await HomepageData.findOne({});
+    // console.log(resu);
+    res.json(resu);
+  } catch (error) {
+    console.log(error);
+    res.send({ msg: error.message });
+  }
+});
 // find blogs with status
 router.post("/find/blog/status", async (req, res) => {
   try {
@@ -126,14 +145,43 @@ router.post("/update/blog/status", verifyToken, async (req, res) => {
       { _id: { $in: req.body.id } },
       { status: req.body.status }
     );
-    // console.log(resu);
+
     if (resu.modifiedCount && resu.modifiedCount) {
+      if (req.body.status === "Active") {
+        const st = await HomepageData.updateMany(
+          {
+            _id: "647a21933a89a8239f770931",
+          },
+          {
+            $pull: {
+              recent: {
+                _id: { $in: req.body.id },
+              },
+            },
+          }
+        );
+        const r = await HomepageData.updateOne(
+          {
+            _id: "647a21933a89a8239f770931",
+            "recent._id": { $nin: req.body.id },
+          },
+          {
+            $push: {
+              recent: {
+                $each: [req.body.blog],
+                $position: 0,
+                $slice: 6,
+              },
+            },
+          }
+        );
+      }
       res.json({ status: 200, msg: "Activated Sucessfully" });
     } else {
       res.json({ status: 500, msg: "something went wrong" });
     }
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     res.send({ msg: error.message });
   }
 });
@@ -198,6 +246,7 @@ router.post("/add/blog", async (req, res) => {
     );
     res.json({ status: 1, msg: "Blog saved successfully.", data: status });
   } catch (error) {
+    // console.log(error);
     res.send({ status: 0, msg: error.message });
   }
 });
@@ -294,11 +343,24 @@ router.post("/delete/blog", async (req, res) => {
     );
 
     if (stat.deletedCount) {
+      const r = await HomepageData.updateOne(
+        {
+          _id: "647a21933a89a8239f770931",
+        },
+        {
+          $pull: {
+            recent: {
+              _id: req.body.id,
+            },
+          },
+        }
+      );
       res.json({ status: 1, msg: "Blog Deleted Successfully" });
     } else {
       res.json({ status: 0, msg: "Something went Wrong" });
     }
   } catch (error) {
+    // console.log(error);
     res.send({ status: 0, msg: error.message });
   }
 });
@@ -324,6 +386,7 @@ router.post("/update/blog", async (req, res) => {
         keywords: req.body.keywords,
         blog: req.body.blog,
         updatedDate: date,
+        status: "Inactive",
       },
       {
         new: true,
@@ -336,7 +399,7 @@ router.post("/update/blog", async (req, res) => {
       res.json({ status: 1, msg: "Blog sucessfully updated.", data: updated });
     } else {
       // console.log("in2");
-      res.json({ status: 0, msg: "Already updated." });
+      res.json({ status: 0, msg: "Something went Wrong" });
     }
   } catch (error) {
     res.send({ status: 0, msg: error.message });

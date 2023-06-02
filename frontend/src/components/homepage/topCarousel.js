@@ -65,7 +65,7 @@ const TopCarousel = ({ data }) => {
                 <Link
                   to={"/blog/" + blog._id + "/" + blog.title}
                   state={blog}
-                  key={blog._id}
+                  key={blog._id + "top"}
                   className="item"
                 >
                   <div class="d-flex">

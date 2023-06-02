@@ -25,15 +25,17 @@ const PendingTable = () => {
     });
   }
 
-  async function statusHandler(id, status) {
+  async function statusHandler(id, status, bl) {
+    bl["status"] = status;
     const { data } = await axios.post("/api/update/blog/status", {
       id: [id],
       status: status,
       token: localStorage.getItem("token"),
+      blog: bl,
     });
     if (data && data.status === 200) {
       closeMessage(messageApi, data.msg, "success");
-      setBlog(blog.filter((blog) => blog._id !== id));
+      setBlog(blog.filter((bl) => bl._id !== id));
     } else if (data && data.status === 404) {
       closeMessage(messageApi, data.msg, "error");
       navigate("/login");
@@ -63,7 +65,7 @@ const PendingTable = () => {
                   </td>
                   <td>
                     <button
-                      onClick={() => statusHandler(bl._id, "Active")}
+                      onClick={() => statusHandler(bl._id, "Active", bl)}
                       type="button"
                       class="btn btn-primary"
                     >

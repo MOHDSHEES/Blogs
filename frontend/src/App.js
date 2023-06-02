@@ -50,19 +50,30 @@ function App() {
   }, []);
 
   const [recentBlogs, setrecentBlogs] = useState(null);
+  const [categoryData, setCategoryData] = useState(null);
 
   // const [loading, setloading] = useState(false);
   useEffect(() => {
-    if (!recentBlogs) {
-      (async () => {
-        // setloading(true);
-        const { data } = await axios.post("/api/recent/blogs");
-        // console.log(data);
-        if (data && data.length) setrecentBlogs(data);
-        // setloading(false);
-      })();
-    }
-  }, [recentBlogs]);
+    (async () => {
+      // setloading(true);
+      const { data } = await axios.post("/api/find/data/homepage");
+      if (data) {
+        setrecentBlogs(data.recent);
+        setCategoryData(data.categoryData);
+      }
+
+      // setloading(false);
+    })();
+    // if (!recentBlogs) {
+    //   (async () => {
+    //     // setloading(true);
+    //     const { data } = await axios.post("/api/recent/blogs");
+    //     // console.log(data);
+    //     if (data && data.length) setrecentBlogs(data);
+    //     // setloading(false);
+    //   })();
+    // }
+  }, []);
 
   function ScrollToTop() {
     const { pathname } = useLocation();
@@ -88,6 +99,7 @@ function App() {
             path="/"
             element={
               <Homepage
+                categoryData={categoryData}
                 recent={recentBlogs}
                 trend={trending}
                 cate={categories}

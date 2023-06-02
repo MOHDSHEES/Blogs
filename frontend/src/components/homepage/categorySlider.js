@@ -1,28 +1,34 @@
 import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
-import axios from "axios";
+// import axios from "axios";
 import { Link } from "react-router-dom";
 import CategorySkeleton from "../skeleton/categoryHomepageSkeleton";
 import resizeImg from "../functions/resizeImg";
 
-const CategorySlider = ({ category }) => {
+const CategorySlider = ({ category, data }) => {
   //   console.log(category);
-  const [blog, setblog] = useState(null);
-  const [loading, setloading] = useState(false);
+  const [blog, setblog] = useState(data);
+  // const [loading, setloading] = useState(false);
   //   console.log(blog);
 
   useEffect(() => {
-    (async () => {
-      setloading(true);
-      const { data } = await axios.post("/api/category/blogs", {
-        category: category,
-      });
-      // console.log(data);
-      if (data && data.length) setblog(data);
-      setloading(false);
-    })();
-  }, [category]);
-  return loading ? (
+    setblog(data);
+  }, [data]);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     if (!blog) {
+  //       setloading(true);
+  //       const { data } = await axios.post("/api/category/blogs", {
+  //         category: category,
+  //       });
+  //       // console.log(data);
+  //       if (data && data.length) setblog(data);
+  //       setloading(false);
+  //     }
+  //   })();
+  // }, [category, blog]);
+  return !blog ? (
     <CategorySkeleton />
   ) : (
     <div class="col-lg-6 py-3">

@@ -80,7 +80,7 @@ const Form = ({ cate }) => {
     const { data } = await axios.post("/api/blog/titles");
     setTitles(data);
   }
-
+  const [originalBlog, setOriginalBlog] = useState(null);
   function updateForm(data) {
     setId(data._id);
     setblog(data.blog);
@@ -89,6 +89,7 @@ const Form = ({ cate }) => {
     setkeywords(data.keywords);
     settitle(data.title);
     setUpdateFlag(0);
+    setOriginalBlog(data);
   }
   async function searchHandler(e, search) {
     e.preventDefault();
@@ -167,21 +168,29 @@ const Form = ({ cate }) => {
   }
   async function saveBlog(e) {
     e.preventDefault();
-    openMessage(messageApi, "Saving...");
+
     setdisabled(true);
     if (flag) {
-      const { data } = await axios.post("/api/update/blog", {
-        id: id,
-        title: title.trim(),
-        mainImg,
-        keywords,
-        category,
-        blog,
-      });
-      closeMessage(messageApi, data.msg, "success");
+      let text =
+        "Blog will be Inactive until verified by Admin. Are you sure to update. \n";
+      if (window.confirm(text) === true) {
+        openMessage(messageApi, "Saving...");
+        const { data } = await axios.post("/api/update/blog", {
+          id: id,
+          title: title.trim(),
+          mainImg,
+          keywords,
+          category,
+          blog,
+        });
+        if (data && data.status === 1)
+          closeMessage(messageApi, data.msg, "success");
+        else closeMessage(messageApi, data.msg, "error");
 
-      setAllBlogs([...allBlogs.filter((blog) => blog._id !== id), data.data]);
+        setAllBlogs([...allBlogs.filter((blog) => blog._id !== id), data.data]);
+      }
     } else {
+      openMessage(messageApi, "Saving...");
       const { data } = await axios.post("/api/add/blog", {
         title: title.trim(),
         mainImg,

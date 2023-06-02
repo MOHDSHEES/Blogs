@@ -54,10 +54,10 @@ const MainImgSlider = ({ data, cate }) => {
               nav={false}
             >
               {blogs.length
-                ? blogs.map((blog) => {
+                ? blogs.map((blog, idx) => {
                     return (
                       <div
-                        key={blog._id}
+                        key={blog._id + idx}
                         class="position-relative overflow-hidden"
                         style={{ height: "435px" }}
                       >

@@ -8,11 +8,11 @@ import MainImgSlider from "./mainImgSlider";
 import TopCarousel from "./topCarousel";
 import CategorySkeleton from "../skeleton/categoryHomepageSkeleton";
 
-const Homepage = ({ recent, trend, cate }) => {
+const Homepage = ({ recent, trend, cate, categoryData }) => {
   // const items = ["Item 1", "Item 2", "Item 3"];
   // for main Img slider top carousel recent blogs
   const [blogs, setblogs] = useState(recent);
-
+  // console.log(categoryData);
   // const [loading, setloading] = useState(false);
   useEffect(() => {
     setblogs(recent);
@@ -52,16 +52,31 @@ const Homepage = ({ recent, trend, cate }) => {
           <div class="pt-3">
             <div class="row">
               {/* <CategorySkeleton /> */}
-
-              {cate
+              {!categoryData
+                ? [0, 1, 2, 3].map((c) => {
+                    return <CategorySkeleton key={c} />;
+                  })
+                : Object.entries(categoryData).map((data, idx) => {
+                    return (
+                      <CategorySlider
+                        key={idx + "cs"}
+                        category={data[0]}
+                        data={data[1]}
+                      />
+                    );
+                  })}
+              {/* {cate
                 ? cate.map((category, idx) => {
                     return (
-                      <CategorySlider key={idx} category={category.category} />
+                      <CategorySlider
+                        key={idx + "cs"}
+                        category={category.category}
+                      />
                     );
                   })
                 : [0, 1, 2, 3].map((c) => {
                     return <CategorySkeleton key={c} />;
-                  })}
+                  })} */}
             </div>
           </div>
         </div>
