@@ -17,6 +17,7 @@ import Signup from "./components/login/signup";
 import Login from "./components/login/login";
 import { message } from "antd";
 import ProtectedRoute from "./components/functions/protectedRoute";
+import Admin from "./components/admin/admin";
 
 // import Sidebar from "./components/sidebar";
 
@@ -87,6 +88,9 @@ function App() {
         <ProtectedRoute path="/add" categories={categories} /> */}
         <Route path="/add" element={<ProtectedRoute />}>
           <Route path="/add" element={<Form cate={categories} />} />
+        </Route>
+        <Route path="/admin" element={<ProtectedRoute />}>
+          <Route path="/admin" element={<Admin />} />
         </Route>
         {/* <Route path="/add" element={<ProtectedRoute />} /> */}
         {/* <Route path="/" element={<Homepage />} />

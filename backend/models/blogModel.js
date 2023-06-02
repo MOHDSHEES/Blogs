@@ -12,6 +12,7 @@ const blogSchema = new mongoose.Schema({
   views: { type: Number },
   comments: [],
   blog: [],
+  status: { type: String, default: "Inactive" },
   user: { type: String, required: true },
 });
 

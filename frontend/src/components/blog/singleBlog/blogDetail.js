@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 // import Footer from "../../footer/footer";
 import Blog from "./blog";
 import Breadcrumb from "./breadcrumb";
-import CommentModal from "./commentModal";
-import Comments from "./comments";
+// import CommentModal from "./commentModal";
+// import Comments from "./comments";
 // import Navbar from "../navbar";
-import Newsletter from "../newsletter";
+// import Newsletter from "../newsletter";
 import Socialfollow from "../socialfollow";
 import Tags from "../tags";
 // import Topbar from "../topbar";
@@ -25,20 +25,31 @@ const BlogDetail = () => {
   // console.log(id);
   // console.log(id);
   const [blog, setblog] = useState(null);
+  // console.log(state);
   // console.log(blog);
   useEffect(() => {
-    if (state && Object.keys(state).length !== 0) setblog(state);
-    (async () => {
-      const { data } = await axios.post("/api/find/blog/id", {
-        id: id,
-      });
-      // console.log(data);
-      if (data && data._id) setblog(data);
-      else {
+    if (state && Object.keys(state).length !== 0) {
+      if (blog && blog.isAdmin) {
+        setblog(state);
+      } else if (blog && blog.status !== "Active") {
         navigate("/");
+        // setblog(state);
+      } else {
+        setblog(state);
       }
-    })();
-  }, [state, id, navigate]);
+    } else {
+      (async () => {
+        const { data } = await axios.post("/api/find/blog/id", {
+          id: id,
+        });
+        // console.log(data);
+        if (data && data._id && data.status === "Active") setblog(data);
+        else {
+          navigate("/");
+        }
+      })();
+    }
+  }, [state, id, blog, navigate]);
   // console.log(blog);
 
   return (

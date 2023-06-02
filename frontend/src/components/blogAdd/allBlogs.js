@@ -25,6 +25,14 @@ const AllBlogs = ({ blog }) => {
           {/* </Link> */}
           <span class="px-1">/</span>
           <span>{blog.createdDate}</span>
+          <span
+            style={{
+              float: "right",
+              color: blog.status === "Active" ? "green" : "red",
+            }}
+          >
+            {blog.status}
+          </span>
         </div>
         {/* <Link
             to={"/blog/" + blog._id + "/" + blog.title}

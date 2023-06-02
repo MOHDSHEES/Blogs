@@ -49,6 +49,28 @@ router.post("/find/user", async (req, res) => {
   }
 });
 
+// authenticate user
+router.post("/authenticate", verifyToken, async (req, res) => {
+  try {
+    // console.log(res.locals.id);
+    const user = await Users.findOne(
+      {
+        _id: res.locals.id,
+      },
+      { password: 0 }
+    );
+    // console.log(user);
+    if (user) {
+      res.json({ status: 200, user: user });
+    } else {
+      res.json({ status: 500, msg: "Not authorised" });
+    }
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // all blogs for particular user
 router.post("/find/blog/all", verifyToken, async (req, res) => {
   try {
@@ -76,11 +98,42 @@ router.post("/find/blog/all", verifyToken, async (req, res) => {
 // find all blogs for particular category
 router.post("/find/blog/categories", async (req, res) => {
   try {
-    const resu = await Blogs.find({ category: req.body.category });
+    const resu = await Blogs.find({
+      category: req.body.category,
+      status: "Active",
+    });
     // let trending = resu.map((a) => a.title);
     // console.log(resu);
     res.json(resu);
   } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
+
+// find blogs with status
+router.post("/find/blog/status", async (req, res) => {
+  try {
+    const resu = await Blogs.find({ status: req.body.status });
+    res.json(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
+// update isActive
+router.post("/update/blog/status", async (req, res) => {
+  try {
+    const resu = await Blogs.updateMany(
+      { _id: { $in: req.body.id } },
+      { status: req.body.status }
+    );
+    // console.log(resu);
+    if (resu.modifiedCount && resu.modifiedCount) {
+      res.json({ status: 200, msg: "Activated Sucessfully" });
+    } else {
+      res.json({ status: 500, msg: "something went wrong" });
+    }
+  } catch (error) {
+    console.log(error);
     res.send({ msg: error.message });
   }
 });
@@ -151,7 +204,9 @@ router.post("/add/blog", async (req, res) => {
 // find trending blogs with most views
 router.post("/blog/trending", async (req, res) => {
   try {
-    const resu = await Blogs.find({}).sort({ views: -1 }).limit(6);
+    const resu = await Blogs.find({ status: "Active" })
+      .sort({ views: -1 })
+      .limit(6);
     // let trending = resu.map((a) => a.title);
     // console.log(resu);
     res.json(resu);
@@ -173,7 +228,9 @@ router.post("/blog/titles", async (req, res) => {
 // db.collection.find().limit(5).sort({$natural:-1})
 router.post("/recent/blogs", async (req, res) => {
   try {
-    const resu = await Blogs.find().limit(6).sort({ $natural: -1 });
+    const resu = await Blogs.find({ status: "Active" })
+      .limit(6)
+      .sort({ $natural: -1 });
     res.json(resu);
   } catch (error) {
     res.send({ msg: error.message });
@@ -183,7 +240,10 @@ router.post("/recent/blogs", async (req, res) => {
 // find blogs by category max:6
 router.post("/category/blogs", async (req, res) => {
   try {
-    const resu = await Blogs.find({ category: req.body.category })
+    const resu = await Blogs.find({
+      category: req.body.category,
+      status: "Active",
+    })
       .limit(6)
       .collation({
         locale: "en",
@@ -197,7 +257,10 @@ router.post("/category/blogs", async (req, res) => {
 // find blog by title for search input
 router.post("/find/blog", async (req, res) => {
   try {
-    const blog = await Blogs.find({ title: req.body.title }).collation({
+    const blog = await Blogs.find({
+      title: req.body.title,
+      status: "Active",
+    }).collation({
       locale: "en",
       strength: 2,
     });
@@ -210,7 +273,7 @@ router.post("/find/blog", async (req, res) => {
 router.post("/find/blog/id", async (req, res) => {
   try {
     const blog = await Blogs.findOneAndUpdate(
-      { _id: req.body.id },
+      { _id: req.body.id, status: "Active" },
       { $inc: { views: 1 } }
     );
     // console.log(blog);

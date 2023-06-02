@@ -262,6 +262,7 @@ const Form = ({ cate }) => {
         onClickTI={handleAddTI}
         onClickTW={handleAddTW}
         onClickEdit={editBlog}
+        isAdmin={isAdmin}
       />
       <div>
         {flag ? (

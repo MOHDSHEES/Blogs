@@ -9,6 +9,7 @@ const Sidebar = ({
   onClickTI,
   onClickEdit,
   onClickTW,
+  isAdmin,
 }) => {
   useEffect(() => {
     /*===== LINK ACTIVE =====*/
@@ -39,7 +40,6 @@ const Sidebar = ({
 
   let navigate = useNavigate();
   function logoutHandler() {
-    console.log("in");
     localStorage.removeItem("token");
     navigate("/", { replace: true });
   }
@@ -50,9 +50,21 @@ const Sidebar = ({
           <div onClick={showNavbar} class="header_toggle">
             <i class="bx bx-menu" ref={headerToggle} id="header-toggle"></i>
           </div>
-          <p className="text-link" onClick={logoutHandler}>
-            Logout
-          </p>
+
+          <div>
+            {isAdmin && (
+              <Link className="text-link" to="/admin">
+                Admin
+              </Link>
+            )}
+            <p
+              style={{ float: "right", marginLeft: "10px" }}
+              className="text-link"
+              onClick={logoutHandler}
+            >
+              Logout
+            </p>
+          </div>
         </header>
         <div class="l-navbar" ref={Navbar} id="nav-bar">
           <nav class="nav">
