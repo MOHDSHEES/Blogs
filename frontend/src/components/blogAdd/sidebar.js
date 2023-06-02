@@ -53,17 +53,17 @@ const Sidebar = ({
 
           <div>
             {isAdmin && (
-              <Link className="text-link" to="/admin">
+              <Link className="btn btn-success" to="/admin">
                 Admin
               </Link>
             )}
-            <p
+            <button
               style={{ float: "right", marginLeft: "10px" }}
-              className="text-link"
+              className="btn btn-outline-primary"
               onClick={logoutHandler}
             >
               Logout
-            </p>
+            </button>
           </div>
         </header>
         <div class="l-navbar" ref={Navbar} id="nav-bar">

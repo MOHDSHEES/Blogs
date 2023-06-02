@@ -120,7 +120,7 @@ router.post("/find/blog/status", async (req, res) => {
   }
 });
 // update isActive
-router.post("/update/blog/status", async (req, res) => {
+router.post("/update/blog/status", verifyToken, async (req, res) => {
   try {
     const resu = await Blogs.updateMany(
       { _id: { $in: req.body.id } },
