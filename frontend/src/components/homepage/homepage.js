@@ -6,26 +6,26 @@ import CategorySlider from "./categorySlider";
 import Featured from "./featured";
 import MainImgSlider from "./mainImgSlider";
 import TopCarousel from "./topCarousel";
-import axios from "axios";
 import CategorySkeleton from "../skeleton/categoryHomepageSkeleton";
 
-const Homepage = ({ trend, cate }) => {
+const Homepage = ({ recent, trend, cate }) => {
   // const items = ["Item 1", "Item 2", "Item 3"];
   // for main Img slider top carousel recent blogs
-  const [blogs, setblogs] = useState(null);
+  const [blogs, setblogs] = useState(recent);
 
   // const [loading, setloading] = useState(false);
   useEffect(() => {
-    if (!blogs) {
-      (async () => {
-        // setloading(true);
-        const { data } = await axios.post("/api/recent/blogs");
-        // console.log(data);
-        if (data && data.length) setblogs(data);
-        // setloading(false);
-      })();
-    }
-  }, [blogs]);
+    setblogs(recent);
+    // if (!blogs) {
+    //   (async () => {
+    //     // setloading(true);
+    //     const { data } = await axios.post("/api/recent/blogs");
+    //     // console.log(data);
+    //     if (data && data.length) setblogs(data);
+    //     // setloading(false);
+    //   })();
+    // }
+  }, [recent]);
   // console.log(cate);
   return (
     <div>

@@ -49,6 +49,21 @@ function App() {
     })();
   }, []);
 
+  const [recentBlogs, setrecentBlogs] = useState(null);
+
+  // const [loading, setloading] = useState(false);
+  useEffect(() => {
+    if (!recentBlogs) {
+      (async () => {
+        // setloading(true);
+        const { data } = await axios.post("/api/recent/blogs");
+        // console.log(data);
+        if (data && data.length) setrecentBlogs(data);
+        // setloading(false);
+      })();
+    }
+  }, [recentBlogs]);
+
   function ScrollToTop() {
     const { pathname } = useLocation();
     useEffect(() => {
@@ -71,7 +86,13 @@ function App() {
         >
           <Route
             path="/"
-            element={<Homepage trend={trending} cate={categories} />}
+            element={
+              <Homepage
+                recent={recentBlogs}
+                trend={trending}
+                cate={categories}
+              />
+            }
           />
           <Route path="/signup" element={<Signup message={messageApi} />} />
           <Route path="/login" element={<Login message={messageApi} />} />
