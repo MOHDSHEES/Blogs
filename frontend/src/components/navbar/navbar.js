@@ -8,7 +8,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = ({ searchHandler }) => {
   function searchHandle(e, search) {
@@ -43,12 +43,12 @@ const NavBar = ({ searchHandler }) => {
           <Container fluid>
             <Navbar.Brand className="navbar-brand d-block d-lg-none" href="#">
               {" "}
-              <a href="/">
+              <Link to="/">
                 <h2 style={{ fontWeight: "600" }} class="m-0  text-uppercase">
                   <span class="text-primary">OFF</span>THE
                   <span class="text-primary">WEB</span>
                 </h2>
-              </a>
+              </Link>
             </Navbar.Brand>
             <Navbar.Toggle
               onClick={() => setExpanded(expanded ? false : "expanded")}
@@ -78,31 +78,63 @@ const NavBar = ({ searchHandler }) => {
                   // style={{ maxHeight: "100px" }}
                   // navbarScroll
                 >
-                  <Nav.Link as={NavLink} className="nav-item " to="/">
+                  <Nav.Link
+                    onClick={() => setExpanded(false)}
+                    as={NavLink}
+                    className="nav-item "
+                    to="/"
+                  >
                     Home
                   </Nav.Link>
-                  <Nav.Link as={NavLink} to="/categories" className="nav-item ">
+                  <Nav.Link
+                    onClick={() => setExpanded(false)}
+                    as={NavLink}
+                    to="/categories"
+                    className="nav-item "
+                  >
                     Categories
                   </Nav.Link>
                   {/* <Nav.Link href="#" className="nav-item ">
                     Single Blog
                   </Nav.Link> */}
-                  <Nav.Link as={NavLink} to="/contact" class="nav-item ">
+                  <Nav.Link
+                    onClick={() => setExpanded(false)}
+                    as={NavLink}
+                    to="/contact"
+                    class="nav-item "
+                  >
                     Contact
                   </Nav.Link>
-                  <Nav.Link as={NavLink} to="/add" class="nav-item ">
+                  <Nav.Link
+                    onClick={() => setExpanded(false)}
+                    as={NavLink}
+                    to="/add"
+                    class="nav-item "
+                  >
                     Add Blog
                   </Nav.Link>
 
                   <NavDropdown title="Policies" id="navbarScrollingDropdown">
-                    <NavDropdown.Item as={NavLink} to="/privacy/policies">
+                    <NavDropdown.Item
+                      onClick={() => setExpanded(false)}
+                      as={NavLink}
+                      to="/privacy/policies"
+                    >
                       Privacy Policies
                     </NavDropdown.Item>
                     {/* <NavDropdown.Divider /> */}
-                    <NavDropdown.Item as={NavLink} to="/terms/condition">
+                    <NavDropdown.Item
+                      onClick={() => setExpanded(false)}
+                      as={NavLink}
+                      to="/terms/condition"
+                    >
                       Terms And Conditions
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={NavLink} to="/advertise/policies">
+                    <NavDropdown.Item
+                      onClick={() => setExpanded(false)}
+                      as={NavLink}
+                      to="/advertise/policies"
+                    >
                       Advertise
                     </NavDropdown.Item>
                   </NavDropdown>
