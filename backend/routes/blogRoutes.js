@@ -115,11 +115,11 @@ router.post("/find/blog/categories", async (req, res) => {
 // data for homepage
 router.post("/find/data/homepage", async (req, res) => {
   try {
-    // const user1 = await new HomepageData({
-    //   recent: trending,
-    //   categoryData: category,
-    // });
-    // const newUser = await user1.save();
+    const user1 = await new HomepageData({
+      recent: [],
+      categoryData: {},
+    });
+    const newUser = await user1.save();
     // console.log(newUser);
     const resu = await HomepageData.findOne({});
     // console.log(resu);
