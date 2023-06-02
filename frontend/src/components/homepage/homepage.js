@@ -16,14 +16,16 @@ const Homepage = ({ trend, cate }) => {
 
   // const [loading, setloading] = useState(false);
   useEffect(() => {
-    (async () => {
-      // setloading(true);
-      const { data } = await axios.post("/api/recent/blogs");
-      // console.log(data);
-      if (data && data.length) setblogs(data);
-      // setloading(false);
-    })();
-  }, []);
+    if (!blogs) {
+      (async () => {
+        // setloading(true);
+        const { data } = await axios.post("/api/recent/blogs");
+        // console.log(data);
+        if (data && data.length) setblogs(data);
+        // setloading(false);
+      })();
+    }
+  }, [blogs]);
   // console.log(cate);
   return (
     <div>

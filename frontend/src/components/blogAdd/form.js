@@ -275,7 +275,7 @@ const Form = ({ cate }) => {
             )}
             <a
               onClick={newBlog}
-              href=""
+              href="#!"
               className="ms-2"
               style={{ marginRight: "10px" }}
             >

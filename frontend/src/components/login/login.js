@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { closeMessage } from "../functions/message";
-import Button from "react-bootstrap/Button";
 import ForgetPassword from "./forgetPassword";
 
 const Login = ({ message }) => {

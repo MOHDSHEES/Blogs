@@ -18,6 +18,7 @@ import Login from "./components/login/login";
 import { message } from "antd";
 import ProtectedRoute from "./components/functions/protectedRoute";
 import Admin from "./components/admin/admin";
+import { staticCategories } from "./data";
 
 // import Sidebar from "./components/sidebar";
 
@@ -25,17 +26,19 @@ function App() {
   const [trending, settrending] = useState(null);
   // const [loading, setloading] = useState(false);
   useEffect(() => {
-    (async () => {
-      // setloading(true);
-      const { data } = await axios.post("/api/blog/trending");
-      // console.log(data);
-      if (data && data.length) settrending(data);
-      // setloading(false);
-    })();
-  }, []);
+    if (!trending) {
+      (async () => {
+        // setloading(true);
+        const { data } = await axios.post("/api/blog/trending");
+        // console.log(data);
+        if (data && data.length) settrending(data);
+        // setloading(false);
+      })();
+    }
+  }, [trending]);
 
   // finding categories
-  const [categories, setcategories] = useState(null);
+  const [categories, setcategories] = useState(staticCategories);
   useEffect(() => {
     (async () => {
       // setloading(true);

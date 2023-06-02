@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Newsletter from "../blog/newsletter";
 import Socialfollow from "../blog/socialfollow";
 // import Tags from "../blog/tags";
 import Trending from "../blog/trending";

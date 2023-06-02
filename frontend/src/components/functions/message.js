@@ -1,5 +1,3 @@
-import React from "react";
-
 const openMessage = (messageApi, content) => {
   messageApi.open({
     key: "updatable",

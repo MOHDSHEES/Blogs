@@ -133,7 +133,7 @@ router.post("/update/blog/status", verifyToken, async (req, res) => {
       res.json({ status: 500, msg: "something went wrong" });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.send({ msg: error.message });
   }
 });

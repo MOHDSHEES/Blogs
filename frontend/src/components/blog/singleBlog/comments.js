@@ -8,13 +8,13 @@ const Comments = () => {
         <div class="media mb-4">
           <img
             src="img/user.jpg"
-            alt="Image"
+            alt="user"
             class="img-fluid mr-3 mt-1"
             style={{ width: "45px" }}
           />
           <div class="media-body">
             <h6>
-              <a href="">John Doe</a>{" "}
+              <a href="#!">John Doe</a>{" "}
               <small>
                 <i>01 Jan 2045</i>
               </small>
@@ -31,13 +31,13 @@ const Comments = () => {
         <div class="media">
           <img
             src="img/user.jpg"
-            alt="Image"
+            alt="user"
             class="img-fluid mr-3 mt-1"
             style={{ width: "45px" }}
           />
           <div class="media-body">
             <h6>
-              <a href="">John Doe</a>{" "}
+              <a href="#!">John Doe</a>{" "}
               <small>
                 <i>01 Jan 2045 at 12:00pm</i>
               </small>
@@ -52,13 +52,13 @@ const Comments = () => {
             <div class="media mt-4">
               <img
                 src="img/user.jpg"
-                alt="Image"
+                alt="user"
                 class="img-fluid mr-3 mt-1"
                 style={{ width: "45px" }}
               />
               <div class="media-body">
                 <h6>
-                  <a href="">John Doe</a>{" "}
+                  <a href="#!">John Doe</a>{" "}
                   <small>
                     <i>01 Jan 2045 at 12:00pm</i>
                   </small>
