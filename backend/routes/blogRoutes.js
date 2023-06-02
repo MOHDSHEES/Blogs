@@ -105,7 +105,6 @@ router.post("/find/blog/categories", async (req, res) => {
       status: "Active",
     });
     // let trending = resu.map((a) => a.title);
-    // console.log(resu);
     res.json(resu);
   } catch (error) {
     res.send({ msg: error.message });
@@ -393,7 +392,18 @@ router.post("/update/blog", async (req, res) => {
       }
     );
     // console.log(updated);
-
+    const st = await HomepageData.updateOne(
+      {
+        _id: "647a21933a89a8239f770931",
+      },
+      {
+        $pull: {
+          recent: {
+            _id: req.body.id,
+          },
+        },
+      }
+    );
     if (updated) {
       // console.log("in");
       res.json({ status: 1, msg: "Blog sucessfully updated.", data: updated });

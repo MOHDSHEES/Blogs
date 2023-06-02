@@ -10,6 +10,10 @@ function Autocomplete({ suggestions, searchHandler }) {
   //  hook for storing input value
   const [input, setInput] = useState("");
 
+  let path = window.location.pathname;
+  useEffect(() => {
+    setInput("");
+  }, [path]);
   // filtering the suggestions according to user
   const onChange = (e) => {
     const userInput = e.target.value;

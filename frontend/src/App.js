@@ -25,6 +25,34 @@ import { staticCategories } from "./data";
 function App() {
   const [trending, settrending] = useState(null);
   // const [loading, setloading] = useState(false);
+
+  const [recentBlogs, setrecentBlogs] = useState(null);
+  const [categoryData, setCategoryData] = useState(null);
+
+  // const [loading, setloading] = useState(false);
+  useEffect(() => {
+    if (!(recentBlogs && categoryData)) {
+      (async () => {
+        // setloading(true);
+        const { data } = await axios.post("/api/find/data/homepage");
+        if (data) {
+          setrecentBlogs(data.recent);
+          setCategoryData(data.categoryData);
+        }
+
+        // setloading(false);
+      })();
+    }
+    // if (!recentBlogs) {
+    //   (async () => {
+    //     // setloading(true);
+    //     const { data } = await axios.post("/api/recent/blogs");
+    //     // console.log(data);
+    //     if (data && data.length) setrecentBlogs(data);
+    //     // setloading(false);
+    //   })();
+    // }
+  }, [recentBlogs, categoryData]);
   useEffect(() => {
     if (!trending) {
       (async () => {
@@ -47,32 +75,6 @@ function App() {
       if (data && data.length) setcategories(data);
       // setloading(false);
     })();
-  }, []);
-
-  const [recentBlogs, setrecentBlogs] = useState(null);
-  const [categoryData, setCategoryData] = useState(null);
-
-  // const [loading, setloading] = useState(false);
-  useEffect(() => {
-    (async () => {
-      // setloading(true);
-      const { data } = await axios.post("/api/find/data/homepage");
-      if (data) {
-        setrecentBlogs(data.recent);
-        setCategoryData(data.categoryData);
-      }
-
-      // setloading(false);
-    })();
-    // if (!recentBlogs) {
-    //   (async () => {
-    //     // setloading(true);
-    //     const { data } = await axios.post("/api/recent/blogs");
-    //     // console.log(data);
-    //     if (data && data.length) setrecentBlogs(data);
-    //     // setloading(false);
-    //   })();
-    // }
   }, []);
 
   function ScrollToTop() {

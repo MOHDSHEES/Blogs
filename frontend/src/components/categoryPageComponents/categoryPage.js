@@ -17,6 +17,7 @@ const CategoryPage = () => {
       const { data } = await axios.post("/api/find/blog/categories", {
         category: category,
       });
+      // console.log(data);
       if (data && data.length) setblogs(data);
       else {
         navigate("/");

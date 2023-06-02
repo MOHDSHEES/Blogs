@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // import Alert from "react-bootstrap/Alert";
 import { message } from "antd";
 import axios from "axios";
-import { closeMessage } from "./functions/message";
+import { closeMessage, openMessage } from "./functions/message";
 import Footer from "./footer/footer";
 const CompleteNavbarAndFooter = ({ trend, cate }) => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -14,12 +14,13 @@ const CompleteNavbarAndFooter = ({ trend, cate }) => {
   async function searchHandler(search) {
     // e.preventDefault();
     // console.log(search);
+    openMessage(messageApi, "Searching...");
     const { data } = await axios.post("/api/find/blog", {
       title: search,
     });
-
     // console.log(data);
     if (data.length) {
+      closeMessage(messageApi, "Blog found", "success");
       const blog = data[0];
       navigate("/blog/" + data[0]._id + "/" + data[0].title, {
         state: blog,
