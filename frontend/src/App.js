@@ -96,7 +96,10 @@ function App() {
           />
           <Route path="/signup" element={<Signup message={messageApi} />} />
           <Route path="/login" element={<Login message={messageApi} />} />
-          <Route path="/blog/:id/:title" element={<BlogDetail />} />
+          <Route
+            path="/blog/:id/:title"
+            element={<BlogDetail trending={trending} />}
+          />
           <Route path="/blogs/:category" element={<CategoryPage />} />
           <Route path="/contact" element={<Contactform />} />
           <Route path="/terms/condition" element={<Terms />} />

@@ -8,7 +8,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-// import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavBar = ({ searchHandler }) => {
   function searchHandle(e, search) {
@@ -78,31 +78,31 @@ const NavBar = ({ searchHandler }) => {
                   // style={{ maxHeight: "100px" }}
                   // navbarScroll
                 >
-                  <Nav.Link className="nav-item active " href="/">
+                  <Nav.Link as={NavLink} className="nav-item " to="/">
                     Home
                   </Nav.Link>
-                  <Nav.Link href="/categories" className="nav-item ">
+                  <Nav.Link as={NavLink} to="/categories" className="nav-item ">
                     Categories
                   </Nav.Link>
                   {/* <Nav.Link href="#" className="nav-item ">
                     Single Blog
                   </Nav.Link> */}
-                  <Nav.Link href="/contact" class="nav-item ">
+                  <Nav.Link as={NavLink} to="/contact" class="nav-item ">
                     Contact
                   </Nav.Link>
-                  <Nav.Link href="/add" class="nav-item ">
+                  <Nav.Link as={NavLink} to="/add" class="nav-item ">
                     Add Blog
                   </Nav.Link>
 
                   <NavDropdown title="Policies" id="navbarScrollingDropdown">
-                    <NavDropdown.Item href="/privacy/policies">
+                    <NavDropdown.Item as={NavLink} to="/privacy/policies">
                       Privacy Policies
                     </NavDropdown.Item>
                     {/* <NavDropdown.Divider /> */}
-                    <NavDropdown.Item href="/terms/condition">
+                    <NavDropdown.Item as={NavLink} to="/terms/condition">
                       Terms And Conditions
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="/advertise/policies">
+                    <NavDropdown.Item as={NavLink} to="/advertise/policies">
                       Advertise
                     </NavDropdown.Item>
                   </NavDropdown>

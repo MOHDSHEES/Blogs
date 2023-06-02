@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import TrendingSkeleton from "../skeleton/trendingSkeleton";
 import resizeImg from "../functions/resizeImg";
 
-const Trending = () => {
-  const [blogs, setblogs] = useState(null);
+const Trending = ({ trending }) => {
+  const [blogs, setblogs] = useState(trending);
   const [loading, setloading] = useState(false);
   useEffect(() => {
     (async () => {

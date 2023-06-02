@@ -17,7 +17,7 @@ import axios from "axios";
 // import { message } from "antd";
 // import { closeMessage } from "../../functions/message";
 
-const BlogDetail = () => {
+const BlogDetail = ({ trending }) => {
   const navigate = useNavigate();
   const { state } = useLocation();
   // console.log(state);
@@ -86,7 +86,7 @@ const BlogDetail = () => {
                   <img class="img-fluid" src="/img/news-500x280-2.jpg" alt="" />
                 </a>
               </div> */}
-              <Trending />
+              <Trending trending={trending} />
             </div>
           </div>
         </div>
