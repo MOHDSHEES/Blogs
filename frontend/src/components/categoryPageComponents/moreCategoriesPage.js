@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import resizeImg from "../functions/resizeImg";
+import { useContext } from "react";
+import { globalContext } from "../../context";
 
-const MoreCategoriesPage = ({ cate }) => {
-  const [categories, setcategories] = useState(null);
-  useEffect(() => {
-    setcategories(cate);
-  }, [cate]);
+const MoreCategoriesPage = () => {
+  const { categories } = useContext(globalContext);
+
   return (
     <div class="container-fluid" style={{ padding: "1rem 15px" }}>
       <div class="container" style={{ padding: "0" }}>

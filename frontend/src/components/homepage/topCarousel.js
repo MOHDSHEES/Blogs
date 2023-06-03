@@ -6,14 +6,16 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import { Link } from "react-router-dom";
 import TopCarouselSkeleton from "../skeleton/topCarouselSkeleton";
 import resizeImg from "../functions/resizeImg";
+import { useContext } from "react";
+import { globalContext } from "../../context";
 
-const TopCarousel = ({ data }) => {
+const TopCarousel = () => {
   const [blogs, setblogs] = useState(null);
   // const [loading, setloading] = useState(false);
-
+  const { trending } = useContext(globalContext);
   useEffect(() => {
-    setblogs(data);
-  }, [data]);
+    setblogs(trending);
+  }, [trending]);
   // useEffect(() => {
   //   (async () => {
   //     setloading(true);

@@ -3,8 +3,11 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { globalContext } from "../../context";
 // import axios from "axios";
-const Topbar = ({ trend }) => {
+const Topbar = () => {
+  const { recentBlogs } = useContext(globalContext);
   const [blogs, setblogs] = useState(null);
   // const [loading, setloading] = useState(false);
   // useEffect(() => {
@@ -18,8 +21,8 @@ const Topbar = ({ trend }) => {
   // }, []);
 
   useEffect(() => {
-    setblogs(trend);
-  }, [trend]);
+    setblogs(recentBlogs);
+  }, [recentBlogs]);
 
   // console.log(trend);
   return (

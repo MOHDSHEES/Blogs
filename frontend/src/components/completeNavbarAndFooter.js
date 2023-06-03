@@ -9,7 +9,7 @@ import axios from "axios";
 import { closeMessage, openMessage } from "./functions/message";
 import Footer from "./footer/footer";
 
-const CompleteNavbarAndFooter = ({ cate, recent }) => {
+const CompleteNavbarAndFooter = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   async function searchHandler(search) {
@@ -39,10 +39,10 @@ const CompleteNavbarAndFooter = ({ cate, recent }) => {
   return (
     <div>
       {contextHolder}
-      <Topbar trend={recent} />
+      <Topbar />
       <NavBar searchHandler={searchHandler} />
       <Outlet />
-      <Footer cate={cate} />
+      <Footer />
     </div>
   );
 };

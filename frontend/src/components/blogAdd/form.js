@@ -8,8 +8,10 @@ import { openMessage, closeMessage } from "../functions/message";
 import { message, Drawer } from "antd";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import AllBlogs from "./allBlogs";
+import { useContext } from "react";
+import { globalContext } from "../../context";
 
-const Form = ({ cate }) => {
+const Form = () => {
   const [disabled, setdisabled] = useState(false);
   const [titles, setTitles] = useState([]);
   const [id, setId] = useState(null);
@@ -28,6 +30,7 @@ const Form = ({ cate }) => {
   const [disabledCategoryBtn, setdisabledCategoryBtn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [user, setuser] = useState(null);
+  const { categories: cate } = useContext(globalContext);
 
   const [tagId, setTagId] = useState(null);
   function reset() {
@@ -74,13 +77,13 @@ const Form = ({ cate }) => {
   useEffect(() => {
     setCategories(cate);
   }, [cate]);
+
   async function editBlog() {
     setFlag(1);
     setUpdateFlag(1);
     const { data } = await axios.post("/api/blog/titles");
     setTitles(data);
   }
-  const [originalBlog, setOriginalBlog] = useState(null);
   function updateForm(data) {
     setId(data._id);
     setblog(data.blog);
@@ -89,7 +92,6 @@ const Form = ({ cate }) => {
     setkeywords(data.keywords);
     settitle(data.title);
     setUpdateFlag(0);
-    setOriginalBlog(data);
   }
   async function searchHandler(e, search) {
     e.preventDefault();

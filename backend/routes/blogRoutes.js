@@ -10,7 +10,6 @@ import {
   getPasswordToken,
   verifyPasswordToken,
 } from "../jwt.js";
-import { category, trending } from "./data.js";
 
 const router = express.Router();
 

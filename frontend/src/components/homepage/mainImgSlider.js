@@ -6,15 +6,18 @@ import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import resizeImg from "../functions/resizeImg";
+import { globalContext } from "../../context";
+import { useContext } from "react";
 
-const MainImgSlider = ({ data, cate }) => {
+const MainImgSlider = () => {
   // console.log(data);
+  const { recentBlogs, categories: cate } = useContext(globalContext);
   const [blogs, setblogs] = useState(null);
   const [categories, setcategories] = useState(null);
   useEffect(() => {
-    setblogs(data);
+    setblogs(recentBlogs);
     setcategories(cate);
-  }, [data, cate]);
+  }, [recentBlogs, cate]);
 
   // useEffect(() => {
   //   (async () => {

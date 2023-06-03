@@ -20,6 +20,7 @@ import ProtectedRoute from "./components/functions/protectedRoute";
 import Admin from "./components/admin/admin";
 import { staticCategories } from "./data";
 import ChangePassword from "./components/login/changePassword";
+import { globalContext } from "./context";
 
 // import Sidebar from "./components/sidebar";
 
@@ -40,20 +41,24 @@ function App() {
           setrecentBlogs(data.recent);
           setCategoryData(data.categoryData);
         }
-
-        // setloading(false);
       })();
     }
-    // if (!recentBlogs) {
-    //   (async () => {
-    //     // setloading(true);
-    //     const { data } = await axios.post("/api/recent/blogs");
-    //     // console.log(data);
-    //     if (data && data.length) setrecentBlogs(data);
-    //     // setloading(false);
-    //   })();
-    // }
   }, [recentBlogs, categoryData]);
+
+  const [titles, setTitles] = useState([]);
+  useEffect(() => {
+    if (titles.length === 0) {
+      async function blogTitles() {
+        const { data } = await axios.post("/api/blog/titles");
+        setTitles(data);
+      }
+      if (titles.length === 0) {
+        blogTitles();
+      }
+    }
+  }, [titles.length]);
+
+  // trending blogs
   useEffect(() => {
     if (!trending) {
       (async () => {
@@ -65,7 +70,6 @@ function App() {
       })();
     }
   }, [trending]);
-
   // finding categories
   const [categories, setcategories] = useState(staticCategories);
   useEffect(() => {
@@ -92,62 +96,48 @@ function App() {
     <div>
       {/* <Form /> */}
       <ScrollToTop />
-      {contextHolder}
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <CompleteNavbarAndFooter cate={categories} recent={recentBlogs} />
-          }
-        >
-          <Route
-            path="/"
-            element={
-              <Homepage
-                categoryData={categoryData}
-                recent={recentBlogs}
-                trend={trending}
-                cate={categories}
-              />
-            }
-          />
-          <Route path="/signup" element={<Signup message={messageApi} />} />
-          <Route path="/login" element={<Login message={messageApi} />} />
-          <Route
-            path="/changepassword/:token"
-            element={<ChangePassword message={messageApi} />}
-          />
-          <Route
-            path="/blog/:id/:title"
-            element={<BlogDetail trending={trending} />}
-          />
-          <Route path="/blogs/:category" element={<CategoryPage />} />
-          <Route path="/contact" element={<Contactform />} />
-          <Route path="/terms/condition" element={<Terms />} />
-          <Route path="/privacy/policies" element={<PrivacyPolicy />} />
-          <Route path="/advertise/policies" element={<Advertise />} />
-          <Route
-            path="/categories"
-            element={<MoreCategoriesPage cate={categories} />}
-          />
-          <Route path="/career" element={<Career />} />
-        </Route>
-        {/* <Route path="/add" element={<Form cate={categories} />} />
+      <globalContext.Provider
+        value={{ trending, categories, recentBlogs, titles }}
+      >
+        {contextHolder}
+        <Routes>
+          <Route path="/" element={<CompleteNavbarAndFooter />}>
+            <Route
+              path="/"
+              element={<Homepage categoryData={categoryData} />}
+            />
+            <Route path="/signup" element={<Signup message={messageApi} />} />
+            <Route path="/login" element={<Login message={messageApi} />} />
+            <Route
+              path="/changepassword/:token"
+              element={<ChangePassword message={messageApi} />}
+            />
+            <Route path="/blog/:id/:title" element={<BlogDetail />} />
+            <Route path="/blogs/:category" element={<CategoryPage />} />
+            <Route path="/contact" element={<Contactform />} />
+            <Route path="/terms/condition" element={<Terms />} />
+            <Route path="/privacy/policies" element={<PrivacyPolicy />} />
+            <Route path="/advertise/policies" element={<Advertise />} />
+            <Route path="/categories" element={<MoreCategoriesPage />} />
+            <Route path="/career" element={<Career />} />
+          </Route>
+          {/* <Route path="/add" element={<Form cate={categories} />} />
         <ProtectedRoute path="/add" categories={categories} /> */}
-        <Route path="/add" element={<ProtectedRoute />}>
-          <Route path="/add" element={<Form cate={categories} />} />
-        </Route>
-        <Route path="/admin" element={<ProtectedRoute />}>
-          <Route path="/admin" element={<Admin />} />
-        </Route>
+          <Route path="/add" element={<ProtectedRoute />}>
+            <Route path="/add" element={<Form />} />
+          </Route>
+          <Route path="/admin" element={<ProtectedRoute />}>
+            <Route path="/admin" element={<Admin />} />
+          </Route>
 
-        {/* <Route path="/add" element={<ProtectedRoute />} /> */}
-        {/* <Route path="/" element={<Homepage />} />
+          {/* <Route path="/add" element={<ProtectedRoute />} /> */}
+          {/* <Route path="/" element={<Homepage />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="/add" element={<Form />} /> */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-      <Analytics />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        <Analytics />
+      </globalContext.Provider>
     </div>
   );
 }

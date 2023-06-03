@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import TrendingSkeleton from "../skeleton/trendingSkeleton";
 import resizeImg from "../functions/resizeImg";
+import { useContext } from "react";
+import { globalContext } from "../../context";
 
-const Trending = ({ trending }) => {
+const Trending = () => {
+  // const [loading, setloading] = useState(false);
+  const { trending } = useContext(globalContext);
   const [blogs, setblogs] = useState(trending);
-  const [loading, setloading] = useState(false);
+  // console.log(trending);
   useEffect(() => {
-    (async () => {
-      setloading(true);
-      const { data } = await axios.post("/api/blog/trending");
-      // console.log(data);
-      if (data && data.length) setblogs(data);
-      setloading(false);
-    })();
-  }, []);
+    setblogs(trending);
+  }, [trending]);
+  // useEffect(() => {
+  //   if (!blogs) {
+  //     (async () => {
+  //       setloading(true);
+  //       const { data } = await axios.post("/api/blog/trending");
+  //       // console.log(data);
+  //       if (data && data.length) setblogs(data);
+  //       setloading(false);
+  //     })();
+  //   }
+  // }, [blogs]);
   return (
     <div>
       <div class="pb-3">
@@ -23,7 +31,7 @@ const Trending = ({ trending }) => {
           <h3 class="m-0">Trending</h3>
         </div>
 
-        {loading ? (
+        {!trending ? (
           <TrendingSkeleton />
         ) : (
           blogs &&

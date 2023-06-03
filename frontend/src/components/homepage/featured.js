@@ -7,8 +7,11 @@ import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import resizeImg from "../functions/resizeImg";
+import { useContext } from "react";
+import { globalContext } from "../../context";
 
-const Featured = ({ trend }) => {
+const Featured = () => {
+  const { trending } = useContext(globalContext);
   const [blogs, setblogs] = useState(null);
   // const [loading, setloading] = useState(false);
   // useEffect(() => {
@@ -21,8 +24,8 @@ const Featured = ({ trend }) => {
   //   })();
   // }, []);
   useEffect(() => {
-    setblogs(trend);
-  }, [trend]);
+    setblogs(trending);
+  }, [trending]);
   // console.log(blogs);
   return (
     <div class="pt-4">

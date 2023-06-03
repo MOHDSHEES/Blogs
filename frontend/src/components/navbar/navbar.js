@@ -9,6 +9,8 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { globalContext } from "../../context";
 
 const NavBar = ({ searchHandler }) => {
   function searchHandle(e, search) {
@@ -18,16 +20,17 @@ const NavBar = ({ searchHandler }) => {
     setExpanded(false);
   }
   const [titles, setTitles] = useState([]);
+  const { titles: title } = useContext(globalContext);
   const [expanded, setExpanded] = useState(false);
   useEffect(() => {
-    async function blogTitles() {
-      const { data } = await axios.post("/api/blog/titles");
-      setTitles(data);
-    }
+    // async function blogTitles() {
+    //   const { data } = await axios.post("/api/blog/titles");
+    //   setTitles(data);
+    // }
     if (titles.length === 0) {
-      blogTitles();
+      setTitles(title);
     }
-  }, [titles.length]);
+  }, [titles, title]);
 
   return (
     <div>

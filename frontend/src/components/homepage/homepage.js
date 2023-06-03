@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 // import NavBar from "../blog/navbar";
 // import Topbar from "../blog/topbar";
 // import Footer from "../footer/footer";
@@ -8,25 +8,12 @@ import MainImgSlider from "./mainImgSlider";
 import TopCarousel from "./topCarousel";
 import CategorySkeleton from "../skeleton/categoryHomepageSkeleton";
 
-const Homepage = ({ recent, trend, cate, categoryData }) => {
+const Homepage = ({ categoryData }) => {
   // const items = ["Item 1", "Item 2", "Item 3"];
   // for main Img slider top carousel recent blogs
-  const [blogs, setblogs] = useState(recent);
+
   // console.log(categoryData);
-  // const [loading, setloading] = useState(false);
-  useEffect(() => {
-    setblogs(recent);
-    // if (!blogs) {
-    //   (async () => {
-    //     // setloading(true);
-    //     const { data } = await axios.post("/api/recent/blogs");
-    //     // console.log(data);
-    //     if (data && data.length) setblogs(data);
-    //     // setloading(false);
-    //   })();
-    // }
-  }, [recent]);
-  // console.log(cate);
+
   return (
     <div>
       {/* {contextHolder} */}
@@ -46,9 +33,9 @@ const Homepage = ({ recent, trend, cate, categoryData }) => {
 
       <div style={{ padding: "1rem 15px" }} class="container-fluid ">
         <div style={{ padding: "0" }} class="container">
-          <TopCarousel data={trend} />
-          <MainImgSlider data={blogs} cate={cate} />
-          <Featured trend={trend} />
+          <TopCarousel />
+          <MainImgSlider />
+          <Featured />
           <div class="pt-3">
             <div class="row">
               {/* <CategorySkeleton /> */}

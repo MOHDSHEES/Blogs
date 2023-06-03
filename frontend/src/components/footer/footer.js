@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { globalContext } from "../../context";
 
-const Footer = ({ cate }) => {
+const Footer = () => {
+  const { categories: cate } = useContext(globalContext);
   const [categories, setcategories] = useState(null);
   useEffect(() => {
     setcategories(cate);
