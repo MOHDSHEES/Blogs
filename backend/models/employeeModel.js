@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 const employeeSchema = new mongoose.Schema({
   _id: {
     type: String,
-    default: () => nanoid(),
+    default: () => nanoid(7),
   },
   email: { type: String, unique: true, required: true },
   name: { type: String, required: true },
