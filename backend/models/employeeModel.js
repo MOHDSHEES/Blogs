@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
+import { nanoid } from "nanoid";
 
 const employeeSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    default: () => nanoid(),
+  },
   email: { type: String, unique: true, required: true },
   name: { type: String, required: true },
   address: { type: String, required: true },

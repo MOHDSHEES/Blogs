@@ -17,6 +17,7 @@
     "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
+    "nanoid": "^4.0.2",
     "path": "^0.12.7"
   },
   "devDependencies": {
