@@ -38,7 +38,7 @@ const ForgetPassword = (props) => {
         setError(data.message);
         setisValid(false);
       }
-      console.log(data);
+      // console.log(data);
     }
 
     setValidated(true);
