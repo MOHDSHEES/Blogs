@@ -4,7 +4,12 @@ import HomepageData from "../models/homepageDataModel.js";
 import Users from "../models/userModel.js";
 import Categories from "../models/categoryModels.js";
 import sgMail from "@sendgrid/mail";
-import { getToken, verifyToken } from "../jwt.js";
+import {
+  getToken,
+  verifyToken,
+  getPasswordToken,
+  verifyPasswordToken,
+} from "../jwt.js";
 import { category, trending } from "./data.js";
 
 const router = express.Router();
@@ -416,6 +421,43 @@ router.post("/update/blog", async (req, res) => {
   }
 });
 
+// verify change password token
+router.post("/verifyPassword/token", verifyPasswordToken, async (req, res) => {
+  try {
+    // console.log(res.locals.email);
+    if (res.locals.email) {
+      res.json({ status: 200, msg: "Token verified" });
+    } else {
+      res.json({ status: 500, msg: "Invalid Token" });
+    }
+  } catch (error) {
+    // console.log(error);
+    res.send({ status: 500, msg: error.message });
+  }
+});
+// verify change password token
+router.post("/change/password", verifyPasswordToken, async (req, res) => {
+  try {
+    const email = res.locals.email;
+    // console.log(email);
+    if (email) {
+      const update = await Users.updateOne(
+        { email: email },
+        { password: req.body.password }
+      );
+      // console.log(update);
+      if (update.acknowledged && update.modifiedCount) {
+        res.json({ status: 200, msg: "Password reset sucessfully" });
+      }
+    } else {
+      res.json({ status: 500, msg: "Something went wrong, try again later" });
+    }
+  } catch (error) {
+    // console.log(error);
+    res.send({ status: 500, msg: error.message });
+  }
+});
+
 // email route
 router.post("/contact/sendemail", async (req, res) => {
   const data = req.body.State;
@@ -655,6 +697,7 @@ router.post("/contact/sendemail", async (req, res) => {
 router.post("/forgetPassword", async (req, res) => {
   try {
     const email = req.body.email;
+    const token = getPasswordToken(email);
 
     const userDetails = await Users.findOne(
       { email: email },
@@ -878,14 +921,14 @@ router.post("/forgetPassword", async (req, res) => {
       </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="b16a4afb-f245-4156-968e-8080176990ea" data-mc-module-version="2019-10-22">
         <tbody>
           <tr>
-            <td style="padding:18px 40px 0px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit"><span style="color: #00634a; font-size: 24px">We received a request to get your &nbsp;password.</span></div><div></div></div></td>
+            <td style="padding:18px 40px 0px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit"><span style="color: #00634a; font-size: 24px">We received a request to reset your &nbsp;password.</span></div><div></div></div></td>
           </tr>
         </tbody>
       </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="b16a4afb-f245-4156-968e-8080176990ea.1" data-mc-module-version="2019-10-22">
         <tbody>
           <tr>
             <td style="padding:18px 40px 10px 0px; line-height:25px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div style="font-family: inherit; text-align: inherit"><span style="color: #00634a"><strong>Protecting your data is important to us.</strong></span></div>
-            <div style="font-family: inherit; text-align: inherit"><span style="color: #00634a"><strong>Your Password is:</strong></span></div>
+            <div style="font-family: inherit; text-align: inherit"><span style="color: #00634a"><strong>Open the link to reset the password</strong><br/>Link is valid for 5 minutes only.</span></div>
             <div style="font-family: inherit; text-align: center; margin-top: 20px"><span style="color: #635d00; font-size: 24px"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></span><span style="color: #00634a; font-size: 24px"><strong>&nbsp;</strong></span></div></td>
           </tr>
         </tbody>
@@ -899,7 +942,7 @@ router.post("/forgetPassword", async (req, res) => {
       </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="e4fd0309-df1b-4119-90b4-54e908c2459e" data-mc-module-version="2019-10-22">
         <tbody>
           <tr>
-            <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit; background-color:#0c4819;" height="100%" valign="top" bgcolor="#0c4819" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="font-family: &quot;trebuchet ms&quot;, helvetica, sans-serif; font-size: 30px; color: #7f8215">${userDetails.password}</span></div><div></div></div></td>
+            <td style="padding:18px 10px 18px 10px; line-height:15px; text-align:left; background-color:#0c4819;" height="100%" valign="top" bgcolor="#0c4819" role="module-content"><div><div style="font-family: inherit; text-align: left"><span style="font-family: &quot;trebuchet ms&quot;, helvetica, sans-serif; font-size: 15px; color: white"><a href="http://offtheweb.in/changepassword/${token}"> https://www.offtheweb.in/changepassword/${token} </a><br/><br/></span></div><div></div></div></td>
           </tr>
         </tbody>
       </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="b16a4afb-f245-4156-968e-8080176990ea.1.1" data-mc-module-version="2019-10-22">
@@ -976,7 +1019,7 @@ router.post("/forgetPassword", async (req, res) => {
         .then(() => {
           res.send({
             success: true,
-            message: "Password has been Sent to Registered Email.",
+            message: "Password reset link has been Sent to Registered Email.",
           });
         })
         .catch((error) => {
@@ -994,6 +1037,7 @@ router.post("/forgetPassword", async (req, res) => {
     //   ? res.send(userDetails._doc)
     //   : res.status(401).send({ msg: "Incorrect Mobile No. or Email" });
   } catch (error) {
+    console.log(error);
     res.send({ msg: error.message });
   }
 });

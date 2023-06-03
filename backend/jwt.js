@@ -28,4 +28,25 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-export { getToken, verifyToken };
+const getPasswordToken = (email) => {
+  return jwt.sign({ email: email }, process.env.JWT_PASSWORD_SECRET, {
+    expiresIn: "300s",
+  });
+};
+
+const verifyPasswordToken = (req, res, next) => {
+  try {
+    var decoded = jwt.verify(req.body.token, process.env.JWT_PASSWORD_SECRET, {
+      algorithm: "RS256",
+    });
+    if (decoded.email) {
+      res.locals.email = decoded.email;
+      next();
+    } else {
+      res.send({ status: 404, msg: "Access forbidden" });
+    }
+  } catch (error) {
+    res.send({ status: 404, msg: "Access forbidden" });
+  }
+};
+export { getToken, verifyToken, getPasswordToken, verifyPasswordToken };

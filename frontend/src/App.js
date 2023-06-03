@@ -19,6 +19,7 @@ import { message } from "antd";
 import ProtectedRoute from "./components/functions/protectedRoute";
 import Admin from "./components/admin/admin";
 import { staticCategories } from "./data";
+import ChangePassword from "./components/login/changePassword";
 
 // import Sidebar from "./components/sidebar";
 
@@ -111,6 +112,10 @@ function App() {
           <Route path="/signup" element={<Signup message={messageApi} />} />
           <Route path="/login" element={<Login message={messageApi} />} />
           <Route
+            path="/changepassword/:token"
+            element={<ChangePassword message={messageApi} />}
+          />
+          <Route
             path="/blog/:id/:title"
             element={<BlogDetail trending={trending} />}
           />
@@ -133,6 +138,7 @@ function App() {
         <Route path="/admin" element={<ProtectedRoute />}>
           <Route path="/admin" element={<Admin />} />
         </Route>
+
         {/* <Route path="/add" element={<ProtectedRoute />} /> */}
         {/* <Route path="/" element={<Homepage />} />
         <Route path="/blog/:id" element={<BlogDetail />} />

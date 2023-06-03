@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const PendingTable = () => {
   const [blog, setBlog] = useState([]);
+  const [disable, setDisable] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   useEffect(() => {
     (async () => {
@@ -27,6 +28,7 @@ const PendingTable = () => {
 
   async function statusHandler(id, status, bl) {
     bl["status"] = status;
+    setDisable(true);
     const { data } = await axios.post("/api/update/blog/status", {
       id: [id],
       status: status,
@@ -42,6 +44,7 @@ const PendingTable = () => {
     } else {
       closeMessage(messageApi, data.msg, "error");
     }
+    setDisable(false);
   }
   return (
     <div class="table-responsive">
@@ -65,6 +68,7 @@ const PendingTable = () => {
                   </td>
                   <td>
                     <button
+                      disabled={disable}
                       onClick={() => statusHandler(bl._id, "Active", bl)}
                       type="button"
                       class="btn btn-primary"
