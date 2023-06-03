@@ -693,7 +693,6 @@ router.post("/contact/sendemail", async (req, res) => {
     });
 });
 
-// forget password
 router.post("/forgetPassword", async (req, res) => {
   try {
     const email = req.body.email;
@@ -714,304 +713,312 @@ router.post("/forgetPassword", async (req, res) => {
         from: "mohd.shees102@gmail.com", // Change to your verified sender
         subject: "OFFTHEWEB PASSWORD",
         html: `
-  
-          <head>
-          <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-          <!--[if !mso]><!-->
-          <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-          <!--<![endif]-->
-          <!--[if (gte mso 9)|(IE)]>
-          <xml>
-            <o:OfficeDocumentSettings>
-              <o:AllowPNG/>
-              <o:PixelsPerInch>96</o:PixelsPerInch>
-            </o:OfficeDocumentSettings>
-          </xml>
-          <![endif]-->
-          <!--[if (gte mso 9)|(IE)]>
-      <style type="text/css">
-        body {width: 600px;margin: 0 auto;}
-        table {border-collapse: collapse;}
-        table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
-        img {-ms-interpolation-mode: bicubic;}
-      </style>
-    <![endif]-->
-          <style type="text/css">
-        body, p, div {
-          font-family: inherit;
-          font-size: 14px;
-        }
-        body {
-          color: #000000;
-        }
-        body a {
-          color: #1188E6;
-          text-decoration: none;
-        }
-        p { margin: 0; padding: 0; }
-        table.wrapper {
-          width:100% !important;
-          table-layout: fixed;
-          -webkit-font-smoothing: antialiased;
-          -webkit-text-size-adjust: 100%;
-          -moz-text-size-adjust: 100%;
-          -ms-text-size-adjust: 100%;
-        }
-        img.max-width {
-          max-width: 100% !important;
-        }
-        .column.of-2 {
-          width: 50%;
-        }
-        .column.of-3 {
-          width: 33.333%;
-        }
-        .column.of-4 {
-          width: 25%;
-        }
-        ul ul ul ul  {
-          list-style-type: disc !important;
-        }
-        ol ol {
-          list-style-type: lower-roman !important;
-        }
-        ol ol ol {
-          list-style-type: lower-latin !important;
-        }
-        ol ol ol ol {
-          list-style-type: decimal !important;
-        }
-        @media screen and (max-width:480px) {
-          .preheader .rightColumnContent,
-          .footer .rightColumnContent {
-            text-align: left !important;
-          }
-          .preheader .rightColumnContent div,
-          .preheader .rightColumnContent span,
-          .footer .rightColumnContent div,
-          .footer .rightColumnContent span {
-            text-align: left !important;
-          }
-          .preheader .rightColumnContent,
-          .preheader .leftColumnContent {
-            font-size: 80% !important;
-            padding: 5px 0;
-          }
-          table.wrapper-mobile {
-            width: 100% !important;
-            table-layout: fixed;
-          }
-          img.max-width {
-            height: auto !important;
-            max-width: 100% !important;
-          }
-          a.bulletproof-button {
-            display: block !important;
-            width: auto !important;
-            font-size: 80%;
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-          }
-          .columns {
-            width: 100% !important;
-          }
-          .column {
-            display: block !important;
-            width: 100% !important;
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
-          }
-          .social-icon-column {
-            display: inline-block !important;
-          }
-        }
-      </style>
-          <!--user entered Head Start--><link href="https://fonts.googleapis.com/css?family=Chivo&display=swap" rel="stylesheet"><style>
-    body {font-family: 'Chivo', sans-serif;}
-    </style><!--End Head user entered-->
+        <!DOCTYPE html>
+
+        <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
+        <head>
+        <title></title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
+        <style>
+            * {
+              box-sizing: border-box;
+            }
+        
+            body {
+              margin: 0;
+              padding: 0;
+            }
+        
+            a[x-apple-data-detectors] {
+              color: inherit !important;
+              text-decoration: inherit !important;
+            }
+        
+            #MessageViewBody a {
+              color: inherit;
+              text-decoration: none;
+            }
+        
+            p {
+              line-height: inherit
+            }
+        
+            .desktop_hide,
+            .desktop_hide table {
+              mso-hide: all;
+              display: none;
+              max-height: 0px;
+              overflow: hidden;
+            }
+        
+            .image_block img+div {
+              display: none;
+            }
+        
+            @media (max-width:660px) {
+              .desktop_hide table.icons-inner {
+                display: inline-block !important;
+              }
+        
+              .icons-inner {
+                text-align: center;
+              }
+        
+              .icons-inner td {
+                margin: 0 auto;
+              }
+        
+              .row-content {
+                width: 100% !important;
+              }
+        
+              .mobile_hide {
+                display: none;
+              }
+        
+              .stack .column {
+                width: 100%;
+                display: block;
+              }
+        
+              .mobile_hide {
+                min-height: 0;
+                max-height: 0;
+                max-width: 0;
+                overflow: hidden;
+                font-size: 0px;
+              }
+        
+              .desktop_hide,
+              .desktop_hide table {
+                display: table !important;
+                max-height: none !important;
+              }
+            }
+          </style>
         </head>
-        <body>
-          <center class="wrapper" data-link-color="#1188E6" data-body-style="font-size:14px; font-family:inherit; color:#000000; background-color:#FFFFFF;">
-            <div class="webkit">
-              <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#FFFFFF">
-                <tr>
-                  <td valign="top" bgcolor="#FFFFFF" width="100%">
-                    <table width="100%" role="content-container" class="outer" align="center" cellpadding="0" cellspacing="0" border="0">
-                      <tr>
-                        <td width="100%">
-                          <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                            <tr>
-                              <td>
-                                <!--[if mso]>
-        <center>
-        <table><tr><td width="600">
-      <![endif]-->
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px;" align="center">
-                                          <tr>
-                                            <td role="modules-container" style="padding:0px 0px 0px 0px; color:#000000; text-align:left;" bgcolor="#FFFFFF" width="100%" align="left"><table class="module preheader preheader-hide" role="module" data-type="preheader" border="0" cellpadding="0" cellspacing="0" width="100%" style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
+        <body style="background-color: #f8f8f9; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
+        <table border="0" cellpadding="0" cellspacing="0" class="nl-container" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f8f8f9;" width="100%">
+        <tbody>
         <tr>
-          <td role="module-content">
-            <p></p>
-          </td>
+        <td>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #1aa19c;" width="100%">
+        <tbody>
+        <tr>
+        <td>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; background-color: #1aa19c; width: 640px;" width="640">
+        <tbody>
+        <tr>
+        <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0" class="divider_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+        <tr>
+        <td class="pad">
+        <div align="center" class="alignment">
+        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+        <tr>
+        <td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 4px solid #1AA19C;"><span> </span></td>
         </tr>
-      </table><table class="wrapper" role="module" data-type="image" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="7a8a420f-bc0f-4307-bd09-412a5ff00998">
-        <tbody>
-          <tr>
-            <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="center">
-              <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px; max-width:100% !important; width:100%; height:auto !important;" width="600" alt="" data-proportionally-constrained="true" data-responsive="true" src="http://cdn.mcauto-images-production.sendgrid.net/954c252fedab403f/93a17c3c-cf4b-40a6-9cae-ff0c223945a4/600x56.png">
-            </td>
-          </tr>
+        </table>
+        </div>
+        </td>
+        </tr>
+        </table>
+        </td>
+        </tr>
         </tbody>
-      </table><table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" role="module" data-type="columns" style="padding:0px 0px 0px 0px;" bgcolor="#FFFFFF" data-distribution="1">
-        <tbody>
-          <tr role="module-content">
-            <td height="100%" valign="top"><table width="600" style="width:600px; border-spacing:0; border-collapse:collapse; margin:0px 0px 0px 0px;" cellpadding="0" cellspacing="0" align="left" border="0" bgcolor="" class="column column-0">
-          <tbody>
-            <tr>
-              <td style="padding:0px;margin:0px;border-spacing:0;"><table class="module" role="module" data-type="divider" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="0439ab5b-e48d-4678-b644-de6e5a115565">
-        <tbody>
-          <tr>
-            <td style="padding:0px 0px 0px 0px;" role="module-content" height="100%" valign="top" bgcolor="">
-              <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" height="7px" style="line-height:7px; font-size:7px;">
-                <tbody>
-                  <tr>
-                    <td style="padding:0px 0px 7px 0px;" bgcolor="#ffffff"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
+        </table>
+        </td>
+        </tr>
         </tbody>
-      </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="8bf615c1-3087-4199-9d84-e16fd7210583" data-mc-module-version="2019-10-22">
+        </table>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tbody>
-          <tr>
-            <td style="padding:18px 0px 18px 0px; line-height:nullpx; text-align:inherit; background-color:#e9d2d2;" height="100%" valign="top" bgcolor="#e9d2d2" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="font-family: &quot;trebuchet ms&quot;, helvetica, sans-serif; font-size: 48px; color: #ff0000"><strong>OFFTHEWEB</strong></span></div><div></div></div></td>
-          </tr>
-        </tbody>
-      </table></td>
-            </tr>
-          </tbody>
-        </table></td>
-          </tr>
-        </tbody>
-      </table><table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" role="module" data-type="columns" style="padding:50px 5px 0px 5px;" bgcolor="#fff7ea" data-distribution="1">
+        <tr>
+        <td>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000000; border-radius: 0; width: 640px;" width="640">
         <tbody>
-          <tr role="module-content">
-            <td height="100%" valign="top"><table width="550" style="width:550px; border-spacing:0; border-collapse:collapse; margin:0px 10px 0px 10px;" cellpadding="0" cellspacing="0" align="left" border="0" bgcolor="" class="column column-0">
-          <tbody>
-            <tr>
-              <td style="padding:0px;margin:0px;border-spacing:0;"><table class="wrapper" role="module" data-type="image" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="550f2fb7-70c1-463b-9758-84b6d731ca56">
+        <tr>
+        <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+        <tr>
+        <td class="pad" style="width:100%;text-align:center;padding-top:15px;padding-right:10px;padding-left:10px;">
+        <h1 style="margin: 0; color: #f80909; font-size: 30px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: 2px; margin-top: 0; margin-bottom: 0;"><strong><span class="tinyMce-placeholder">OFFTHEWEB</span></strong></h1>
+        </td>
+        </tr>
+        </table>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tbody>
-          <tr>
-            <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="center">
-              <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px;" width="162" alt="" data-proportionally-constrained="true" data-responsive="false" src="http://cdn.mcauto-images-production.sendgrid.net/954c252fedab403f/27050768-0978-4ce8-8ad0-fa01a1949374/162x34.png" height="34">
-            </td>
-          </tr>
-        </tbody>
-      </table><table class="module" role="module" data-type="spacer" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="d8a6da06-629b-4b1f-a750-84744e679927">
+        <tr>
+        <td>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; background-color: #fff; width: 640px;" width="640">
         <tbody>
-          <tr>
-            <td style="padding:0px 0px 20px 0px;" role="module-content" bgcolor="">
-            </td>
-          </tr>
+        <tr>
+        <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0" class="divider_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+        <tr>
+        <td class="pad" style="padding-left:15px;padding-right:15px;padding-top:10px;">
+        <div align="center" class="alignment">
+        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+        <tr>
+        <td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 4px solid #220303;"><span> </span></td>
+        </tr>
+        </table>
+        </div>
+        </td>
+        </tr>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0" class="text_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+        <tr>
+        <td class="pad" style="padding-bottom:10px;padding-left:40px;padding-right:40px;padding-top:25px;">
+        <div style="font-family: Arial, sans-serif">
+        <div class="" style="font-size: 12px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #555555; line-height: 1.2;">
+        <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 19.2px;"><span style="font-size:22px;color:#2b303a;"><strong>Forgot Your Password?</strong></span></p>
+        </div>
+        </div>
+        </td>
+        </tr>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0" class="text_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+        <tr>
+        <td class="pad" style="padding-bottom:10px;padding-left:40px;padding-right:40px;padding-top:10px;">
+        <div style="font-family: sans-serif">
+        <div class="" style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 18px; color: #555555; line-height: 1.5;">
+        <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;"><strong>Click the Reset Password button to reset the password</strong><br/>Link is valid for 5 minutes.</p>
+        </div>
+        </div>
+        </td>
+        </tr>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0" class="button_block block-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+        <tr>
+        <td class="pad" style="padding-left:10px;padding-right:10px;padding-top:15px;text-align:center;">
+        <div align="center" class="alignment"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:62px;width:210px;v-text-anchor:middle;" arcsize="57%" stroke="false" fillcolor="#f7a50c"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a href="http://offtheweb.in/changepassword/${token}" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f7a50c;border-radius:35px;width:auto;border-top:0px solid transparent;font-weight:undefined;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:15px;padding-bottom:15px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:30px;padding-right:30px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="margin: 0; word-break: break-word; line-height: 32px;"><strong>RESET PASSWORD</strong></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+        </td>
+        </tr>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0" class="divider_block block-5" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+        <tr>
+        <td class="pad" style="padding-bottom:12px;padding-top:25px;">
+        <div align="center" class="alignment">
+        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+        <tr>
+        <td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 0px solid #BBBBBB;"><span> </span></td>
+        </tr>
+        </table>
+        </div>
+        </td>
+        </tr>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0" class="text_block block-6" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+        <tr>
+        <td class="pad" style="padding-bottom:10px;padding-left:40px;padding-right:40px;padding-top:10px;">
+        <div style="font-family: sans-serif">
+        <div class="" style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 18px; color: #555555; line-height: 1.5;">
+        <p style="margin: 0; mso-line-height-alt: 18px;">If you did not request a password change, please contact us IMMEDIATELY so we can keep your account secure.</p>
+        <p style="margin: 0; mso-line-height-alt: 18px;"> </p>
+        <p style="margin: 0; mso-line-height-alt: 18px;">Contact Us at -<br/><a href="https://u24411844.ct.sendgrid.net/ls/click?upn=wn5VxQNDmL2KF-2BV1yfDiZLHBjPHpMGYpg7meDsSuIgti9TvmiARPN-2FfxRo7zg8KuSMdt_9-2FeLDb2w2xTsdHAxqgMnnsxTzRtJFSLtY-2FRonIwZ2Rvd-2BtlyFadMfGHIW8Aspm59A1dxSvP1hH6AljT1Jih0BBIY6JEEnLQ3G3o5KV-2F4V-2BUPjvi2LUWFC8AFv-2BokH1pDFdJjh7KPTgQm0kp-2FGq3n7FbEcRHBZMvl5I1ap2s-2Bbsw3J1DKFN6EL6bIyVssecoGcgSgS9g-2B5cHVvbc6bB81fDDNvXXpUozbipWY-2F4O-2Bgzg-3D" rel="noopener" style="text-decoration: underline; color: #e91414;" target="_blank">https://www.offtheweb.in/contact</a></p>
+        <p style="margin: 0; mso-line-height-alt: 18px;">or Email at<br/><a href="mailto:official.offtheweb@gmail.com" rel="noopener" style="text-decoration: underline; color: #e91414;" target="_blank">official.offtheweb@gmail.com</a></p>
+        <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;"><br/><br/></p>
+        </div>
+        </div>
+        </td>
+        </tr>
+        </table>
+        </td>
+        </tr>
         </tbody>
-      </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="b16a4afb-f245-4156-968e-8080176990ea" data-mc-module-version="2019-10-22">
+        </table>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tbody>
-          <tr>
-            <td style="padding:18px 40px 0px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit"><span style="color: #00634a; font-size: 24px">We received a request to reset your &nbsp;password.</span></div><div></div></div></td>
-          </tr>
-        </tbody>
-      </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="b16a4afb-f245-4156-968e-8080176990ea.1" data-mc-module-version="2019-10-22">
+        <tr>
+        <td>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000000; border-radius: 0; width: 640px;" width="640">
         <tbody>
-          <tr>
-            <td style="padding:18px 40px 10px 0px; line-height:25px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div style="font-family: inherit; text-align: inherit"><span style="color: #00634a"><strong>Protecting your data is important to us.</strong></span></div>
-            <div style="font-family: inherit; text-align: inherit"><span style="color: #00634a"><strong>Open the link to reset the password</strong><br/>Link is valid for 5 minutes only.</span></div>
-            <div style="font-family: inherit; text-align: center; margin-top: 20px"><span style="color: #635d00; font-size: 24px"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></span><span style="color: #00634a; font-size: 24px"><strong>&nbsp;</strong></span></div></td>
-          </tr>
+        <tr>
+        <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+        <div class="spacer_block block-1" style="height:1px;line-height:1px;font-size:1px;"> </div>
+        </td>
+        </tr>
         </tbody>
-      </table><table class="module" role="module" data-type="spacer" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="c97177b8-c172-4c4b-b5bd-7604cde23e3f">
+        </table>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-5" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tbody>
-          <tr>
-            <td style="padding:0px 0px 10px 0px;" role="module-content" bgcolor="">
-            </td>
-          </tr>
-        </tbody>
-      </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="e4fd0309-df1b-4119-90b4-54e908c2459e" data-mc-module-version="2019-10-22">
+        <tr>
+        <td>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000000; border-radius: 0; width: 640px;" width="640">
         <tbody>
-          <tr>
-            <td style="padding:18px 10px 18px 10px; line-height:15px; text-align:left; background-color:#0c4819;" height="100%" valign="top" bgcolor="#0c4819" role="module-content"><div><div style="font-family: inherit; text-align: left"><span style="font-family: &quot;trebuchet ms&quot;, helvetica, sans-serif; font-size: 15px; color: white"><a href="http://offtheweb.in/changepassword/${token}"> https://www.offtheweb.in/changepassword/${token} </a><br/><br/></span></div><div></div></div></td>
-          </tr>
+        <tr>
+        <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #410125; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+        <table border="0" cellpadding="15" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+        <tr>
+        <td class="pad">
+        <div style="color:#ffffff;font-size:10px;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-weight:400;line-height:120%;text-align:center;direction:ltr;letter-spacing:0px;mso-line-height-alt:12px;">
+        <p style="margin: 0; margin-bottom: 5px;">OFFTHEWEB Copyright © 2023</p>
+        <p style="margin: 0; margin-bottom: 5px;">Want to stop receiving these emails?</p>
+        <p style="margin: 0;"><a href="" rel="noopener" style="text-decoration: underline; color: #53bcfa;" target="_blank">Unsubscribe</a></p>
+        </div>
+        </td>
+        </tr>
+        </table>
+        </td>
+        </tr>
         </tbody>
-      </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="b16a4afb-f245-4156-968e-8080176990ea.1.1" data-mc-module-version="2019-10-22">
+        </table>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-6" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tbody>
-          <tr>
-            <td style="padding:18px 10px 10px 0px; line-height:18px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit"><span style="color: #00634a">If you did not request a password change, please contact us</span></div>
-    <div style="font-family: inherit; text-align: inherit"><span style="color: #00634a">IMMEDIATELY so we can keep your account secure.</span></div>
-    <div style="font-family: inherit; text-align: inherit"><span style="color: #00634a"><br>
-    </span></div>
-    <div style="font-family: inherit; text-align: inherit"><span style="color: #00634a">Contact Us at - <br/> <a href="https://www.offtheweb.in/contact"> https://www.offtheweb.in/contact </a></span></div>
-    <div style="font-family: inherit; text-align: inherit"><span style="color: #00634a">or Email at <br/> official.offtheweb@gmail.com</span></div><div></div></div></td>
-          </tr>
-        </tbody>
-      </table><table class="module" role="module" data-type="spacer" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="c97177b8-c172-4c4b-b5bd-7604cde23e3f.1.1">
+        <tr>
+        <td>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 640px;" width="640">
         <tbody>
-          <tr>
-            <td style="padding:0px 0px 80px 0px;" role="module-content" bgcolor="">
-            </td>
-          </tr>
+        <tr>
+        <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0" class="icons_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+        <tr>
+        <td class="pad" style="vertical-align: middle; color: #9d9d9d; font-family: inherit; font-size: 15px; padding-bottom: 5px; padding-top: 5px; text-align: center;">
+        <table cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+        <tr>
+        <td class="alignment" style="vertical-align: middle; text-align: center;"><!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
+        </td>
+        </tr>
+        </table>
+        </td>
+        </tr>
+        </table>
+        </td>
+        </tr>
         </tbody>
-      </table></td>
-            </tr>
-          </tbody>
-        </table></td>
-          </tr>
+        </table>
+        </td>
+        </tr>
         </tbody>
-      </table><table class="module" role="module" data-type="divider" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="38ec2680-c847-4765-8c5f-aa2aba19a2b3">
-        <tbody>
-          <tr>
-            <td style="padding:0px 0px 0px 0px;" role="module-content" height="100%" valign="top" bgcolor="">
-              <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" height="7px" style="line-height:7px; font-size:7px;">
-                <tbody>
-                  <tr>
-                    <td style="padding:0px 0px 7px 0px;" bgcolor="#ffffff"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
+        </table>
+        </td>
+        </tr>
         </tbody>
-      </table><table class="wrapper" role="module" data-type="image" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="7a8a420f-bc0f-4307-bd09-412a5ff00998.1">
-        <tbody>
-          <tr>
-            <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="center">
-              <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px; max-width:100% !important; width:100%; height:auto !important;" width="600" alt="" data-proportionally-constrained="true" data-responsive="true" src="http://cdn.mcauto-images-production.sendgrid.net/954c252fedab403f/93a17c3c-cf4b-40a6-9cae-ff0c223945a4/600x56.png">
-            </td>
-          </tr>
-        </tbody>
-      </table></td>
-                                          </tr>
-                                        </table>
-                                        <!--[if mso]>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </center>
-                                <![endif]-->
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </center>
+        </table><!-- End -->
         </body>
+        </html>
           `,
       };
       sgMail

@@ -32,7 +32,6 @@ db.once("open", function () {
 });
 
 app.use(express.static(path.join(__dirname, "./frontend/build")));
-
 app.use("/api", blogRoute);
 // app.use("/api/uploads", uploadRouter);
 // app.use("/api/seller", sellerRoutes);
@@ -42,10 +41,10 @@ app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "./frontend/build/index.html"))
 );
 
-app.post("/api", async (req, res) => {
-  console.log("test");
-  res.send("working");
-});
+// app.post("/api", async (req, res) => {
+//   console.log("test");
+//   res.send("working");
+// });
 
 const httpServer = http.Server(app);
 httpServer.listen(PORT, () => {
