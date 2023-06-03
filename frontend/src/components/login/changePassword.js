@@ -43,9 +43,10 @@ const ChangePassword = ({ message }) => {
       if (data.status === 200) {
         closeMessage(message, data.msg, "success");
         navigate("/login", { replace: true });
-      } else {
+      } else if (data.status === 404) {
         closeMessage(message, data.msg, "error");
-      }
+        navigate("/login", { replace: true });
+      } else closeMessage(message, data.msg, "error");
     } else {
       closeMessage(message, "Password Mismatch", "error");
     }
