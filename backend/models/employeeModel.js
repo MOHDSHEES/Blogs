@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 import { customAlphabet } from "nanoid";
-let employeeId = customAlphabet("1234567890", 10);
+let nanoid = customAlphabet("1234567890", 10);
 const employeeSchema = new mongoose.Schema({
   employeeId: {
     type: String,
     required: true,
-    default: () => employeeId,
+    default: () => nanoid(),
     index: { unique: true },
   },
   email: { type: String, unique: true, required: true },
