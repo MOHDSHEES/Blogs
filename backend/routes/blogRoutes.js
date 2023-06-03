@@ -710,7 +710,7 @@ router.post("/add/employee/sendemail", async (req, res) => {
     <p style="margin: 0; mso-line-height-alt: 18px;"> </p>
     <p style="margin: 0; mso-line-height-alt: 18px;">We hope this email finds you well. We are writing to congratulate you on successfully joining our company as a valued team member. We are thrilled to have you on board and look forward to your contributions.</p>
     <p style="margin: 0; mso-line-height-alt: 18px;"> </p>
-    <p style="margin: 0; mso-line-height-alt: 18px;">To ensure a smooth onboarding process, it is important that you complete the registration process by clicking the below register button:</p>
+    <p style="margin: 0; mso-line-height-alt: 18px;">To ensure a smooth onboarding process, it is important that you complete the registration process by clicking the register button:</p>
     </div>
     </div>
     </td>
