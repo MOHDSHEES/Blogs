@@ -8,7 +8,8 @@ import { message } from "antd";
 import axios from "axios";
 import { closeMessage, openMessage } from "./functions/message";
 import Footer from "./footer/footer";
-const CompleteNavbarAndFooter = ({ trend, cate }) => {
+
+const CompleteNavbarAndFooter = ({ cate, recent }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   async function searchHandler(search) {
@@ -38,7 +39,7 @@ const CompleteNavbarAndFooter = ({ trend, cate }) => {
   return (
     <div>
       {contextHolder}
-      <Topbar trend={trend} />
+      <Topbar trend={recent} />
       <NavBar searchHandler={searchHandler} />
       <Outlet />
       <Footer cate={cate} />

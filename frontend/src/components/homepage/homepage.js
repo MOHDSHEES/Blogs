@@ -46,7 +46,7 @@ const Homepage = ({ recent, trend, cate, categoryData }) => {
 
       <div style={{ padding: "1rem 15px" }} class="container-fluid ">
         <div style={{ padding: "0" }} class="container">
-          <TopCarousel data={blogs} />
+          <TopCarousel data={trend} />
           <MainImgSlider data={blogs} cate={cate} />
           <Featured trend={trend} />
           <div class="pt-3">

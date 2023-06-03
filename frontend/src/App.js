@@ -69,14 +69,16 @@ function App() {
   // finding categories
   const [categories, setcategories] = useState(staticCategories);
   useEffect(() => {
-    (async () => {
-      // setloading(true);
-      const { data } = await axios.post("/api/find/categories");
-      // console.log(data);
-      if (data && data.length) setcategories(data);
-      // setloading(false);
-    })();
-  }, []);
+    if (recentBlogs && trending) {
+      (async () => {
+        // setloading(true);
+        const { data } = await axios.post("/api/find/categories");
+        // console.log(data);
+        if (data && data.length) setcategories(data);
+        // setloading(false);
+      })();
+    }
+  }, [recentBlogs, trending]);
 
   function ScrollToTop() {
     const { pathname } = useLocation();
@@ -95,7 +97,7 @@ function App() {
         <Route
           path="/"
           element={
-            <CompleteNavbarAndFooter cate={categories} trend={trending} />
+            <CompleteNavbarAndFooter cate={categories} recent={recentBlogs} />
           }
         >
           <Route
