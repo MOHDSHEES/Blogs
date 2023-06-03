@@ -21,6 +21,7 @@ import Admin from "./components/admin/admin";
 import { staticCategories } from "./data";
 import ChangePassword from "./components/login/changePassword";
 import { globalContext } from "./context";
+import EmployeeRegister from "./components/login/employeeRegister";
 
 // import Sidebar from "./components/sidebar";
 
@@ -108,6 +109,10 @@ function App() {
             />
             <Route path="/signup" element={<Signup message={messageApi} />} />
             <Route path="/login" element={<Login message={messageApi} />} />
+            <Route
+              path="/employee/registration/:token"
+              element={<EmployeeRegister message={messageApi} />}
+            />
             <Route
               path="/changepassword/:token"
               element={<ChangePassword message={messageApi} />}

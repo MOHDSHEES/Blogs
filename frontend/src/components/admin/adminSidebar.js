@@ -1,6 +1,8 @@
 import React from "react";
+import { useState } from "react";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AddEmployee from "./addEmployee";
 
 const AdminSidebar = ({ isAdmin }) => {
   const headerToggle = useRef();
@@ -22,6 +24,7 @@ const AdminSidebar = ({ isAdmin }) => {
     localStorage.removeItem("token");
     navigate("/", { replace: true });
   }
+  const [modalShow, setModalShow] = useState(false);
   return (
     <div>
       <div ref={bodyPd} id="body-pd">
@@ -60,13 +63,14 @@ const AdminSidebar = ({ isAdmin }) => {
                 {/* <i class="bx bx-layer nav_logo-icon"></i>{" "} */}
                 <span class="nav_logo-name">Off The Web</span>{" "}
               </a>
-              {/* <div class="nav_list">
-                <Link class="nav_link">
+              <div class="nav_list">
+                <Link onClick={() => setModalShow(true)} class="nav_link">
                   {" "}
-                  <i class="bx bx-heading nav_icon"></i>{" "}
-                  <span class="nav_name">Heading</span>{" "}
+                  <i class="bx bx-user-plus nav_icon"></i>{" "}
+                  {/* <i class="bx bx-heading "></i> */}
+                  <span class="nav_name">Add Employee/Intern</span>{" "}
                 </Link>{" "}
-              </div> */}
+              </div>
             </div>{" "}
             {/* <div>
               <Link onClick={onClickEdit} class="nav_link">
@@ -77,6 +81,7 @@ const AdminSidebar = ({ isAdmin }) => {
             </div> */}
           </nav>
         </div>
+        <AddEmployee show={modalShow} onHide={() => setModalShow(false)} />
         {/* <div class="height-100 bg-light">
           <Form />
         </div> */}
