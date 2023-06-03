@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
-import { nanoid } from "nanoid";
+import { customAlphabet } from "nanoid";
 
 const employeeSchema = new mongoose.Schema({
-  _id: {
+  employeeId: {
     type: String,
-    default: () => nanoid(7),
+    required: true,
+    default: () => customAlphabet("1234567890", 10),
+    index: { unique: true },
   },
   email: { type: String, unique: true, required: true },
   name: { type: String, required: true },
