@@ -734,7 +734,7 @@ router.post("/add/employee/sendemail", async (req, res) => {
     <p style="margin: 0; mso-line-height-alt: 18px;">OFFTHEWEB</p>
     <p style="margin: 0; mso-line-height-alt: 18px;"> </p>
     <p style="margin: 0; mso-line-height-alt: 18px;"><strong>Note</strong>: Your Data security is our priority. It will only be used to keep the record. We will not disclose or share you data with anyone.</p>
-    <p style="margin: 0; mso-line-height-alt: 18px;">Link is valid for only one Employee/Intern and can not be used again. </p>
+    <p style="margin: 0; mso-line-height-alt: 18px;">Link is valid for only one Employee/Intern and can not be used again. </p><br/><p style="margin: 0; mso-line-height-alt: 18px;">Contact us: <a href="https://www.offtheweb.in/contact">https://www.offtheweb.in/contact</p>
     <p style="margin: 0; mso-line-height-alt: 18px;"> </p>
     <p style="margin: 0; font-size: 12px; mso-line-height-alt: 18px;"> </p>
     </div>
