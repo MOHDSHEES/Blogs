@@ -39,7 +39,7 @@ app.use("/api", blogRoute);
 // app.use("/api/payment", paymentRoutes);
 
 app.get("*", (req, res) => {
-  res.set("Cache-Control", "no-store");
+  // res.set("Cache-Control", "no-store");
   res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
 });
 
