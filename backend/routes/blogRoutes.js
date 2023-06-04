@@ -469,7 +469,7 @@ router.post("/change/password", verifyPasswordToken, async (req, res) => {
         { password: req.body.password }
       );
       // console.log(update);
-      if (update.acknowledged && update.modifiedCount) {
+      if (update.acknowledged) {
         res.json({ status: 200, msg: "Password reset sucessfully" });
       }
     } else {
@@ -1081,7 +1081,6 @@ router.post("/forgetPassword", async (req, res) => {
       { email: email },
       { email: 1, password: 1 }
     );
-
     // console.log(userDetails);
     if (userDetails) {
       // res.send(userDetails._doc);
@@ -1409,7 +1408,7 @@ router.post("/forgetPassword", async (req, res) => {
           });
         })
         .catch((error) => {
-          //   console.log(error);
+          // console.log(error);
           res.send({
             status: 500,
             success: false,

@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { useState } from "react";
 import { message } from "antd";
-import { closeMessage } from "../functions/message";
+import { closeMessage, openMessage } from "../functions/message";
 
 const ForgetPassword = (props) => {
   const [email, setEmail] = useState("");
@@ -19,25 +19,30 @@ const ForgetPassword = (props) => {
   const [validated, setValidated] = useState(false);
   const [isValid, setisValid] = useState(true);
   const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     } else {
+      openMessage(messageApi, "Sending...");
+      setDisabled(true);
       const { data } = await axios.post("/api/forgetPassword", {
         email: email,
       });
-
       if (data.success) {
         closeMessage(messageApi, data.message, "success");
         props.onHide();
       } else {
+        closeMessage(messageApi, data.message, "success");
         setError(data.message);
         setisValid(false);
       }
+      setDisabled(false);
       // console.log(data);
     }
 
@@ -88,7 +93,9 @@ const ForgetPassword = (props) => {
               {error}
             </Form.Control.Feedback>
             <Modal.Footer>
-              <Button type="submit">Send Email</Button>
+              <Button disabled={disabled} type="submit">
+                Send Email
+              </Button>
               <Button variant="secondary" onClick={props.onHide}>
                 Close
               </Button>

@@ -9,6 +9,7 @@ import axios from "axios";
 const AddEmployee = (props) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [validated, setValidated] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   //   const [isValid, setisValid] = useState(true);
   //   const [error, setError] = useState(null);
 
@@ -39,6 +40,8 @@ const AddEmployee = (props) => {
       event.preventDefault();
       event.stopPropagation();
     } else {
+      setDisabled(true);
+      closeMessage(messageApi, "Sending...");
       const { data } = await axios.post("/api/add/employee/sendemail", {
         state: state,
       });
@@ -52,6 +55,7 @@ const AddEmployee = (props) => {
         // setisValid(false);
       }
       // console.log(data);
+      setDisabled(false);
     }
 
     setValidated(true);
@@ -150,7 +154,9 @@ const AddEmployee = (props) => {
               {error}
             </Form.Control.Feedback> */}
             <Modal.Footer>
-              <Button type="submit">Send Email</Button>
+              <Button disabled={disabled} type="submit">
+                Send Email
+              </Button>
               <Button variant="secondary" onClick={props.onHide}>
                 Close
               </Button>
