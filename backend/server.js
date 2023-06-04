@@ -38,8 +38,7 @@ app.use("/api", blogRoute);
 // app.use("/api", emailRoutes);
 // app.use("/api/payment", paymentRoutes);
 
-app.get("*", (req, res) => {
-  res.set("Cache-Control", "no-store");
+app.get("*/?1", (req, res) => {
   res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
 });
 
