@@ -100,9 +100,6 @@ const NavBar = ({ searchHandler }) => {
                   {/* <Nav.Link href="#" className="nav-item ">
                     Single Blog
                   </Nav.Link> */}
-                  <Nav.Link to="/contact" class="nav-item ">
-                    Test
-                  </Nav.Link>
                   <Nav.Link
                     onClick={() => setExpanded(false)}
                     as={NavLink}
