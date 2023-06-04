@@ -5,6 +5,7 @@ import http from "http";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import blogRoute from "./routes/blogRoutes.js";
+import nocache from "nocache";
 // import uploadRouter from "./routes/uploadRouter.js";
 // import sellerRoutes from "./routes/sellerRoutes.js";
 // import emailRoutes from "./routes/emailRoutes.js";
@@ -17,6 +18,7 @@ const __dirname = path.resolve();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(nocache());
 
 dotenv.config();
 const mongodbUrl = process.env.MONGODB_URL;
