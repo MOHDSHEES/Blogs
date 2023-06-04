@@ -97,9 +97,9 @@ const NavBar = ({ searchHandler }) => {
                   >
                     Categories
                   </Nav.Link>
-                  <Nav.Link href="#" className="nav-item ">
+                  {/* <Nav.Link href="#" className="nav-item ">
                     Single Blog
-                  </Nav.Link>
+                  </Nav.Link> */}
                   <Nav.Link
                     onClick={() => setExpanded(false)}
                     as={NavLink}
