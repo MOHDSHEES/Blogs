@@ -126,9 +126,9 @@ const NavBar = ({ searchHandler }) => {
                       Privacy Policies
                     </NavDropdown.Item>
                     {/* <NavDropdown.Divider /> */}
-                    {/* <NavDropdown.Item onClick={() => setExpanded(false)}>
+                    <NavDropdown.Item onClick={() => setExpanded(false)}>
                       Testing
-                    </NavDropdown.Item> */}
+                    </NavDropdown.Item>
                     <NavDropdown.Item
                       onClick={() => setExpanded(false)}
                       as={NavLink}

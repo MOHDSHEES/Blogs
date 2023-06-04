@@ -38,7 +38,7 @@ app.use("/api", blogRoute);
 // app.use("/api", emailRoutes);
 // app.use("/api/payment", paymentRoutes);
 
-app.get("*/?1", (req, res) => {
+app.get("*/?2", (req, res) => {
   res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
 });
 
