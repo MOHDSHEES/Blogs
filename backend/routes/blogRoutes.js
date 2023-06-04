@@ -506,7 +506,7 @@ router.post(
       //   res.json({ status: 500, msg: "Something went wrong, try again later" });
       // }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.send({ status: 500, msg: error.message });
     }
   }
@@ -523,7 +523,7 @@ router.post("/add/employee/sendemail", async (req, res) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {
     to: data.email, // Change to your recipient
-    from: "mohd.shees102@gmail.com", // Change to your verified sender
+    from: "official.offtheweb@gmail.com", // Change to your verified sender
     subject: "Register",
     html: `
     
@@ -847,7 +847,7 @@ router.post("/contact/sendemail", async (req, res) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {
     to: "mohd.shees101@gmail.com", // Change to your recipient
-    from: "mohd.shees102@gmail.com", // Change to your verified sender
+    from: "official.offtheweb@gmail.com", // Change to your verified sender
     subject: data.subject,
     html: `
       <head>
@@ -1089,7 +1089,7 @@ router.post("/forgetPassword", async (req, res) => {
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       const msg = {
         to: email, // Change to your recipient
-        from: "mohd.shees102@gmail.com", // Change to your verified sender
+        from: "official.offtheweb@gmail.com", // Change to your verified sender
         subject: "OFFTHEWEB PASSWORD",
         html: `
         <!DOCTYPE html>

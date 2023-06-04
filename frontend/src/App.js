@@ -22,6 +22,7 @@ import { staticCategories } from "./data";
 import ChangePassword from "./components/login/changePassword";
 import { globalContext } from "./context";
 import EmployeeRegister from "./components/login/employeeRegister";
+import PrintCertificate from "./components/printCertificate";
 
 // import Sidebar from "./components/sidebar";
 
@@ -103,6 +104,10 @@ function App() {
         {contextHolder}
         <Routes>
           <Route path="/" element={<CompleteNavbarAndFooter />}>
+            {/* <Route
+              path="/print"
+              element={<PrintCertificate message={messageApi} />}
+            /> */}
             <Route
               path="/"
               element={<Homepage categoryData={categoryData} />}
