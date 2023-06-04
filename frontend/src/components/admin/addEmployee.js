@@ -23,7 +23,7 @@ const AddEmployee = (props) => {
     const { name, value } = event.target;
     setstate({
       ...state,
-      [name]: value.trim(),
+      [name]: value,
     });
   };
   function clear() {

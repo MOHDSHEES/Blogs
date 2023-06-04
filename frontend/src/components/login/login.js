@@ -16,6 +16,7 @@ const Login = ({ message }) => {
       [name]: value.trim(),
     });
   };
+
   let navigate = useNavigate();
   async function submitHandler(e) {
     e.preventDefault();
