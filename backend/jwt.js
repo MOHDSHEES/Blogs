@@ -58,7 +58,12 @@ const verifyPasswordToken = (req, res, next) => {
 // get token for employee registration link
 const getEmployeeToken = (user) => {
   return jwt.sign(
-    { email: user.email, post: user.post, joiningDate: user.joiningDate },
+    {
+      email: user.email,
+      post: user.post,
+      joiningDate: user.joiningDate,
+      jobType: user.jobType,
+    },
     process.env.JWT_SECRET,
     {
       expiresIn: "864000s",

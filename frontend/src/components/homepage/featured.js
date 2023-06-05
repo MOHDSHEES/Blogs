@@ -98,7 +98,12 @@ const Featured = () => {
                     <div class="mb-1" style={{ fontSize: "13px" }}>
                       <Link
                         class="text-white"
-                        to={"/blog/" + blog._id + "/" + blog.title}
+                        to={
+                          "/blog/" +
+                          blog._id +
+                          "/" +
+                          blog.title.replace(/ /g, "-")
+                        }
                         state={blog}
                       >
                         {blog.category}
@@ -106,7 +111,12 @@ const Featured = () => {
                       <span class="px-1 text-white">/</span>
                       <Link
                         class="text-white"
-                        to={"/blog/" + blog._id + "/" + blog.title}
+                        to={
+                          "/blog/" +
+                          blog._id +
+                          "/" +
+                          blog.title.replace(/ /g, "-")
+                        }
                         state={blog}
                       >
                         Views: {blog.views}
@@ -114,7 +124,12 @@ const Featured = () => {
                     </div>
                     <Link
                       class="h4 m-0 text-white"
-                      to={"/blog/" + blog._id + "/" + blog.title}
+                      to={
+                        "/blog/" +
+                        blog._id +
+                        "/" +
+                        blog.title.replace(/ /g, "-")
+                      }
                       state={blog}
                     >
                       {blog.title}

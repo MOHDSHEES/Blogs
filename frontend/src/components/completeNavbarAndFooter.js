@@ -23,9 +23,12 @@ const CompleteNavbarAndFooter = () => {
     if (data.length) {
       closeMessage(messageApi, "Blog found", "success");
       const blog = data[0];
-      navigate("/blog/" + data[0]._id + "/" + data[0].title, {
-        state: blog,
-      });
+      navigate(
+        "/blog/" + data[0]._id + "/" + data[0].title.replace(/ /g, "-"),
+        {
+          state: blog,
+        }
+      );
     } else {
       closeMessage(
         messageApi,

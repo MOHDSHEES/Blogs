@@ -17,6 +17,7 @@ const AddEmployee = (props) => {
     email: "",
     joiningDate: "",
     post: "",
+    jobType: "",
   });
   const Inputchange = (event) => {
     setValidated(false);
@@ -27,7 +28,7 @@ const AddEmployee = (props) => {
     });
   };
   function clear() {
-    setstate({ email: "", joiningDate: "", post: "" });
+    setstate({ email: "", joiningDate: "", post: "", jobType: "" });
     setValidated(false);
     // setisValid(true);
   }
@@ -67,6 +68,7 @@ const AddEmployee = (props) => {
     // console.log(data);
   }
 
+  // console.log(state);
   //   async function verify(event) {
   //     console.log("in");
   //     const { data } = await axios.post(
@@ -119,6 +121,20 @@ const AddEmployee = (props) => {
               <Form.Control.Feedback type="invalid">
                 Enter Valid Email.
               </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGridState">
+              <Form.Label>Job Type</Form.Label>
+              <Form.Select
+                required
+                name="jobType"
+                value={state.jobType}
+                onChange={Inputchange}
+              >
+                <option value="">Choose...</option>
+                <option value="Intern">Intern</option>
+                <option value="Permanent Employee">Permanent Employee</option>
+                <option value="Part time Employee">Part time Employee</option>
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGridAddress2">
               <Form.Label>Enter the Post of Employee/Intern *</Form.Label>

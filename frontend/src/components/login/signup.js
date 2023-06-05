@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { message } from "antd";
 import { closeMessage } from "../functions/message";
+import Otp from "./otp";
 
 const Signup = ({ message }) => {
   const navigate = useNavigate();
@@ -25,21 +26,25 @@ const Signup = ({ message }) => {
   async function submitHandler(e) {
     e.preventDefault();
     if (state.password === cpassword) {
-      const { data } = await axios.post("/api/save/user", { detail: state });
-      //   console.log(data);
-      if (data && data.user && data.user._id) {
-        closeMessage(message, "Sucessfully Registered", "success");
-        localStorage.setItem("token", data.token);
-        navigate("/add", { replace: true });
-      } else if (data.user.msg.split(" ")[0] === "E11000") {
-        closeMessage(message, "Email Id already registered with us", "error");
-      } else {
-        closeMessage(message, data.user.msg, "error");
-      }
-    } else {
-      closeMessage(message, "Password Missmatch", "error");
-    }
+      if (isVerified) {
+        const { data } = await axios.post("/api/save/user", { detail: state });
+        //   console.log(data);
+        if (data && data.user && data.user._id) {
+          closeMessage(message, "Sucessfully Registered", "success");
+          localStorage.setItem("token", data.token);
+          navigate("/add", { replace: true });
+        } else if (data.user.msg.split(" ")[0] === "E11000")
+          closeMessage(message, "Email Id already registered with us", "error");
+        else closeMessage(message, data.user.msg, "error");
+      } else closeMessage(message, "Please verify email", "error");
+    } else closeMessage(message, "Password Missmatch", "error");
   }
+
+  // console.log(state);
+  // boolean hook (true if email is verified)
+  const [isVerified, setisVerified] = useState(false);
+  // boolean hook (true if signUp btn is disabled)
+  const [disable, setdisable] = useState(true);
   return (
     <div>
       {/* {contextHolder} */}
@@ -89,7 +94,7 @@ const Signup = ({ message }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="mb-4 ">
+                    {/* <div className="mb-4 ">
                       <div className="form-outline">
                         <input
                           type="email"
@@ -104,7 +109,16 @@ const Signup = ({ message }) => {
                           Email
                         </label>
                       </div>
-                    </div>
+                    </div> */}
+                    <Otp
+                      disable={setdisable}
+                      setstate={setstate}
+                      setisVerified={setisVerified}
+                      isVerified={isVerified}
+                      state={state}
+                    />
+
+                    {/*  */}
                     <div className="row">
                       <div className="col-md-6 mb-4 pb-2">
                         <div className="form-outline">
@@ -145,6 +159,7 @@ const Signup = ({ message }) => {
                       <input
                         className="btn btn-primary btn-lg"
                         type="submit"
+                        disabled={disable}
                         defaultValue="Submit"
                       />
                       <p className="mt-2">
