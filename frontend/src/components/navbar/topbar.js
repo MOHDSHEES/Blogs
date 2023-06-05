@@ -58,7 +58,12 @@ const Topbar = () => {
                         return (
                           <div key={blog._id} className="item break-line-1">
                             <Link
-                              to={"/blog/" + blog._id + "/" + blog.title}
+                              to={
+                                "/blog/" +
+                                blog._id +
+                                "/" +
+                                blog.title.replace(/ /g, "-")
+                              }
                               state={blog}
                               class="text-secondary"
                             >

@@ -10,6 +10,7 @@ const employeeSchema = new mongoose.Schema({
   },
   email: { type: String, unique: true, required: true },
   name: { type: String, required: true },
+  jobType: { type: String, required: true },
   address: { type: String, required: true },
   district: { type: String, required: true },
   post: { type: String, required: true },

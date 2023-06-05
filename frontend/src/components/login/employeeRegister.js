@@ -25,12 +25,14 @@ const EmployeeRegister = ({ message }) => {
         setEmail(data.email);
         setPost(data.post);
         setJoiningDate(data.joiningDate);
+        setJobType(data.jobType);
       }
     })();
   }, [token, navigate, message]);
   const [email, setEmail] = useState("");
   const [post, setPost] = useState("");
   const [joiningDate, setJoiningDate] = useState("");
+  const [jobType, setJobType] = useState("");
   const [state, setstate] = useState({
     name: "",
     gender: "",
@@ -51,8 +53,9 @@ const EmployeeRegister = ({ message }) => {
     const details = {
       ...state,
       email: email,
-      post: post,
+      post: post.trim(),
       joiningDate: joiningDate,
+      jobType: jobType,
     };
     const { data } = await axios.post("/api/save/employee", {
       details,
@@ -130,7 +133,21 @@ const EmployeeRegister = ({ message }) => {
                           readonly
                         />
                       </div>
-                      <div class="col-md-8">
+                      <div class="col-md-4">
+                        <label for="inputPassword4" class="form-label">
+                          Job Type *
+                        </label>
+                        <input
+                          type="text"
+                          value={jobType}
+                          // onChange={Inputchange}
+                          disabled
+                          readonly
+                          required
+                          class="form-control"
+                        />
+                      </div>
+                      <div class="col-md-4">
                         <label for="inputPassword4" class="form-label">
                           Full Name *
                         </label>

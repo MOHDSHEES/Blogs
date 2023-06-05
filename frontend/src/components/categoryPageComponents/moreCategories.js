@@ -30,7 +30,12 @@ const MoreCategories = ({ blog }) => {
                 >
                   <div class="mb-1" style={{ fontSize: "13px" }}>
                     <Link
-                      to={"/blog/" + blog._id + "/" + blog.title}
+                      to={
+                        "/blog/" +
+                        blog._id +
+                        "/" +
+                        blog.title.replace(/ /g, "-")
+                      }
                       state={blog}
                     >
                       {blog.category}
@@ -39,7 +44,9 @@ const MoreCategories = ({ blog }) => {
                     <span>{blog.createdDate}</span>
                   </div>
                   <Link
-                    to={"/blog/" + blog._id + "/" + blog.title}
+                    to={
+                      "/blog/" + blog._id + "/" + blog.title.replace(/ /g, "-")
+                    }
                     state={blog}
                     class="h6 m-0 break-line-3"
                   >

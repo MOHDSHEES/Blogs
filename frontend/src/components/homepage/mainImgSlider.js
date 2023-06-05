@@ -73,17 +73,38 @@ const MainImgSlider = () => {
                         />
                         <div class="overlay">
                           <div class="mb-1">
-                            <a class="text-white" href="">
+                            <Link
+                              class="text-white"
+                              to={
+                                "/blog/" +
+                                blog._id +
+                                "/" +
+                                blog.title.replace(/ /g, "-")
+                              }
+                            >
                               {blog.category}
-                            </a>
+                            </Link>
                             <span class="px-2 text-white">/</span>
-                            <a class="text-white" href="">
+                            <Link
+                              class="text-white"
+                              to={
+                                "/blog/" +
+                                blog._id +
+                                "/" +
+                                blog.title.replace(/ /g, "-")
+                              }
+                            >
                               {blog.createdDate}
-                            </a>
+                            </Link>
                           </div>
                           <Link
                             class="h2 m-0 text-white font-weight-bold"
-                            to={"/blog/" + blog._id + "/" + blog.title}
+                            to={
+                              "/blog/" +
+                              blog._id +
+                              "/" +
+                              blog.title.replace(/ /g, "-")
+                            }
                             state={blog}
                           >
                             {blog.title}

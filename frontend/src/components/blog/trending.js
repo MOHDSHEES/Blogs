@@ -54,7 +54,12 @@ const Trending = () => {
                 >
                   <div class="mb-1" style={{ fontSize: "13px" }}>
                     <Link
-                      to={"/blog/" + blog._id + "/" + blog.title}
+                      to={
+                        "/blog/" +
+                        blog._id +
+                        "/" +
+                        blog.title.replace(/ /g, "-")
+                      }
                       state={blog}
                     >
                       {blog.category}
@@ -64,7 +69,9 @@ const Trending = () => {
                   </div>
                   <Link
                     className="h6 m-0 break-line-3 "
-                    to={"/blog/" + blog._id + "/" + blog.title}
+                    to={
+                      "/blog/" + blog._id + "/" + blog.title.replace(/ /g, "-")
+                    }
                     state={blog}
                   >
                     {blog.title}

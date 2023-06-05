@@ -41,7 +41,12 @@ const Categories = ({ blog }) => {
                     <div class="overlay position-relative bg-light">
                       <div class="mb-2" style={{ fontSize: "14px" }}>
                         <Link
-                          to={"/blog/" + blog._id + "/" + blog.title}
+                          to={
+                            "/blog/" +
+                            blog._id +
+                            "/" +
+                            blog.title.replace(/ /g, "-")
+                          }
                           state={blog}
                         >
                           {blog.category}
@@ -50,14 +55,24 @@ const Categories = ({ blog }) => {
                         <span>{blog.createdDate}</span>
                       </div>
                       <Link
-                        to={"/blog/" + blog._id + "/" + blog.title}
+                        to={
+                          "/blog/" +
+                          blog._id +
+                          "/" +
+                          blog.title.replace(/ /g, "-")
+                        }
                         state={blog}
                         class="h4"
                       >
                         {blog.title}
                       </Link>
                       <Link
-                        to={"/blog/" + blog._id + "/" + blog.title}
+                        to={
+                          "/blog/" +
+                          blog._id +
+                          "/" +
+                          blog.title.replace(/ /g, "-")
+                        }
                         state={blog}
                         style={{ color: "#6c757d" }}
                         class="h6 m-0 break-line-3"

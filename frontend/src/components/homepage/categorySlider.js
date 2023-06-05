@@ -103,7 +103,12 @@ const CategorySlider = ({ category, data }) => {
           </div> */}
                         <Link
                           class="h4 m-0 break-line-4-3"
-                          to={"/blog/" + bl._id + "/" + bl.title}
+                          to={
+                            "/blog/" +
+                            bl._id +
+                            "/" +
+                            bl.title.replace(/ /g, "-")
+                          }
                           state={bl}
                         >
                           {bl.title}

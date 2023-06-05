@@ -21,7 +21,7 @@ const PendingTable = () => {
   }, []);
   const navigate = useNavigate();
   function preview(data) {
-    navigate("/blog/" + data._id + "/" + data.title, {
+    navigate("/blog/" + data._id + "/" + data.title.replace(/ /g, "-"), {
       state: { ...data, isAdmin: true },
     });
   }
