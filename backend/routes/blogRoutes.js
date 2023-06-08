@@ -15,12 +15,113 @@ import {
 } from "../jwt.js";
 import {
   contactForm,
+  forgetEmployeePassword,
   forgetPassword,
   registerEmployee,
   sendotp,
 } from "./emailTemplates.js";
 
 const router = express.Router();
+
+//  assigning task by admin
+router.post("/assign/task/employee", async (req, res) => {
+  try {
+    // console.log(res.locals.data._id);
+    let date = new Date().toJSON().slice(0, 10);
+    // console.log(date);
+    const resu = await Employees.findOneAndUpdate(
+      {
+        email: req.body.email,
+      },
+      {
+        $push: {
+          tasks: {
+            $each: [
+              {
+                task: req.body.task,
+                assignDate: date,
+                taskNo: req.body.taskNo,
+                status: 0,
+              },
+            ],
+            $position: 0,
+          },
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    // console.log(resu);
+    if (resu)
+      res.json({
+        status: 200,
+        msg: "Task assigned successfully",
+        data: resu,
+      });
+    else
+      res.json({ status: 500, msg: "Something went wrong, Try again later" });
+    // console.log(user);
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+  } catch (error) {
+    // console.log(error);
+    res.send({ status: 500, msg: error.message });
+  }
+});
+
+//  updating task status
+router.post("/update/task/status", async (req, res) => {
+  try {
+    const status = req.body.status;
+    const taskNo = req.body.taskNo;
+    // console.log(req.body.status);
+    // console.log(req.body.taskNo);
+    // console.log(res.locals.data._id);
+    // let date = new Date().toJSON().slice(0, 10);
+    // console.log(date);
+    const resu = await Employees.updateOne(
+      {
+        email: req.body.email,
+        "tasks.taskNo": taskNo,
+      },
+      {
+        $set: {
+          "tasks.$.status": status,
+        },
+      }
+    );
+    // console.log(resu);
+    if (resu.acknowledged && resu.modifiedCount)
+      res.json({
+        status: 200,
+        msg: "Successfully updated",
+      });
+    else
+      res.json({ status: 500, msg: "Something went wrong, Try again later" });
+    // console.log(user);
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+  } catch (error) {
+    // console.log(error);
+    res.send({ status: 500, msg: error.message });
+  }
+});
+// get all Employee
+router.post("/find/employees", async (req, res) => {
+  try {
+    const employee = await Employees.find({});
+
+    res.json(employee);
+    // if (newUser._id) {
+    //   res.json({ status: 200, msg: "Successfully Registered" });
+    // } else
+    //   res.json({ status: 500, msg: "Something went wrong try again later." });
+    // // res.json(user);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 
 // Employee registration
 router.post("/save/employee", async (req, res) => {
@@ -40,6 +141,113 @@ router.post("/save/employee", async (req, res) => {
     } else {
       res.send({ msg: error.message });
     }
+  }
+});
+
+// employee login
+router.post("/find/employee", async (req, res) => {
+  try {
+    // console.log(req.body.email);
+    const user1 = await Employees.findOne(
+      {
+        email: req.body.email,
+        password: req.body.password,
+      },
+      { password: 0 }
+    );
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+    if (user1) {
+      const token = getToken({ _id: user1.employeeId, email: user1.email });
+      res.json({ user: user1, token: token });
+    } else res.send({ msg: "Incorrect Email or Password" });
+  } catch (error) {
+    // console.log(error);
+    res.send({ msg: error.message });
+  }
+});
+
+// authenticate employee
+router.post("/authenticate/employee", verifyToken, async (req, res) => {
+  try {
+    // console.log(res.locals.data._id);
+    const user = await Employees.findOne(
+      {
+        email: res.locals.data.email,
+      },
+      { password: 0 }
+    );
+    // console.log(user);
+    if (user) {
+      res.json({ status: 200, user: user });
+    } else {
+      res.json({ status: 500, msg: "Not authorised" });
+    }
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
+
+// update employee details
+
+router.post("/update/employee", verifyToken, async (req, res) => {
+  try {
+    // console.log(res.locals.data._id);
+    const resu = await Employees.updateOne(
+      {
+        email: res.locals.data.email,
+      },
+      req.body.data
+    );
+    // console.log(resu);
+    if (resu.acknowledged && resu.modifiedCount)
+      res.json({
+        status: 200,
+        msg: "Updated Successfully",
+        details: req.body.data,
+      });
+    else if (resu.acknowledged && !resu.modifiedCount)
+      res.json({ status: 200, msg: "Already Updated" });
+    else
+      res.json({ status: 500, msg: "Something went wrong, Try again later" });
+    // console.log(user);
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+  } catch (error) {
+    // console.log(error);
+    res.send({ status: 500, msg: error.message });
+  }
+});
+
+// update employee Password
+router.post("/update/employee/password", verifyToken, async (req, res) => {
+  try {
+    // console.log(res.locals.data._id);
+    const found = await Employees.findOne({
+      email: res.locals.data.email,
+      password: req.body.oldPassword,
+    });
+    // console.log(found);
+    // console.log(req.body.oldPassword);
+    // console.log(req.body.newPassword);
+    if (found) {
+      const updated = await Employees.updateOne(
+        {
+          email: res.locals.data.email,
+        },
+        { password: req.body.newPassword }
+      );
+      // console.log(updated);
+      if (updated.acknowledged)
+        res.json({ status: 200, msg: "Password changed successfully." });
+      else
+        res.json({ statue: 500, msg: "Something went wrong. Try again later" });
+    } else res.json({ status: 404, msg: "Old Password is Incorrect." });
+  } catch (error) {
+    // console.log(error);
+    res.send({ status: 500, msg: error.message });
   }
 });
 
@@ -91,7 +299,7 @@ router.post("/authenticate", verifyToken, async (req, res) => {
     // console.log(res.locals.id);
     const user = await Users.findOne(
       {
-        _id: res.locals.id,
+        _id: res.locals.data._id,
       },
       { password: 0 }
     );
@@ -113,7 +321,7 @@ router.post("/find/blog/all", verifyToken, async (req, res) => {
     // console.log(res.locals.id);
     const user = await Users.findOne(
       {
-        _id: res.locals.id,
+        _id: res.locals.data._id,
       },
       { password: 0 }
     );
@@ -158,7 +366,7 @@ router.post("/find/data/homepage", async (req, res) => {
     // console.log(resu);
     res.json(resu);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.send({ msg: error.message });
   }
 });
@@ -214,7 +422,7 @@ router.post("/update/blog/status", verifyToken, async (req, res) => {
       res.json({ status: 500, msg: "something went wrong" });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.send({ msg: error.message });
   }
 });
@@ -356,7 +564,8 @@ router.post("/find/blog/id", async (req, res) => {
   try {
     const blog = await Blogs.findOneAndUpdate(
       { _id: req.body.id, status: "Active" },
-      { $inc: { views: 1 } }
+      { $inc: { views: 1 } },
+      { new: true }
     );
     // console.log(blog);
     res.json(blog);
@@ -464,7 +673,7 @@ router.post("/verifyPassword/token", verifyPasswordToken, async (req, res) => {
     res.send({ status: 500, msg: error.message });
   }
 });
-// verify change password token
+// verify token and change password token
 router.post("/change/password", verifyPasswordToken, async (req, res) => {
   try {
     const email = res.locals.email;
@@ -486,6 +695,33 @@ router.post("/change/password", verifyPasswordToken, async (req, res) => {
     res.send({ status: 500, msg: error.message });
   }
 });
+
+// verify token change employee password token
+router.post(
+  "/forget/employee/password",
+  verifyPasswordToken,
+  async (req, res) => {
+    try {
+      const email = res.locals.email;
+      // console.log(email);
+      if (email) {
+        const update = await Employees.updateOne(
+          { email: email },
+          { password: req.body.password }
+        );
+        // console.log(update);
+        if (update.acknowledged) {
+          res.json({ status: 200, msg: "Password reset sucessfully" });
+        }
+      } else {
+        res.json({ status: 500, msg: "Something went wrong, try again later" });
+      }
+    } catch (error) {
+      // console.log(error);
+      res.send({ status: 500, msg: error.message });
+    }
+  }
+);
 
 // verify employee registration token
 router.post(
@@ -601,6 +837,55 @@ router.post("/forgetPassword", async (req, res) => {
         from: "official.offtheweb@gmail.com", // Change to your verified sender
         subject: "OFFTHEWEB PASSWORD",
         html: forgetPassword(token),
+      };
+      sgMail
+        .send(msg)
+        .then(() => {
+          res.send({
+            success: true,
+            message: "Password reset link has been Sent to Registered Email.",
+          });
+        })
+        .catch((error) => {
+          // console.log(error);
+          res.send({
+            status: 500,
+            success: false,
+            message: "Something went wrong. Try again later",
+          });
+        });
+    } else {
+      res.send({ status: 500, message: "Incorrect Email" });
+    }
+    // userDetails
+    //   ? res.send(userDetails._doc)
+    //   : res.status(401).send({ msg: "Incorrect Mobile No. or Email" });
+  } catch (error) {
+    // console.log(error);
+    res.send({ msg: error.message });
+  }
+});
+
+router.post("/forgetPassword/employee", async (req, res) => {
+  try {
+    const email = req.body.email;
+    const token = getPasswordToken(email);
+
+    // console.log("in");
+    const userDetails = await Employees.findOne(
+      { email: email },
+      { email: 1, password: 1 }
+    );
+    // console.log(userDetails);
+    if (userDetails) {
+      // res.send(userDetails._doc);
+      // const data = req.body.state;
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
+        to: email, // Change to your recipient
+        from: "official.offtheweb@gmail.com", // Change to your verified sender
+        subject: "OFFTHEWEB PASSWORD",
+        html: forgetEmployeePassword(token),
       };
       sgMail
         .send(msg)

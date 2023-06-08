@@ -21,7 +21,7 @@ const verifyToken = (req, res, next) => {
     });
     // console.log(decoded);
     if (decoded._id) {
-      res.locals.id = decoded._id;
+      res.locals.data = decoded;
       next();
     } else {
       res.send({ status: 404, msg: "Access forbidden" });

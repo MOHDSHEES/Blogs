@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { closeMessage } from "../functions/message";
 
-const ChangePassword = ({ message }) => {
+const ChangePassword = ({ message, employee }) => {
   const { token } = useParams();
   //   console.log(token);
   const navigate = useNavigate();
@@ -14,12 +14,16 @@ const ChangePassword = ({ message }) => {
       const { data } = await axios.post("/api/verifyPassword/token", {
         token: token,
       });
-      if (!(data.status === 200)) {
+
+      if (!(data.status === 200) && !employee) {
         navigate("/login", { replace: true });
+        closeMessage(message, data.msg, "error");
+      } else if (!(data.status === 200) && employee) {
+        navigate("/employee/login", { replace: true });
         closeMessage(message, data.msg, "error");
       }
     })();
-  }, [token, navigate, message]);
+  }, [token, navigate, message, employee]);
   const [state, setstate] = useState({
     newPassword: "",
     cPassword: "",
@@ -36,17 +40,31 @@ const ChangePassword = ({ message }) => {
   async function submitHandler(e) {
     e.preventDefault();
     if (state.newPassword === state.cPassword) {
-      const { data } = await axios.post("/api/change/password", {
-        password: state.newPassword,
-        token: token,
-      });
-      if (data.status === 200) {
-        closeMessage(message, data.msg, "success");
-        navigate("/login", { replace: true });
-      } else if (data.status === 404) {
-        closeMessage(message, data.msg, "error");
-        navigate("/login", { replace: true });
-      } else closeMessage(message, data.msg, "error");
+      if (!employee) {
+        const { data } = await axios.post("/api/change/password", {
+          password: state.newPassword,
+          token: token,
+        });
+        if (data.status === 200) {
+          closeMessage(message, data.msg, "success");
+          navigate("/login", { replace: true });
+        } else if (data.status === 404) {
+          closeMessage(message, data.msg, "error");
+          navigate("/login", { replace: true });
+        } else closeMessage(message, data.msg, "error");
+      } else {
+        const { data } = await axios.post("/api/forget/employee/password", {
+          password: state.newPassword,
+          token: token,
+        });
+        if (data.status === 200) {
+          closeMessage(message, data.msg, "success");
+          navigate("/employee/login", { replace: true });
+        } else if (data.status === 404) {
+          closeMessage(message, data.msg, "error");
+          navigate("/employee/login", { replace: true });
+        } else closeMessage(message, data.msg, "error");
+      }
     } else {
       closeMessage(message, "Password Mismatch", "error");
     }

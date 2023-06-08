@@ -25,31 +25,43 @@ const BlogDetail = () => {
   // console.log(id);
   // console.log(id);
   const [blog, setblog] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   // console.log(state);
   // console.log(blog);
   useEffect(() => {
+    if (blog) {
+      setIsAdmin(blog.isAdmin);
+    }
+  }, [blog]);
+  useEffect(() => {
     if (state && Object.keys(state).length !== 0) {
-      if (blog && blog.isAdmin) {
+      if (isAdmin) {
         setblog(state);
-      } else if (blog && blog.status !== "Active") {
+        setIsActive(state.status === "Active" ? true : false);
+      } else if (state.status !== "Active") {
         navigate("/");
         // setblog(state);
       } else {
         setblog(state);
       }
-    } else {
-      (async () => {
-        const { data } = await axios.post("/api/find/blog/id", {
-          id: id,
-        });
-        // console.log(data);
-        if (data && data._id && data.status === "Active") setblog(data);
-        else {
-          navigate("/");
-        }
-      })();
     }
-  }, [state, id, blog, navigate]);
+  }, [state, isAdmin, isActive, navigate]);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.post("/api/find/blog/id", {
+        id: id,
+      });
+      // console.log(data);
+      if (data && data._id && data.status === "Active") {
+        setblog(data);
+        setIsActive(true);
+      } else {
+        navigate("/");
+      }
+    })();
+  }, [id, navigate]);
   // console.log(blog);
 
   return (

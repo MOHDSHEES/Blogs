@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AddEmployee from "./addEmployee";
 
-const AdminSidebar = ({ isAdmin }) => {
+const AdminSidebar = ({ setTab }) => {
   const headerToggle = useRef();
   const Navbar = useRef();
   const bodyPd = useRef();
@@ -69,6 +69,14 @@ const AdminSidebar = ({ isAdmin }) => {
                   <i class="bx bx-user-plus nav_icon"></i>{" "}
                   {/* <i class="bx bx-heading "></i> */}
                   <span class="nav_name">Add Employee/Intern</span>{" "}
+                </Link>{" "}
+              </div>
+              <div class="nav_list">
+                <Link onClick={() => setTab(1)} class="nav_link">
+                  {" "}
+                  <i class="bx bx-task nav_icon"></i>
+                  {/* <i class="bx bx-heading "></i> */}
+                  <span class="nav_name">Assign Task</span>{" "}
                 </Link>{" "}
               </div>
             </div>{" "}

@@ -20,7 +20,7 @@ const NavBar = ({ searchHandler }) => {
     setExpanded(false);
   }
   const [titles, setTitles] = useState([]);
-  const { titles: title } = useContext(globalContext);
+  const { titles: title, employeeData } = useContext(globalContext);
   const [expanded, setExpanded] = useState(false);
   useEffect(() => {
     // async function blogTitles() {
@@ -116,6 +116,25 @@ const NavBar = ({ searchHandler }) => {
                   >
                     Add Blog
                   </Nav.Link>
+                  {employeeData ? (
+                    <Nav.Link
+                      onClick={() => setExpanded(false)}
+                      as={NavLink}
+                      to={"/employee/" + employeeData.employeeId}
+                      class="nav-item "
+                    >
+                      Dashboard
+                    </Nav.Link>
+                  ) : (
+                    <Nav.Link
+                      onClick={() => setExpanded(false)}
+                      as={NavLink}
+                      to="/employee/login"
+                      class="nav-item "
+                    >
+                      Employee LogIn
+                    </Nav.Link>
+                  )}
 
                   <NavDropdown title="Policies" id="navbarScrollingDropdown">
                     <NavDropdown.Item

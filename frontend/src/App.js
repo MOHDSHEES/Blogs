@@ -23,6 +23,8 @@ import ChangePassword from "./components/login/changePassword";
 import { globalContext } from "./context";
 import EmployeeRegister from "./components/login/employeeRegister";
 import PrintCertificate from "./components/printCertificate";
+import Employee from "./components/employee.js/employee";
+import EmployeeLogin from "./components/login/employeeLogin";
 
 // import Sidebar from "./components/sidebar";
 
@@ -86,6 +88,21 @@ function App() {
     }
   }, [recentBlogs, trending]);
 
+  const [employeeData, setEmployeeData] = useState(null);
+  // verify employee login
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.post("/api/authenticate/employee", {
+        token: localStorage.getItem("employeeToken"),
+      });
+      if (data.status === 200) {
+        setEmployeeData(data.user);
+      } else {
+        setEmployeeData(null);
+      }
+    })();
+  }, []);
+
   function ScrollToTop() {
     const { pathname } = useLocation();
     useEffect(() => {
@@ -99,7 +116,15 @@ function App() {
       {/* <Form /> */}
       <ScrollToTop />
       <globalContext.Provider
-        value={{ trending, categories, recentBlogs, titles }}
+        value={{
+          trending,
+          categories,
+          recentBlogs,
+          titles,
+          messageApi,
+          employeeData,
+          setEmployeeData,
+        }}
       >
         {contextHolder}
         <Routes>
@@ -115,12 +140,21 @@ function App() {
             <Route path="/signup" element={<Signup message={messageApi} />} />
             <Route path="/login" element={<Login message={messageApi} />} />
             <Route
+              path="/employee/login"
+              element={<EmployeeLogin message={messageApi} />}
+            />
+
+            <Route
               path="/employee/registration/:token"
               element={<EmployeeRegister message={messageApi} />}
             />
             <Route
               path="/changepassword/:token"
-              element={<ChangePassword message={messageApi} />}
+              element={<ChangePassword message={messageApi} employee={false} />}
+            />
+            <Route
+              path="/employee/changepassword/:token"
+              element={<ChangePassword message={messageApi} employee={true} />}
             />
             <Route path="/blog/:id/:title" element={<BlogDetail />} />
             <Route path="/blogs/:category" element={<CategoryPage />} />
@@ -139,6 +173,10 @@ function App() {
           <Route path="/admin" element={<ProtectedRoute />}>
             <Route path="/admin" element={<Admin />} />
           </Route>
+          <Route
+            path="/employee/:id"
+            element={<Employee message={messageApi} />}
+          />
 
           {/* <Route path="/add" element={<ProtectedRoute />} /> */}
           {/* <Route path="/" element={<Homepage />} />

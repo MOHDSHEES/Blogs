@@ -18,6 +18,8 @@ const employeeSchema = new mongoose.Schema({
   gender: { type: String, required: true },
   pincode: { type: String, required: true },
   state: { type: String, required: true },
+  password: { type: String, required: true },
+  tasks: [{}],
 });
 
 // productsSchema.index({ name: "text", category: "text" });
