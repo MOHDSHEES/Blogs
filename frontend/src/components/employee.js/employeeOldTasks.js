@@ -95,7 +95,7 @@ const EmployeeOldTasks = (props) => {
               Completed
             </label>
           </div>
-          <div style={{ maxHeight: "400px", overflow: "scroll" }}>
+          <div style={{ maxHeight: "400px", overflowY: "scroll" }}>
             {loading
               ? "Loading..."
               : data && (
