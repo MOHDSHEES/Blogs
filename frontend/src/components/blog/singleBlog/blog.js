@@ -45,11 +45,7 @@ const Blog = ({ blogs }) => {
   return (
     <div className="">
       <Helmet>
-        <title>Testing...</title>
-        <meta
-          name="description"
-          content="Try jgjhg jgjhgj fjfhfj hfghf hgjfy"
-        />
+        <title>{blog && blog.title}</title>
       </Helmet>
       <div class="position-relative mb-3">
         {!(blog && blog.mainImg) ? (
