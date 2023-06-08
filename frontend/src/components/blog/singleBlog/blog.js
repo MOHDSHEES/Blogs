@@ -9,7 +9,7 @@ import { TwitterTweetEmbed } from "react-twitter-embed";
 import BlogIndex from "./blogIndex";
 import resizeImg from "../../functions/resizeImg";
 import { WhatsappShareButton, WhatsappIcon } from "react-share";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Blog = ({ blogs }) => {
   // useEffect(() => {
@@ -45,10 +45,11 @@ const Blog = ({ blogs }) => {
   return (
     <div className="">
       <Helmet>
-        <meta charSet="utf-8" />
-        <title>{blog && blog.title}</title>
-        <meta name="description" content="Try..." />
-        <link rel="canonical" href="http://mysite.com/example" />
+        <title>Testing...</title>
+        <meta
+          name="description"
+          content="Try jgjhg jgjhgj fjfhfj hfghf hgjfy"
+        />
       </Helmet>
       <div class="position-relative mb-3">
         {!(blog && blog.mainImg) ? (
@@ -77,7 +78,7 @@ const Blog = ({ blogs }) => {
             <span>Total Views: {blog && blog.views}</span>
 
             {/* <WhatsappShareButton
-              url="http://localhost:3000/blog/6447a13deb22555a15b58185/test-1"
+              url="https://www.offtheweb.in/blog/644a1f9fc80c35ee702706b8/The-Ultimate-Guide-to-ChatGPT:-The-Future-of-Chatgpt-and-AI"
               title="OFFTHEWEB"
             >
               <WhatsappIcon size={32} round={true} />

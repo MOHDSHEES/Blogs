@@ -51,7 +51,7 @@ const BlogDetail = () => {
   }, [state, navigate]);
 
   useEffect(() => {
-    if (!state.isAdmin) {
+    if (state && !state.isAdmin) {
       // console.log("in");
       (async () => {
         const { data } = await axios.post("/api/find/blog/id", {

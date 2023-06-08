@@ -81,6 +81,7 @@ const MainImgSlider = () => {
                                 "/" +
                                 blog.title.replace(/ /g, "-")
                               }
+                              state={blog}
                             >
                               {blog.category}
                             </Link>
@@ -93,6 +94,7 @@ const MainImgSlider = () => {
                                 "/" +
                                 blog.title.replace(/ /g, "-")
                               }
+                              state={blog}
                             >
                               {blog.createdDate}
                             </Link>
