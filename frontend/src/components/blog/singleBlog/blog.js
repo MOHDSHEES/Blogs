@@ -41,7 +41,7 @@ const Blog = ({ blogs }) => {
   // }, [state, id, navigate]);
 
   return (
-    <div className="wordWrap">
+    <div className="">
       <div class="position-relative mb-3">
         {!(blog && blog.mainImg) ? (
           <Skeleton
