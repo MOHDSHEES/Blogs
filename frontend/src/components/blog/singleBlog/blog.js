@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 import BlogIndex from "./blogIndex";
 import resizeImg from "../../functions/resizeImg";
+import { WhatsappShareButton, WhatsappIcon } from "react-share";
+import { Helmet } from "react-helmet";
 
 const Blog = ({ blogs }) => {
   // useEffect(() => {
@@ -42,6 +44,12 @@ const Blog = ({ blogs }) => {
 
   return (
     <div className="">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{blog && blog.title}</title>
+        <meta name="description" content="Try..." />
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <div class="position-relative mb-3">
         {!(blog && blog.mainImg) ? (
           <Skeleton
@@ -67,6 +75,13 @@ const Blog = ({ blogs }) => {
             <span class="px-1">/</span>
             <span>{blog && blog.createdDate} / </span>
             <span>Total Views: {blog && blog.views}</span>
+
+            {/* <WhatsappShareButton
+              url="http://localhost:3000/blog/6447a13deb22555a15b58185/test-1"
+              title="OFFTHEWEB"
+            >
+              <WhatsappIcon size={32} round={true} />
+            </WhatsappShareButton> */}
           </div>
           {/* <div class="mb-3">
             {blog &&

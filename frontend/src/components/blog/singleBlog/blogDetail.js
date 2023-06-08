@@ -26,7 +26,7 @@ const BlogDetail = () => {
   // console.log(id);
   const [blog, setblog] = useState(null);
   // const [isAdmin, setIsAdmin] = useState(false);
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
   // console.log(state);
   // console.log(blog);
   // useEffect(() => {
@@ -40,7 +40,7 @@ const BlogDetail = () => {
       if (state.isAdmin) {
         // setIsAdmin(true);
         setblog(state);
-        setIsActive(state.status === "Active" ? true : false);
+        // setIsActive(state.status === "Active" ? true : false);
       } else if (state.status !== "Active") {
         navigate("/");
         // setblog(state);
@@ -60,7 +60,7 @@ const BlogDetail = () => {
 
         if (data && data._id && data.status === "Active") {
           setblog(data);
-          setIsActive(true);
+          // setIsActive(true);
           // console.log(data);
         } else {
           navigate("/");
