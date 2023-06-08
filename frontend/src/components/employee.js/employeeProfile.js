@@ -327,14 +327,16 @@ const EmployeeProfile = () => {
                                         </span>
                                         <br />
                                       </span>{" "}
-                                      {task.task.split("\n").map((str, idx) => (
-                                        <p
-                                          key={idx}
-                                          style={{ marginBottom: 0 }}
-                                        >
-                                          {parse(capital(str))}
-                                        </p>
-                                      ))}
+                                      {capital(task.task)
+                                        .split("\n")
+                                        .map((str, idx) => (
+                                          <p
+                                            key={idx}
+                                            style={{ marginBottom: 0 }}
+                                          >
+                                            {parse(str)}
+                                          </p>
+                                        ))}
                                       <br />
                                       {!task.status && (
                                         <p
