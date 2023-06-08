@@ -125,8 +125,9 @@ const Blog = ({ blogs }) => {
                           // src={bl.img}
                           alt={bl.img}
                         />
-                        {bl.text.split("\n").map((str) => (
+                        {bl.text.split("\n").map((str, key) => (
                           <p
+                            key={key}
                             style={{
                               // whiteSpace: "break-spaces",
                               textAlign: "justify",

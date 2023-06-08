@@ -8,6 +8,7 @@ import EmployeeChangePassword from "./employeeChangePassword";
 import { useCallback } from "react";
 import { closeMessage, openMessage } from "../functions/message";
 import EmployeeOldTasks from "./employeeOldTasks";
+import parse from "html-react-parser";
 
 const EmployeeProfile = () => {
   const { setEmployeeData, messageApi } = useContext(globalContext);
@@ -326,7 +327,14 @@ const EmployeeProfile = () => {
                                         </span>
                                         <br />
                                       </span>{" "}
-                                      {capital(task.task)}
+                                      {task.task.split("\n").map((str, idx) => (
+                                        <p
+                                          key={idx}
+                                          style={{ marginBottom: 0 }}
+                                        >
+                                          {parse(capital(str))}
+                                        </p>
+                                      ))}
                                       <br />
                                       {!task.status && (
                                         <p
