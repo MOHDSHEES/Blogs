@@ -389,18 +389,20 @@ router.post("/update/blog/status", verifyToken, async (req, res) => {
 
     if (resu.modifiedCount && resu.modifiedCount) {
       if (req.body.status === "Active") {
-        const st = await HomepageData.updateMany(
-          {
-            _id: "647a21933a89a8239f770931",
-          },
-          {
-            $pull: {
-              recent: {
-                _id: { $in: req.body.id },
-              },
-            },
-          }
-        );
+        // pulling blog from homepagerecent
+        // const st = await HomepageData.updateMany(
+        //   {
+        //     _id: "647a21933a89a8239f770931",
+        //   },
+        //   {
+        //     $pull: {
+        //       recent: {
+        //         _id: { $in: req.body.id },
+        //       },
+        //     },
+        //   }
+        // );
+        // adding blog to homepage recent
         const r = await HomepageData.updateOne(
           {
             _id: "647a21933a89a8239f770931",
@@ -416,7 +418,27 @@ router.post("/update/blog/status", verifyToken, async (req, res) => {
             },
           }
         );
+        var querry = "categoryData." + req.body.blog.category + "_id";
+        var quer = "categoryData." + req.body.blog.category;
+        // adding blog to homepage category
+        const s = await HomepageData.updateOne(
+          {
+            _id: "647a21933a89a8239f770931",
+            [querry]: { $nin: req.body.id },
+          },
+          {
+            $push: {
+              [quer]: {
+                $each: [req.body.blog],
+                $position: 0,
+                $slice: 6,
+              },
+            },
+          }
+        );
+        // console.log(s);
       }
+
       res.json({ status: 200, msg: "Activated Sucessfully" });
     } else {
       res.json({ status: 500, msg: "something went wrong" });
@@ -577,6 +599,7 @@ router.post("/find/blog/id", async (req, res) => {
 // delete blog with id
 router.post("/delete/blog", async (req, res) => {
   try {
+    // console.log(req.body.category);
     const stat = await Blogs.deleteOne({ _id: req.body.id });
     // console.log(stat);
     const address = await Users.updateOne(
@@ -584,6 +607,7 @@ router.post("/delete/blog", async (req, res) => {
       { $pull: { blog: req.body.id } }
     );
 
+    // console.log(stat);
     if (stat.deletedCount) {
       const r = await HomepageData.updateOne(
         {
@@ -592,6 +616,19 @@ router.post("/delete/blog", async (req, res) => {
         {
           $pull: {
             recent: {
+              _id: req.body.id,
+            },
+          },
+        }
+      );
+      const query = "categoryData." + req.body.category;
+      const s = await HomepageData.updateOne(
+        {
+          _id: "647a21933a89a8239f770931",
+        },
+        {
+          $pull: {
+            [query]: {
               _id: req.body.id,
             },
           },
@@ -635,6 +672,8 @@ router.post("/update/blog", async (req, res) => {
       }
     );
     // console.log(updated);
+
+    // pull blog from homepage recent
     const st = await HomepageData.updateOne(
       {
         _id: "647a21933a89a8239f770931",
@@ -647,6 +686,22 @@ router.post("/update/blog", async (req, res) => {
         },
       }
     );
+
+    const query = "categoryData." + req.body.category;
+    // pull blog from homepage category
+    const s = await HomepageData.updateOne(
+      {
+        _id: "647a21933a89a8239f770931",
+      },
+      {
+        $pull: {
+          [query]: {
+            _id: req.body.id,
+          },
+        },
+      }
+    );
+    // console.log(s);
     if (updated) {
       // console.log("in");
       res.json({ status: 1, msg: "Blog sucessfully updated.", data: updated });
@@ -655,6 +710,7 @@ router.post("/update/blog", async (req, res) => {
       res.json({ status: 0, msg: "Something went Wrong" });
     }
   } catch (error) {
+    // console.log(error);
     res.send({ status: 0, msg: error.message });
   }
 });

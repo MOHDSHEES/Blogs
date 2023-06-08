@@ -151,6 +151,7 @@ const Form = () => {
     setopenpopover(false);
   }
   async function deleteBlog(e) {
+    // console.log(category);
     e.preventDefault();
     let text = "Are you sure you want to delete this blog.\n";
     if (window.confirm(text) === true) {
@@ -158,6 +159,7 @@ const Form = () => {
       const { data } = await axios.post("/api/delete/blog", {
         id: id,
         user: user._id,
+        category: category,
       });
       if (data.status) {
         closeMessage(messageApi, data.msg, "success");
