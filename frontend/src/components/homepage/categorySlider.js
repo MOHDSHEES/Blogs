@@ -76,7 +76,7 @@ const CategorySlider = ({ category, data }) => {
             }}
           >
             {/* <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative"> */}
-            {blog.reverse().map((bl) => {
+            {blog.map((bl) => {
               return (
                 <div key={bl._id}>
                   <div class="position-relative">
