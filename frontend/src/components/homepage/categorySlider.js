@@ -76,48 +76,42 @@ const CategorySlider = ({ category, data }) => {
             }}
           >
             {/* <div class="owl-carousel owl-carousel-3 carousel-item-2 position-relative"> */}
-            {blog
-              .slice(-5)
-              .reverse()
-              .map((bl) => {
-                return (
-                  <div key={bl._id}>
-                    <div class="position-relative">
-                      <div style={{ height: "200px" }}>
-                        <img
-                          class="img-fluid w-100 h-100"
-                          src={resizeImg(bl.mainImg, 6, "h_200,c_scale")}
-                          // src={bl.mainImg}
-                          alt={bl.category}
-                          style={{ objectFit: "cover" }}
-                        />
-                      </div>
-                      <div
-                        class="overlay position-relative bg-light category-slide-text"
-                        style={{ justifyContent: "start" }}
-                      >
-                        {/* <div class="mb-2" style={{ fontSize: "13px" }}>
+            {blog.reverse().map((bl) => {
+              return (
+                <div key={bl._id}>
+                  <div class="position-relative">
+                    <div style={{ height: "200px" }}>
+                      <img
+                        class="img-fluid w-100 h-100"
+                        src={resizeImg(bl.mainImg, 6, "h_200,c_scale")}
+                        // src={bl.mainImg}
+                        alt={bl.category}
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
+                    <div
+                      class="overlay position-relative bg-light category-slide-text"
+                      style={{ justifyContent: "start" }}
+                    >
+                      {/* <div class="mb-2" style={{ fontSize: "13px" }}>
             <a href="">Technology</a>
             <span class="px-1">/</span>
             <span>January 01, 2045</span>
           </div> */}
-                        <Link
-                          class="h4 m-0 break-line-4-3"
-                          to={
-                            "/blog/" +
-                            bl._id +
-                            "/" +
-                            bl.title.replace(/ /g, "-")
-                          }
-                          state={bl}
-                        >
-                          {bl.title}
-                        </Link>
-                      </div>
+                      <Link
+                        class="h4 m-0 break-line-4-3"
+                        to={
+                          "/blog/" + bl._id + "/" + bl.title.replace(/ /g, "-")
+                        }
+                        state={bl}
+                      >
+                        {bl.title}
+                      </Link>
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              );
+            })}
           </OwlCarousel>
         </>
       )}

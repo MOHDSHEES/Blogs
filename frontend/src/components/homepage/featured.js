@@ -13,6 +13,7 @@ import { globalContext } from "../../context";
 const Featured = () => {
   const { trending } = useContext(globalContext);
   const [blogs, setblogs] = useState(null);
+
   // const [loading, setloading] = useState(false);
   // useEffect(() => {
   //   (async () => {
