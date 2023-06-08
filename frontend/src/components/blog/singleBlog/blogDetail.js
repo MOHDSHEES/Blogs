@@ -48,18 +48,20 @@ const BlogDetail = () => {
         setblog(state);
       }
     }
-  }, [state, isActive, navigate]);
+  }, [state, navigate]);
 
   useEffect(() => {
     if (!state.isAdmin) {
+      // console.log("in");
       (async () => {
         const { data } = await axios.post("/api/find/blog/id", {
           id: id,
         });
-        // console.log(data);
+
         if (data && data._id && data.status === "Active") {
           setblog(data);
           setIsActive(true);
+          // console.log(data);
         } else {
           navigate("/");
         }
