@@ -3,6 +3,7 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 // import { useState } from "react";
 import capital from "../functions/capitaliseStr";
+import parse from "html-react-parser";
 
 const EmployeeOldTasks = (props) => {
   const [radio, setRadio] = useState("1");
@@ -126,7 +127,13 @@ const EmployeeOldTasks = (props) => {
                                     </span>
                                     <br />
                                   </span>{" "}
-                                  {capital(task.task)}
+                                  {capital(task.task)
+                                    .split("\n")
+                                    .map((str, idx) => (
+                                      <p key={idx} style={{ marginBottom: 0 }}>
+                                        {parse(str)}
+                                      </p>
+                                    ))}
                                   <br />
                                   {!task.status && !props.isAdmin && (
                                     <p
