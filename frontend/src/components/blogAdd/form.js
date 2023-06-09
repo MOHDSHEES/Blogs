@@ -331,7 +331,7 @@ const Form = () => {
             </a>
             {updateFlag === 1 && (
               <div className="mt-4 p-2">
-                {filteredData && filteredData.length !== 0 && (
+                {allBlogs && allBlogs.length !== 0 && (
                   <div className="m-3">
                     <div class="form-check form-check-inline">
                       <input
