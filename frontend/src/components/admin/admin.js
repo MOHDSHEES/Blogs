@@ -49,12 +49,14 @@ const Admin = () => {
                 {employees &&
                   employees.map((employee) => {
                     return (
-                      <EmployeeCard
-                        setEmployees={setEmployees}
-                        employees={employees}
-                        key={employee._id}
-                        employee={employee}
-                      />
+                      employee.status === 1 && (
+                        <EmployeeCard
+                          setEmployees={setEmployees}
+                          employees={employees}
+                          key={employee._id}
+                          employee={employee}
+                        />
+                      )
                     );
                   })}
                 {/* <EmployeeCard  />

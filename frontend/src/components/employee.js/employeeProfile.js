@@ -142,10 +142,17 @@ const EmployeeProfile = () => {
                   />
                   <h5 className="my-3">{employee.name}</h5>
                   <p className="text-muted mb-1">{employee.post}</p>
-                  <p className="text-muted mb-1">{employee.jobType}</p>
-                  <p className="text-muted mb-4">
+                  <p className="text-muted mb-1">{employee.jobType}</p>{" "}
+                  {employee.status ? (
+                    <p className="text-muted mb-4">
+                      Status: <span style={{ color: "green" }}>Working</span>
+                    </p>
+                  ) : (
+                    <p className="text-muted mb-4"> Status: Former</p>
+                  )}
+                  {/* <p className="text-muted mb-4">
                     {capital(employee.district)}, {employee.state}
-                  </p>
+                  </p> */}
                   <div className="d-flex justify-content-center mb-2">
                     <button
                       onClick={() => setModalShow(true)}
