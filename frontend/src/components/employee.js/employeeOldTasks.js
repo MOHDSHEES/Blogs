@@ -29,7 +29,7 @@ const EmployeeOldTasks = (props) => {
       setData(props.data.tasks);
     }
   }
-  console.log(loading);
+  //   console.log(loading);
   return (
     <div>
       {/* {contextHolder} */}

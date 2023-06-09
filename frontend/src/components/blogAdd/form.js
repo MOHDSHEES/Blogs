@@ -59,20 +59,25 @@ const Form = () => {
   // console.log(allBlogs);
   let navigate = useNavigate();
   useEffect(() => {
-    (async () => {
-      const { data } = await axios.post("/api/find/blog/all", {
-        token: localStorage.getItem("token"),
-      });
-      if (data && data.status === 404) {
-        localStorage.removeItem("token");
-        navigate("/login", { replace: true });
-      }
-      // console.log(data);
-      setuser(data.user);
-      setIsAdmin(data.user.isAdmin);
-      setAllBlogs(data.blogs);
-    })();
-  }, [navigate]);
+    if (!user) {
+      // console.log("in");
+      (async () => {
+        const { data } = await axios.post("/api/find/blog/all", {
+          token: localStorage.getItem("token"),
+        });
+        if (data && data.status === 404) {
+          localStorage.removeItem("token");
+          navigate("/login", { replace: true });
+        }
+        // console.log(data);
+        setuser(data.user);
+
+        setIsAdmin(data.user.isAdmin);
+        setAllBlogs(data.blogs);
+        setfilteredData(data.blogs);
+      })();
+    }
+  }, [navigate, user]);
 
   useEffect(() => {
     setCategories(cate);
@@ -164,6 +169,7 @@ const Form = () => {
       if (data.status) {
         closeMessage(messageApi, data.msg, "success");
         setAllBlogs(allBlogs.filter((blog) => blog._id !== id));
+        setfilteredData(filteredData.filter((blog) => blog._id !== id));
         newBlog();
       } else {
         closeMessage(messageApi, data.msg, "error");
@@ -192,6 +198,13 @@ const Form = () => {
         else closeMessage(messageApi, data.msg, "error");
 
         setAllBlogs([...allBlogs.filter((blog) => blog._id !== id), data.data]);
+        if (radio === "3")
+          setfilteredData([...filteredData.filter((blog) => blog._id !== id)]);
+        else
+          setfilteredData([
+            ...filteredData.filter((blog) => blog._id !== id),
+            data.data,
+          ]);
       }
     } else {
       openMessage(messageApi, "Saving...");
@@ -205,6 +218,7 @@ const Form = () => {
       });
       closeMessage(messageApi, data.msg, "success");
       setAllBlogs([...allBlogs, data.data]);
+      if (radio !== "3") setfilteredData([...filteredData, data.data]);
       newBlog();
     }
     setdisabled(false);
@@ -265,6 +279,27 @@ const Form = () => {
     setblog(items);
   }
 
+  const [radio, setRadio] = useState("1");
+  const [loading, setLoading] = useState(false);
+  const [filteredData, setfilteredData] = useState(null);
+  function onOptionChange(e) {
+    setRadio(e.target.value);
+    if (e.target.value === "2") {
+      setLoading(true);
+      const d = allBlogs.filter((task) => task.status === "Inactive");
+      setLoading(false);
+      setfilteredData(d);
+    } else if (e.target.value === "3") {
+      setLoading(true);
+      const d = allBlogs.filter((task) => task.status === "Active");
+      setLoading(false);
+      setfilteredData(d);
+    } else {
+      setLoading(false);
+      setfilteredData(allBlogs);
+    }
+  }
+
   return (
     <div className="body">
       {contextHolder}
@@ -296,22 +331,73 @@ const Form = () => {
             </a>
             {updateFlag === 1 && (
               <div className="mt-4 p-2">
+                {filteredData && filteredData.length !== 0 && (
+                  <div className="m-3">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio1"
+                        value="1"
+                        checked={radio === "1"}
+                        onChange={onOptionChange}
+                      />
+                      <label class="form-check-label" for="inlineRadio1">
+                        All
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio2"
+                        value="2"
+                        checked={radio === "2"}
+                        onChange={onOptionChange}
+                      />
+                      <label class="form-check-label" for="inlineRadio2">
+                        Inactive
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio3"
+                        value="3"
+                        checked={radio === "3"}
+                        onChange={onOptionChange}
+                      />
+                      <label class="form-check-label" for="inlineRadio3">
+                        Active
+                      </label>
+                    </div>
+                  </div>
+                )}
                 {/* <MoreCategories blog={allBlogs} /> */}
-                <div class="row">
-                  {allBlogs &&
-                    allBlogs.map((blog, idx) => {
-                      return (
-                        <div
-                          onClick={(e) => updateForm(blog)}
-                          class="col-lg-6"
-                          style={{ cursor: "pointer" }}
-                          key={idx + "Allblogs"}
-                        >
-                          <AllBlogs blog={blog} />
-                        </div>
-                      );
-                    })}
-                </div>
+                {loading ? (
+                  "Loading..."
+                ) : (
+                  <div class="row">
+                    {filteredData && filteredData.length !== 0
+                      ? filteredData.map((blog, idx) => {
+                          return (
+                            <div
+                              onClick={(e) => updateForm(blog)}
+                              class="col-lg-6"
+                              style={{ cursor: "pointer" }}
+                              key={idx + "Allblogs"}
+                            >
+                              <AllBlogs blog={blog} />
+                            </div>
+                          );
+                        })
+                      : "No blogs"}
+                  </div>
+                )}
               </div>
             )}
           </div>
