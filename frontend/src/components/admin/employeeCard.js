@@ -18,7 +18,9 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
           <div className="mt-3 mb-4">
             <img
               src={
-                employee.gender === "male"
+                employee.profileImg
+                  ? employee.profileImg
+                  : employee.gender === "male"
                   ? "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                   : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
               }
