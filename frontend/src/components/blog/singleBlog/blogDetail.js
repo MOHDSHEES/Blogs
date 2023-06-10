@@ -46,6 +46,17 @@ const BlogDetail = () => {
         // setblog(state);
       } else {
         setblog(state);
+        (async () => {
+          const { data } = await axios.post("/api/find/blog/id", {
+            id: id,
+          });
+
+          if (data && data._id && data.status === "Active") {
+            setblog(data);
+          } else {
+            navigate("/");
+          }
+        })();
       }
     }
   }, [state, navigate]);
