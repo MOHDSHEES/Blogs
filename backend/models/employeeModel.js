@@ -9,6 +9,7 @@ const employeeSchema = new mongoose.Schema({
     index: { unique: true },
   },
   email: { type: String, unique: true, required: true },
+  profileImg: { type: String },
   name: { type: String, required: true },
   jobType: { type: String, required: true },
   address: { type: String, required: true },

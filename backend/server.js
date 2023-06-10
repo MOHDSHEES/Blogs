@@ -5,6 +5,7 @@ import http from "http";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import blogRoute from "./routes/blogRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 import nocache from "nocache";
 // import uploadRouter from "./routes/uploadRouter.js";
 // import sellerRoutes from "./routes/sellerRoutes.js";
@@ -34,6 +35,7 @@ db.once("open", function () {
 });
 
 app.use(express.static(path.join(__dirname, "./frontend/build")));
+app.use("/api/uploads", uploadRoutes);
 app.use("/api", blogRoute);
 // app.use("/api/uploads", uploadRouter);
 // app.use("/api/seller", sellerRoutes);

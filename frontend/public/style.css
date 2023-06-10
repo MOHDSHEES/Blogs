@@ -413,3 +413,13 @@ a {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
+.imgedit-button {
+  cursor: pointer;
+  position: absolute;
+  top: 120px;
+  background: white;
+  right: 45px;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

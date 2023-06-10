@@ -39,7 +39,7 @@ const CategoryPage = () => {
           <div class="col-lg-4 pt-3 pt-lg-0">
             <Socialfollow />
             {/* <Newsletter /> */}
-            <div class="mb-3 pb-3">
+            {/* <div class="mb-3 pb-3">
               <a href="#!">
                 <img
                   class="img-fluid"
@@ -47,7 +47,7 @@ const CategoryPage = () => {
                   alt="advertise"
                 />
               </a>
-            </div>
+            </div> */}
             <Trending />
             {/* <Tags /> */}
           </div>
