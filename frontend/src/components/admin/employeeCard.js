@@ -26,7 +26,7 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
               }
               className="rounded-circle img-fluid"
               alt="profile"
-              style={{ width: "100px" }}
+              style={{ width: "100px", height: "100px" }}
             />
           </div>
           <h4 className="mb-2">{employee.name}</h4>
