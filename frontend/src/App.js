@@ -25,6 +25,8 @@ import EmployeeRegister from "./components/login/employeeRegister";
 import PrintCertificate from "./components/printCertificate";
 import Employee from "./components/employee.js/employee";
 import EmployeeLogin from "./components/login/employeeLogin";
+import TextEditor from "./components/editor/textEditor";
+import Test from "./components/test";
 
 // import Sidebar from "./components/sidebar";
 
@@ -164,9 +166,11 @@ function App() {
             <Route path="/advertise/policies" element={<Advertise />} />
             <Route path="/categories" element={<MoreCategoriesPage />} />
             <Route path="/career" element={<Career />} />
+            {/* <Route path="/test" element={<Test />} /> */}
           </Route>
           {/* <Route path="/add" element={<Form cate={categories} />} />
         <ProtectedRoute path="/add" categories={categories} /> */}
+          {/* <Route path="/edit" element={<TextEditor />} /> */}
           <Route path="/add" element={<ProtectedRoute />}>
             <Route path="/add" element={<Form />} />
           </Route>

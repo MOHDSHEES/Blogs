@@ -116,7 +116,7 @@ const EmployeeOldTasks = (props) => {
                                   style={{ fontSize: ".77rem" }}
                                 >
                                   <span style={{ fontWeight: 600 }}>
-                                    Task: {task.assignDate}
+                                    {task.taskNo} Task: {task.assignDate}
                                     <span
                                       style={{
                                         float: "right",

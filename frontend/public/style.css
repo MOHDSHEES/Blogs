@@ -423,3 +423,65 @@ a {
   padding: 5px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+/* .ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  content: attr(data-value);
+} */
+
+.ql-editor {
+  white-space: pre-line;
+}
+.ql-clipboard {
+  white-space: pre-wrap;
+}
+
+/* Set default font-family */
+#editor-container {
+  font-family: "Roboto,sans-serif";
+  font-size: 16px;
+  /* height: 375px; */
+}
+
+/* Set dropdown font-families */
+#toolbar-container .ql-font span[data-label="Comic Sans"]::before {
+  font-family: "Comic Sans";
+}
+#toolbar-container .ql-font span[data-label="Courier New"]::before {
+  font-family: "Courier New";
+}
+#toolbar-container .ql-font span[data-label="Georgia"]::before {
+  font-family: "Georgia";
+}
+#toolbar-container .ql-font span[data-label="Helvetica"]::before {
+  font-family: "Helvetica";
+}
+#toolbar-container .ql-font span[data-label="Lucida"]::before {
+  font-family: "Lucida";
+}
+/* #toolbar-container .ql-font span[data-label="cursive"]::before {
+  font-family: "cursive";
+} */
+
+/* Set content font-families */
+
+/* .ql-font-cursive {
+  font-family: " cursive";
+} */
+.ql-font-georgia {
+  font-family: "Georgia";
+}
+.ql-font-helvetica {
+  font-family: "Helvitca";
+}
+.ql-font-courier-new {
+  font-family: "Courier New";
+}
+.ql-font-comic-sans {
+  font-family: "Comic Sans";
+}
+.ql-font-lucida {
+  font-family: "Lucida";
+}
+.ql-font-roboto {
+  font-family: "Roboto";
+}

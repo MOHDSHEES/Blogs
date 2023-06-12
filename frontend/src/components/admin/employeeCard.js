@@ -13,7 +13,7 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
       className="col-sm employee-padding-0"
       style={{ maxWidth: "400px", minWidth: "290px", marginBottom: "25px" }}
     >
-      <div className="card" style={{ borderRadius: "15px" }}>
+      <div className="card " style={{ borderRadius: "15px" }}>
         <div className="card-body text-center">
           <div className="mt-3 mb-4">
             <img
@@ -26,7 +26,11 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
               }
               className="rounded-circle img-fluid"
               alt="profile"
-              style={{ width: "100px", height: "100px", objectFit: "cover" }}
+              style={{
+                width: "100px",
+                height: "100px",
+                objectFit: "cover",
+              }}
             />
           </div>
           <h4 className="mb-2">{employee.name}</h4>
