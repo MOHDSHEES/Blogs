@@ -33,12 +33,14 @@ const EmployeeRegister = ({ message }) => {
   const [post, setPost] = useState("");
   const [joiningDate, setJoiningDate] = useState("");
   const [jobType, setJobType] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [state, setstate] = useState({
     name: "",
     gender: "",
     address: "",
     district: "",
     pincode: "",
+    password: "",
   });
 
   const Inputchange = (event) => {
@@ -57,16 +59,20 @@ const EmployeeRegister = ({ message }) => {
       joiningDate: joiningDate,
       jobType: jobType,
     };
-    const { data } = await axios.post("/api/save/employee", {
-      details,
-    });
-    if (data && data.status === 200) {
-      closeMessage(message, data.msg, "success");
-      navigate("/", { replace: true });
-    } else if (data && data.status === 11000) {
-      closeMessage(message, data.msg, "error");
-      navigate("/", { replace: true });
-    } else closeMessage(message, data.msg, "error");
+    if (state.password === confirmPassword) {
+      const { data } = await axios.post("/api/save/employee", {
+        details,
+      });
+      if (data && data.status === 200) {
+        closeMessage(message, data.msg, "success");
+        navigate("/", { replace: true });
+      } else if (data && data.status === 11000) {
+        closeMessage(message, data.msg, "error");
+        navigate("/", { replace: true });
+      } else closeMessage(message, data.msg, "error");
+    } else {
+      closeMessage(message, "Password Mismatch", "error");
+    }
     // // console.log(data);
   }
   return (
@@ -246,8 +252,36 @@ const EmployeeRegister = ({ message }) => {
                           id="inputZip"
                         />
                       </div>
+                      <div class="col-md-6">
+                        <label for="inputZip" class="form-label">
+                          Password *
+                        </label>
+                        <input
+                          type="password"
+                          name="password"
+                          required
+                          value={state.password}
+                          onChange={Inputchange}
+                          class="form-control"
+                          id="inputZip"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputZip" class="form-label">
+                          Confirm Password *
+                        </label>
+                        <input
+                          type="password"
+                          name="pincode"
+                          required
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          class="form-control"
+                          id="inputZip"
+                        />
+                      </div>
 
-                      <div class="col-12">
+                      <div class="col-2">
                         <button type="submit" class="btn btn-primary">
                           Register
                         </button>

@@ -3,6 +3,8 @@ import { Quill } from "react-quill";
 // import ImageResize from "quill-image-resize-module-react";
 import { ImageDrop } from "quill-image-drop-module";
 import BlotFormatter from "quill-blot-formatter";
+import { TwitterTweetEmbed } from "react-twitter-embed";
+import Skeleton from "react-loading-skeleton";
 // var Size = Quill.import('attributors/style/size');
 
 Quill.register("modules/blotFormatter", BlotFormatter);
@@ -77,6 +79,7 @@ function imageHandler() {
     this.quill.insertEmbed(range.index, "image", value, Quill.sources.USER);
   }
 }
+
 // function handleSizeToolbar() {
 //   const sizeSelector = document.querySelector(".ql-size .ql-picker");
 //   if (sizeSelector) {
@@ -133,7 +136,7 @@ export const formats = [
 //     editor.format("size", size);
 //   };
 // Quill Toolbar component
-export function QuillToolbar({ state }) {
+export function QuillToolbar({ state, quillRef }) {
   //   console.log(state);
   async function submitHandler() {
     console.log(state);
@@ -205,7 +208,8 @@ export function QuillToolbar({ state }) {
         <button className="ql-redo">
           <CustomRedo />
         </button>
-        <button onClick={submitHandler} className="ql-redo">
+        {/* <button className="ql-tweet">Tweet</button> */}
+        <button onClick={submitHandler} className="ql-save">
           <i class="bx bxs-save"></i>
         </button>
       </span>
