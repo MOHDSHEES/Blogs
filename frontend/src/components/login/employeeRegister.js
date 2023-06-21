@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 const EmployeeRegister = ({ message }) => {
   const { token } = useParams();
-
   let navigate = useNavigate();
   useEffect(() => {
     (async () => {
