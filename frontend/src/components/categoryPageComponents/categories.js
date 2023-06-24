@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import resizeImg from "../functions/resizeImg";
 import CategoryPageSkeleton from "../skeleton/categoryPageSkeleton";
+import parse from "html-react-parser";
 
 const Categories = ({ blog }) => {
   const [blogs, setblogs] = useState(null);
@@ -77,7 +78,7 @@ const Categories = ({ blog }) => {
                         style={{ color: "#6c757d" }}
                         class="h6 m-0 break-line-3"
                       >
-                        {blog.blog[0].text}
+                        {parse(blog.blog[0].text)}
                       </Link>
                     </div>
                   </div>
