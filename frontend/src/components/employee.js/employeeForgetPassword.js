@@ -32,7 +32,7 @@ const EmployeeForgetPassword = (props) => {
       openMessage(messageApi, "Sending...");
       setDisabled(true);
       const { data } = await axios.post("/api/forgetPassword/employee", {
-        email: email,
+        email: email.toLowerCase(),
       });
       //   console.log(data);
       if (data.success) {
