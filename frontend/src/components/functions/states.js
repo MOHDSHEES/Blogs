@@ -4,6 +4,7 @@ const states = [
   "Assam",
   "Bihar",
   "Chattisgarh",
+  "Delhi",
   "Goa",
   "Gujrat",
   "Haryana",

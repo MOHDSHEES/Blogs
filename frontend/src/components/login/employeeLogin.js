@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { closeMessage } from "../functions/message";
 import ForgetPassword from "./forgetPassword";
 import { globalContext } from "../../context";
 import { useContext } from "react";
+import EmployeeForgetPassword from "../employee.js/employeeForgetPassword";
 
 const EmployeeLogin = ({ message }) => {
   const { setEmployeeData } = useContext(globalContext);
@@ -42,7 +43,12 @@ const EmployeeLogin = ({ message }) => {
   //   useEffect(() => {
   //     localStorage.removeItem("token");
   //   }, []);
-  const [modalShow, setModalShow] = useState(false);
+  // const [modalShow, setModalShow] = useState(false);
+  const [forgetModalShow, setForgetModalShow] = useState(false);
+  function forgetPassword() {
+    setForgetModalShow(true);
+    // props.onHide();
+  }
   return (
     <div>
       <section className=" gradient-custom">
@@ -100,11 +106,18 @@ const EmployeeLogin = ({ message }) => {
                         type="submit"
                         defaultValue="Submit"
                       />
+                      <Link
+                        style={{ float: "right" }}
+                        //   variant="primary"
+                        onClick={forgetPassword}
+                      >
+                        Forget Password?
+                      </Link>
                     </div>
                   </form>
-                  <ForgetPassword
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
+                  <EmployeeForgetPassword
+                    show={forgetModalShow}
+                    onHide={() => setForgetModalShow(false)}
                   />
                 </div>
               </div>

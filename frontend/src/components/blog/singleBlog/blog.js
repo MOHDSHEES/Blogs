@@ -60,7 +60,7 @@ const Blog = ({ blogs }) => {
           <img
             class="img-fluid w-100"
             src={blog && blog.mainImg}
-            alt=""
+            alt={blog && blog.title}
             style={{ objectFit: "cover" }}
           />
         )}
