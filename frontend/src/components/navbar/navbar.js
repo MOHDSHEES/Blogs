@@ -140,7 +140,7 @@ const NavBar = ({ searchHandler }) => {
                     <NavDropdown.Item
                       onClick={() => setExpanded(false)}
                       as={NavLink}
-                      to="/privacy/policies"
+                      to="https://www.offtheweb.in/policies/privacyPolicy"
                     >
                       Privacy Policies
                     </NavDropdown.Item>
@@ -151,14 +151,14 @@ const NavBar = ({ searchHandler }) => {
                     <NavDropdown.Item
                       onClick={() => setExpanded(false)}
                       as={NavLink}
-                      to="/terms/condition"
+                      to="https://www.offtheweb.in/policies/termsCondition"
                     >
                       Terms And Conditions
                     </NavDropdown.Item>
                     <NavDropdown.Item
                       onClick={() => setExpanded(false)}
                       as={NavLink}
-                      to="/advertise/policies"
+                      to="https://www.offtheweb.in/policies/advertise"
                     >
                       Advertise
                     </NavDropdown.Item>
