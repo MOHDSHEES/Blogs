@@ -100,14 +100,14 @@ const NavBar = ({ searchHandler }) => {
                   {/* <Nav.Link href="#" className="nav-item ">
                     Single Blog
                   </Nav.Link> */}
-                  <Nav.Link
+                  {/* <Nav.Link
                     onClick={() => setExpanded(false)}
                     as={NavLink}
                     to="/contact"
                     class="nav-item "
                   >
                     Contact
-                  </Nav.Link>
+                  </Nav.Link> */}
                   <Nav.Link
                     onClick={() => setExpanded(false)}
                     as={NavLink}
@@ -136,7 +136,7 @@ const NavBar = ({ searchHandler }) => {
                     </Nav.Link>
                   )}
 
-                  <NavDropdown title="Policies" id="navbarScrollingDropdown">
+                  {/* <NavDropdown title="Policies" id="navbarScrollingDropdown">
                     <NavDropdown.Item
                       onClick={() => setExpanded(false)}
                       as={NavLink}
@@ -144,10 +144,7 @@ const NavBar = ({ searchHandler }) => {
                     >
                       Privacy Policies
                     </NavDropdown.Item>
-                    {/* <NavDropdown.Divider /> */}
-                    {/* <NavDropdown.Item onClick={() => setExpanded(false)}>
-                      Testing
-                    </NavDropdown.Item> */}
+                  
                     <NavDropdown.Item
                       onClick={() => setExpanded(false)}
                       as={NavLink}
@@ -162,7 +159,7 @@ const NavBar = ({ searchHandler }) => {
                     >
                       Advertise
                     </NavDropdown.Item>
-                  </NavDropdown>
+                  </NavDropdown> */}
                 </Nav>
                 {/* <Form className="d-flex"> */}
                 <Autocomplete

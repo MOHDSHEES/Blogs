@@ -162,28 +162,28 @@ const Footer = () => {
               {/* <a class="text-secondary mb-2" href="#!">
                 <i class="fa fa-angle-right text-dark mr-2"></i>About
               </a> */}
-              <a
+              {/* <a
                 class="text-secondary mb-2"
                 href="https://www.offtheweb.in/policies/advertise"
               >
                 <i class="fa fa-angle-right text-dark mr-2"></i>Advertise
-              </a>
-              <a
+              </a> */}
+              {/* <a
                 class="text-secondary mb-2"
                 href="https://www.offtheweb.in/policies/privacyPolicy"
               >
                 <i class="fa fa-angle-right text-dark mr-2"></i>Privacy & policy
-              </a>
-              <a
+              </a> */}
+              {/* <a
                 class="text-secondary mb-2"
                 href="https://www.offtheweb.in/policies/termsCondition"
               >
                 <i class="fa fa-angle-right text-dark mr-2"></i>Terms &
                 conditions
-              </a>
-              <Link class="text-secondary mb-2" to="/contact">
+              </a> */}
+              {/* <Link class="text-secondary mb-2" to="/contact">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Contact
-              </Link>
+              </Link> */}
               <Link class="text-secondary mb-2" to="/add">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Add Blog
               </Link>

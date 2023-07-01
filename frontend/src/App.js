@@ -160,12 +160,12 @@ function App() {
             />
             <Route path="/blog/:id/:title" element={<BlogDetail />} />
             <Route path="/blogs/:category" element={<CategoryPage />} />
-            <Route path="/contact" element={<Contactform />} />
-            <Route path="/terms/condition" element={<Terms />} />
-            <Route path="/privacy/policies" element={<PrivacyPolicy />} />
-            <Route path="/advertise/policies" element={<Advertise />} />
+            {/* <Route path="/contact" element={<Contactform />} /> */}
+            {/* <Route path="/terms/condition" element={<Terms />} /> */}
+            {/* <Route path="/privacy/policies" element={<PrivacyPolicy />} /> */}
+            {/* <Route path="/advertise/policies" element={<Advertise />} /> */}
             <Route path="/categories" element={<MoreCategoriesPage />} />
-            <Route path="/career" element={<Career />} />
+            {/* <Route path="/career" element={<Career />} /> */}
             {/* <Route path="/test" element={<Test />} /> */}
           </Route>
           {/* <Route path="/add" element={<Form cate={categories} />} />
