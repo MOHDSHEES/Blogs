@@ -211,7 +211,7 @@ const forgetEmployeePassword = (token) => {
     <div class="" style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 18px; color: #555555; line-height: 1.5;">
     <p style="margin: 0; mso-line-height-alt: 18px;">If you did not request a password change, please contact us IMMEDIATELY so we can keep your account secure.</p>
     <p style="margin: 0; mso-line-height-alt: 18px;"> </p>
-    <p style="margin: 0; mso-line-height-alt: 18px;">Contact Us at -<br/><a href="https://u24411844.ct.sendgrid.net/ls/click?upn=wn5VxQNDmL2KF-2BV1yfDiZLHBjPHpMGYpg7meDsSuIgti9TvmiARPN-2FfxRo7zg8KuSMdt_9-2FeLDb2w2xTsdHAxqgMnnsxTzRtJFSLtY-2FRonIwZ2Rvd-2BtlyFadMfGHIW8Aspm59A1dxSvP1hH6AljT1Jih0BBIY6JEEnLQ3G3o5KV-2F4V-2BUPjvi2LUWFC8AFv-2BokH1pDFdJjh7KPTgQm0kp-2FGq3n7FbEcRHBZMvl5I1ap2s-2Bbsw3J1DKFN6EL6bIyVssecoGcgSgS9g-2B5cHVvbc6bB81fDDNvXXpUozbipWY-2F4O-2Bgzg-3D" rel="noopener" style="text-decoration: underline; color: #e91414;" target="_blank">https://offtheweb.vercel.app/contact</a></p>
+    <p style="margin: 0; mso-line-height-alt: 18px;">Contact Us at -<br/><a href="https://u24411844.ct.sendgrid.net/ls/click?upn=wn5VxQNDmL2KF-2BV1yfDiZLHBjPHpMGYpg7meDsSuIgti9TvmiARPN-2FfxRo7zg8KuSMdt_9-2FeLDb2w2xTsdHAxqgMnnsxTzRtJFSLtY-2FRonIwZ2Rvd-2BtlyFadMfGHIW8Aspm59A1dxSvP1hH6AljT1Jih0BBIY6JEEnLQ3G3o5KV-2F4V-2BUPjvi2LUWFC8AFv-2BokH1pDFdJjh7KPTgQm0kp-2FGq3n7FbEcRHBZMvl5I1ap2s-2Bbsw3J1DKFN6EL6bIyVssecoGcgSgS9g-2B5cHVvbc6bB81fDDNvXXpUozbipWY-2F4O-2Bgzg-3D" rel="noopener" style="text-decoration: underline; color: #e91414;" target="_blank">https://www.offtheweb.in/contact</a></p>
     <p style="margin: 0; mso-line-height-alt: 18px;">or Email at<br/><a href="mailto:official.offtheweb@gmail.com" rel="noopener" style="text-decoration: underline; color: #e91414;" target="_blank">official.offtheweb@gmail.com</a></p>
     <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;"><br/><br/></p>
     </div>
@@ -520,7 +520,7 @@ const forgetPassword = (token) => {
     <div class="" style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 18px; color: #555555; line-height: 1.5;">
     <p style="margin: 0; mso-line-height-alt: 18px;">If you did not request a password change, please contact us IMMEDIATELY so we can keep your account secure.</p>
     <p style="margin: 0; mso-line-height-alt: 18px;"> </p>
-    <p style="margin: 0; mso-line-height-alt: 18px;">Contact Us at -<br/><a href="https://u24411844.ct.sendgrid.net/ls/click?upn=wn5VxQNDmL2KF-2BV1yfDiZLHBjPHpMGYpg7meDsSuIgti9TvmiARPN-2FfxRo7zg8KuSMdt_9-2FeLDb2w2xTsdHAxqgMnnsxTzRtJFSLtY-2FRonIwZ2Rvd-2BtlyFadMfGHIW8Aspm59A1dxSvP1hH6AljT1Jih0BBIY6JEEnLQ3G3o5KV-2F4V-2BUPjvi2LUWFC8AFv-2BokH1pDFdJjh7KPTgQm0kp-2FGq3n7FbEcRHBZMvl5I1ap2s-2Bbsw3J1DKFN6EL6bIyVssecoGcgSgS9g-2B5cHVvbc6bB81fDDNvXXpUozbipWY-2F4O-2Bgzg-3D" rel="noopener" style="text-decoration: underline; color: #e91414;" target="_blank">https://offtheweb.vercel.app/contact</a></p>
+    <p style="margin: 0; mso-line-height-alt: 18px;">Contact Us at -<br/><a href="https://u24411844.ct.sendgrid.net/ls/click?upn=wn5VxQNDmL2KF-2BV1yfDiZLHBjPHpMGYpg7meDsSuIgti9TvmiARPN-2FfxRo7zg8KuSMdt_9-2FeLDb2w2xTsdHAxqgMnnsxTzRtJFSLtY-2FRonIwZ2Rvd-2BtlyFadMfGHIW8Aspm59A1dxSvP1hH6AljT1Jih0BBIY6JEEnLQ3G3o5KV-2F4V-2BUPjvi2LUWFC8AFv-2BokH1pDFdJjh7KPTgQm0kp-2FGq3n7FbEcRHBZMvl5I1ap2s-2Bbsw3J1DKFN6EL6bIyVssecoGcgSgS9g-2B5cHVvbc6bB81fDDNvXXpUozbipWY-2F4O-2Bgzg-3D" rel="noopener" style="text-decoration: underline; color: #e91414;" target="_blank">https://www.offtheweb.in/contact</a></p>
     <p style="margin: 0; mso-line-height-alt: 18px;">or Email at<br/><a href="mailto:official.offtheweb@gmail.com" rel="noopener" style="text-decoration: underline; color: #e91414;" target="_blank">official.offtheweb@gmail.com</a></p>
     <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;"><br/><br/></p>
     </div>
@@ -1029,7 +1029,7 @@ const registerEmployee = (data, token) => {
     <p style="margin: 0; mso-line-height-alt: 18px;">OFFTHEWEB</p>
     <p style="margin: 0; mso-line-height-alt: 18px;"> </p>
     <p style="margin: 0; mso-line-height-alt: 18px;"><strong>Note</strong>: Your Data security is our priority. It will only be used to keep the record. We will not disclose or share you data with anyone.</p>
-    <p style="margin: 0; mso-line-height-alt: 18px;">Link is valid for only one Employee/Intern and can not be used again. </p><br/><p style="margin: 0; mso-line-height-alt: 18px;">Contact us: <a href="https://offtheweb.vercel.app/contact">https://offtheweb.vercel.app/contact</p>
+    <p style="margin: 0; mso-line-height-alt: 18px;">Link is valid for only one Employee/Intern and can not be used again. </p><br/><p style="margin: 0; mso-line-height-alt: 18px;">Contact us: <a href="https://www.offtheweb.in/contact">https://www.offtheweb.in/contact</p>
     <p style="margin: 0; mso-line-height-alt: 18px;"> </p>
     <p style="margin: 0; font-size: 12px; mso-line-height-alt: 18px;"> </p>
     </div>
