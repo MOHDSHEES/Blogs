@@ -1,36 +1,36 @@
 import React, { useEffect, useState } from "react";
-import Autocomplete from "../autocomplete/autocomplete";
-import axios from "axios";
+// import Autocomplete from "../autocomplete/autocomplete";
+// import axios from "axios";
 // import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 // import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+// import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { globalContext } from "../../context";
 
 const NavBar = ({ searchHandler }) => {
-  function searchHandle(e, search) {
-    e.preventDefault();
-    // console.log(search);
-    searchHandler(search);
-    setExpanded(false);
-  }
-  const [titles, setTitles] = useState([]);
-  const { titles: title, employeeData } = useContext(globalContext);
+  // function searchHandle(e, search) {
+  //   e.preventDefault();
+  //   // console.log(search);
+  //   searchHandler(search);
+  //   setExpanded(false);
+  // }
+  // const [titles, setTitles] = useState([]);
+  const { employeeData } = useContext(globalContext);
   const [expanded, setExpanded] = useState(false);
-  useEffect(() => {
-    // async function blogTitles() {
-    //   const { data } = await axios.post("/api/blog/titles");
-    //   setTitles(data);
-    // }
-    if (titles.length === 0) {
-      setTitles(title);
-    }
-  }, [titles, title]);
+  // useEffect(() => {
+  //   // async function blogTitles() {
+  //   //   const { data } = await axios.post("/api/blog/titles");
+  //   //   setTitles(data);
+  //   // }
+  //   if (titles.length === 0) {
+  //     setTitles(title);
+  //   }
+  // }, [titles, title]);
 
   return (
     <div>
@@ -162,10 +162,10 @@ const NavBar = ({ searchHandler }) => {
                   </NavDropdown> */}
                 </Nav>
                 {/* <Form className="d-flex"> */}
-                <Autocomplete
+                {/* <Autocomplete
                   searchHandler={searchHandle}
                   suggestions={titles}
-                />
+                /> */}
                 {/* <Form.Control
                   type="search"
                   placeholder="Search"

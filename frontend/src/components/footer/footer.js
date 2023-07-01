@@ -187,9 +187,9 @@ const Footer = () => {
               <Link class="text-secondary mb-2" to="/add">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Add Blog
               </Link>
-              <a class="text-secondary" href="https://www.offtheweb.in/career">
+              {/* <a class="text-secondary" href="https://www.offtheweb.in/career">
                 <i class="fa fa-angle-right text-dark mr-2"></i>Careers
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
