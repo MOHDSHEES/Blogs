@@ -187,7 +187,7 @@ const Form = () => {
         openMessage(messageApi, "Saving...");
         const { data } = await axios.post("/api/update/blog", {
           id: id,
-          title: title.trim(),
+          title: title.trim().replace(/\?/g, " "),
           mainImg,
           keywords,
           category,
@@ -775,13 +775,13 @@ const Form = () => {
                   >
                     Cancel
                   </button>
-                  <button
+                  {/* <button
                     onClick={(e) => deleteBlog(e)}
                     type="button"
                     class="m-3 btn btn-danger"
                   >
                     Delete
-                  </button>
+                  </button> */}
                 </>
               ) : (
                 ""
