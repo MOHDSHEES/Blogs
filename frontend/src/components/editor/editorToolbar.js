@@ -138,9 +138,9 @@ export const formats = [
 // Quill Toolbar component
 export function QuillToolbar({ state, quillRef }) {
   //   console.log(state);
-  async function submitHandler() {
-    console.log(state);
-  }
+  // async function submitHandler() {
+  //   console.log(state);
+  // }
   return (
     <div id="toolbar">
       <span className="ql-formats">
@@ -209,9 +209,9 @@ export function QuillToolbar({ state, quillRef }) {
           <CustomRedo />
         </button>
         {/* <button className="ql-tweet">Tweet</button> */}
-        <button onClick={submitHandler} className="ql-save">
+        {/* <button onClick={submitHandler} className="ql-save">
           <i class="bx bxs-save"></i>
-        </button>
+        </button> */}
       </span>
     </div>
   );

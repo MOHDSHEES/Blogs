@@ -1,5 +1,6 @@
 import express from "express";
 import Blogs from "../models/blogModel.js";
+import UBlogs from "../models/uBlogModel.js";
 import HomepageData from "../models/homepageDataModel.js";
 import Users from "../models/userModel.js";
 import Employees from "../models/employeeModel.js";
@@ -478,6 +479,42 @@ router.post("/add/category", async (req, res) => {
     res.send({ status: 0, msg: error.message });
   }
 });
+
+// creating new blogs from editor
+router.post("/add/new/blog", async (req, res) => {
+  try {
+    const date =
+      new Date().toLocaleString("en-US", { weekday: "long" }) +
+      ", " +
+      new Date().toLocaleString("en-US", { month: "long" }) +
+      ", " +
+      new Date().getDate() +
+      ", " +
+      new Date().getFullYear();
+    const blog = new UBlogs({
+      mainImg: req.body.mainImg,
+      keywords: req.body.keywords,
+      category: req.body.category,
+      blog: req.body.blog,
+      views: 0,
+      createdDate: date,
+      user: req.body.user,
+    });
+    const status = await blog.save();
+    // console.log(status._id);
+    const response = await Users.updateOne(
+      {
+        _id: req.body.user,
+      },
+      { $addToSet: { blog: status._id } }
+    );
+    res.json({ status: 1, msg: "Blog saved successfully.", data: status });
+  } catch (error) {
+    // console.log(error);
+    res.send({ status: 0, msg: error.message });
+  }
+});
+
 // create blog
 router.post("/add/blog", async (req, res) => {
   try {
@@ -596,6 +633,16 @@ router.post("/find/blog/id", async (req, res) => {
   }
 });
 
+// find blog for new editor
+router.post("/find/blog/new/id", async (req, res) => {
+  try {
+    const blog = await UBlogs.findOneAndUpdate({}, { new: true });
+    // console.log(blog);
+    res.json(blog);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // delete blog with id
 router.post("/delete/blog", async (req, res) => {
   try {
@@ -636,6 +683,76 @@ router.post("/delete/blog", async (req, res) => {
       );
       res.json({ status: 1, msg: "Blog Deleted Successfully" });
     } else {
+      res.json({ status: 0, msg: "Something went Wrong" });
+    }
+  } catch (error) {
+    // console.log(error);
+    res.send({ status: 0, msg: error.message });
+  }
+});
+
+//  Update new editor blog
+router.post("/update/new/blog", async (req, res) => {
+  try {
+    const date =
+      new Date().toLocaleString("en-US", { weekday: "long" }) +
+      ", " +
+      new Date().toLocaleString("en-US", { month: "long" }) +
+      ", " +
+      new Date().getDate() +
+      ", " +
+      new Date().getFullYear();
+    // console.log(date);
+    const updated = await UBlogs.findOneAndUpdate(
+      { _id: req.body.id },
+      {
+        mainImg: req.body.mainImg,
+        category: req.body.category,
+        keywords: req.body.keywords,
+        blog: req.body.blog,
+        updatedDate: date,
+        status: "Inactive",
+      },
+      {
+        new: true,
+      }
+    );
+    // console.log(updated);
+
+    // pull blog from homepage recent
+    const st = await HomepageData.updateOne(
+      {
+        _id: "647a21933a89a8239f770931",
+      },
+      {
+        $pull: {
+          recent: {
+            _id: req.body.id,
+          },
+        },
+      }
+    );
+
+    const query = "categoryData." + req.body.category;
+    // pull blog from homepage category
+    const s = await HomepageData.updateOne(
+      {
+        _id: "647a21933a89a8239f770931",
+      },
+      {
+        $pull: {
+          [query]: {
+            _id: req.body.id,
+          },
+        },
+      }
+    );
+    // console.log(s);
+    if (updated) {
+      // console.log("in");
+      res.json({ status: 1, msg: "Blog sucessfully updated.", data: updated });
+    } else {
+      // console.log("in2");
       res.json({ status: 0, msg: "Something went Wrong" });
     }
   } catch (error) {
