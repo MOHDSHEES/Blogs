@@ -436,7 +436,7 @@ export const TextEditor = () => {
                 </label>
               </div>
             </div>
-            <div style={{ height: "500px" }}>
+            <div>
               <EditorToolbar quillRef={quillRef} state={state} />
               {/* <button onClick={insertTweet}>Embed Tweet</button> */}
               <ReactQuill
