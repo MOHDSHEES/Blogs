@@ -70,7 +70,6 @@ const Signup = ({ message }) => {
                             name="fname"
                             value={state.fname}
                             onChange={Inputchange}
-                            required
                             className="form-control form-control-lg"
                           />
                           <label className="form-label" htmlFor="firstName">
@@ -86,6 +85,7 @@ const Signup = ({ message }) => {
                             name="lname"
                             value={state.lname}
                             onChange={Inputchange}
+                            required
                             className="form-control form-control-lg"
                           />
                           <label className="form-label" htmlFor="lastName">
