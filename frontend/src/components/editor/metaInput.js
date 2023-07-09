@@ -11,6 +11,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
     setTitle(metaData.title);
     setkeywords(metaData.keywords);
     setmainImg(metaData.mainImg);
+    setDescription(metaData.description);
   }, [metaData]);
   //   console.log(metaData);
   const [keywords, setkeywords] = useState(metaData.keywords);
@@ -25,6 +26,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const { categories: cate } = useContext(globalContext);
   const [id, setId] = useState(null);
+  const [description, setDescription] = useState(metaData.description);
 
   async function addCategory() {
     const result = categories.findIndex(
@@ -84,6 +86,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
       mainImg: mainImg,
       category: category,
       keywords: keywords,
+      description: description,
       id: id,
     });
     window.$("#staticBackdrop").modal("hide");
@@ -94,6 +97,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
     setTitle(metaData.title);
     setkeywords(metaData.keywords);
     setmainImg(metaData.mainImg);
+    setDescription(metaData.description);
     setId(null);
     window.$("#staticBackdrop").modal("hide");
   }
@@ -171,6 +175,17 @@ const MetaInput = ({ setMetaData, metaData }) => {
                   value={keywords}
                   onChange={(e) => setkeywords(e.target.value)}
                   placeholder="Please enter keywords seperated by comma"
+                  autocomplete="off"
+                  required
+                />
+                <div style={{ margin: "10px 0 5px" }}>
+                  <small>Description</small>
+                </div>
+                <textarea
+                  className="form-control"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Please enter description i.e Introduction..."
                   autocomplete="off"
                   required
                 />

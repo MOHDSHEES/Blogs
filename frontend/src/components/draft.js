@@ -27,6 +27,7 @@ const Draft = () => {
     mainImg: "",
     keywords: "",
     category: "",
+    description: "",
     id: null,
   });
   const [titles, setTitles] = useState([]);
@@ -142,6 +143,7 @@ const Draft = () => {
       mainImg: "",
       title: "",
       keywords: "",
+      description: "",
       _id: null,
     });
     // setcategory("");
@@ -153,6 +155,7 @@ const Draft = () => {
     reset();
     setUpdateFlag(0);
     setFlag(0);
+    window.$("#staticBackdrop").modal("show");
   }
 
   // useEffect(() => {
@@ -186,6 +189,7 @@ const Draft = () => {
       mainImg: data.mainImg,
       title: data.title,
       keywords: data.keywords,
+      description: data.description,
     });
     window.$("#staticBackdrop").modal("show");
     // setcategory(data.category);

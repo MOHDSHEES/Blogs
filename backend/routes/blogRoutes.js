@@ -524,6 +524,7 @@ router.post("/add/new/blog", async (req, res) => {
       _id: id,
       title: req.body.metaData.title,
       mainImg: req.body.metaData.mainImg,
+      description: req.body.metaData.description,
       keywords: req.body.metaData.keywords,
       category: req.body.metaData.category,
       blog: req.body.blog,
@@ -749,6 +750,8 @@ router.post("/delete/blog", async (req, res) => {
 
 //  Update new editor blog
 router.post("/update/new/blog", async (req, res) => {
+  // console.log(req.body.metaData.description);
+  // console.log(req.body.id);
   try {
     const date =
       new Date().toLocaleString("en-US", { weekday: "long" }) +
@@ -764,6 +767,7 @@ router.post("/update/new/blog", async (req, res) => {
       {
         title: req.body.metaData.title,
         mainImg: req.body.metaData.mainImg,
+        description: req.body.metaData.description,
         category: req.body.metaData.category,
         keywords: req.body.metaData.keywords,
         blog: req.body.blog,
