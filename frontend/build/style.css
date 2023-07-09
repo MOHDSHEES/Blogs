@@ -486,12 +486,23 @@ a {
   font-family: "Roboto";
 }
 
-.blog-con img {
-  padding: 10px;
+.image-left {
+  float: left;
 }
 
+.blog-con img {
+  padding: 10px;
+  max-height: 300px;
+  object-fit: cover;
+}
+p:empty {
+  display: none; /* hide empty <p> tags */
+  /* Or apply custom styling to empty <p> tags */
+  /* e.g., font-size: 0; */
+}
 @media (max-width: 768px) {
   .blog-con img {
     width: 100%;
+    object-fit: cover;
   }
 }
