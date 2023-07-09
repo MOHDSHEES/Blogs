@@ -488,6 +488,8 @@ a {
 
 .blog-con img {
   padding: 10px;
+  max-height: 300px;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {
