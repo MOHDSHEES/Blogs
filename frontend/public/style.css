@@ -495,5 +495,6 @@ a {
 @media (max-width: 768px) {
   .blog-con img {
     width: 100%;
+    object-fit: cover;
   }
 }
