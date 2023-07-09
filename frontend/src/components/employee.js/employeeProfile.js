@@ -156,10 +156,12 @@ const EmployeeProfile = () => {
                         objectFit: "cover",
                       }}
                     />
-                    <i
-                      onClick={() => setUploadShow(true)}
-                      class="bx bx-edit-alt rounded-circle imgedit-button"
-                    ></i>
+                    {employee.status === 1 && (
+                      <i
+                        onClick={() => setUploadShow(true)}
+                        class="bx bx-edit-alt rounded-circle imgedit-button"
+                      ></i>
+                    )}
                   </div>
                   <h5 className="my-3">{employee.name}</h5>
                   <p className="text-muted mb-1">{employee.post}</p>

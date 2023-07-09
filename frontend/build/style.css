@@ -485,3 +485,13 @@ a {
 .ql-font-roboto {
   font-family: "Roboto";
 }
+
+.blog-con img {
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .blog-con img {
+    width: 100%;
+  }
+}
