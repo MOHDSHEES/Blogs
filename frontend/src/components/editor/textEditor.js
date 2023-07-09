@@ -469,7 +469,7 @@ export const TextEditor = () => {
                 style={{ height: "80vh", background: "white" }}
                 theme="snow"
                 value={state}
-                // onChange={handleChange}
+                onChange={handleChange}
                 placeholder={"Start writing blog..."}
                 modules={modules}
                 formats={formats}
