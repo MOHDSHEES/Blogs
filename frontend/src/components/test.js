@@ -27,7 +27,7 @@ const Test = () => {
                 alt={blog && blog.title}
                 style={{ objectFit: "cover" }}
               />
-              <div class="mb-3">{blog && parse(blog.blog)}</div>
+              <div class="mb-3 blog-con">{blog && parse(blog.blog)}</div>
             </div>
           </div>
         </div>

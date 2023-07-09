@@ -169,19 +169,23 @@ const EmployeeProfile = () => {
                       Status: <span style={{ color: "green" }}>Working</span>
                     </p>
                   ) : (
-                    <p className="text-muted mb-4"> Status: Former</p>
+                    <p className="text-muted mb-4">
+                      Status: <span style={{ color: "red" }}>Former</span>
+                    </p>
                   )}
                   {/* <p className="text-muted mb-4">
                     {capital(employee.district)}, {employee.state}
                   </p> */}
                   <div className="d-flex justify-content-center mb-2">
-                    <button
-                      onClick={() => setModalShow(true)}
-                      type="button"
-                      className="btn btn-primary"
-                    >
-                      Update Details
-                    </button>
+                    {employee.status === 1 && (
+                      <button
+                        onClick={() => setModalShow(true)}
+                        type="button"
+                        className="btn btn-primary"
+                      >
+                        Update Details
+                      </button>
+                    )}
                     <button
                       onClick={() => setChangePasswordModal(true)}
                       type="button"
@@ -288,6 +292,21 @@ const EmployeeProfile = () => {
                     </div>
                   </div>
                   <hr />
+                  {employee.completionDate && (
+                    <>
+                      <div className="row">
+                        <div className="col-sm-3">
+                          <p className="mb-0">Completion Date</p>
+                        </div>
+                        <div className="col-sm-9">
+                          <p className="text-muted mb-0">
+                            {employee.completionDate}
+                          </p>
+                        </div>
+                      </div>
+                      <hr />
+                    </>
+                  )}
                   <div className="row">
                     <div className="col-sm-3">
                       <p className="mb-0">Address</p>
