@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import EditorToolbar, { modules, formats } from "./editorToolbar";
 import "react-quill/dist/quill.snow.css";
-import Sidebar from "../blogAdd/sidebar";
 import axios from "axios";
 import { message } from "antd";
 import { closeMessage, openMessage } from "../functions/message";
@@ -10,6 +9,7 @@ import AllBlogs from "../blogAdd/allBlogs";
 import Autocomplete from "../autocomplete/autocomplete";
 import { useNavigate } from "react-router-dom";
 import { globalContext } from "../../context";
+import EditorSidebar from "./editorSidebar";
 // import { TwitterTweetEmbed } from "react-twitter-embed";
 // import "./styles.css";
 
@@ -254,7 +254,7 @@ export const TextEditor = () => {
   return (
     <div className="body">
       {contextHolder}
-      <Sidebar
+      <EditorSidebar
         // onClickH={handleAddH}
         // onClickP={handleAddP}
         // onClickIT={handleAddIT}

@@ -5,6 +5,7 @@ import HomepageData from "../models/homepageDataModel.js";
 import Users from "../models/userModel.js";
 import Employees from "../models/employeeModel.js";
 import Categories from "../models/categoryModels.js";
+import { customAlphabet } from "nanoid";
 import sgMail from "@sendgrid/mail";
 import {
   getToken,
@@ -508,6 +509,8 @@ router.post("/add/category", async (req, res) => {
 // creating new blogs from editor
 router.post("/add/new/blog", async (req, res) => {
   try {
+    let nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
+    const id = req.body.metaData.id ? req.body.metaData.id : nanoid();
     const date =
       new Date().toLocaleString("en-US", { weekday: "long" }) +
       ", " +
@@ -516,10 +519,13 @@ router.post("/add/new/blog", async (req, res) => {
       new Date().getDate() +
       ", " +
       new Date().getFullYear();
+
     const blog = new UBlogs({
-      mainImg: req.body.mainImg,
-      keywords: req.body.keywords,
-      category: req.body.category,
+      _id: id,
+      title: req.body.metaData.title,
+      mainImg: req.body.metaData.mainImg,
+      keywords: req.body.metaData.keywords,
+      category: req.body.metaData.category,
       blog: req.body.blog,
       views: 0,
       createdDate: date,
@@ -535,7 +541,7 @@ router.post("/add/new/blog", async (req, res) => {
     );
     res.json({ status: 1, msg: "Blog saved successfully.", data: status });
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     res.send({ status: 0, msg: error.message });
   }
 });
@@ -589,6 +595,16 @@ router.post("/blog/trending", async (req, res) => {
   }
 });
 // find titles
+router.post("/blog/updated/titles", async (req, res) => {
+  try {
+    const resu = await UBlogs.find({}).select({ title: 1, _id: 0 });
+    let titles = resu.map((a) => a.title);
+    res.json(titles);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
+// find titles
 router.post("/blog/titles", async (req, res) => {
   try {
     const resu = await Blogs.find({}).select({ title: 1, _id: 0 });
@@ -624,6 +640,21 @@ router.post("/category/blogs", async (req, res) => {
         strength: 2,
       });
     res.json(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
+
+// find blog by title for search input
+router.post("/find/updated/blog", async (req, res) => {
+  try {
+    const blog = await UBlogs.find({
+      title: req.body.title,
+    }).collation({
+      locale: "en",
+      strength: 2,
+    });
+    res.json(blog);
   } catch (error) {
     res.send({ msg: error.message });
   }
@@ -731,9 +762,10 @@ router.post("/update/new/blog", async (req, res) => {
     const updated = await UBlogs.findOneAndUpdate(
       { _id: req.body.id },
       {
-        mainImg: req.body.mainImg,
-        category: req.body.category,
-        keywords: req.body.keywords,
+        title: req.body.metaData.title,
+        mainImg: req.body.metaData.mainImg,
+        category: req.body.metaData.category,
+        keywords: req.body.metaData.keywords,
         blog: req.body.blog,
         updatedDate: date,
         status: "Inactive",

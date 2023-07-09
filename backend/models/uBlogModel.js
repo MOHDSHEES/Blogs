@@ -1,8 +1,18 @@
 import mongoose from "mongoose";
+import { customAlphabet } from "nanoid";
 
 // mongoose.set("useCreateIndex", true);
 // schema.index({ title: "text" });
+
+let nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
 const blogSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    required: true,
+    default: () => nanoid(),
+    index: { unique: true },
+  },
+  title: { type: String, required: true },
   mainImg: { type: String, required: true },
   keywords: { type: String, required: true },
   category: { type: String, required: true },

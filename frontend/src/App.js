@@ -167,7 +167,7 @@ function App() {
             {/* <Route path="/advertise/policies" element={<Advertise />} /> */}
             <Route path="/categories" element={<MoreCategoriesPage />} />
             {/* <Route path="/career" element={<Career />} /> */}
-            <Route path="/test" element={<Test />} />
+            {/* <Route path="/test" element={<Test />} /> */}
           </Route>
           {/* <Route path="/add" element={<Form cate={categories} />} />
         <ProtectedRoute path="/add" categories={categories} /> */}

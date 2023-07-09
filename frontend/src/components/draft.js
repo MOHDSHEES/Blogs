@@ -5,28 +5,38 @@ import axios from "axios";
 import { globalContext } from "../context";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "./blogAdd/sidebar";
 import Autocomplete from "./autocomplete/autocomplete";
 import AllBlogs from "./blogAdd/allBlogs";
+import EditorSidebar from "./editor/editorSidebar";
 
 const Draft = () => {
   const editorRef = useRef(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+
+  useEffect(() => {
+    window.$("#staticBackdrop").modal("show"); // Show the modal on page render
+  }, []);
+  //   const log = () => {
+  //     if (editorRef.current) {
+  //       console.log(editorRef.current.getContent());
+  //     }
+  //   };
 
   const [state, setState] = useState(null);
-  console.log(state);
+  const [metaData, setMetaData] = useState({
+    title: "",
+    mainImg: "",
+    keywords: "",
+    category: "",
+    id: null,
+  });
   const [titles, setTitles] = useState([]);
-  const [mainImg, setmainImg] = useState("");
-  const [keywords, setkeywords] = useState("");
-  const [category, setcategory] = useState("");
-  const [categories, setCategories] = useState(null);
-  const [checkBox, setcheckBox] = useState(false);
-  const [categoryImg, setcategoryImg] = useState("");
-  const [disabledCategoryBtn, setdisabledCategoryBtn] = useState(false);
+  //   const [mainImg, setmainImg] = useState("");
+  //   const [keywords, setkeywords] = useState("");
+  //   const [category, setcategory] = useState("");
+  //   const [categories, setCategories] = useState(null);
+  //   const [checkBox, setcheckBox] = useState(false);
+  //   const [categoryImg, setcategoryImg] = useState("");
+  //   const [disabledCategoryBtn, setdisabledCategoryBtn] = useState(false);
   const [disabled, setdisabled] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const [id, setId] = useState(null);
@@ -35,7 +45,7 @@ const Draft = () => {
   const [filteredData, setfilteredData] = useState(null);
   const [radio, setRadio] = useState("1");
   const [loading, setLoading] = useState(false);
-  const { categories: cate } = useContext(globalContext);
+  //   const { categories: cate } = useContext(globalContext);
   const [isAdmin, setIsAdmin] = useState(false);
   const [user, setuser] = useState(null);
 
@@ -60,52 +70,63 @@ const Draft = () => {
   async function editBlog() {
     setFlag(1);
     setUpdateFlag(1);
-    const { data } = await axios.post("/api/blog/titles");
+    const { data } = await axios.post("/api/blog/updated/titles");
     setTitles(data);
   }
   async function submitHandler(e) {
     e.preventDefault();
-    setdisabled(true);
-    if (flag) {
-      let text =
-        "Blog will be Inactive until verified by Admin. Are you sure to update. \n";
-      if (window.confirm(text) === true) {
-        openMessage(messageApi, "Saving...");
-        const { data } = await axios.post("/api/update/new/blog", {
-          id: id,
-          mainImg,
-          keywords,
-          category,
-          blog: state,
-        });
-        if (data && data.status === 1)
-          closeMessage(messageApi, data.msg, "success");
-        else closeMessage(messageApi, data.msg, "error");
 
-        setAllBlogs([...allBlogs.filter((blog) => blog._id !== id), data.data]);
-        if (radio === "3")
-          setfilteredData([...filteredData.filter((blog) => blog._id !== id)]);
-        else
-          setfilteredData([
-            ...filteredData.filter((blog) => blog._id !== id),
-            data.data,
-          ]);
+    if (metaData.title.trim()) {
+      if (state && state.trim()) {
+        setdisabled(true);
+        if (flag) {
+          let text =
+            "Blog will be Inactive until verified by Admin. Are you sure to update. \n";
+          if (window.confirm(text) === true) {
+            openMessage(messageApi, "Saving...");
+            const { data } = await axios.post("/api/update/new/blog", {
+              id: id,
+              metaData: metaData,
+              blog: state,
+            });
+            if (data && data.status === 1)
+              closeMessage(messageApi, data.msg, "success");
+            else closeMessage(messageApi, data.msg, "error");
+
+            setAllBlogs([
+              ...allBlogs.filter((blog) => blog._id !== id),
+              data.data,
+            ]);
+            if (radio === "3")
+              setfilteredData([
+                ...filteredData.filter((blog) => blog._id !== id),
+              ]);
+            else
+              setfilteredData([
+                ...filteredData.filter((blog) => blog._id !== id),
+                data.data,
+              ]);
+          }
+        } else {
+          openMessage(messageApi, "Saving...");
+          const { data } = await axios.post("/api/add/new/blog", {
+            metaData: metaData,
+            blog: state,
+            user: user._id,
+          });
+          closeMessage(messageApi, data.msg, "success");
+          setAllBlogs([...allBlogs, data.data]);
+          if (radio !== "3") setfilteredData([...filteredData, data.data]);
+          newBlog();
+        }
+        setdisabled(false);
+      } else {
+        closeMessage(messageApi, "All fields are required", "error");
       }
     } else {
-      openMessage(messageApi, "Saving...");
-      const { data } = await axios.post("/api/add/new/blog", {
-        mainImg,
-        keywords,
-        category,
-        blog: state,
-        user: user._id,
-      });
-      closeMessage(messageApi, data.msg, "success");
-      setAllBlogs([...allBlogs, data.data]);
-      if (radio !== "3") setfilteredData([...filteredData, data.data]);
-      newBlog();
+      closeMessage(messageApi, "All fields are required", "error");
+      window.$("#staticBackdrop").modal("show");
     }
-    setdisabled(false);
   }
   // console.log(modules);
   // console.log(state);
@@ -116,9 +137,16 @@ const Draft = () => {
   function reset() {
     setUpdateFlag(1);
     setState(null);
-    setcategory("");
-    setkeywords("");
-    setmainImg("");
+    setMetaData({
+      category: "",
+      mainImg: "",
+      title: "",
+      keywords: "",
+      _id: null,
+    });
+    // setcategory("");
+    // setkeywords("");
+    // setmainImg("");
   }
 
   function newBlog() {
@@ -153,18 +181,26 @@ const Draft = () => {
     setId(data._id);
     // console.log(deltaContent);
     setState(data.blog);
-    setcategory(data.category);
-    setmainImg(data.mainImg);
-    setkeywords(data.keywords);
+    setMetaData({
+      category: data.category,
+      mainImg: data.mainImg,
+      title: data.title,
+      keywords: data.keywords,
+    });
+    window.$("#staticBackdrop").modal("show");
+    // setcategory(data.category);
+    // setmainImg(data.mainImg);
+    // setkeywords(data.keywords);
   }
 
   async function searchHandler(e, search) {
     e.preventDefault();
-    const { data } = await axios.post("/api/find/blog", {
+    const { data } = await axios.post("/api/find/updated/blog", {
       title: search,
     });
     if (data.length) {
       updateForm(data[0]);
+
       // setId(data[0]._id);
       // setblog(data[0].blog);
       // setcategory(data[0].category);
@@ -178,52 +214,52 @@ const Draft = () => {
     }
   }
 
-  async function addCategory() {
-    const result = categories.findIndex(
-      (item) => category.toLowerCase() === item.category.toLowerCase()
-    );
-    if (result === -1) {
-      if (!(category.trim() === "") && !(categoryImg.trim() === "")) {
-        setdisabledCategoryBtn(true);
-        openMessage(messageApi, "Adding Category...");
-        const { data } = await axios.post("/api/add/category", {
-          category: { category: category, categoryImg: categoryImg },
-        });
-        if (data.status) {
-          setCategories([
-            ...categories,
-            { category: category, categoryImg: categoryImg },
-          ]);
-          setcheckBox(false);
-          setdisabledCategoryBtn(false);
-          setdisabled(false);
-          closeMessage(messageApi, data.msg, "success");
-        } else {
-          closeMessage(messageApi, data.msg, "error");
-          setdisabledCategoryBtn(false);
-          setdisabled(false);
-        }
-      } else {
-        closeMessage(
-          messageApi,
-          "Both category name and category Img are required",
-          "error"
-        );
-      }
-    } else if (checkBox) {
-      closeMessage(messageApi, "Category Already Exsists", "success");
-      setcheckBox(false);
-      setdisabled(false);
-    }
-  }
-  function checkBoxHandle(e) {
-    setcheckBox(e.target.checked);
-    if (e.target.checked) {
-      setdisabled(true);
-    } else {
-      setdisabled(false);
-    }
-  }
+  //   async function addCategory() {
+  //     const result = categories.findIndex(
+  //       (item) => category.toLowerCase() === item.category.toLowerCase()
+  //     );
+  //     if (result === -1) {
+  //       if (!(category.trim() === "") && !(categoryImg.trim() === "")) {
+  //         setdisabledCategoryBtn(true);
+  //         openMessage(messageApi, "Adding Category...");
+  //         const { data } = await axios.post("/api/add/category", {
+  //           category: { category: category, categoryImg: categoryImg },
+  //         });
+  //         if (data.status) {
+  //           setCategories([
+  //             ...categories,
+  //             { category: category, categoryImg: categoryImg },
+  //           ]);
+  //           setcheckBox(false);
+  //           setdisabledCategoryBtn(false);
+  //           setdisabled(false);
+  //           closeMessage(messageApi, data.msg, "success");
+  //         } else {
+  //           closeMessage(messageApi, data.msg, "error");
+  //           setdisabledCategoryBtn(false);
+  //           setdisabled(false);
+  //         }
+  //       } else {
+  //         closeMessage(
+  //           messageApi,
+  //           "Both category name and category Img are required",
+  //           "error"
+  //         );
+  //       }
+  //     } else if (checkBox) {
+  //       closeMessage(messageApi, "Category Already Exsists", "success");
+  //       setcheckBox(false);
+  //       setdisabled(false);
+  //     }
+  //   }
+  //   function checkBoxHandle(e) {
+  //     setcheckBox(e.target.checked);
+  //     if (e.target.checked) {
+  //       setdisabled(true);
+  //     } else {
+  //       setdisabled(false);
+  //     }
+  //   }
 
   const [allBlogs, setAllBlogs] = useState(null);
   // console.log(allBlogs);
@@ -249,15 +285,17 @@ const Draft = () => {
     }
   }, [navigate, user]);
 
-  useEffect(() => {
-    setCategories(cate);
-  }, [cate]);
+  //   useEffect(() => {
+  //     setCategories(cate);
+  //   }, [cate]);
 
   return (
     <div className="body">
       {contextHolder}
-      <Sidebar
-        // onClickH={handleAddH}
+      <EditorSidebar
+        setMetaData={setMetaData}
+        metaData={metaData}
+        // onClickM={handleAddM}
         // onClickP={handleAddP}
         // onClickIT={handleAddIT}
         // onClickTI={handleAddTI}
@@ -357,7 +395,7 @@ const Draft = () => {
       {!updateFlag ? (
         <div className="text-editor">
           <form onSubmit={submitHandler}>
-            <div class="p-3 bg-light">
+            {/* <div class="p-3 bg-light">
               <div style={{ margin: "10px 0 5px" }}>
                 <small>Main Image</small>
               </div>
@@ -462,7 +500,7 @@ const Draft = () => {
                   </small>
                 </label>
               </div>
-            </div>
+            </div> */}
 
             <Editor
               apiKey="cxf2qo25od9zprfi6zjjx6nxqa6xdm3c4b9h3uyq1981iunr"
