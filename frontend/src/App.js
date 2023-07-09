@@ -27,6 +27,7 @@ import Employee from "./components/employee.js/employee";
 import EmployeeLogin from "./components/login/employeeLogin";
 import TextEditor from "./components/editor/textEditor";
 import Test from "./components/test";
+import BlogEditor from "./components/draft";
 
 // import Sidebar from "./components/sidebar";
 
@@ -170,7 +171,7 @@ function App() {
           </Route>
           {/* <Route path="/add" element={<Form cate={categories} />} />
         <ProtectedRoute path="/add" categories={categories} /> */}
-          <Route path="/edit" element={<TextEditor />} />
+          <Route path="/edit" element={<BlogEditor />} />
           <Route path="/add" element={<ProtectedRoute />}>
             <Route path="/add" element={<Form />} />
           </Route>

@@ -316,6 +316,31 @@ router.post("/authenticate", verifyToken, async (req, res) => {
     res.send({ msg: error.message });
   }
 });
+
+// all blogs for particular user for new editor
+router.post("/find/ublog/all", verifyToken, async (req, res) => {
+  try {
+    // console.log(res.locals.id);
+    const user = await Users.findOne(
+      {
+        _id: res.locals.data._id,
+      },
+      { password: 0 }
+    );
+    // console.log(user);
+    if (user.isAdmin) {
+      const resu = await UBlogs.find({});
+      res.json({ blogs: resu, user: user });
+    } else {
+      const resu = await UBlogs.find({ _id: { $in: user.blog } });
+      res.json({ blogs: resu, user: user });
+    }
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // all blogs for particular user
 router.post("/find/blog/all", verifyToken, async (req, res) => {
   try {

@@ -155,27 +155,27 @@ const Form = () => {
     setblog(values);
     setopenpopover(false);
   }
-  async function deleteBlog(e) {
-    // console.log(category);
-    e.preventDefault();
-    let text = "Are you sure you want to delete this blog.\n";
-    if (window.confirm(text) === true) {
-      openMessage(messageApi, "Deleting...");
-      const { data } = await axios.post("/api/delete/blog", {
-        id: id,
-        user: user._id,
-        category: category,
-      });
-      if (data.status) {
-        closeMessage(messageApi, data.msg, "success");
-        setAllBlogs(allBlogs.filter((blog) => blog._id !== id));
-        setfilteredData(filteredData.filter((blog) => blog._id !== id));
-        newBlog();
-      } else {
-        closeMessage(messageApi, data.msg, "error");
-      }
-    }
-  }
+  // async function deleteBlog(e) {
+  //   // console.log(category);
+  //   e.preventDefault();
+  //   let text = "Are you sure you want to delete this blog.\n";
+  //   if (window.confirm(text) === true) {
+  //     openMessage(messageApi, "Deleting...");
+  //     const { data } = await axios.post("/api/delete/blog", {
+  //       id: id,
+  //       user: user._id,
+  //       category: category,
+  //     });
+  //     if (data.status) {
+  //       closeMessage(messageApi, data.msg, "success");
+  //       setAllBlogs(allBlogs.filter((blog) => blog._id !== id));
+  //       setfilteredData(filteredData.filter((blog) => blog._id !== id));
+  //       newBlog();
+  //     } else {
+  //       closeMessage(messageApi, data.msg, "error");
+  //     }
+  //   }
+  // }
   async function saveBlog(e) {
     e.preventDefault();
 

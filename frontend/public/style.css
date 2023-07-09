@@ -486,6 +486,10 @@ a {
   font-family: "Roboto";
 }
 
+.image-left {
+  float: left;
+}
+
 .blog-con img {
   padding: 10px;
   max-height: 300px;

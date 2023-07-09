@@ -15,6 +15,7 @@ import { globalContext } from "../../context";
 
 export const TextEditor = () => {
   const [state, setState] = useState(null);
+  console.log(state);
   const [titles, setTitles] = useState([]);
   const [mainImg, setmainImg] = useState("");
   const [keywords, setkeywords] = useState("");
@@ -122,13 +123,36 @@ export const TextEditor = () => {
     setUpdateFlag(0);
     setFlag(0);
   }
+
+  // useEffect(() => {
+  //   if (quillRef.current) {
+  //     const quillInstance = quillRef.current.getEditor();
+  //     quillInstance.clipboard.dangerouslyPasteHTML(initialContent);
+
+  //     // Apply CSS styles to the inserted image
+  //     const imageBlots = quillInstance.root.querySelectorAll("img");
+  //     imageBlots.forEach((imageBlot) => {
+  //       if (imageBlot.width === 201 && imageBlot.height === 174.0351890611087) {
+  //         imageBlot.style.width = "201px";
+  //         imageBlot.style.height = "174.0351890611087px";
+  //         imageBlot.style.display = "inline";
+  //         imageBlot.style.float = "left";
+  //         imageBlot.style.margin = "0px 1em 1em 0px";
+  //       }
+  //     });
+  //   }
+  // }, []);
+
+  // const initialContent =
+  //   '<p>Some text before the image.</p><img src="https://res.cloudinary.com/domyp6djh/image/upload/v1688566567/technology%20webp/NVIDIA_GAUGAN_1640_1420_px_ywigkz_ozlgbh.webp" width="201" height="174.0351890611087" style="display: inline; float: left; margin: 0px 1em 1em 0px;" data-align="left"><p>Some text after the image.</p>';
   function updateForm(data) {
+    setUpdateFlag(0);
     setId(data._id);
+    // console.log(deltaContent);
     setState(data.blog);
     setcategory(data.category);
     setmainImg(data.mainImg);
     setkeywords(data.keywords);
-    setUpdateFlag(0);
   }
 
   async function searchHandler(e, search) {
@@ -206,7 +230,7 @@ export const TextEditor = () => {
     if (!user) {
       // console.log("in");
       (async () => {
-        const { data } = await axios.post("/api/find/blog/all", {
+        const { data } = await axios.post("/api/find/ublog/all", {
           token: localStorage.getItem("token"),
         });
         if (data && data.status === 404) {
@@ -226,6 +250,7 @@ export const TextEditor = () => {
   useEffect(() => {
     setCategories(cate);
   }, [cate]);
+
   return (
     <div className="body">
       {contextHolder}
@@ -444,11 +469,15 @@ export const TextEditor = () => {
                 style={{ height: "80vh", background: "white" }}
                 theme="snow"
                 value={state}
-                onChange={handleChange}
+                // onChange={handleChange}
                 placeholder={"Start writing blog..."}
                 modules={modules}
                 formats={formats}
               />
+              {/* <div
+                className="ql-editor"
+                dangerouslySetInnerHTML={{ __html: state }}
+              /> */}
             </div>
             <div className="form-fixed-btn">
               <button

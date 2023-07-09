@@ -10,6 +10,13 @@ import Skeleton from "react-loading-skeleton";
 Quill.register("modules/blotFormatter", BlotFormatter);
 Quill.register("modules/imageDrop", ImageDrop);
 
+const ExtendedImage = Quill.import("formats/image");
+class CustomImage extends ExtendedImage {
+  static formats(domNode) {
+    return domNode.getAttribute("width");
+  }
+}
+Quill.register(CustomImage, true);
 // Custom Undo button icon component for Quill editor. You can import it directly
 // from 'quill/assets/icons/undo.svg' but I found that a number of loaders do not
 // handle them correctly
@@ -99,6 +106,9 @@ export const modules = {
       redo: redoChange,
       image: imageHandler,
     },
+  },
+  clipboard: {
+    matchVisual: false, // Disable visual matching to preserve HTML attributes
   },
   history: {
     delay: 500,

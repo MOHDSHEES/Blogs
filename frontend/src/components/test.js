@@ -25,7 +25,7 @@ const Test = () => {
                 class="img-fluid w-100"
                 src={blog && blog.mainImg}
                 alt={blog && blog.title}
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "cover", marginBottom: "20px" }}
               />
               <div class="mb-3 blog-con">{blog && parse(blog.blog)}</div>
             </div>
