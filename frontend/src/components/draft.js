@@ -149,9 +149,6 @@ const Draft = () => {
       description: "",
       id: null,
     });
-    // setcategory("");
-    // setkeywords("");
-    // setmainImg("");
   }
 
   function newBlog() {
@@ -161,27 +158,6 @@ const Draft = () => {
     window.$("#staticBackdrop").modal("show");
   }
 
-  // useEffect(() => {
-  //   if (quillRef.current) {
-  //     const quillInstance = quillRef.current.getEditor();
-  //     quillInstance.clipboard.dangerouslyPasteHTML(initialContent);
-
-  //     // Apply CSS styles to the inserted image
-  //     const imageBlots = quillInstance.root.querySelectorAll("img");
-  //     imageBlots.forEach((imageBlot) => {
-  //       if (imageBlot.width === 201 && imageBlot.height === 174.0351890611087) {
-  //         imageBlot.style.width = "201px";
-  //         imageBlot.style.height = "174.0351890611087px";
-  //         imageBlot.style.display = "inline";
-  //         imageBlot.style.float = "left";
-  //         imageBlot.style.margin = "0px 1em 1em 0px";
-  //       }
-  //     });
-  //   }
-  // }, []);
-
-  // const initialContent =
-  //   '<p>Some text before the image.</p><img src="https://res.cloudinary.com/domyp6djh/image/upload/v1688566567/technology%20webp/NVIDIA_GAUGAN_1640_1420_px_ywigkz_ozlgbh.webp" width="201" height="174.0351890611087" style="display: inline; float: left; margin: 0px 1em 1em 0px;" data-align="left"><p>Some text after the image.</p>';
   function updateForm(data) {
     setUpdateFlag(0);
     setId(data.id);
@@ -195,9 +171,6 @@ const Draft = () => {
       description: data.description,
     });
     window.$("#staticBackdrop").modal("show");
-    // setcategory(data.category);
-    // setmainImg(data.mainImg);
-    // setkeywords(data.keywords);
   }
 
   async function searchHandler(e, search) {
@@ -207,66 +180,13 @@ const Draft = () => {
     });
     if (data.length) {
       updateForm(data[0]);
-
-      // setId(data[0]._id);
-      // setblog(data[0].blog);
-      // setcategory(data[0].category);
-      // setmainImg(data[0].mainImg);
-      // setkeywords(data[0].keywords);
-      // settitle(data[0].title);
-      // setUpdateFlag(0);
     } else {
       closeMessage(messageApi, "Blog not Found", "error");
       reset();
     }
   }
 
-  //   async function addCategory() {
-  //     const result = categories.findIndex(
-  //       (item) => category.toLowerCase() === item.category.toLowerCase()
-  //     );
-  //     if (result === -1) {
-  //       if (!(category.trim() === "") && !(categoryImg.trim() === "")) {
-  //         setdisabledCategoryBtn(true);
-  //         openMessage(messageApi, "Adding Category...");
-  //         const { data } = await axios.post("/api/add/category", {
-  //           category: { category: category, categoryImg: categoryImg },
-  //         });
-  //         if (data.status) {
-  //           setCategories([
-  //             ...categories,
-  //             { category: category, categoryImg: categoryImg },
-  //           ]);
-  //           setcheckBox(false);
-  //           setdisabledCategoryBtn(false);
-  //           setdisabled(false);
-  //           closeMessage(messageApi, data.msg, "success");
-  //         } else {
-  //           closeMessage(messageApi, data.msg, "error");
-  //           setdisabledCategoryBtn(false);
-  //           setdisabled(false);
-  //         }
-  //       } else {
-  //         closeMessage(
-  //           messageApi,
-  //           "Both category name and category Img are required",
-  //           "error"
-  //         );
-  //       }
-  //     } else if (checkBox) {
-  //       closeMessage(messageApi, "Category Already Exsists", "success");
-  //       setcheckBox(false);
-  //       setdisabled(false);
-  //     }
-  //   }
-  //   function checkBoxHandle(e) {
-  //     setcheckBox(e.target.checked);
-  //     if (e.target.checked) {
-  //       setdisabled(true);
-  //     } else {
-  //       setdisabled(false);
-  //     }
-  //   }
+  //
 
   const [allBlogs, setAllBlogs] = useState(null);
   // console.log(allBlogs);
@@ -282,7 +202,7 @@ const Draft = () => {
           localStorage.removeItem("token");
           navigate("/login", { replace: true });
         }
-        // console.log(data);
+
         setuser(data.user);
 
         setIsAdmin(data.user.isAdmin);
@@ -292,10 +212,6 @@ const Draft = () => {
     }
   }, [navigate, user]);
 
-  //   useEffect(() => {
-  //     setCategories(cate);
-  //   }, [cate]);
-
   return (
     <div className="body">
       {contextHolder}
@@ -303,11 +219,6 @@ const Draft = () => {
         setMetaData={setMetaData}
         metaData={metaData}
         updateFlag={updateFlag}
-        // onClickM={handleAddM}
-        // onClickP={handleAddP}
-        // onClickIT={handleAddIT}
-        // onClickTI={handleAddTI}
-        // onClickTW={handleAddTW}
         onClickEdit={editBlog}
         isAdmin={true}
       />
@@ -401,115 +312,8 @@ const Draft = () => {
       )}
 
       {!updateFlag ? (
-        <div className="text-editor">
+        <div className="text-editor" style={{ marginTop: "80px" }}>
           <form onSubmit={submitHandler}>
-            {/* <div class="p-3 bg-light">
-              <div style={{ margin: "10px 0 5px" }}>
-                <small>Main Image</small>
-              </div>
-              <input
-                className="form-control"
-                value={mainImg}
-                onChange={(e) => setmainImg(e.target.value)}
-                placeholder="Please enter the URL of main image..."
-                autocomplete="off"
-                required
-              />
-              <div style={{ margin: "10px 0 5px" }}>
-                <small>Keywords</small>
-              </div>
-              <input
-                className="form-control"
-                value={keywords}
-                onChange={(e) => setkeywords(e.target.value)}
-                placeholder="Please enter keywords seperated by comma"
-                autocomplete="off"
-                required
-              />
-              <div style={{ margin: "10px 0 5px" }}>
-                <small>Category</small>
-              </div>
-              {!checkBox ? (
-                <select
-                  name="brand"
-                  value={category}
-                  onChange={(e) => setcategory(e.target.value)}
-                  id="inputState"
-                  className="form-select"
-                  required
-                >
-                  <option value="">
-                    Please select the category of the blog...
-                  </option>
-                  {categories &&
-                    categories.map((category, idx) => {
-                      return (
-                        <option key={idx + "id"} value={category.category}>
-                          {category.category}
-                        </option>
-                      );
-                    })}
-                </select>
-              ) : (
-                <div>
-                  <div style={{ margin: "10px 0 5px" }}>
-                    <small>Enter Image URL</small>
-                  </div>
-                  <input
-                    style={{ marginBottom: "5px" }}
-                    className="form-control"
-                    value={categoryImg}
-                    onChange={(e) => setcategoryImg(e.target.value)}
-                    placeholder="Please enter the URL of category image..."
-                    autocomplete="off"
-                    required
-                  />
-                  <div style={{ margin: "10px 0 5px" }}>
-                    <small>Enter Category</small>
-                  </div>
-                  <div class="input-group">
-                    <input
-                      className="form-control"
-                      value={category}
-                      onChange={(e) => setcategory(e.target.value)}
-                      placeholder="Please enter the category of the blog..."
-                      autocomplete="off"
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={addCategory}
-                      form="categoryForm"
-                      disabled={disabledCategoryBtn}
-                      class="btn btn-primary input-group-text"
-                    >
-                      Add Category
-                    </button>
-                  </div>
-                </div>
-              )}
-              <div className="pl-4 pt-2">
-                <input
-                  className="form-check-input "
-                  type="checkbox"
-                  checked={checkBox}
-                  onChange={(e) => checkBoxHandle(e)}
-                />
-                <label
-                  onClick={() => {
-                    setcheckBox(!checkBox);
-                    setdisabled(!disabled);
-                  }}
-                  className="form-check-label"
-                  htmlFor="defaultCheck1"
-                >
-                  <small>
-                    Tick the checkbox if category is not in the list.{" "}
-                  </small>
-                </label>
-              </div>
-            </div> */}
-
             <Editor
               apiKey="cxf2qo25od9zprfi6zjjx6nxqa6xdm3c4b9h3uyq1981iunr"
               onInit={(evt, editor) => (editorRef.current = editor)}
@@ -541,20 +345,23 @@ const Draft = () => {
                   "wordcount",
                 ],
                 toolbar:
-                  "undo redo | blocks | image " +
+                  "undo redo | blocks| fontfamily | fontsize | image " +
                   "bold italic forecolor | alignleft aligncenter " +
-                  "alignright alignjustify | bullist numlist outdent indent | " +
-                  "removeformat",
+                  "alignright alignjustify | bullist numlist outdent indent |" +
+                  "removeformat ",
+                font_size_formats:
+                  "8pt 10pt 12pt 14pt 16pt 18pt 20pt 22pt 24pt 26pt 28pt 36pt 48pt 72pt",
 
                 image_list: [
                   {
-                    title: "My image 1",
-                    value: "https://www.example.com/my1.gif",
+                    title: "Sample Img",
+                    value:
+                      "https://res.cloudinary.com/domyp6djh/image/upload/v1685970572/468x200_af2w60.png",
                   },
-                  {
-                    title: "My image 2",
-                    value: "http://www.moxiecode.com/my2.gif",
-                  },
+                  //   {
+                  //     title: "My image 2",
+                  //     value: "http://www.moxiecode.com/my2.gif",
+                  //   },
                 ],
                 content_style:
                   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
@@ -578,13 +385,6 @@ const Draft = () => {
                   >
                     Cancel
                   </button>
-                  {/* <button
-                    onClick={(e) => deleteBlog(e)}
-                    type="button"
-                    class="m-3 btn btn-danger"
-                  >
-                    Delete
-                  </button> */}
                 </>
               ) : (
                 ""
