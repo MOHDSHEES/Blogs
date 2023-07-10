@@ -43,7 +43,7 @@ const AllBlogs = ({ blog }) => {
           {blog.title}{" "}
           <a
             href={
-              "https://www.offtheweb.in/blogs/" + blog.title + "/" + blog._id
+              "https://www.offtheweb.in/blogs/" + blog.title + "/" + blog.id
             }
             rel="noreferrer"
             target="_blank"

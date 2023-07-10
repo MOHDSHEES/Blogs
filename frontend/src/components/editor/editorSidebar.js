@@ -7,6 +7,7 @@ const EditorSidebar = ({
   setMetaData,
   metaData,
   onClickEdit,
+  updateFlag,
 
   isAdmin,
 }) => {
@@ -83,16 +84,18 @@ const EditorSidebar = ({
                 <span class="nav_logo-name">Off The Web</span>{" "}
               </a>
               <div class="nav_list">
-                <Link
-                  // onClick={onClickM}
-                  class="nav_link"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
-                >
-                  <i class="bx bx-spreadsheet nav_icon"></i>
-                  {/* <i class="bx bx-heading nav_icon"></i>{" "} */}
-                  <span class="nav_name">Meta Data</span>{" "}
-                </Link>
+                {!updateFlag && (
+                  <Link
+                    // onClick={onClickM}
+                    class="nav_link"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                  >
+                    <i class="bx bx-spreadsheet nav_icon"></i>
+                    {/* <i class="bx bx-heading nav_icon"></i>{" "} */}
+                    <span class="nav_name">Meta Data</span>{" "}
+                  </Link>
+                )}
                 {/* <Link onClick={onClickP} class="nav_link active">
                   {" "}
                   <i class="bx bx-text nav_icon"></i>

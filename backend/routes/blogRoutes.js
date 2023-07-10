@@ -333,7 +333,7 @@ router.post("/find/ublog/all", verifyToken, async (req, res) => {
       const resu = await UBlogs.find({});
       res.json({ blogs: resu, user: user });
     } else {
-      const resu = await UBlogs.find({ _id: { $in: user.blog } });
+      const resu = await UBlogs.find({ id: { $in: user.blog } });
       res.json({ blogs: resu, user: user });
     }
     // let trending = resu.map((a) => a.title);
@@ -521,7 +521,7 @@ router.post("/add/new/blog", async (req, res) => {
       new Date().getFullYear();
 
     const blog = new UBlogs({
-      _id: id,
+      id: id,
       title: req.body.metaData.title,
       mainImg: req.body.metaData.mainImg,
       description: req.body.metaData.description,
@@ -598,7 +598,7 @@ router.post("/blog/trending", async (req, res) => {
 // find titles
 router.post("/blog/updated/titles", async (req, res) => {
   try {
-    const resu = await UBlogs.find({}).select({ title: 1, _id: 0 });
+    const resu = await UBlogs.find({}).select({ title: 1, id: 0 });
     let titles = resu.map((a) => a.title);
     res.json(titles);
   } catch (error) {
@@ -763,7 +763,7 @@ router.post("/update/new/blog", async (req, res) => {
       new Date().getFullYear();
     // console.log(date);
     const updated = await UBlogs.findOneAndUpdate(
-      { _id: req.body.id },
+      { id: req.body.id },
       {
         title: req.body.metaData.title,
         mainImg: req.body.metaData.mainImg,

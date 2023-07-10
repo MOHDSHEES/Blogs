@@ -95,16 +95,16 @@ const Draft = () => {
             else closeMessage(messageApi, data.msg, "error");
 
             setAllBlogs([
-              ...allBlogs.filter((blog) => blog._id !== id),
+              ...allBlogs.filter((blog) => blog.id !== id),
               data.data,
             ]);
             if (radio === "3")
               setfilteredData([
-                ...filteredData.filter((blog) => blog._id !== id),
+                ...filteredData.filter((blog) => blog.id !== id),
               ]);
             else
               setfilteredData([
-                ...filteredData.filter((blog) => blog._id !== id),
+                ...filteredData.filter((blog) => blog.id !== id),
                 data.data,
               ]);
           }
@@ -117,8 +117,11 @@ const Draft = () => {
           });
           closeMessage(messageApi, data.msg, "success");
           setAllBlogs([...allBlogs, data.data]);
+
           if (radio !== "3") setfilteredData([...filteredData, data.data]);
-          newBlog();
+          reset();
+          setUpdateFlag(0);
+          setFlag(0);
         }
         setdisabled(false);
       } else {
@@ -144,7 +147,7 @@ const Draft = () => {
       title: "",
       keywords: "",
       description: "",
-      _id: null,
+      id: null,
     });
     // setcategory("");
     // setkeywords("");
@@ -181,7 +184,7 @@ const Draft = () => {
   //   '<p>Some text before the image.</p><img src="https://res.cloudinary.com/domyp6djh/image/upload/v1688566567/technology%20webp/NVIDIA_GAUGAN_1640_1420_px_ywigkz_ozlgbh.webp" width="201" height="174.0351890611087" style="display: inline; float: left; margin: 0px 1em 1em 0px;" data-align="left"><p>Some text after the image.</p>';
   function updateForm(data) {
     setUpdateFlag(0);
-    setId(data._id);
+    setId(data.id);
     // console.log(deltaContent);
     setState(data.blog);
     setMetaData({
@@ -299,6 +302,7 @@ const Draft = () => {
       <EditorSidebar
         setMetaData={setMetaData}
         metaData={metaData}
+        updateFlag={updateFlag}
         // onClickM={handleAddM}
         // onClickP={handleAddP}
         // onClickIT={handleAddIT}

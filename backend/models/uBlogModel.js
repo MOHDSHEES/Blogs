@@ -6,7 +6,7 @@ import { customAlphabet } from "nanoid";
 
 let nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
 const blogSchema = new mongoose.Schema({
-  _id: {
+  id: {
     type: String,
     required: true,
     default: () => nanoid(),
