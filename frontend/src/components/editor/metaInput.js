@@ -25,7 +25,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
   const [disabled, setdisabled] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const { categories: cate } = useContext(globalContext);
-  const [id, setId] = useState(null);
+  //   const [id, setId] = useState(null);
   const [description, setDescription] = useState(metaData.description);
 
   async function addCategory() {
@@ -87,7 +87,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
       category: category,
       keywords: keywords,
       description: description,
-      id: id,
+      //   id: id,
     });
     window.$("#staticBackdrop").modal("hide");
   }
@@ -98,7 +98,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
     setkeywords(metaData.keywords);
     setmainImg(metaData.mainImg);
     setDescription(metaData.description);
-    setId(null);
+    // setId(null);
     window.$("#staticBackdrop").modal("hide");
   }
   return (
@@ -130,12 +130,12 @@ const MetaInput = ({ setMetaData, metaData }) => {
           <div class="modal-body">
             <form onSubmit={submitHandler}>
               <div class="p-3 bg-light">
-                <small>
+                {/* <small>
                   <b>Note: </b> If updating previous blogs from older editor.
                   Please provide the id of that blog. i.e- last 24 digits of
                   url.{" "}
-                </small>
-                <div style={{ margin: "10px 0 5px" }}>
+                </small> */}
+                {/* <div style={{ margin: "10px 0 5px" }}>
                   <small>Blog Id (Optional)</small>
                 </div>
                 <input
@@ -144,7 +144,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
                   onChange={(e) => setId(e.target.value)}
                   placeholder="Please enter the blog Id ..."
                   autocomplete="off"
-                />
+                /> */}
                 <div style={{ margin: "10px 0 5px" }}>
                   <small>Title</small>
                 </div>
@@ -192,66 +192,69 @@ const MetaInput = ({ setMetaData, metaData }) => {
                 <div style={{ margin: "10px 0 5px" }}>
                   <small>Category</small>
                 </div>
-                {!checkBox ? (
-                  <select
-                    name="brand"
-                    value={category}
-                    onChange={(e) => setcategory(e.target.value)}
-                    id="inputState"
-                    className="form-select"
-                    required
-                  >
-                    <option value="">
-                      Please select the category of the blog...
-                    </option>
-                    {categories &&
-                      categories.map((category, idx) => {
-                        return (
-                          <option key={idx + "id"} value={category.category}>
-                            {category.category}
-                          </option>
-                        );
-                      })}
-                  </select>
-                ) : (
-                  <div>
-                    <div style={{ margin: "10px 0 5px" }}>
-                      <small>Enter Image URL</small>
-                    </div>
-                    <input
-                      style={{ marginBottom: "5px" }}
-                      className="form-control"
-                      value={categoryImg}
-                      onChange={(e) => setcategoryImg(e.target.value)}
-                      placeholder="Please enter the URL of category image..."
-                      autocomplete="off"
+                {
+                  !checkBox && (
+                    <select
+                      name="brand"
+                      value={category}
+                      onChange={(e) => setcategory(e.target.value)}
+                      id="inputState"
+                      className="form-select"
                       required
-                    />
-                    <div style={{ margin: "10px 0 5px" }}>
-                      <small>Enter Category</small>
-                    </div>
-                    <div class="input-group">
-                      <input
-                        className="form-control"
-                        value={category}
-                        onChange={(e) => setcategory(e.target.value)}
-                        placeholder="Please enter the category of the blog..."
-                        autocomplete="off"
-                        required
-                      />
-                      <button
-                        type="button"
-                        onClick={addCategory}
-                        form="categoryForm"
-                        disabled={disabledCategoryBtn}
-                        class="btn btn-primary input-group-text"
-                      >
-                        Add Category
-                      </button>
-                    </div>
-                  </div>
-                )}
-                <div className="pl-4 pt-2">
+                    >
+                      <option value="">
+                        Please select the category of the blog...
+                      </option>
+                      {categories &&
+                        categories.map((category, idx) => {
+                          return (
+                            <option key={idx + "id"} value={category.category}>
+                              {category.category}
+                            </option>
+                          );
+                        })}
+                    </select>
+                  )
+                  // ) : (
+                  //   <div>
+                  //     <div style={{ margin: "10px 0 5px" }}>
+                  //       <small>Enter Image URL</small>
+                  //     </div>
+                  //     <input
+                  //       style={{ marginBottom: "5px" }}
+                  //       className="form-control"
+                  //       value={categoryImg}
+                  //       onChange={(e) => setcategoryImg(e.target.value)}
+                  //       placeholder="Please enter the URL of category image..."
+                  //       autocomplete="off"
+                  //       required
+                  //     />
+                  //     <div style={{ margin: "10px 0 5px" }}>
+                  //       <small>Enter Category</small>
+                  //     </div>
+                  //     <div class="input-group">
+                  //       <input
+                  //         className="form-control"
+                  //         value={category}
+                  //         onChange={(e) => setcategory(e.target.value)}
+                  //         placeholder="Please enter the category of the blog..."
+                  //         autocomplete="off"
+                  //         required
+                  //       />
+                  //       <button
+                  //         type="button"
+                  //         onClick={addCategory}
+                  //         form="categoryForm"
+                  //         disabled={disabledCategoryBtn}
+                  //         class="btn btn-primary input-group-text"
+                  //       >
+                  //         Add Category
+                  //       </button>
+                  //     </div>
+                  //   </div>
+                  // )
+                }
+                {/* <div className="pl-4 pt-2">
                   <input
                     className="form-check-input "
                     type="checkbox"
@@ -270,7 +273,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
                       Tick the checkbox if category is not in the list.{" "}
                     </small>
                   </label>
-                </div>
+                </div> */}
               </div>
               <div class="modal-footer">
                 <button

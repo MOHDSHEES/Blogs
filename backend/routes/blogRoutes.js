@@ -509,8 +509,8 @@ router.post("/add/category", async (req, res) => {
 // creating new blogs from editor
 router.post("/add/new/blog", async (req, res) => {
   try {
-    let nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
-    const id = req.body.metaData.id ? req.body.metaData.id : nanoid();
+    // let nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
+    // const id = req.body.metaData.id ? req.body.metaData.id : nanoid();
     const date =
       new Date().toLocaleString("en-US", { weekday: "long" }) +
       ", " +
@@ -521,7 +521,7 @@ router.post("/add/new/blog", async (req, res) => {
       new Date().getFullYear();
 
     const blog = new UBlogs({
-      id: id,
+      // id: id,
       title: req.body.metaData.title,
       mainImg: req.body.metaData.mainImg,
       description: req.body.metaData.description,

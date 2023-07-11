@@ -28,7 +28,7 @@ const Draft = () => {
     keywords: "",
     category: "",
     description: "",
-    id: null,
+    // id: null,
   });
   const [titles, setTitles] = useState([]);
   //   const [mainImg, setmainImg] = useState("");
@@ -147,7 +147,7 @@ const Draft = () => {
       title: "",
       keywords: "",
       description: "",
-      id: null,
+      //   id: null,
     });
   }
 
@@ -365,7 +365,7 @@ const Draft = () => {
                   //   },
                 ],
                 content_style:
-                  "body { font-family:Helvetica,Arial,sans-serif;  }",
+                  "body { font-family:Helvetica,Arial,sans-serif;font-size:18px  }",
               }}
             />
             {/* <button onClick={log}>Log editor content</button> */}
