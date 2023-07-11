@@ -365,7 +365,7 @@ const Draft = () => {
                   //   },
                 ],
                 content_style:
-                  "body { font-family:Helvetica,Arial,sans-serif;font-size:18px  }",
+                  "body { font-family:Times new roman,Arial,sans-serif;font-size:18px  }",
               }}
             />
             {/* <button onClick={log}>Log editor content</button> */}
