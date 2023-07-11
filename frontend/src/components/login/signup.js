@@ -32,7 +32,7 @@ const Signup = ({ message }) => {
         if (data && data.user && data.user._id) {
           closeMessage(message, "Sucessfully Registered", "success");
           localStorage.setItem("token", data.token);
-          navigate("/add", { replace: true });
+          navigate("/edit", { replace: true });
         } else if (data.user.msg.split(" ")[0] === "E11000")
           closeMessage(message, "Email Id already registered with us", "error");
         else closeMessage(message, data.user.msg, "error");

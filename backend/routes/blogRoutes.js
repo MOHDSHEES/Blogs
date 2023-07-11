@@ -328,7 +328,7 @@ router.post("/find/ublog/all", verifyToken, async (req, res) => {
       },
       { password: 0 }
     );
-    // console.log(user);
+    // console.log(user.blog);
     if (user.isAdmin) {
       const resu = await UBlogs.find({});
       res.json({ blogs: resu, user: user });
@@ -538,7 +538,7 @@ router.post("/add/new/blog", async (req, res) => {
       {
         _id: req.body.user,
       },
-      { $addToSet: { blog: status._id } }
+      { $addToSet: { blog: status.id } }
     );
     res.json({ status: 1, msg: "Blog saved successfully.", data: status });
   } catch (error) {

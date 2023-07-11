@@ -27,7 +27,7 @@ const Login = ({ message }) => {
     // console.log(data);
     if (data && data.token) {
       localStorage.setItem("token", data.token);
-      navigate("/add", { replace: true });
+      navigate("/edit", { replace: true });
     } else {
       closeMessage(message, data.msg, "error");
     }
