@@ -221,7 +221,7 @@ const Draft = () => {
         metaData={metaData}
         updateFlag={updateFlag}
         onClickEdit={editBlog}
-        isAdmin={true}
+        isAdmin={isAdmin}
       />
       {flag ? (
         <div style={{ marginTop: "80px" }}>

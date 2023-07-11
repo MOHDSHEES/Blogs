@@ -43,7 +43,7 @@ const AllBlogs = ({ blog }) => {
           {blog.title}{" "}
           <a
             href={
-              "http://localhost:3000/blogs/" +
+              "https://www.offtheweb.in/blogs/" +
               blog.title.replace(/ /g, "-") +
               "-" +
               blog.id

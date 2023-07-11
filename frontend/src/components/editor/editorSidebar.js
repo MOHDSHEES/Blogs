@@ -8,7 +8,6 @@ const EditorSidebar = ({
   metaData,
   onClickEdit,
   updateFlag,
-
   isAdmin,
 }) => {
   useEffect(() => {
