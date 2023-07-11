@@ -43,7 +43,10 @@ const AllBlogs = ({ blog }) => {
           {blog.title}{" "}
           <a
             href={
-              "https://www.offtheweb.in/blogs/" + blog.title + "/" + blog.id
+              "http://localhost:3000/blogs/" +
+              blog.title.replace(/ /g, "-") +
+              "-" +
+              blog.id
             }
             rel="noreferrer"
             target="_blank"

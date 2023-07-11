@@ -12,9 +12,9 @@ import EditorSidebar from "./editor/editorSidebar";
 const Draft = () => {
   const editorRef = useRef(null);
 
-  useEffect(() => {
-    window.$("#staticBackdrop").modal("show"); // Show the modal on page render
-  }, []);
+  //   useEffect(() => {
+  //     window.$("#staticBackdrop").modal("show"); // Show the modal on page render
+  //   }, []);
   //   const log = () => {
   //     if (editorRef.current) {
   //       console.log(editorRef.current.getContent());
@@ -200,14 +200,15 @@ const Draft = () => {
         });
         if (data && data.status === 404) {
           localStorage.removeItem("token");
+          window.$("#staticBackdrop").modal("hide");
           navigate("/login", { replace: true });
+        } else {
+          setuser(data.user);
+          window.$("#staticBackdrop").modal("show");
+          setIsAdmin(data.user.isAdmin);
+          setAllBlogs(data.blogs);
+          setfilteredData(data.blogs);
         }
-
-        setuser(data.user);
-
-        setIsAdmin(data.user.isAdmin);
-        setAllBlogs(data.blogs);
-        setfilteredData(data.blogs);
       })();
     }
   }, [navigate, user]);
@@ -345,7 +346,7 @@ const Draft = () => {
                   "wordcount",
                 ],
                 toolbar:
-                  "undo redo | blocks| fontfamily | fontsize | image " +
+                  "undo redo | blocks| fontfamily | fontsizeinput | image " +
                   "bold italic forecolor | alignleft aligncenter " +
                   "alignright alignjustify | bullist numlist outdent indent |" +
                   "removeformat ",
@@ -364,7 +365,7 @@ const Draft = () => {
                   //   },
                 ],
                 content_style:
-                  "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                  "body { font-family:Helvetica,Arial,sans-serif;  }",
               }}
             />
             {/* <button onClick={log}>Log editor content</button> */}
