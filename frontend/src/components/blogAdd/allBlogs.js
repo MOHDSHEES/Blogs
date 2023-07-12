@@ -39,26 +39,24 @@ const AllBlogs = ({ blog }) => {
             state={blog}
             class="h6 m-0 break-line-3"
           > */}
-        <p class="h6 m-0 break-line-3">
-          {blog.title}{" "}
-          <a
-            href={
-              "https://www.offtheweb.in/blogs/" +
-              blog.title.replace(/ /g, "-") +
-              "-" +
-              blog.id
-            }
-            rel="noreferrer"
-            target="_blank"
-            style={{
-              zIndex: "900px",
-              float: "right",
-              color: "green",
-            }}
-          >
-            preview
-          </a>
-        </p>
+        <p class="h6 m-0 break-line-3">{blog.title}</p>
+        <a
+          href={
+            "https://www.offtheweb.in/blogs/" +
+            blog.title.replace(/ /g, "-") +
+            "-" +
+            blog.id
+          }
+          rel="noreferrer"
+          target="_blank"
+          style={{
+            zIndex: "900px",
+            textAlign: "end",
+            color: "green",
+          }}
+        >
+          preview
+        </a>
 
         {/* </Link> */}
       </div>
