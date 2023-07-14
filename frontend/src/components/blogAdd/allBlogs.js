@@ -42,7 +42,7 @@ const AllBlogs = ({ blog }) => {
         <p class="h6 m-0 break-line-3">{blog.title}</p>
         <a
           href={
-            "http://localhost:3000/blogs/" +
+            "https://www.offtheweb.in/blogs/" +
             blog.title.replace(/ /g, "-").replace(/\?/g, "") +
             "-" +
             blog.id
