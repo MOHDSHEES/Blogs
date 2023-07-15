@@ -9,12 +9,16 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
   const [modalShow, setModalShow] = useState(false);
   const [oldTasksModal, setOldTasksModal] = useState(false);
   async function updateDetails(querry) {
-    const { data } = await axios.post("/api/update/employees/admin", {
-      id: employee._id,
-      data: querry,
-    });
-    if ((querry.status === data.status) === 0) {
-      const d = employee.filter((task) => task._id === data._id);
+    if (window.confirm("Are you sure you want to terminate?") === true) {
+      const { data } = await axios.post("/api/update/employees/admin", {
+        id: employee._id,
+        data: querry,
+      });
+
+      if (querry.status === data.status && data.status === 0) {
+        const d = employees.filter((emp) => emp._id !== data._id);
+        setEmployees(d);
+      }
     }
     // console.log(data);
   }
@@ -43,7 +47,7 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
               }}
             />
           </div>
-          {/* <div className="employee-status-edit">
+          <div className="employee-status-edit">
             <div class="btn-group dropstart">
               <button
                 class=" btn-simple"
@@ -67,7 +71,7 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
                 </li>
               </ul>
             </div>
-          </div> */}
+          </div>
 
           <h4 className="mb-2">{employee.name}</h4>
           <p className="text-muted mb-4">

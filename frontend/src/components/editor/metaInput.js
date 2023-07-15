@@ -82,11 +82,11 @@ const MetaInput = ({ setMetaData, metaData }) => {
   async function submitHandler(e) {
     e.preventDefault();
     setMetaData({
-      title: title,
+      title: title.trim(),
       mainImg: mainImg,
       category: category,
       keywords: keywords,
-      description: description,
+      description: description.trim(),
       //   id: id,
     });
     window.$("#staticBackdrop").modal("hide");
@@ -116,9 +116,9 @@ const MetaInput = ({ setMetaData, metaData }) => {
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            <h2 class="modal-title fs-5" id="staticBackdropLabel">
               Meta Data
-            </h1>
+            </h2>
             <button
               type="button"
               class="btn-close"
