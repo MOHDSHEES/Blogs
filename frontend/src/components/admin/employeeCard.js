@@ -47,11 +47,9 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
               }}
             />
           </div>
-          {!employee.employeeId.includes([
-            "6222563006",
-            "9870357609",
-            "9197487964",
-          ]) && (
+          {!["6222563006", "9870357609", "9197487964"].includes(
+            employee.employeeId
+          ) && (
             <div className="employee-status-edit">
               <div class="btn-group dropstart">
                 <button
