@@ -74,54 +74,61 @@ const Draft = () => {
     const { data } = await axios.post("/api/blog/updated/titles");
     setTitles(data);
   }
-  async function submitHandler(e) {
+
+  async function saveUpdate(props) {
+    if (flag) {
+      let text =
+        "Blog will be Inactive until verified by Admin. Are you sure to update. \n";
+      if (window.confirm(text) === true) {
+        openMessage(messageApi, "Saving...");
+        const { data } = await axios.post("/api/update/new/blog", {
+          id: id,
+          metaData: metaData,
+          blog: state,
+          activationRequest: props,
+        });
+        if (data && data.status === 1)
+          closeMessage(messageApi, data.msg, "success");
+        else closeMessage(messageApi, data.msg, "error");
+
+        setAllBlogs([...allBlogs.filter((blog) => blog.id !== id), data.data]);
+        if (radio === "3")
+          setfilteredData([...filteredData.filter((blog) => blog.id !== id)]);
+        else
+          setfilteredData([
+            ...filteredData.filter((blog) => blog.id !== id),
+            data.data,
+          ]);
+      }
+    } else {
+      openMessage(messageApi, "Saving...");
+      const { data } = await axios.post("/api/add/new/blog", {
+        metaData: metaData,
+        blog: state,
+        user: user._id,
+        activationRequest: props,
+      });
+      closeMessage(messageApi, data.msg, "success");
+      setAllBlogs([...allBlogs, data.data]);
+
+      if (radio !== "3") setfilteredData([...filteredData, data.data]);
+      reset();
+      setUpdateFlag(0);
+      setFlag(0);
+    }
+  }
+
+  function submitHandler(e) {
     e.preventDefault();
 
     if (metaData.title.trim()) {
       if (state && state.trim()) {
         setdisabled(true);
-        if (flag) {
-          let text =
-            "Blog will be Inactive until verified by Admin. Are you sure to update. \n";
-          if (window.confirm(text) === true) {
-            openMessage(messageApi, "Saving...");
-            const { data } = await axios.post("/api/update/new/blog", {
-              id: id,
-              metaData: metaData,
-              blog: state,
-            });
-            if (data && data.status === 1)
-              closeMessage(messageApi, data.msg, "success");
-            else closeMessage(messageApi, data.msg, "error");
-
-            setAllBlogs([
-              ...allBlogs.filter((blog) => blog.id !== id),
-              data.data,
-            ]);
-            if (radio === "3")
-              setfilteredData([
-                ...filteredData.filter((blog) => blog.id !== id),
-              ]);
-            else
-              setfilteredData([
-                ...filteredData.filter((blog) => blog.id !== id),
-                data.data,
-              ]);
-          }
+        let requestActivation = "Do you want to submit Blog for Activation. \n";
+        if (window.confirm(requestActivation)) {
+          saveUpdate(true);
         } else {
-          openMessage(messageApi, "Saving...");
-          const { data } = await axios.post("/api/add/new/blog", {
-            metaData: metaData,
-            blog: state,
-            user: user._id,
-          });
-          closeMessage(messageApi, data.msg, "success");
-          setAllBlogs([...allBlogs, data.data]);
-
-          if (radio !== "3") setfilteredData([...filteredData, data.data]);
-          reset();
-          setUpdateFlag(0);
-          setFlag(0);
+          saveUpdate(false);
         }
         setdisabled(false);
       } else {
@@ -132,6 +139,7 @@ const Draft = () => {
       window.$("#staticBackdrop").modal("show");
     }
   }
+
   // console.log(modules);
   // console.log(state);
   //   const handleChange = (value) => {
@@ -213,6 +221,7 @@ const Draft = () => {
     }
   }, [navigate, user]);
 
+  //   to change the size of bullet points accordingly
   const handleExecCommand = (evt, editor) => {
     let cmd = evt.command;
     if (cmd === "FontSize" || cmd === "FontName") {

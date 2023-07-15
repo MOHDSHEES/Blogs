@@ -28,52 +28,52 @@ const MetaInput = ({ setMetaData, metaData }) => {
   //   const [id, setId] = useState(null);
   const [description, setDescription] = useState(metaData.description);
 
-  async function addCategory() {
-    const result = categories.findIndex(
-      (item) => category.toLowerCase() === item.category.toLowerCase()
-    );
-    if (result === -1) {
-      if (!(category.trim() === "") && !(categoryImg.trim() === "")) {
-        setdisabledCategoryBtn(true);
-        openMessage(messageApi, "Adding Category...");
-        const { data } = await axios.post("/api/add/category", {
-          category: { category: category, categoryImg: categoryImg },
-        });
-        if (data.status) {
-          setCategories([
-            ...categories,
-            { category: category, categoryImg: categoryImg },
-          ]);
-          setcheckBox(false);
-          setdisabledCategoryBtn(false);
-          setdisabled(false);
-          closeMessage(messageApi, data.msg, "success");
-        } else {
-          closeMessage(messageApi, data.msg, "error");
-          setdisabledCategoryBtn(false);
-          setdisabled(false);
-        }
-      } else {
-        closeMessage(
-          messageApi,
-          "Both category name and category Img are required",
-          "error"
-        );
-      }
-    } else if (checkBox) {
-      closeMessage(messageApi, "Category Already Exsists", "success");
-      setcheckBox(false);
-      setdisabled(false);
-    }
-  }
-  function checkBoxHandle(e) {
-    setcheckBox(e.target.checked);
-    if (e.target.checked) {
-      setdisabled(true);
-    } else {
-      setdisabled(false);
-    }
-  }
+  // async function addCategory() {
+  //   const result = categories.findIndex(
+  //     (item) => category.toLowerCase() === item.category.toLowerCase()
+  //   );
+  //   if (result === -1) {
+  //     if (!(category.trim() === "") && !(categoryImg.trim() === "")) {
+  //       setdisabledCategoryBtn(true);
+  //       openMessage(messageApi, "Adding Category...");
+  //       const { data } = await axios.post("/api/add/category", {
+  //         category: { category: category, categoryImg: categoryImg },
+  //       });
+  //       if (data.status) {
+  //         setCategories([
+  //           ...categories,
+  //           { category: category, categoryImg: categoryImg },
+  //         ]);
+  //         setcheckBox(false);
+  //         setdisabledCategoryBtn(false);
+  //         setdisabled(false);
+  //         closeMessage(messageApi, data.msg, "success");
+  //       } else {
+  //         closeMessage(messageApi, data.msg, "error");
+  //         setdisabledCategoryBtn(false);
+  //         setdisabled(false);
+  //       }
+  //     } else {
+  //       closeMessage(
+  //         messageApi,
+  //         "Both category name and category Img are required",
+  //         "error"
+  //       );
+  //     }
+  //   } else if (checkBox) {
+  //     closeMessage(messageApi, "Category Already Exsists", "success");
+  //     setcheckBox(false);
+  //     setdisabled(false);
+  //   }
+  // }
+  // function checkBoxHandle(e) {
+  //   setcheckBox(e.target.checked);
+  //   if (e.target.checked) {
+  //     setdisabled(true);
+  //   } else {
+  //     setdisabled(false);
+  //   }
+  // }
 
   useEffect(() => {
     setCategories(cate);

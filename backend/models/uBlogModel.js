@@ -24,6 +24,7 @@ const blogSchema = new mongoose.Schema({
   blog: { type: String, required: true },
   status: { type: String, default: "Inactive" },
   user: { type: String, required: true },
+  activationRequest: { type: Boolean },
 });
 
 // productsSchema.index({ name: "text", category: "text" });

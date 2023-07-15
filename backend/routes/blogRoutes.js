@@ -530,6 +530,7 @@ router.post("/add/new/blog", async (req, res) => {
       blog: req.body.blog,
       views: 0,
       createdDate: date,
+      activationRequest: req.body.activationRequest || false,
       user: req.body.user,
     });
     const status = await blog.save();
@@ -772,6 +773,7 @@ router.post("/update/new/blog", async (req, res) => {
         keywords: req.body.metaData.keywords,
         blog: req.body.blog,
         updatedDate: date,
+        activationRequest: req.body.activationRequest || false,
         status: "Inactive",
       },
       {
