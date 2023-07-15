@@ -47,32 +47,37 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
               }}
             />
           </div>
-          <div className="employee-status-edit">
-            <div class="btn-group dropstart">
-              <button
-                class=" btn-simple"
-                style={{ padding: "5px 10px" }}
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                &#8942;
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li>
-                  <a
-                    onClick={() => updateDetails({ status: 0 })}
-                    class="dropdown-item"
-                    href="#!"
-                  >
-                    Terminate
-                  </a>
-                </li>
-              </ul>
+          {!employee.employeeId.includes([
+            "6222563006",
+            "9870357609",
+            "9197487964",
+          ]) && (
+            <div className="employee-status-edit">
+              <div class="btn-group dropstart">
+                <button
+                  class=" btn-simple"
+                  style={{ padding: "5px 10px" }}
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  &#8942;
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li>
+                    <a
+                      onClick={() => updateDetails({ status: 0 })}
+                      class="dropdown-item"
+                      href="#!"
+                    >
+                      Terminate
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-
+          )}
           <h4 className="mb-2">{employee.name}</h4>
           <p className="text-muted mb-4">
             {employee.post}
