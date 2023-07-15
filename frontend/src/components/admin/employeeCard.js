@@ -2,12 +2,22 @@ import React from "react";
 import { useState } from "react";
 import EmployeeOldTasks from "../employee.js/employeeOldTasks";
 import TaskAssign from "./taskAssign";
+import axios from "axios";
 
 const EmployeeCard = ({ employee, setEmployees, employees }) => {
   //   console.log(employee);
   const [modalShow, setModalShow] = useState(false);
   const [oldTasksModal, setOldTasksModal] = useState(false);
-
+  async function updateDetails(querry) {
+    const { data } = await axios.post("/api/update/employees/admin", {
+      id: employee._id,
+      data: querry,
+    });
+    if ((querry.status === data.status) === 0) {
+      const d = employee.filter((task) => task._id === data._id);
+    }
+    // console.log(data);
+  }
   return (
     <div
       className="col-sm employee-padding-0"
@@ -33,6 +43,32 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
               }}
             />
           </div>
+          {/* <div className="employee-status-edit">
+            <div class="btn-group dropstart">
+              <button
+                class=" btn-simple"
+                style={{ padding: "5px 10px" }}
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                &#8942;
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                  <a
+                    onClick={() => updateDetails({ status: 0 })}
+                    class="dropdown-item"
+                    href="#!"
+                  >
+                    Terminate
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div> */}
+
           <h4 className="mb-2">{employee.name}</h4>
           <p className="text-muted mb-4">
             {employee.post}

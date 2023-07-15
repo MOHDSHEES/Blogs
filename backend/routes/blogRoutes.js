@@ -25,6 +25,25 @@ import {
 
 const router = express.Router();
 
+// update employee by admin
+router.post("/update/employees/admin", async (req, res) => {
+  try {
+    const employee = await Employees.findOneAndUpdate(
+      { _id: req.body.id },
+      req.body.data,
+      { new: true }
+    );
+    res.json(employee);
+    // if (newUser._id) {
+    //   res.json({ status: 200, msg: "Successfully Registered" });
+    // } else
+    //   res.json({ status: 500, msg: "Something went wrong try again later." });
+    // // res.json(user);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
+
 //  assigning task by admin
 router.post("/assign/task/employee", async (req, res) => {
   try {

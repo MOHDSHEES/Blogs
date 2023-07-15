@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Autocomplete from "./autocomplete/autocomplete";
 import AllBlogs from "./blogAdd/allBlogs";
 import EditorSidebar from "./editor/editorSidebar";
+import Confirm from "./editor/confirm";
 
 const Draft = () => {
   const editorRef = useRef(null);
@@ -60,6 +61,13 @@ const Draft = () => {
     } else if (e.target.value === "3") {
       setLoading(true);
       const d = allBlogs.filter((task) => task.status === "Active");
+      setLoading(false);
+      setfilteredData(d);
+    } else if (e.target.value === "4") {
+      setLoading(true);
+      const d = allBlogs.filter(
+        (task) => task.activationRequest && task.status === "Inactive"
+      );
       setLoading(false);
       setfilteredData(d);
     } else {
@@ -118,19 +126,35 @@ const Draft = () => {
     }
   }
 
+  function saveAndActivate() {
+    window.$("#staticBackdrop1").modal("hide");
+    setdisabled(true);
+    saveUpdate(true);
+    setdisabled(false);
+  }
+  function save() {
+    window.$("#staticBackdrop1").modal("hide");
+    setdisabled(true);
+    saveUpdate(false);
+    setdisabled(false);
+  }
   function submitHandler(e) {
     e.preventDefault();
 
     if (metaData.title.trim()) {
       if (state && state.trim()) {
-        setdisabled(true);
-        let requestActivation = "Do you want to submit Blog for Activation. \n";
-        if (window.confirm(requestActivation)) {
-          saveUpdate(true);
-        } else {
-          saveUpdate(false);
-        }
-        setdisabled(false);
+        // setdisabled(true);
+        window.$("#staticBackdrop1").modal("show");
+        // let requestActivation =
+        //   "Do you want to submit Blog for Activation? \n Click 'Ok' to Save and sent blog for Activation \n Click 'Cancel' for Normal Save";
+        // if (ok) {
+        //   saveUpdate(true);
+        //   window.$("#staticBackdrop1").modal("hide");
+        // } else if (cancel) {
+        //   saveUpdate(false);
+        //   window.$("#staticBackdrop1").modal("hide");
+        // }
+        // setdisabled(false);
       } else {
         closeMessage(messageApi, "All fields are required", "error");
       }
@@ -316,6 +340,20 @@ const Draft = () => {
                       Active
                     </label>
                   </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio4"
+                      value="4"
+                      checked={radio === "4"}
+                      onChange={onOptionChange}
+                    />
+                    <label class="form-check-label" for="inlineRadio4">
+                      Activation Request's
+                    </label>
+                  </div>
                 </div>
               )}
               {/* <MoreCategories blog={allBlogs} /> */}
@@ -431,6 +469,15 @@ const Draft = () => {
       ) : (
         ""
       )}
+      <Confirm
+        message={
+          "<p>Do you want to submit blog for Activation?</p> <p>If you have completed the blog then choose <b>'Save and Sent for Activation'</b> else choose <b>'Normal save'</b>.</p>"
+        }
+        ok="Save and Sent for Activation"
+        cancel="Normal Save"
+        okFunction={saveAndActivate}
+        cancelFunction={save}
+      />
     </div>
   );
 };
