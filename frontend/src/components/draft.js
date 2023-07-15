@@ -21,7 +21,7 @@ const Draft = () => {
   //     }
   //   };
 
-  const [state, setState] = useState(null);
+  const [state, setState] = useState("");
   const [metaData, setMetaData] = useState({
     title: "",
     mainImg: "",
@@ -140,7 +140,7 @@ const Draft = () => {
 
   function reset() {
     setUpdateFlag(1);
-    setState(null);
+    setState("");
     setMetaData({
       category: "",
       mainImg: "",
@@ -212,6 +212,31 @@ const Draft = () => {
       })();
     }
   }, [navigate, user]);
+
+  const handleExecCommand = (evt, editor) => {
+    let cmd = evt.command;
+    if (cmd === "FontSize" || cmd === "FontName") {
+      let val = evt.value;
+      let node = editor.selection.getNode();
+      let nodeParent = node.parentNode;
+      if (node.nodeName === "SPAN" && nodeParent.nodeName === "LI") {
+        if (cmd === "FontSize") {
+          editor.dom.setStyle(nodeParent, "font-size", val);
+        }
+        if (cmd === "FontName") {
+          editor.dom.setStyle(nodeParent, "font-family", val);
+        }
+      } else if (node.nodeName === "UL" || node.nodeName === "OL") {
+        let li = editor.dom.select("li", node);
+        if (cmd === "FontSize") {
+          editor.dom.setStyle(li, "font-size", val);
+        }
+        if (cmd === "FontName") {
+          editor.dom.setStyle(li, "font-family", val);
+        }
+      }
+    }
+  };
 
   return (
     <div className="body">
@@ -321,6 +346,7 @@ const Draft = () => {
               //   initialValue="Start writing..."
               value={state}
               onEditorChange={(content) => setState(content)}
+              onExecCommand={handleExecCommand}
               init={{
                 height: 500,
                 placeholder: "Start writing here...",
