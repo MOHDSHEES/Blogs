@@ -516,3 +516,10 @@ p:empty {
   top: 30px;
   right: 30px;
 }
+
+.tasks {
+  cursor: pointer;
+}
+.tasks:hover {
+  background-color: #fcdedf;
+}

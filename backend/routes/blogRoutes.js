@@ -44,6 +44,37 @@ router.post("/update/employees/admin", async (req, res) => {
   }
 });
 
+//  update task by admin
+router.post("/update/task/employee", async (req, res) => {
+  try {
+    // console.log(res.locals.data._id);
+    // let date = new Date().toJSON().slice(0, 10);
+    // console.log(req.body.taskNo);
+    const resu = await Employees.findOneAndUpdate(
+      { email: req.body.email, "tasks.taskNo": req.body.taskNo },
+      { $set: { "tasks.$.task": req.body.newTask } },
+      {
+        new: true,
+      }
+    );
+    // console.log(resu);
+    if (resu)
+      res.json({
+        status: 200,
+        msg: "Task updated successfully",
+        data: resu,
+      });
+    else
+      res.json({ status: 500, msg: "Something went wrong, Try again later" });
+    // console.log(user);
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+  } catch (error) {
+    // console.log(error);
+    res.send({ status: 500, msg: error.message });
+  }
+});
+
 //  assigning task by admin
 router.post("/assign/task/employee", async (req, res) => {
   try {

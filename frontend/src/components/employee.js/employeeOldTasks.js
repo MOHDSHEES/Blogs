@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 // import { useState } from "react";
 import capital from "../functions/capitaliseStr";
 import parse from "html-react-parser";
+import TaskAssign from "../admin/taskAssign";
 
 const EmployeeOldTasks = (props) => {
+  const [modalShow, setModalShow] = useState(false);
   const [radio, setRadio] = useState("1");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(props.data.tasks && props.data.tasks);
   useEffect(() => {
-    if (!data) setData(props.data.tasks);
+    setData(props.data.tasks);
   }, [props.data.tasks, data]);
   function onOptionChange(e) {
     setRadio(e.target.value);
@@ -29,7 +32,17 @@ const EmployeeOldTasks = (props) => {
       setData(props.data.tasks);
     }
   }
+
+  // console.log(props);
   //   console.log(loading);
+
+  const [oldTask, setOldTask] = useState(null);
+  async function editTask(task) {
+    if (props.isAdmin) {
+      setOldTask(task);
+      setModalShow(true);
+    }
+  }
   return (
     <div>
       {/* {contextHolder} */}
@@ -109,7 +122,12 @@ const EmployeeOldTasks = (props) => {
                         return (
                           <>
                             {task.assignDate !== props.assignDate && (
-                              <li className=" list-group-item justify-content-between align-items-center p-3">
+                              <li
+                                onClick={() => editTask(task)}
+                                className={`${
+                                  props.isAdmin && "tasks"
+                                } list-group-item justify-content-between align-items-center p-3`}
+                              >
                                 <p
                                   className="mb-1"
                                   key={idx}
@@ -158,6 +176,14 @@ const EmployeeOldTasks = (props) => {
           </div>
         </Modal.Body>
       </Modal>
+      <TaskAssign
+        employees={props.employees}
+        oldTask={oldTask}
+        employee={props.data}
+        setEmployees={props.setEmployees}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </div>
   );
 };

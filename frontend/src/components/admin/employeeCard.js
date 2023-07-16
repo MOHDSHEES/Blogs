@@ -5,7 +5,6 @@ import TaskAssign from "./taskAssign";
 import axios from "axios";
 
 const EmployeeCard = ({ employee, setEmployees, employees }) => {
-  //   console.log(employee);
   const [modalShow, setModalShow] = useState(false);
   const [oldTasksModal, setOldTasksModal] = useState(false);
   async function updateDetails(querry) {
@@ -22,6 +21,7 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
     }
     // console.log(data);
   }
+
   return (
     <div
       className="col-sm employee-padding-0"
@@ -155,6 +155,8 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
         </div>
       </div>
       <EmployeeOldTasks
+        employees={employees}
+        setEmployees={setEmployees}
         // updateStatus={updateStatus}
         isAdmin={true}
         show={oldTasksModal}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { useState } from "react";
@@ -7,42 +7,73 @@ import { closeMessage, openMessage } from "../functions/message";
 
 const TaskAssign = (props) => {
   //   console.log(props.employee);
-  const [task, setTask] = useState("");
+  const [task, setTask] = useState(props.oldTask ? props.oldTask.task : "");
   const [messageApi, contextHolder] = message.useMessage();
   const [disabled, setDisabled] = useState(false);
 
+  useEffect(() => {
+    if (props.oldTask) {
+      setTask(props.oldTask.task);
+      console.log(props.oldTask.status);
+    }
+  }, [props]);
   //   console.log(task);
   async function handleSubmit(e) {
     e.preventDefault();
     if (task === null || task.trim() === "") {
       setTask(task.trim());
+      closeMessage(messageApi, "Task cannot be Empty", "error");
     } else {
       openMessage(messageApi, "Sending...");
-    }
+      setDisabled(true);
+      if (props.oldTask) {
+        // console.log("in");
+        const { data } = await axios.post("/api/update/task/employee", {
+          email: props.employee.email,
+          newTask: task,
+          taskNo: props.oldTask.taskNo,
+        });
+        if (data.status === 200) {
+          const updatedData = props.employees.map((c, i) => {
+            if (c.employeeId === props.employee.employeeId) {
+              return data.data;
+            } else return c;
+          });
+          props.setEmployees(updatedData);
+          closeMessage(messageApi, data.msg, "success");
+          props.onHide();
+        } else {
+          closeMessage(messageApi, data.msg, "error");
+          // setError(data.message);
+          props.onHide();
+          // setisValid(false);
+        }
+      } else {
+        const { data } = await axios.post("/api/assign/task/employee", {
+          email: props.employee.email,
+          task: task,
+          taskNo: props.employee.tasks ? props.employee.tasks.length + 1 : 1,
+        });
 
-    setDisabled(true);
-    const { data } = await axios.post("/api/assign/task/employee", {
-      email: props.employee.email,
-      task: task,
-      taskNo: props.employee.tasks ? props.employee.tasks.length + 1 : 1,
-    });
-    // console.log(data);
-    if (data.status === 200) {
-      const updatedData = props.employees.map((c, i) => {
-        if (c.employeeId === props.employee.employeeId) {
-          return data.data;
-        } else return c;
-      });
-      props.setEmployees(updatedData);
-      closeMessage(messageApi, data.msg, "success");
-      props.onHide();
-    } else {
-      closeMessage(messageApi, data.msg, "error");
-      // setError(data.message);
-      props.onHide();
-      // setisValid(false);
+        // console.log(data);
+        if (data.status === 200) {
+          const updatedData = props.employees.map((c, i) => {
+            if (c.employeeId === props.employee.employeeId) {
+              return data.data;
+            } else return c;
+          });
+          props.setEmployees(updatedData);
+          closeMessage(messageApi, data.msg, "success");
+          props.onHide();
+        } else {
+          closeMessage(messageApi, data.msg, "error");
+          // setError(data.message);
+          props.onHide();
+          // setisValid(false);
+        }
+      }
+      setDisabled(false);
     }
-    setDisabled(false);
     // console.log(data);
     // }
 
@@ -51,6 +82,23 @@ const TaskAssign = (props) => {
   function clear() {
     setTask("");
   }
+
+  async function updateStatus() {
+    openMessage(messageApi, "Updating Status...");
+    const { data } = await axios.post("/api/update/task/status", {
+      email: props.employee.email,
+      taskNo: props.oldTask.taskNo,
+      status: 0,
+    });
+    if (data.status === 200) {
+      console.log(data);
+
+      closeMessage(messageApi, data.msg, "success");
+    } else {
+      closeMessage(messageApi, data.msg, "error");
+    }
+  }
+
   return (
     <div>
       {contextHolder}
@@ -73,7 +121,12 @@ const TaskAssign = (props) => {
             Emp. Id: {props.employee.employeeId} <br />
             Name: {props.employee.name}
             <br />
-            Task: {props.employee.tasks ? props.employee.tasks.length + 1 : 1}
+            Task:{" "}
+            {props.oldTask
+              ? props.oldTask.taskNo
+              : props.employee.tasks
+              ? props.employee.tasks.length + 1
+              : 1}
           </div>
           <form onSubmit={handleSubmit}>
             <div class="mb-3">
@@ -95,6 +148,16 @@ const TaskAssign = (props) => {
             <button disabled={disabled} type="submit" class="btn btn-primary">
               Submit
             </button>
+            {props.oldTask && props.oldTask.status === 1 && (
+              <button
+                type="btn"
+                style={{ marginLeft: "20px" }}
+                onClick={updateStatus}
+                class="btn btn-primary"
+              >
+                Mark as Incomplete
+              </button>
+            )}
           </form>
         </Modal.Body>
       </Modal>
