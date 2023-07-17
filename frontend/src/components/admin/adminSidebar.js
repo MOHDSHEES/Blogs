@@ -34,7 +34,7 @@ const AdminSidebar = ({ setTab }) => {
           </div>
 
           <div>
-            <Link className="btn btn-success" to="/add">
+            <Link className="btn btn-success" to="/edit">
               Add Blog
             </Link>
 

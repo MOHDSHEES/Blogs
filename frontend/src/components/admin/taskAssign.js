@@ -14,7 +14,7 @@ const TaskAssign = (props) => {
   useEffect(() => {
     if (props.oldTask) {
       setTask(props.oldTask.task);
-      console.log(props.oldTask.status);
+      // console.log(props.oldTask.status);
     }
   }, [props]);
   //   console.log(task);

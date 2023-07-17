@@ -111,7 +111,7 @@ const NavBar = ({ searchHandler }) => {
                   <Nav.Link
                     onClick={() => setExpanded(false)}
                     as={NavLink}
-                    to="/add"
+                    to="/edit"
                     class="nav-item "
                   >
                     Add Blog
