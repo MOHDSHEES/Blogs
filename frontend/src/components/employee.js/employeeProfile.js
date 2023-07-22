@@ -10,6 +10,9 @@ import { closeMessage, openMessage } from "../functions/message";
 import EmployeeOldTasks from "./employeeOldTasks";
 import parse from "html-react-parser";
 import PhotoUpload from "./photoUpload";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import ProgressBar from "../functions/progressBar";
 
 const EmployeeProfile = () => {
   const { setEmployeeData, messageApi } = useContext(globalContext);
@@ -103,6 +106,7 @@ const EmployeeProfile = () => {
   }
 
   const [uploadShow, setUploadShow] = useState(false);
+  const value = 10;
   return (
     <section style={{ backgroundColor: "#eee" }}>
       <div className="container py-2">
@@ -198,22 +202,135 @@ const EmployeeProfile = () => {
                   </div>
                 </div>
               </div>
-              {/* <div className="card mb-4 mb-lg-0">
+              <div className="card mb-4 mb-lg-0">
                 <div className="card-body p-0">
                   <p className="mb-2 p-2 px-3">
                     <span className="text-primary font-italic me-1">
-                      Today's Tasks
+                      Score:
                     </span>{" "}
-                    <p
+                    {/* <p
                       className="button-link"
                       style={{ float: "right", marginBottom: 0 }}
                       onClick={() => getEmployeeData(true)}
                     >
                       <i class="bx bx-refresh"></i>
-                    </p>
+                    </p> */}
                   </p>
 
-                  {todayTask && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div
+                      style={{
+                        textAlign: "center",
+                        padding: "10px",
+                        width: "90px",
+                      }}
+                    >
+                      <div style={{ width: 70, height: 70 }}>
+                        <CircularProgressbar
+                          value={value}
+                          text={`${value}`}
+                          maxValue={10}
+                          // strokeWidth={50}
+                          // background={true}
+                          styles={buildStyles({
+                            // strokeLinecap: "butt",
+                            textColor: `${
+                              value >= 7
+                                ? "green"
+                                : value < 4
+                                ? "red"
+                                : "#eed202"
+                            }`,
+                            pathColor: `${
+                              value >= 7
+                                ? "green"
+                                : value < 4
+                                ? "red"
+                                : "#eed202"
+                            }`,
+                            textSize: "25px",
+                            trailColor: "#dad5d5",
+                          })}
+                        />
+                      </div>
+                      <small>Overall</small>
+                    </div>
+                    <div
+                      style={{
+                        textAlign: "center",
+                        padding: "10px",
+                        width: "90px",
+                      }}
+                    >
+                      <div style={{ width: 70, height: 70 }}>
+                        <CircularProgressbar
+                          value={value}
+                          text={value}
+                          maxValue={10}
+                          // strokeWidth={50}
+                          // background={true}
+                          styles={buildStyles({
+                            // strokeLinecap: "butt",
+                            textColor: "green",
+                            pathColor: "green",
+                            textSize: "25px",
+                            trailColor: "#dad5d5",
+                          })}
+                        />
+                      </div>
+                      <small>Monthly</small>
+                    </div>
+                    <div
+                      style={{
+                        textAlign: "center",
+                        padding: "10px",
+                        width: "90px",
+                      }}
+                    >
+                      <div style={{ width: 70, height: 70 }}>
+                        <CircularProgressbar
+                          value={value}
+                          text={`${value}`}
+                          maxValue={10}
+                          // strokeWidth={50}
+                          // background={true}
+                          styles={buildStyles({
+                            // strokeLinecap: "butt",
+                            textColor: `${
+                              value >= 7
+                                ? "green"
+                                : value < 4
+                                ? "red"
+                                : "#eed202"
+                            }`,
+                            pathColor: `${
+                              value >= 7
+                                ? "green"
+                                : value < 4
+                                ? "red"
+                                : "#eed202"
+                            }`,
+                            textSize: "25px",
+                            trailColor: "#dad5d5",
+                          })}
+                        />
+                      </div>
+                      <small>Weekly</small>
+                    </div>
+                  </div>
+                  <div style={{ padding: "10px" }}>
+                    <ProgressBar score={10} />
+                    {/* <ProgressBar score={9} />
+                    <ProgressBar score={5} />
+                    <ProgressBar score={3} /> */}
+                  </div>
+                  {/* {todayTask && (
                     <>
                       <ol
                         className="list-group list-group-flush rounded-3"
@@ -251,9 +368,9 @@ const EmployeeProfile = () => {
                           </button>
                         )}
                     </>
-                  )}
+                  )} */}
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className="col-lg-8 employee-padding-0">
               <div className="card mb-4">

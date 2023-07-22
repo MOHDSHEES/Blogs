@@ -91,7 +91,7 @@ const TaskAssign = (props) => {
       status: 0,
     });
     if (data.status === 200) {
-      console.log(data);
+      // console.log(data);
 
       closeMessage(messageApi, data.msg, "success");
     } else {
@@ -99,6 +99,33 @@ const TaskAssign = (props) => {
     }
   }
 
+  async function scoring() {
+    let score = prompt("Please enter Score between 1 to 10.");
+    if (score && score.trim() && parseFloat(score)) {
+      openMessage(messageApi, "Updating Status...");
+      const { data } = await axios.post("/api/update/task/score", {
+        email: props.employee.email,
+        taskNo: props.oldTask.taskNo,
+        score: parseFloat(score),
+      });
+      if (data.status === 200) {
+        // console.log(data);
+        const updatedData = props.employees.map((c, i) => {
+          if (c.employeeId === props.employee.employeeId) {
+            return data.data;
+          } else return c;
+        });
+        props.setEmployees(updatedData);
+        props.onHide();
+
+        closeMessage(messageApi, data.msg, "success");
+      } else {
+        closeMessage(messageApi, data.msg, "error");
+      }
+    } else {
+      closeMessage(messageApi, "Enter valid score", "error");
+    }
+  }
   return (
     <div>
       {contextHolder}
@@ -118,6 +145,13 @@ const TaskAssign = (props) => {
         </Modal.Header>
         <Modal.Body>
           <div class="form-text mb-3">
+            <button
+              onClick={scoring}
+              style={{ float: "right", marginRight: "10px" }}
+              className="btn btn-success"
+            >
+              Rate
+            </button>
             Emp. Id: {props.employee.employeeId} <br />
             Name: {props.employee.name}
             <br />
@@ -127,6 +161,11 @@ const TaskAssign = (props) => {
               : props.employee.tasks
               ? props.employee.tasks.length + 1
               : 1}
+            <br />
+            Score:{" "}
+            {props.oldTask && props.oldTask.score
+              ? props.oldTask.score
+              : "Not rated"}
           </div>
           <form onSubmit={handleSubmit}>
             <div class="mb-3">

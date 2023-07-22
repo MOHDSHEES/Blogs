@@ -46,8 +46,8 @@ const AllBlogs = ({ blog }) => {
         <p class="h6 m-0 break-line-3">{blog.title}</p>
         <a
           href={
-            "https://www.offtheweb.in/blogs/" +
-            blog.title.replace(/ /g, "-").replace(/\?/g, "") +
+            "https://www.offtheweb.in/blogs/preview/" +
+            blog.title.toLowerCase().replace(/ /g, "-").replace(/\?/g, "") +
             "-" +
             blog.id
           }

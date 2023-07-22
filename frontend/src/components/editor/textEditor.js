@@ -15,7 +15,7 @@ import EditorSidebar from "./editorSidebar";
 
 export const TextEditor = () => {
   const [state, setState] = useState(null);
-  console.log(state);
+  // console.log(state);
   const [titles, setTitles] = useState([]);
   const [mainImg, setmainImg] = useState("");
   const [keywords, setkeywords] = useState("");

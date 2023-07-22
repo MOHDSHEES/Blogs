@@ -122,6 +122,47 @@ router.post("/assign/task/employee", async (req, res) => {
   }
 });
 
+//  updating task score
+router.post("/update/task/score", async (req, res) => {
+  try {
+    const score = req.body.score;
+    const taskNo = req.body.taskNo;
+    // console.log(req.body.status);
+    // console.log(req.body.taskNo);
+    // console.log(res.locals.data._id);
+    // let date = new Date().toJSON().slice(0, 10);
+    // console.log(date);
+    const resu = await Employees.findOneAndUpdate(
+      {
+        email: req.body.email,
+        "tasks.taskNo": taskNo,
+      },
+      {
+        $set: {
+          "tasks.$.score": score,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    // console.log(resu);
+    if (resu)
+      res.json({
+        status: 200,
+        data: resu,
+        msg: "Successfully updated",
+      });
+    else
+      res.json({ status: 500, msg: "Something went wrong, Try again later" });
+    // console.log(user);
+    // let trending = resu.map((a) => a.title);
+    // console.log(resu);
+  } catch (error) {
+    // console.log(error);
+    res.send({ status: 500, msg: error.message });
+  }
+});
 //  updating task status
 router.post("/update/task/status", async (req, res) => {
   try {
@@ -447,6 +488,15 @@ router.post("/find/data/homepage", async (req, res) => {
     res.send({ msg: error.message });
   }
 });
+// find ublogs with status
+router.post("/find/ublog/status", async (req, res) => {
+  try {
+    const resu = await UBlogs.find({ status: req.body.status });
+    res.json(resu);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // find blogs with status
 router.post("/find/blog/status", async (req, res) => {
   try {
@@ -456,6 +506,64 @@ router.post("/find/blog/status", async (req, res) => {
     res.send({ msg: error.message });
   }
 });
+
+// update ublogs isActive
+router.post("/update/ublog/status", verifyToken, async (req, res) => {
+  try {
+    const resu = await UBlogs.updateMany(
+      { _id: { $in: req.body.id } },
+      { status: req.body.status }
+    );
+
+    if (resu.modifiedCount && resu.modifiedCount) {
+      if (req.body.status === "Active") {
+        // adding blog to homepage recent
+        const r = await HomepageData.updateOne(
+          {
+            _id: "647a21933a89a8239f770931",
+            "recent._id": { $nin: req.body.id },
+          },
+          {
+            $push: {
+              recent: {
+                $each: [req.body.blog],
+                $position: 0,
+                $slice: 6,
+              },
+            },
+          }
+        );
+        var querry = "categoryData." + req.body.blog.category + "_id";
+        var quer = "categoryData." + req.body.blog.category;
+        // adding blog to homepage category
+        const s = await HomepageData.updateOne(
+          {
+            _id: "647a21933a89a8239f770931",
+            [querry]: { $nin: req.body.id },
+          },
+          {
+            $push: {
+              [quer]: {
+                $each: [req.body.blog],
+                $position: 0,
+                $slice: 6,
+              },
+            },
+          }
+        );
+        // console.log(s);
+      }
+
+      res.json({ status: 200, msg: "Activated Sucessfully" });
+    } else {
+      res.json({ status: 500, msg: "something went wrong" });
+    }
+  } catch (error) {
+    // console.log(error);
+    res.send({ msg: error.message });
+  }
+});
+
 // update isActive
 router.post("/update/blog/status", verifyToken, async (req, res) => {
   try {
@@ -466,19 +574,6 @@ router.post("/update/blog/status", verifyToken, async (req, res) => {
 
     if (resu.modifiedCount && resu.modifiedCount) {
       if (req.body.status === "Active") {
-        // pulling blog from homepagerecent
-        // const st = await HomepageData.updateMany(
-        //   {
-        //     _id: "647a21933a89a8239f770931",
-        //   },
-        //   {
-        //     $pull: {
-        //       recent: {
-        //         _id: { $in: req.body.id },
-        //       },
-        //     },
-        //   }
-        // );
         // adding blog to homepage recent
         const r = await HomepageData.updateOne(
           {
@@ -840,13 +935,13 @@ router.post("/update/new/blog", async (req, res) => {
       {
         $pull: {
           recent: {
-            _id: req.body.id,
+            id: req.body.id,
           },
         },
       }
     );
 
-    const query = "categoryData." + req.body.category;
+    const query = "categoryData." + req.body.metaData.category;
     // pull blog from homepage category
     const s = await HomepageData.updateOne(
       {
@@ -855,7 +950,7 @@ router.post("/update/new/blog", async (req, res) => {
       {
         $pull: {
           [query]: {
-            _id: req.body.id,
+            id: req.body.id,
           },
         },
       }

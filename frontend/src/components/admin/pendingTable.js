@@ -13,7 +13,7 @@ const PendingTable = () => {
   const [messageApi, contextHolder] = message.useMessage();
   useEffect(() => {
     (async () => {
-      const { data } = await axios.post("/api/find/blog/status", {
+      const { data } = await axios.post("/api/find/ublog/status", {
         status: "Inactive",
       });
       setBlog(data);
@@ -29,7 +29,7 @@ const PendingTable = () => {
   async function statusHandler(id, status, bl) {
     bl["status"] = status;
     setDisable(true);
-    const { data } = await axios.post("/api/update/blog/status", {
+    const { data } = await axios.post("/api/update/ublog/status", {
       id: [id],
       status: status,
       token: localStorage.getItem("token"),
