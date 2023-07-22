@@ -20,11 +20,11 @@ const PendingTable = () => {
     })();
   }, []);
   const navigate = useNavigate();
-  function preview(data) {
-    navigate("/blog/" + data._id + "/" + data.title.replace(/ /g, "-"), {
-      state: { ...data, isAdmin: true },
-    });
-  }
+  // function preview(data) {
+  //   navigate("/blog/" + data._id + "/" + data.title.replace(/ /g, "-"), {
+  //     state: { ...data, isAdmin: true },
+  //   });
+  // }
 
   async function statusHandler(id, status, bl) {
     bl["status"] = status;
@@ -63,7 +63,7 @@ const PendingTable = () => {
               return (
                 <tr>
                   <th scope="row">{idx + 1}</th>{" "}
-                  <td onClick={() => preview(bl)} style={{ cursor: "pointer" }}>
+                  <td style={{ cursor: "pointer" }}>
                     <AllBlogs key={bl._id} blog={bl} />
                   </td>
                   <td>
