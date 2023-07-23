@@ -101,7 +101,13 @@ const TaskAssign = (props) => {
 
   async function scoring() {
     let score = prompt("Please enter Score between 1 to 10.");
-    if (score && score.trim() && parseFloat(score)) {
+    if (
+      score &&
+      score.trim() &&
+      parseFloat(score) &&
+      score >= 0 &&
+      score <= 10
+    ) {
       openMessage(messageApi, "Updating Status...");
       const { data } = await axios.post("/api/update/task/score", {
         email: props.employee.email,

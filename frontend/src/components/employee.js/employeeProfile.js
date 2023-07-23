@@ -213,6 +213,14 @@ const EmployeeProfile = () => {
                     <span className="text-primary font-italic me-1">
                       Score:
                     </span>{" "}
+                    {WeekDates.length !== 0 && (
+                      <span>
+                        {" "}
+                        <small style={{ float: "right", marginTop: "3px" }}>
+                          Ends: {WeekDates[WeekDates.length - 1]}
+                        </small>
+                      </span>
+                    )}
                     {/* <p
                       className="button-link"
                       style={{ float: "right", marginBottom: 0 }}
