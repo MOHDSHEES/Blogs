@@ -112,8 +112,7 @@ const EmployeeProfile = () => {
     if (employee && employee.tasks.length)
       setWeekDates(getWeekDatesFromDate(employee.tasks[0].assignDate));
   }, [employee]);
-
-  const value = 10;
+  console.log(WeekDates);
   return (
     <section style={{ backgroundColor: "#eee" }}>
       <div className="container py-2">
