@@ -148,16 +148,54 @@ router.post("/update/task/score", async (req, res) => {
       }
     );
 
-    // console.log(resu.tasks);
-    function getMostRecentSunday() {
-      const currentDate = new Date();
-      const currentDayOfWeek = currentDate.getDay();
-      const daysSincePreviousSunday =
-        currentDayOfWeek === 0 ? 7 : currentDayOfWeek;
-      const mostRecentSunday = new Date(currentDate);
-      mostRecentSunday.setDate(currentDate.getDate() - daysSincePreviousSunday);
-      return mostRecentSunday;
+    const date = new Date(resu.tasks[0].assignDate);
+    const currentDayOfWeek = date.getDay();
+    const daysSincePreviousSunday =
+      currentDayOfWeek === 0 ? 7 : currentDayOfWeek;
+    const previousSunday = new Date(date);
+    previousSunday.setDate(date.getDate() - daysSincePreviousSunday);
+
+    const weekDates = [];
+    for (let i = 0; i < 7; i++) {
+      const currentDate = new Date(previousSunday);
+      currentDate.setDate(previousSunday.getDate() + i);
+      weekDates.push(currentDate.toISOString().slice(0, 10));
     }
+
+    let week = 0;
+    let noTasks = 0;
+    if (weekDates.includes(req.body.date)) {
+      resu.tasks.map((task) => {
+        if (weekDates.includes(task.assignDate)) {
+          if (task.score) {
+            noTasks = noTasks + 1;
+            week = week + task.score;
+          } else return (week = week);
+        }
+      });
+      const r = await Employees.findOneAndUpdate(
+        {
+          email: req.body.email,
+          "tasks.taskNo": taskNo,
+        },
+        {
+          "score.weekly": (week / noTasks).toFixed(1),
+          // "score.overall": resu.score.overall
+          //   ? resu.score.overall + score
+          //   : score,
+        }
+      );
+    }
+    // console.log(resu.tasks);
+    // function getMostRecentSunday() {
+    //   const currentDate = new Date();
+    //   const currentDayOfWeek = currentDate.getDay();
+    //   const daysSincePreviousSunday =
+    //     currentDayOfWeek === 0 ? 7 : currentDayOfWeek;
+    //   const mostRecentSunday = new Date(currentDate);
+    //   mostRecentSunday.setDate(currentDate.getDate() - daysSincePreviousSunday);
+    //   return mostRecentSunday;
+    // }
 
     // Usage example:
     // const mostRecentSunday = getMostRecentSunday();

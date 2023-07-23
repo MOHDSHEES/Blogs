@@ -13,6 +13,7 @@ import PhotoUpload from "./photoUpload";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ProgressBar from "../functions/progressBar";
+import { getWeekDatesFromDate } from "../functions/getweekdays";
 
 const EmployeeProfile = () => {
   const { setEmployeeData, messageApi } = useContext(globalContext);
@@ -106,6 +107,12 @@ const EmployeeProfile = () => {
   }
 
   const [uploadShow, setUploadShow] = useState(false);
+  const [WeekDates, setWeekDates] = useState(null);
+  useEffect(() => {
+    if (employee && employee.tasks.length)
+      setWeekDates(getWeekDatesFromDate(employee.tasks[0].assignDate));
+  }, [employee]);
+
   const value = 10;
   return (
     <section style={{ backgroundColor: "#eee" }}>
@@ -224,7 +231,7 @@ const EmployeeProfile = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <div
+                    {/* <div
                       style={{
                         textAlign: "center",
                         padding: "10px",
@@ -236,10 +243,7 @@ const EmployeeProfile = () => {
                           value={value}
                           text={`${value}`}
                           maxValue={10}
-                          // strokeWidth={50}
-                          // background={true}
                           styles={buildStyles({
-                            // strokeLinecap: "butt",
                             textColor: `${
                               value >= 7
                                 ? "green"
@@ -273,10 +277,7 @@ const EmployeeProfile = () => {
                           value={value}
                           text={value}
                           maxValue={10}
-                          // strokeWidth={50}
-                          // background={true}
                           styles={buildStyles({
-                            // strokeLinecap: "butt",
                             textColor: "green",
                             pathColor: "green",
                             textSize: "25px",
@@ -285,7 +286,7 @@ const EmployeeProfile = () => {
                         />
                       </div>
                       <small>Monthly</small>
-                    </div>
+                    </div> */}
                     <div
                       style={{
                         textAlign: "center",
@@ -295,24 +296,24 @@ const EmployeeProfile = () => {
                     >
                       <div style={{ width: 70, height: 70 }}>
                         <CircularProgressbar
-                          value={value}
-                          text={`${value}`}
+                          value={employee.score.weekly}
+                          text={`${employee.score.weekly}`}
                           maxValue={10}
                           // strokeWidth={50}
                           // background={true}
                           styles={buildStyles({
                             // strokeLinecap: "butt",
                             textColor: `${
-                              value >= 7
+                              employee.score.weekly >= 7
                                 ? "green"
-                                : value < 4
+                                : employee.score.weekly < 4
                                 ? "red"
                                 : "#eed202"
                             }`,
                             pathColor: `${
-                              value >= 7
+                              employee.score.weekly >= 7
                                 ? "green"
-                                : value < 4
+                                : employee.score.weekly < 4
                                 ? "red"
                                 : "#eed202"
                             }`,
@@ -323,13 +324,24 @@ const EmployeeProfile = () => {
                       </div>
                       <small>Weekly</small>
                     </div>
+                    <div style={{ padding: "10px", flex: 1 }}>
+                      {WeekDates &&
+                        employee.tasks.map((task, idx) => {
+                          // console.log(task);
+                          return (
+                            WeekDates.includes(task.assignDate) && (
+                              <ProgressBar
+                                key={idx}
+                                score={task.score ? task.score : 0}
+                                task={task.taskNo}
+                                assigned={task.score ? true : false}
+                              />
+                            )
+                          );
+                        })}
+                    </div>
                   </div>
-                  <div style={{ padding: "10px" }}>
-                    <ProgressBar score={10} />
-                    {/* <ProgressBar score={9} />
-                    <ProgressBar score={5} />
-                    <ProgressBar score={3} /> */}
-                  </div>
+
                   {/* {todayTask && (
                     <>
                       <ol

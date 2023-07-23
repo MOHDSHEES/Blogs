@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProgressBar = ({ score }) => {
+const ProgressBar = ({ score, task, assigned }) => {
   return (
     <div className="progress-bar-container">
       <div
@@ -16,7 +16,7 @@ const ProgressBar = ({ score }) => {
         className="progress-label"
         style={{ color: `${score >= 7 ? "white" : "black"}` }}
       >
-        Task:1 ({score})
+        Task:{task} ({assigned ? score + " points" : "Not Rated yet"})
       </div>
     </div>
   );
