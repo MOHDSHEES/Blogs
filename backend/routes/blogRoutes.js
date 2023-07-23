@@ -151,7 +151,7 @@ router.post("/update/task/score", async (req, res) => {
     const date = new Date(resu.tasks[0].assignDate);
     const currentDayOfWeek = date.getDay();
     const daysSincePreviousSunday =
-      currentDayOfWeek === 0 ? 7 : currentDayOfWeek;
+      currentDayOfWeek === 0 ? 0 : currentDayOfWeek;
     const previousSunday = new Date(date);
     previousSunday.setDate(date.getDate() - daysSincePreviousSunday);
 
@@ -170,7 +170,7 @@ router.post("/update/task/score", async (req, res) => {
           if (task.score) {
             noTasks = noTasks + 1;
             week = week + task.score;
-          } else return (week = week);
+          } else week = week;
         }
       });
       const r = await Employees.findOneAndUpdate(
