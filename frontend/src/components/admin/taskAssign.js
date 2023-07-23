@@ -106,6 +106,7 @@ const TaskAssign = (props) => {
       const { data } = await axios.post("/api/update/task/score", {
         email: props.employee.email,
         taskNo: props.oldTask.taskNo,
+        date: props.oldTask.assignDate,
         score: parseFloat(score),
       });
       if (data.status === 200) {

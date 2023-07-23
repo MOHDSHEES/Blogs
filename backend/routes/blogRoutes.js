@@ -138,6 +138,7 @@ router.post("/update/task/score", async (req, res) => {
         "tasks.taskNo": taskNo,
       },
       {
+        // "score.overall": score,
         $set: {
           "tasks.$.score": score,
         },
@@ -146,6 +147,40 @@ router.post("/update/task/score", async (req, res) => {
         new: true,
       }
     );
+
+    // console.log(resu.tasks);
+    function getMostRecentSunday() {
+      const currentDate = new Date();
+      const currentDayOfWeek = currentDate.getDay();
+      const daysSincePreviousSunday =
+        currentDayOfWeek === 0 ? 7 : currentDayOfWeek;
+      const mostRecentSunday = new Date(currentDate);
+      mostRecentSunday.setDate(currentDate.getDate() - daysSincePreviousSunday);
+      return mostRecentSunday;
+    }
+
+    // Usage example:
+    // const mostRecentSunday = getMostRecentSunday();
+    // console.log(mostRecentSunday.toISOString().slice(0, 10));
+    // if (resu) {
+    //   // Check each task's assignDate and print the result
+    //   for (const task of resu.tasks) {
+    //     const d1 = new Date(task.assignDate);
+    //     const d2 = new Date(mostRecentSunday.toISOString().slice(0, 10));
+    //     if (d1 < d2) {
+    //       console.log(false);
+    //     } else {
+    //       console.log(true);
+    //     }
+    //     // var pickedDate = new Date(
+    //     //   Date.parse(task.assignDate.replace(/-/g, " "))
+    //     // );
+    //     // console.log(pickedDate);
+    //     // console.log(new Date().toJSON().slice(0, 10));
+    //     // console.log(task.assignDate);
+    //     // console.log(task.assignDate <= new Date().toJSON().slice(0, 10));
+    //   }
+    // }
     // console.log(resu);
     if (resu)
       res.json({

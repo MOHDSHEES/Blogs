@@ -22,7 +22,10 @@ const employeeSchema = new mongoose.Schema({
   state: { type: String, required: true },
   password: { type: String, required: true },
   status: { type: Number, default: 1 },
-  score: { type: Number, default: 10 },
+  score: {
+    overall: { type: Number, default: 10 },
+    weekly: { type: Number, default: 10 },
+  },
   tasks: [{}],
 });
 

@@ -14,7 +14,7 @@ const EmployeeOldTasks = (props) => {
   const [data, setData] = useState(props.data.tasks && props.data.tasks);
   useEffect(() => {
     setData(props.data.tasks);
-  }, [props.data.tasks, data]);
+  }, [props.data.tasks]);
   function onOptionChange(e) {
     setRadio(e.target.value);
     if (e.target.value === "2") {
