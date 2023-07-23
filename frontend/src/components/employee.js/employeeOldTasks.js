@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import axios from "axios";
+// import axios from "axios";
 // import { useState } from "react";
 import capital from "../functions/capitaliseStr";
 import parse from "html-react-parser";
