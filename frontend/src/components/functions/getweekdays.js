@@ -1,7 +1,7 @@
 function getWeekDatesFromDate(dateString) {
   const date = new Date(dateString);
   const currentDayOfWeek = date.getDay();
-  const daysSincePreviousSunday = currentDayOfWeek === 0 ? 7 : currentDayOfWeek;
+  const daysSincePreviousSunday = currentDayOfWeek === 0 ? 0 : currentDayOfWeek;
   const previousSunday = new Date(date);
   previousSunday.setDate(date.getDate() - daysSincePreviousSunday);
 
