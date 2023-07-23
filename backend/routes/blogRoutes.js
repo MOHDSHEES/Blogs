@@ -521,11 +521,17 @@ router.post("/find/blog/all", verifyToken, async (req, res) => {
       const resu = await Blogs.find({});
       res.json({ blogs: resu, user: user });
     } else {
-      const resu = await Blogs.find({ _id: { $in: user.blog } });
+      const b = user.blog.filter((bg) => {
+        if (bg.length !== 10) {
+          return bg;
+        }
+      });
+      // console.log(b);
+      const resu = await Blogs.find({ _id: { $in: b } });
+      // console.log(resu);
       res.json({ blogs: resu, user: user });
     }
     // let trending = resu.map((a) => a.title);
-    // console.log(resu);
   } catch (error) {
     res.send({ msg: error.message });
   }

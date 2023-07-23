@@ -69,7 +69,6 @@ const Form = () => {
           localStorage.removeItem("token");
           navigate("/login", { replace: true });
         }
-        // console.log(data);
         setuser(data.user);
 
         setIsAdmin(data.user.isAdmin);
