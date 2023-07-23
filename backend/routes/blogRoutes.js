@@ -744,7 +744,7 @@ router.post("/blog/trending", async (req, res) => {
 // find titles
 router.post("/blog/updated/titles", async (req, res) => {
   try {
-    const resu = await UBlogs.find({}).select({ title: 1, id: 0 });
+    const resu = await UBlogs.find({}).select({ title: 1, _id: 0 });
     let titles = resu.map((a) => a.title);
     res.json(titles);
   } catch (error) {

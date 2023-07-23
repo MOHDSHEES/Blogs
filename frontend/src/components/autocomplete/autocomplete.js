@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 function Autocomplete({ suggestions, searchHandler }) {
+  // console.log(suggestions);
   // hook for storing filtered suggestions
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   // hook for storing index for active suggestion
@@ -17,7 +18,6 @@ function Autocomplete({ suggestions, searchHandler }) {
   // filtering the suggestions according to user
   const onChange = (e) => {
     const userInput = e.target.value;
-
     const inputWords = userInput.trim().toLowerCase().split(" ");
     let filtered = suggestions;
     inputWords.forEach((word) => {
