@@ -79,40 +79,94 @@ router.post("/update/task/employee", async (req, res) => {
 router.post("/assign/task/employee", async (req, res) => {
   try {
     // console.log(res.locals.data._id);
+    const emp = await Employees.findOne({
+      email: req.body.email,
+    });
+
     let date = new Date().toJSON().slice(0, 10);
-    // console.log(date);
-    const resu = await Employees.findOneAndUpdate(
-      {
-        email: req.body.email,
-      },
-      {
-        $push: {
-          tasks: {
-            $each: [
-              {
-                task: req.body.task,
-                assignDate: date,
-                taskNo: req.body.taskNo,
-                status: 0,
-              },
-            ],
-            $position: 0,
+
+    const dat = new Date(date);
+    const currentDayOfWeek = dat.getDay();
+    const daysSincePreviousSunday =
+      currentDayOfWeek === 0 ? 0 : currentDayOfWeek;
+    const previousSunday = new Date(dat);
+    previousSunday.setDate(dat.getDate() - daysSincePreviousSunday);
+
+    const weekDates = [];
+    for (let i = 0; i < 7; i++) {
+      const currentDate = new Date(previousSunday);
+      currentDate.setDate(previousSunday.getDate() + i);
+      weekDates.push(currentDate.toISOString().slice(0, 10));
+    }
+    let resu;
+    if (emp) {
+      if (!weekDates.includes(emp.tasks && emp.tasks[0].assignDate)) {
+        resu = await Employees.findOneAndUpdate(
+          {
+            email: req.body.email,
           },
-        },
-      },
-      {
-        new: true,
+          {
+            $push: {
+              tasks: {
+                $each: [
+                  {
+                    task: req.body.task,
+                    assignDate: date,
+                    taskNo: req.body.taskNo,
+                    status: 0,
+                  },
+                ],
+                $position: 0,
+              },
+            },
+
+            "score.preWeek": emp.score.weekly && emp.score.weekly,
+            "score.weekly": 10,
+            // "score.overall": resu.score.overall
+            //   ? resu.score.overall + score
+            //   : score,
+          },
+          {
+            new: true,
+          }
+        );
+      } else {
+        resu = await Employees.findOneAndUpdate(
+          {
+            email: req.body.email,
+          },
+          {
+            $push: {
+              tasks: {
+                $each: [
+                  {
+                    task: req.body.task,
+                    assignDate: date,
+                    taskNo: req.body.taskNo,
+                    status: 0,
+                  },
+                ],
+                $position: 0,
+              },
+            },
+          },
+          {
+            new: true,
+          }
+        );
       }
-    );
-    // console.log(resu);
-    if (resu)
-      res.json({
-        status: 200,
-        msg: "Task assigned successfully",
-        data: resu,
-      });
-    else
+      // console.log(resu);
+      if (resu)
+        res.json({
+          status: 200,
+          msg: "Task assigned successfully",
+          data: resu,
+        });
+      else
+        res.json({ status: 500, msg: "Something went wrong, Try again later" });
+    } else {
       res.json({ status: 500, msg: "Something went wrong, Try again later" });
+    }
     // console.log(user);
     // let trending = resu.map((a) => a.title);
     // console.log(resu);
@@ -161,7 +215,7 @@ router.post("/update/task/score", async (req, res) => {
       currentDate.setDate(previousSunday.getDate() + i);
       weekDates.push(currentDate.toISOString().slice(0, 10));
     }
-
+    // console.log(new Date().getDate() - date.getDate());
     let week = 0;
     let noTasks = 0;
     if (weekDates.includes(req.body.date)) {
@@ -176,7 +230,7 @@ router.post("/update/task/score", async (req, res) => {
       const r = await Employees.findOneAndUpdate(
         {
           email: req.body.email,
-          "tasks.taskNo": taskNo,
+          // "tasks.taskNo": taskNo,
         },
         {
           "score.weekly": (week / noTasks).toFixed(1),

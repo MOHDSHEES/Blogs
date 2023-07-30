@@ -270,37 +270,54 @@ const EmployeeProfile = () => {
                         />
                       </div>
                       <small>Overall</small>
-                    </div>
-                    <div
-                      style={{
-                        textAlign: "center",
-                        padding: "10px",
-                        width: "90px",
-                      }}
-                    >
-                      <div style={{ width: 70, height: 70 }}>
-                        <CircularProgressbar
-                          value={value}
-                          text={value}
-                          maxValue={10}
-                          styles={buildStyles({
-                            textColor: "green",
-                            pathColor: "green",
-                            textSize: "25px",
-                            trailColor: "#dad5d5",
-                          })}
-                        />
-                      </div>
-                      <small>Monthly</small>
                     </div> */}
+                    {employee.score.preWeek &&
+                      employee.score.preWeek !== -1 && (
+                        <div
+                          style={{
+                            textAlign: "center",
+                            padding: "10px",
+                            width: "80px",
+                          }}
+                        >
+                          <div style={{ width: 60, height: 60 }}>
+                            <CircularProgressbar
+                              value={employee.score.preWeek}
+                              text={`${employee.score.preWeek}`}
+                              maxValue={10}
+                              styles={buildStyles({
+                                // strokeLinecap: "butt",
+                                textColor: `${
+                                  employee.score.preWeek >= 7
+                                    ? "green"
+                                    : employee.score.preWeek < 4
+                                    ? "red"
+                                    : "#eed202"
+                                }`,
+                                pathColor: `${
+                                  employee.score.preWeek >= 7
+                                    ? "green"
+                                    : employee.score.preWeek < 4
+                                    ? "red"
+                                    : "#eed202"
+                                }`,
+                                textSize: "25px",
+                                trailColor: "#dad5d5",
+                              })}
+                            />
+                          </div>
+                          <small>Pre. week</small>
+                        </div>
+                      )}
+
                     <div
                       style={{
                         textAlign: "center",
                         padding: "10px",
-                        width: "90px",
+                        width: "80px",
                       }}
                     >
-                      <div style={{ width: 70, height: 70 }}>
+                      <div style={{ width: 60, height: 60 }}>
                         <CircularProgressbar
                           value={employee.score.weekly}
                           text={`${employee.score.weekly}`}

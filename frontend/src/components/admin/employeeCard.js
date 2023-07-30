@@ -84,6 +84,13 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
             <br />
             {employee.email}
             <br />
+            {employee.score &&
+              employee.score.weekly &&
+              "Weekly Score: " + employee.score.weekly}
+            <br />
+            {employee.score &&
+              employee.score.preWeek !== -1 &&
+              "Pre. week Score: " + employee.score.preWeek}
             <div className="d-flex justify-content-between text-center mt-5 mb-2">
               <div>
                 <small style={{ fontWeight: 600 }}>Job Type</small>

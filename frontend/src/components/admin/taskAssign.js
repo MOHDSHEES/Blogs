@@ -152,13 +152,15 @@ const TaskAssign = (props) => {
         </Modal.Header>
         <Modal.Body>
           <div class="form-text mb-3">
-            <button
-              onClick={scoring}
-              style={{ float: "right", marginRight: "10px" }}
-              className="btn btn-success"
-            >
-              Rate
-            </button>
+            {props.oldTask && props.oldTask.task && (
+              <button
+                onClick={scoring}
+                style={{ float: "right", marginRight: "10px" }}
+                className="btn btn-success"
+              >
+                Rate
+              </button>
+            )}
             Emp. Id: {props.employee.employeeId} <br />
             Name: {props.employee.name}
             <br />
