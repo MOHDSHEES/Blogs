@@ -29,6 +29,7 @@ const Draft = () => {
     keywords: "",
     category: "",
     description: "",
+    related: "",
     // id: null,
   });
   const [titles, setTitles] = useState([]);
@@ -179,6 +180,7 @@ const Draft = () => {
       title: "",
       keywords: "",
       description: "",
+      related: "",
       //   id: null,
     });
   }
@@ -201,6 +203,7 @@ const Draft = () => {
       title: data.title,
       keywords: data.keywords,
       description: data.description,
+      related: data.related ? data.related : "",
     });
     window.$("#staticBackdrop").modal("show");
   }

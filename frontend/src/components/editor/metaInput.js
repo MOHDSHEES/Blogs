@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useState } from "react";
 import { message } from "antd";
-import { closeMessage, openMessage } from "../functions/message";
+// import { closeMessage, openMessage } from "../functions/message";
 import { globalContext } from "../../context";
 
 const MetaInput = ({ setMetaData, metaData }) => {
@@ -12,6 +12,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
     setkeywords(metaData.keywords);
     setmainImg(metaData.mainImg);
     setDescription(metaData.description);
+    setRelated(metaData.related ? metaData.related : "");
   }, [metaData]);
   //   console.log(metaData);
   const [keywords, setkeywords] = useState(metaData.keywords);
@@ -19,11 +20,14 @@ const MetaInput = ({ setMetaData, metaData }) => {
   const [title, setTitle] = useState(metaData.title);
   const [category, setcategory] = useState(metaData.category);
   const [categories, setCategories] = useState(null);
-  const [checkBox, setcheckBox] = useState(false);
-  const [categoryImg, setcategoryImg] = useState("");
-  const [disabledCategoryBtn, setdisabledCategoryBtn] = useState(false);
-  const [disabled, setdisabled] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
+  const [related, setRelated] = useState(
+    metaData.related ? metaData.related : ""
+  );
+  // const [checkBox, setcheckBox] = useState(false);
+  // const [categoryImg, setcategoryImg] = useState("");
+  // const [disabledCategoryBtn, setdisabledCategoryBtn] = useState(false);
+  // const [disabled, setdisabled] = useState(false);
+  // const [messageApi, contextHolder] = message.useMessage();
   const { categories: cate } = useContext(globalContext);
   //   const [id, setId] = useState(null);
   const [description, setDescription] = useState(metaData.description);
@@ -87,6 +91,8 @@ const MetaInput = ({ setMetaData, metaData }) => {
       category: category,
       keywords: keywords,
       description: description.trim(),
+      related: related,
+
       //   id: id,
     });
     window.$("#staticBackdrop").modal("hide");
@@ -98,6 +104,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
     setkeywords(metaData.keywords);
     setmainImg(metaData.mainImg);
     setDescription(metaData.description);
+    setRelated(metaData.related ? metaData.related : "");
     // setId(null);
     window.$("#staticBackdrop").modal("hide");
   }
@@ -112,7 +119,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      {contextHolder}
+      {/* {contextHolder} */}
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
@@ -192,68 +199,76 @@ const MetaInput = ({ setMetaData, metaData }) => {
                 <div style={{ margin: "10px 0 5px" }}>
                   <small>Category</small>
                 </div>
-                {
-                  !checkBox && (
-                    <select
-                      name="brand"
-                      value={category}
-                      onChange={(e) => setcategory(e.target.value)}
-                      id="inputState"
-                      className="form-select"
-                      required
-                    >
-                      <option value="">
-                        Please select the category of the blog...
-                      </option>
-                      {categories &&
-                        categories.map((category, idx) => {
-                          return (
-                            <option key={idx + "id"} value={category.category}>
-                              {category.category}
-                            </option>
-                          );
-                        })}
-                    </select>
-                  )
-                  // ) : (
-                  //   <div>
-                  //     <div style={{ margin: "10px 0 5px" }}>
-                  //       <small>Enter Image URL</small>
-                  //     </div>
-                  //     <input
-                  //       style={{ marginBottom: "5px" }}
-                  //       className="form-control"
-                  //       value={categoryImg}
-                  //       onChange={(e) => setcategoryImg(e.target.value)}
-                  //       placeholder="Please enter the URL of category image..."
-                  //       autocomplete="off"
-                  //       required
-                  //     />
-                  //     <div style={{ margin: "10px 0 5px" }}>
-                  //       <small>Enter Category</small>
-                  //     </div>
-                  //     <div class="input-group">
-                  //       <input
-                  //         className="form-control"
-                  //         value={category}
-                  //         onChange={(e) => setcategory(e.target.value)}
-                  //         placeholder="Please enter the category of the blog..."
-                  //         autocomplete="off"
-                  //         required
-                  //       />
-                  //       <button
-                  //         type="button"
-                  //         onClick={addCategory}
-                  //         form="categoryForm"
-                  //         disabled={disabledCategoryBtn}
-                  //         class="btn btn-primary input-group-text"
-                  //       >
-                  //         Add Category
-                  //       </button>
-                  //     </div>
-                  //   </div>
-                  // )
-                }
+
+                <select
+                  name="brand"
+                  value={category}
+                  onChange={(e) => setcategory(e.target.value)}
+                  id="inputState"
+                  className="form-select"
+                  required
+                >
+                  <option value="">
+                    Please select the category of the blog...
+                  </option>
+                  {categories &&
+                    categories.map((category, idx) => {
+                      return (
+                        <option key={idx + "id"} value={category.category}>
+                          {category.category}
+                        </option>
+                      );
+                    })}
+                </select>
+                <div style={{ margin: "10px 0 5px" }}>
+                  <small>Related Blogs (Optional)</small>
+                </div>
+                <input
+                  className="form-control"
+                  value={related}
+                  onChange={(e) => setRelated(e.target.value)}
+                  placeholder="Please enter Id's of related blogs seperated by comma"
+                  autocomplete="off"
+                />
+                {/* : (
+                    <div>
+                      <div style={{ margin: "10px 0 5px" }}>
+                        <small>Enter Image URL</small>
+                      </div>
+                      <input
+                        style={{ marginBottom: "5px" }}
+                        className="form-control"
+                        value={categoryImg}
+                        onChange={(e) => setcategoryImg(e.target.value)}
+                        placeholder="Please enter the URL of category image..."
+                        autocomplete="off"
+                        required
+                      />
+                      <div style={{ margin: "10px 0 5px" }}>
+                        <small>Enter Category</small>
+                      </div>
+                      <div class="input-group">
+                        <input
+                          className="form-control"
+                          value={category}
+                          onChange={(e) => setcategory(e.target.value)}
+                          placeholder="Please enter the category of the blog..."
+                          autocomplete="off"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={addCategory}
+                          form="categoryForm"
+                          disabled={disabledCategoryBtn}
+                          class="btn btn-primary input-group-text"
+                        >
+                          Add Category
+                        </button>
+                      </div>
+                    </div>
+                  ) */}
+
                 {/* <div className="pl-4 pt-2">
                   <input
                     className="form-check-input "
@@ -285,7 +300,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
                   Close
                 </button>
                 <button
-                  disabled={disabled}
+                  // disabled={disabled}
                   type="submit"
                   class="btn btn-primary"
                 >

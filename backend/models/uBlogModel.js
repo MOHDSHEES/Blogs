@@ -13,6 +13,7 @@ const blogSchema = new mongoose.Schema({
     index: { unique: true },
   },
   title: { type: String, required: true },
+  related: { type: String },
   description: { type: String, required: true },
   mainImg: { type: String, required: true },
   keywords: { type: String, required: true },
