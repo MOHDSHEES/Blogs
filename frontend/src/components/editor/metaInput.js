@@ -87,7 +87,7 @@ const MetaInput = ({ setMetaData, metaData }) => {
     e.preventDefault();
     setMetaData({
       title: title.trim(),
-      mainImg: mainImg,
+      mainImg: mainImg.trim(),
       category: category,
       keywords: keywords,
       description: description.trim(),
