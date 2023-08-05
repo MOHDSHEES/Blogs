@@ -128,6 +128,7 @@ const EmployeeOldTasks = (props) => {
                               <div>
                                 <li
                                   onClick={() => editTask(task)}
+                                  style={{ backgroundColor: "#fbf8f8" }}
                                   className={`${
                                     props.isAdmin && "tasks"
                                   } list-group-item justify-content-between align-items-center p-3`}
@@ -169,7 +170,9 @@ const EmployeeOldTasks = (props) => {
                                       .map((str, idx) => (
                                         <p
                                           key={idx}
-                                          style={{ marginBottom: 0 }}
+                                          style={{
+                                            marginBottom: 0,
+                                          }}
                                         >
                                           {parse(str)}
                                         </p>
