@@ -12,6 +12,44 @@ const Admin = () => {
   const navigate = useNavigate();
   const [admin, setAdmin] = useState(false);
   const [employees, setEmployees] = useState(null);
+  const [filteredEmployees, setFilteredEmployees] = useState(null);
+  const [radio, setRadio] = useState("1");
+  const [loading, setLoading] = useState(false);
+
+  // filter function
+  function onOptionChange(e) {
+    setRadio(e.target.value);
+    if (e.target.value === "2") {
+      setLoading(true);
+      const d = employees.filter(
+        (emp) => emp.post === "Digital marketing & Seo"
+      );
+
+      setLoading(false);
+      setFilteredEmployees(d);
+    } else if (e.target.value === "3") {
+      setLoading(true);
+      const d = employees.filter((emp) => emp.post === "Content Writer");
+      setLoading(false);
+      setFilteredEmployees(d);
+    } else if (e.target.value === "4") {
+      setLoading(true);
+      const d = employees.filter(
+        (emp) => emp.post === "Social Media Management"
+      );
+      setLoading(false);
+      setFilteredEmployees(d);
+    } else if (e.target.value === "5") {
+      setLoading(true);
+      const d = employees.filter((emp) => emp.status === 0);
+      setLoading(false);
+      setFilteredEmployees(d);
+    } else {
+      setLoading(false);
+      setFilteredEmployees(employees);
+    }
+  }
+
   useEffect(() => {
     (async () => {
       const { data } = await axios.post("/api/authenticate", {
@@ -30,6 +68,7 @@ const Admin = () => {
     (async () => {
       const { data } = await axios.post("/api/find/employees");
       setEmployees(data);
+      setFilteredEmployees(data);
     })();
   }, []);
 
@@ -37,34 +76,122 @@ const Admin = () => {
   return (
     <div className="body">
       <AdminSidebar isAdmin={admin} setTab={setTab} />
-
-      <div className="col py-3" style={{ marginTop: "80px" }}>
-        <PendingTable />
-      </div>
-      {tab === 1 && (
-        <div>
-          <section style={{ backgroundColor: "#f4f5f7" }}>
-            <div className="container py-2 ">
-              <div className="row d-flex justify-content-center align-items-center ">
-                {employees &&
-                  employees.map((employee) => {
-                    return (
-                      employee.status === 1 && (
-                        <EmployeeCard
-                          setEmployees={setEmployees}
-                          employees={employees}
-                          key={employee._id}
-                          employee={employee}
-                        />
-                      )
-                    );
-                  })}
-                {/* <EmployeeCard  />
-                <EmployeeCard /> */}
-              </div>
-            </div>
-          </section>
+      {tab === 0 ? (
+        <div className="col py-3" style={{ marginTop: "80px" }}>
+          <PendingTable />
         </div>
+      ) : (
+        tab === 1 && (
+          <div style={{ marginTop: "80px" }}>
+            <section style={{ backgroundColor: "#f4f5f7" }}>
+              <div className="container py-2 ">
+                <div
+                  class="alert alert-primary employee-filter"
+                  role="alert"
+                  style={{ marginBottom: "25px" }}
+                >
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio1"
+                      value="1"
+                      checked={radio === "1"}
+                      onChange={onOptionChange}
+                    />
+                    <label class="form-check-label" for="inlineRadio1">
+                      All
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio2"
+                      value="2"
+                      checked={radio === "2"}
+                      onChange={onOptionChange}
+                    />
+                    <label class="form-check-label" for="inlineRadio2">
+                      Digital marketing & Seo
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio3"
+                      value="3"
+                      checked={radio === "3"}
+                      onChange={onOptionChange}
+                    />
+                    <label class="form-check-label" for="inlineRadio3">
+                      Content Writer
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio4"
+                      value="4"
+                      checked={radio === "4"}
+                      onChange={onOptionChange}
+                    />
+                    <label class="form-check-label" for="inlineRadio4">
+                      Social Media Management
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio5"
+                      value="5"
+                      checked={radio === "5"}
+                      onChange={onOptionChange}
+                    />
+                    <label class="form-check-label" for="inlineRadio5">
+                      Former Employees
+                    </label>
+                  </div>
+                </div>
+
+                <div className="row d-flex justify-content-center align-items-center ">
+                  {loading
+                    ? "Loading..."
+                    : filteredEmployees &&
+                      filteredEmployees.map((employee) => {
+                        return radio === "5" ? (
+                          <EmployeeCard
+                            setEmployees={setEmployees}
+                            employees={employees}
+                            key={employee._id}
+                            employee={employee}
+                          />
+                        ) : (
+                          employee.status === 1 && (
+                            <EmployeeCard
+                              setEmployees={setEmployees}
+                              employees={employees}
+                              key={employee._id}
+                              employee={employee}
+                            />
+                          )
+                        );
+                      })}
+                  {/* <EmployeeCard  />
+                <EmployeeCard /> */}
+                </div>
+              </div>
+            </section>
+          </div>
+        )
       )}
       {/* <div style={{ padding: "1rem 15px" }} class="container-fluid ">
         <div style={{ padding: "0" }} class="container">

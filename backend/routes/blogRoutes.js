@@ -300,17 +300,33 @@ router.post("/update/task/status", async (req, res) => {
     // console.log(res.locals.data._id);
     // let date = new Date().toJSON().slice(0, 10);
     // console.log(date);
-    const resu = await Employees.updateOne(
-      {
-        email: req.body.email,
-        "tasks.taskNo": taskNo,
-      },
-      {
-        $set: {
-          "tasks.$.status": status,
+    let resu;
+    if (status === 0) {
+      resu = await Employees.updateOne(
+        {
+          email: req.body.email,
+          "tasks.taskNo": taskNo,
         },
-      }
-    );
+        {
+          $set: {
+            "tasks.$.status": status,
+          },
+        }
+      );
+    } else {
+      resu = await Employees.updateOne(
+        {
+          email: req.body.email,
+          "tasks.taskNo": taskNo,
+        },
+        {
+          $set: {
+            "tasks.$.status": status,
+            "tasks.$.completedAt": new Date(),
+          },
+        }
+      );
+    }
     // console.log(resu);
     if (resu.acknowledged && resu.modifiedCount)
       res.json({

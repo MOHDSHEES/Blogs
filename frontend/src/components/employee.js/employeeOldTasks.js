@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import capital from "../functions/capitaliseStr";
 import parse from "html-react-parser";
 import TaskAssign from "../admin/taskAssign";
+import FormatDate from "../functions/formatDate";
 
 const EmployeeOldTasks = (props) => {
   const [modalShow, setModalShow] = useState(false);
@@ -15,6 +16,8 @@ const EmployeeOldTasks = (props) => {
   useEffect(() => {
     setData(props.data.tasks);
   }, [props.data.tasks]);
+
+  // filter function
   function onOptionChange(e) {
     setRadio(e.target.value);
     if (e.target.value === "2") {
@@ -122,50 +125,101 @@ const EmployeeOldTasks = (props) => {
                         return (
                           <>
                             {task.assignDate !== props.assignDate && (
-                              <li
-                                onClick={() => editTask(task)}
-                                className={`${
-                                  props.isAdmin && "tasks"
-                                } list-group-item justify-content-between align-items-center p-3`}
-                              >
-                                <p
-                                  className="mb-1"
-                                  key={idx}
-                                  style={{ fontSize: ".77rem" }}
+                              <div>
+                                <li
+                                  onClick={() => editTask(task)}
+                                  className={`${
+                                    props.isAdmin && "tasks"
+                                  } list-group-item justify-content-between align-items-center p-3`}
                                 >
-                                  <span style={{ fontWeight: 600 }}>
-                                    {task.taskNo} Task: {task.assignDate}
-                                    <span
-                                      style={{
-                                        float: "right",
-                                        color: task.status ? "green " : "red",
-                                      }}
-                                    >
-                                      {task.status ? "Completed" : "Incomplete"}
-                                    </span>
+                                  <p
+                                    className="mb-1"
+                                    key={idx}
+                                    style={{ fontSize: ".77rem" }}
+                                  >
+                                    <span style={{ fontWeight: 600 }}>
+                                      {task.taskNo} Task: {task.assignDate}
+                                      {!task.status && !props.isAdmin && (
+                                        <span
+                                          onClick={() =>
+                                            props.updateStatus(task.taskNo)
+                                          }
+                                          style={{
+                                            float: "right",
+                                          }}
+                                          className="text-link-blue"
+                                        >
+                                          Mark as Complete
+                                        </span>
+                                      )}
+                                      {/* <span
+                                        style={{
+                                          float: "right",
+                                          color: task.status ? "green " : "red",
+                                        }}
+                                      >
+                                        {task.status
+                                          ? "Completed"
+                                          : "Incomplete"}
+                                      </span> */}
+                                      <br />
+                                    </span>{" "}
+                                    {capital(task.task)
+                                      .split("\n")
+                                      .map((str, idx) => (
+                                        <p
+                                          key={idx}
+                                          style={{ marginBottom: 0 }}
+                                        >
+                                          {parse(str)}
+                                        </p>
+                                      ))}
                                     <br />
-                                  </span>{" "}
-                                  {capital(task.task)
-                                    .split("\n")
-                                    .map((str, idx) => (
-                                      <p key={idx} style={{ marginBottom: 0 }}>
-                                        {parse(str)}
+                                    {/* {!task.status && !props.isAdmin && (
+                                      <p
+                                        onClick={() =>
+                                          props.updateStatus(task.taskNo)
+                                        }
+                                        className="text-link-blue mt-2"
+                                        style={{ float: "right" }}
+                                      >
+                                        Mark as Complete
                                       </p>
-                                    ))}
-                                  <br />
-                                  {!task.status && !props.isAdmin && (
-                                    <p
-                                      onClick={() =>
-                                        props.updateStatus(task.taskNo)
-                                      }
-                                      className="text-link-blue mt-2"
-                                      style={{ float: "right" }}
-                                    >
-                                      Mark as Complete
-                                    </p>
-                                  )}
-                                </p>
-                              </li>
+                                    )} */}
+                                  </p>
+                                </li>
+                                <table class="table table-bordered">
+                                  <thead>
+                                    <tr className="table-active">
+                                      <th scope="col">Status</th>
+                                      <th scope="col">
+                                        {task.status && task.completedAt
+                                          ? "Submited At"
+                                          : "Last Submitted At"}
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <th
+                                        scope="row"
+                                        style={{
+                                          color: task.status ? "green " : "red",
+                                        }}
+                                      >
+                                        {task.status
+                                          ? "Completed"
+                                          : "Incomplete"}
+                                      </th>
+                                      <td>
+                                        {task.completedAt
+                                          ? FormatDate(task.completedAt)
+                                          : "Not submitted"}
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
                             )}
                           </>
                         );

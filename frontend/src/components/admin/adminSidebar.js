@@ -64,6 +64,14 @@ const AdminSidebar = ({ setTab }) => {
                 <span class="nav_logo-name">Off The Web</span>{" "}
               </a>
               <div class="nav_list">
+                <Link onClick={() => setTab(0)} class="nav_link">
+                  {" "}
+                  <i class="bx bxs-badge-check nav_icon"></i>
+                  {/* <i class="bx bx-heading "></i> */}
+                  <span class="nav_name">Blogs for activation</span>{" "}
+                </Link>{" "}
+              </div>
+              <div class="nav_list">
                 <Link onClick={() => setModalShow(true)} class="nav_link">
                   {" "}
                   <i class="bx bx-user-plus nav_icon"></i>{" "}

@@ -14,6 +14,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ProgressBar from "../functions/progressBar";
 import { getWeekDatesFromDate } from "../functions/getweekdays";
+import FormatDate from "../functions/formatDate";
 
 const EmployeeProfile = () => {
   const { setEmployeeData, messageApi } = useContext(globalContext);
@@ -506,40 +507,54 @@ const EmployeeProfile = () => {
                             return (
                               <>
                                 {task.assignDate === assignDate && (
-                                  <li className="list-group-item justify-content-between align-items-center p-3">
-                                    <p
-                                      className="mb-1"
-                                      key={idx}
-                                      style={{ fontSize: ".77rem" }}
-                                    >
-                                      <span style={{ fontWeight: 600 }}>
-                                        Task {idx + 1}:
-                                        <span
-                                          style={{
-                                            float: "right",
-                                            color: task.status
-                                              ? "green "
-                                              : "red",
-                                          }}
-                                        >
-                                          {task.status
-                                            ? "Completed"
-                                            : "Incomplete"}
-                                        </span>
-                                        <br />
-                                      </span>{" "}
-                                      {capital(task.task)
-                                        .split("\n")
-                                        .map((str, idx) => (
-                                          <p
-                                            key={idx}
-                                            style={{ marginBottom: 0 }}
+                                  <div>
+                                    <li className="list-group-item justify-content-between align-items-center p-3">
+                                      <p
+                                        className="mb-1"
+                                        key={idx}
+                                        style={{ fontSize: ".77rem" }}
+                                      >
+                                        <span style={{ fontWeight: 600 }}>
+                                          Task {idx + 1}:
+                                          <span
+                                            style={{
+                                              float: "right",
+                                              color: task.status
+                                                ? "green "
+                                                : "red",
+                                            }}
                                           >
-                                            {parse(str)}
-                                          </p>
-                                        ))}
-                                      <br />
-                                      {!task.status && (
+                                            {!task.status && (
+                                              <span
+                                                onClick={() =>
+                                                  updateStatus(task.taskNo)
+                                                }
+                                                style={{
+                                                  float: "right",
+                                                }}
+                                                className="text-link-blue"
+                                              >
+                                                Mark as Complete
+                                              </span>
+                                            )}
+                                            {/* {task.status
+                                            ? "Completed"
+                                            : "Incomplete"} */}
+                                          </span>
+                                          <br />
+                                        </span>{" "}
+                                        {capital(task.task)
+                                          .split("\n")
+                                          .map((str, idx) => (
+                                            <p
+                                              key={idx}
+                                              style={{ marginBottom: 0 }}
+                                            >
+                                              {parse(str)}
+                                            </p>
+                                          ))}
+                                        <br />
+                                        {/* {!task.status && (
                                         <p
                                           onClick={() =>
                                             updateStatus(task.taskNo)
@@ -549,9 +564,43 @@ const EmployeeProfile = () => {
                                         >
                                           Mark as Complete
                                         </p>
-                                      )}
-                                    </p>
-                                  </li>
+                                      )} */}
+                                      </p>
+                                    </li>
+                                    <table class="table table-bordered">
+                                      <thead>
+                                        <tr className="table-active">
+                                          <th scope="col">Status</th>
+                                          <th scope="col">
+                                            {task.status && task.completedAt
+                                              ? "Submited At"
+                                              : "Last Submitted At"}
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <th
+                                            scope="row"
+                                            style={{
+                                              color: task.status
+                                                ? "green "
+                                                : "red",
+                                            }}
+                                          >
+                                            {task.status
+                                              ? "Completed"
+                                              : "Incomplete"}
+                                          </th>
+                                          <td>
+                                            {task.completedAt
+                                              ? FormatDate(task.completedAt)
+                                              : "Not submitted"}
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
                                 )}
                               </>
                             );
