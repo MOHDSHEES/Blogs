@@ -22,7 +22,7 @@ const Admin = () => {
     if (e.target.value === "2") {
       setLoading(true);
       const d = employees.filter(
-        (emp) => emp.post === "Digital marketing & SEO"
+        (emp) => emp.post === "Digital Marketing & SEO"
       );
 
       setLoading(false);
@@ -115,7 +115,7 @@ const Admin = () => {
                       onChange={onOptionChange}
                     />
                     <label class="form-check-label" for="inlineRadio2">
-                      Digital marketing & SEO
+                      Digital Marketing & SEO
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
