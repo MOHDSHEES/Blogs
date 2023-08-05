@@ -170,6 +170,7 @@ const Admin = () => {
                         return radio === "5" ? (
                           <EmployeeCard
                             setEmployees={setEmployees}
+                            setFilteredEmployees={setFilteredEmployees}
                             employees={employees}
                             key={employee._id}
                             employee={employee}
@@ -178,6 +179,7 @@ const Admin = () => {
                           employee.status === 1 && (
                             <EmployeeCard
                               setEmployees={setEmployees}
+                              setFilteredEmployees={setFilteredEmployees}
                               employees={employees}
                               key={employee._id}
                               employee={employee}

@@ -4,7 +4,12 @@ import EmployeeOldTasks from "../employee.js/employeeOldTasks";
 import TaskAssign from "./taskAssign";
 import axios from "axios";
 
-const EmployeeCard = ({ employee, setEmployees, employees }) => {
+const EmployeeCard = ({
+  employee,
+  setEmployees,
+  employees,
+  setFilteredEmployees,
+}) => {
   const [modalShow, setModalShow] = useState(false);
   const [oldTasksModal, setOldTasksModal] = useState(false);
   async function updateDetails(querry) {
@@ -17,6 +22,7 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
       if (querry.status === data.status && data.status === 0) {
         const d = employees.filter((emp) => emp._id !== data._id);
         setEmployees(d);
+        setFilteredEmployees(d);
       }
     }
     // console.log(data);
@@ -47,35 +53,40 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
               }}
             />
           </div>
-          {!["6222563006", "9870357609", "9197487964"].includes(
-            employee.employeeId
-          ) && (
-            <div className="employee-status-edit">
-              <div class="btn-group dropstart">
-                <button
-                  class=" btn-simple"
-                  style={{ padding: "5px 10px" }}
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  &#8942;
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li>
-                    <a
-                      onClick={() => updateDetails({ status: 0 })}
-                      class="dropdown-item"
-                      href="#!"
-                    >
-                      Terminate
-                    </a>
-                  </li>
-                </ul>
+
+          {employee.status === 1 &&
+            !["6222563006", "9870357609", "9197487964"].includes(
+              employee.employeeId
+            ) && (
+              <div className="employee-status-edit">
+                <div class="btn-group dropstart">
+                  <button
+                    class=" btn-simple"
+                    style={{ padding: "5px 10px" }}
+                    type="button"
+                    id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    &#8942;
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton1"
+                  >
+                    <li>
+                      <a
+                        onClick={() => updateDetails({ status: 0 })}
+                        class="dropdown-item"
+                        href="#!"
+                      >
+                        Terminate
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          )}
+            )}
           <h4 className="mb-2">{employee.name}</h4>
           <p className="text-muted mb-4">
             {employee.post}
@@ -130,21 +141,24 @@ const EmployeeCard = ({ employee, setEmployees, employees }) => {
             </button>
           </div> */}
 
-          <button
-            type="button"
-            onClick={() => setModalShow(true)}
-            className="btn btn-success btn-rounded btn-lg"
-          >
-            Assign Task
-          </button>
-          <button
-            type="button"
-            onClick={() => setOldTasksModal(true)}
-            className="btn btn-primary btn-rounded btn-lg mx-1"
-          >
-            Tasks
-          </button>
-
+          {employee.status === 1 && (
+            <>
+              <button
+                type="button"
+                onClick={() => setModalShow(true)}
+                className="btn btn-success btn-rounded btn-lg"
+              >
+                Assign Task
+              </button>
+              <button
+                type="button"
+                onClick={() => setOldTasksModal(true)}
+                className="btn btn-primary btn-rounded btn-lg mx-1"
+              >
+                Tasks
+              </button>
+            </>
+          )}
           {/* <div className="d-flex justify-content-between text-center mt-5 mb-2">
             <div>
               <p className="mb-2 h5">8471</p>
