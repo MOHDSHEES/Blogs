@@ -130,13 +130,13 @@ const Draft = () => {
   function saveAndActivate() {
     window.$("#staticBackdrop1").modal("hide");
     setdisabled(true);
-    saveUpdate(true);
+    saveUpdate(1);
     setdisabled(false);
   }
   function save() {
     window.$("#staticBackdrop1").modal("hide");
     setdisabled(true);
-    saveUpdate(false);
+    saveUpdate(0);
     setdisabled(false);
   }
   function submitHandler(e) {

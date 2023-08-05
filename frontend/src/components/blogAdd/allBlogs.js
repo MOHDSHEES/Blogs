@@ -2,7 +2,23 @@ import React from "react";
 import resizeImg from "../functions/resizeImg";
 
 const AllBlogs = ({ blog }) => {
-  const borderColor = blog.activationRequest ? "green" : "red";
+  // console.log(blog.activationRequest.slice(-1));
+  // const borderColor = blog.activationRequest ? "green" : "red";
+  // console.log(blog.activationRequest);
+  let borderColor;
+  let date = null;
+  if (
+    (blog.activationRequest && blog.activationRequest.slice(-1) === "1") ||
+    blog.activationRequest.slice(-1) === "0"
+  ) {
+    borderColor = blog.activationRequest.slice(-1) === "1" ? "green" : "red";
+    if (blog.activationRequest.slice(-1) === "1") {
+      date = blog.activationRequest.slice(4, 21);
+    }
+  } else {
+    borderColor = blog.activationRequest === "true" ? "green" : "red";
+  }
+
   return (
     // <div class="col-lg-6">
     <div
@@ -44,6 +60,7 @@ const AllBlogs = ({ blog }) => {
             class="h6 m-0 break-line-3"
           > */}
         <p class="h6 m-0 break-line-3">{blog.title}</p>
+
         <a
           href={
             "https://www.offtheweb.in/blogs/preview/" +
@@ -59,6 +76,11 @@ const AllBlogs = ({ blog }) => {
             color: "green",
           }}
         >
+          {date && (
+            <span style={{ float: "left" }}>
+              <small>{date}</small>
+            </span>
+          )}
           preview
         </a>
 

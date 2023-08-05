@@ -805,6 +805,12 @@ router.post("/add/new/blog", async (req, res) => {
   try {
     // let nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
     // const id = req.body.metaData.id ? req.body.metaData.id : nanoid();
+    let request;
+    if (req.body.activationRequest) {
+      request = new Date() + req.body.activationRequest;
+    } else {
+      request = req.body.activationRequest;
+    }
     const date =
       new Date().toLocaleString("en-US", { weekday: "long" }) +
       ", " +
@@ -825,7 +831,7 @@ router.post("/add/new/blog", async (req, res) => {
       blog: req.body.blog,
       views: 0,
       createdDate: date,
-      activationRequest: req.body.activationRequest || false,
+      activationRequest: request,
       user: req.body.user,
     });
     const status = await blog.save();
@@ -1047,7 +1053,14 @@ router.post("/delete/blog", async (req, res) => {
 //  Update new editor blog
 router.post("/update/new/blog", async (req, res) => {
   // console.log(req.body.metaData.description);
-  // console.log(req.body.id);
+  // console.log(req.body.blog);
+
+  let request;
+  if (req.body.activationRequest) {
+    request = new Date() + req.body.activationRequest;
+  } else {
+    request = req.body.activationRequest;
+  }
   try {
     const date =
       new Date().toLocaleString("en-US", { weekday: "long" }) +
@@ -1069,7 +1082,7 @@ router.post("/update/new/blog", async (req, res) => {
         related: req.body.metaData.related,
         blog: req.body.blog,
         updatedDate: date,
-        activationRequest: req.body.activationRequest || false,
+        activationRequest: request,
         status: "Inactive",
       },
       {
