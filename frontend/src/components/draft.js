@@ -67,7 +67,10 @@ const Draft = () => {
     } else if (e.target.value === "4") {
       setLoading(true);
       const d = allBlogs.filter(
-        (task) => task.activationRequest && task.status === "Inactive"
+        (task) =>
+          (task.activationRequest.slice(-1) === "1" ||
+            task.activationRequest === "true") &&
+          task.status === "Inactive"
       );
       setLoading(false);
       setfilteredData(d);
