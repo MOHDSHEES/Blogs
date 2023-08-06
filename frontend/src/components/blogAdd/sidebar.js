@@ -136,13 +136,13 @@ const Sidebar = ({
                 </Link> */}
               </div>
             </div>{" "}
-            <div>
+            {/* <div>
               <Link onClick={onClickEdit} class="nav_link">
                 {" "}
                 <i class="bx bx-edit-alt nav_icon"></i>{" "}
                 <span class="nav_name">Edit</span>{" "}
               </Link>
-            </div>
+            </div> */}
           </nav>
         </div>
         {/* <div class="height-100 bg-light">

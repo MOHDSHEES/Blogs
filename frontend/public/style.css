@@ -572,7 +572,7 @@ p:empty {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   overflow: hidden;
   max-height: 0px;
-  transition: max-height 0.9s ease;
+  transition: max-height 0.5s ease;
 }
 .allblogs-more-data {
   width: 100%;
