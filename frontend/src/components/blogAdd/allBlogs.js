@@ -120,7 +120,7 @@ const AllBlogs = ({ blog, updateForm, adminPannel }) => {
               </span>
             </small>
             <small className="allblogs-flex-item">
-              <b>Updated Date:</b>{" "}
+              <b>Last Updated on:</b>{" "}
               {blog.updatedDate ? blog.updatedDate : "Not updated"}
             </small>
 
