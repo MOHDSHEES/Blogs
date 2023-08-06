@@ -50,15 +50,20 @@ const Admin = () => {
     }
   }
 
+  const [adminName, setAdminName] = useState(null);
   useEffect(() => {
     (async () => {
       const { data } = await axios.post("/api/authenticate", {
         token: localStorage.getItem("token"),
       });
-      //   console.log(data);
       if (!(data.status === 200 && data.user.isAdmin)) {
         navigate("/");
       } else if (data.status === 200 && data.user.isAdmin) {
+        setAdminName(
+          data.user.fname
+            ? data.user.fname + " " + data.user.lname
+            : data.user.lname
+        );
         setAdmin(true);
       }
     })();
@@ -78,7 +83,7 @@ const Admin = () => {
       <AdminSidebar isAdmin={admin} setTab={setTab} />
       {tab === 0 ? (
         <div className="col py-3" style={{ marginTop: "80px" }}>
-          <PendingTable />
+          <PendingTable adminName={adminName} />
         </div>
       ) : (
         tab === 1 && (

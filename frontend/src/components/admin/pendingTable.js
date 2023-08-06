@@ -7,7 +7,7 @@ import { message } from "antd";
 import { closeMessage } from "../functions/message";
 import { useNavigate } from "react-router-dom";
 
-const PendingTable = () => {
+const PendingTable = ({ adminName }) => {
   const [blog, setBlog] = useState([]);
   const [disable, setDisable] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -34,6 +34,7 @@ const PendingTable = () => {
       status: status,
       token: localStorage.getItem("token"),
       blog: bl,
+      adminName: adminName,
     });
     if (data && data.status === 200) {
       closeMessage(messageApi, data.msg, "success");
@@ -64,7 +65,7 @@ const PendingTable = () => {
                 <tr>
                   <th scope="row">{idx + 1}</th>{" "}
                   <td style={{ cursor: "pointer" }}>
-                    <AllBlogs key={bl._id} blog={bl} />
+                    <AllBlogs key={bl._id} blog={bl} adminPannel={true} />
                   </td>
                   <td>
                     <button

@@ -26,6 +26,10 @@ const blogSchema = new mongoose.Schema({
   status: { type: String, default: "Inactive" },
   user: { type: String, required: true },
   activationRequest: { type: String },
+  activationDetails: {
+    activatedBy: { type: String },
+    activatedDate: { type: String },
+  },
 });
 
 // productsSchema.index({ name: "text", category: "text" });

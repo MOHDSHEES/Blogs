@@ -661,7 +661,11 @@ router.post("/update/ublog/status", verifyToken, async (req, res) => {
   try {
     const resu = await UBlogs.updateMany(
       { _id: { $in: req.body.id } },
-      { status: req.body.status }
+      {
+        status: req.body.status,
+        "activationDetails.activatedBy": req.body.adminName,
+        "activationDetails.activatedDate": new Date(),
+      }
     );
 
     if (resu.modifiedCount && resu.modifiedCount) {

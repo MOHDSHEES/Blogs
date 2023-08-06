@@ -368,12 +368,15 @@ const Draft = () => {
                     ? filteredData.map((blog, idx) => {
                         return (
                           <div
-                            onClick={(e) => updateForm(blog)}
+                            // onClick={(e) => updateForm(blog)}
                             class="col-lg-6"
-                            style={{ cursor: "pointer" }}
+                            style={{ cursor: "pointer", marginBottom: "10px" }}
                             key={idx + "Allblogs"}
                           >
-                            <AllBlogs blog={blog} />
+                            <AllBlogs
+                              blog={blog}
+                              updateForm={() => updateForm(blog)}
+                            />
                           </div>
                         );
                       })
