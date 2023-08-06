@@ -141,8 +141,8 @@ const EmployeeCard = ({
             </button>
           </div> */}
 
-          {employee.status === 1 && (
-            <>
+          <>
+            {employee.status === 1 && (
               <button
                 type="button"
                 onClick={() => setModalShow(true)}
@@ -150,15 +150,16 @@ const EmployeeCard = ({
               >
                 Assign Task
               </button>
-              <button
-                type="button"
-                onClick={() => setOldTasksModal(true)}
-                className="btn btn-primary btn-rounded btn-lg mx-1"
-              >
-                Tasks
-              </button>
-            </>
-          )}
+            )}
+            <button
+              type="button"
+              onClick={() => setOldTasksModal(true)}
+              className="btn btn-primary btn-rounded btn-lg mx-1"
+            >
+              Tasks
+            </button>
+          </>
+
           {/* <div className="d-flex justify-content-between text-center mt-5 mb-2">
             <div>
               <p className="mb-2 h5">8471</p>
@@ -179,6 +180,7 @@ const EmployeeCard = ({
         employees={employees}
         setEmployees={setEmployees}
         // updateStatus={updateStatus}
+        setFilteredEmployees={setFilteredEmployees}
         isAdmin={true}
         show={oldTasksModal}
         assignDate={null}
@@ -188,6 +190,7 @@ const EmployeeCard = ({
       <TaskAssign
         employees={employees}
         employee={employee}
+        setFilteredEmployees={setFilteredEmployees}
         setEmployees={setEmployees}
         show={modalShow}
         onHide={() => setModalShow(false)}

@@ -41,7 +41,7 @@ const EmployeeOldTasks = (props) => {
 
   const [oldTask, setOldTask] = useState(null);
   async function editTask(task) {
-    if (props.isAdmin) {
+    if (props.isAdmin && props.data.status) {
       setOldTask(task);
       setModalShow(true);
     }
@@ -240,6 +240,7 @@ const EmployeeOldTasks = (props) => {
         employees={props.employees}
         oldTask={oldTask}
         employee={props.data}
+        setFilteredEmployees={props.setFilteredEmployees}
         setEmployees={props.setEmployees}
         show={modalShow}
         onHide={() => setModalShow(false)}

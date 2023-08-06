@@ -39,6 +39,7 @@ const TaskAssign = (props) => {
               return data.data;
             } else return c;
           });
+          props.setFilteredEmployees(updatedData);
           props.setEmployees(updatedData);
           closeMessage(messageApi, data.msg, "success");
           props.onHide();
@@ -62,6 +63,7 @@ const TaskAssign = (props) => {
               return data.data;
             } else return c;
           });
+          props.setFilteredEmployees(updatedData);
           props.setEmployees(updatedData);
           closeMessage(messageApi, data.msg, "success");
           props.onHide();
@@ -92,8 +94,16 @@ const TaskAssign = (props) => {
     });
     if (data.status === 200) {
       // console.log(data);
+      const updatedData = props.employees.map((c, i) => {
+        if (c.employeeId === props.employee.employeeId) {
+          return data.data;
+        } else return c;
+      });
+      props.setFilteredEmployees(updatedData);
+      props.setEmployees(updatedData);
 
       closeMessage(messageApi, data.msg, "success");
+      props.onHide();
     } else {
       closeMessage(messageApi, data.msg, "error");
     }
@@ -122,7 +132,9 @@ const TaskAssign = (props) => {
             return data.data;
           } else return c;
         });
+        props.setFilteredEmployees(updatedData);
         props.setEmployees(updatedData);
+
         props.onHide();
 
         closeMessage(messageApi, data.msg, "success");

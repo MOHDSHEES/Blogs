@@ -302,7 +302,7 @@ router.post("/update/task/status", async (req, res) => {
     // console.log(date);
     let resu;
     if (status === 0) {
-      resu = await Employees.updateOne(
+      resu = await Employees.findOneAndUpdate(
         {
           email: req.body.email,
           "tasks.taskNo": taskNo,
@@ -314,7 +314,7 @@ router.post("/update/task/status", async (req, res) => {
         }
       );
     } else {
-      resu = await Employees.updateOne(
+      resu = await Employees.findOneAndUpdate(
         {
           email: req.body.email,
           "tasks.taskNo": taskNo,
@@ -328,10 +328,11 @@ router.post("/update/task/status", async (req, res) => {
       );
     }
     // console.log(resu);
-    if (resu.acknowledged && resu.modifiedCount)
+    if (resu)
       res.json({
         status: 200,
         msg: "Successfully updated",
+        data: resu,
       });
     else
       res.json({ status: 500, msg: "Something went wrong, Try again later" });
