@@ -214,7 +214,7 @@ const EmployeeProfile = () => {
                     <span className="text-primary font-italic me-1">
                       Score:
                     </span>{" "}
-                    {WeekDates.length !== 0 && (
+                    {WeekDates && WeekDates.length !== 0 && (
                       <span>
                         {" "}
                         <small style={{ float: "right", marginTop: "3px" }}>
@@ -610,15 +610,16 @@ const EmployeeProfile = () => {
                     ) : (
                       <div>No task for Today.</div>
                     )}
-                    {todayTask.length !== employee.tasks.length && (
-                      <button
-                        onClick={() => setOldTasksModal(true)}
-                        type="button"
-                        className="btn btn-outline-primary ms-1 mt-2"
-                      >
-                        Previous Tasks
-                      </button>
-                    )}
+                    {todayTask &&
+                      todayTask.length !== employee.tasks.length && (
+                        <button
+                          onClick={() => setOldTasksModal(true)}
+                          type="button"
+                          className="btn btn-outline-primary ms-1 mt-2"
+                        >
+                          Previous Tasks
+                        </button>
+                      )}
                   </div>
                 </div>
               </div>
