@@ -80,6 +80,7 @@ const Draft = () => {
     }
   }
 
+  // const [disabled, setDisabled] = useState(false);
   async function editBlog() {
     setFlag(1);
     setUpdateFlag(1);
@@ -88,6 +89,7 @@ const Draft = () => {
   }
 
   async function saveUpdate(props) {
+    setdisabled(true);
     if (flag) {
       let text =
         "Blog will be Inactive until verified by Admin. Are you sure to update. \n";
@@ -128,6 +130,7 @@ const Draft = () => {
       setUpdateFlag(0);
       setFlag(0);
     }
+    setdisabled(false);
   }
 
   function saveAndActivate() {
