@@ -13,10 +13,25 @@ const EmployeeCard = ({
   const [modalShow, setModalShow] = useState(false);
   const [oldTasksModal, setOldTasksModal] = useState(false);
   async function updateDetails(querry) {
+    const currentDate = new Date();
+
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Adding 1 to month since it's zero-based
+    const day = String(currentDate.getDate()).padStart(2, "0");
+
+    const formattedDate = `${year}-${month}-${day}`;
+    // console.log(formattedDate);
+    const date =
+      new Date().toLocaleString("en-US", { month: "long" }) +
+      ", " +
+      new Date().getDate() +
+      ", " +
+      new Date().getFullYear();
+    console.log(date);
     if (window.confirm("Are you sure you want to terminate?") === true) {
       const { data } = await axios.post("/api/update/employees/admin", {
         id: employee._id,
-        data: querry,
+        data: { ...querry, completionDate: formattedDate },
       });
 
       if (querry.status === data.status && data.status === 0) {
@@ -116,6 +131,15 @@ const EmployeeCard = ({
                 <small>{employee.joiningDate}</small>
                 {/* <p className="text-muted mb-0">Income amounts</p> */}
               </div>
+              {employee && employee.completionDate && (
+                <div className="px-3">
+                  {/* <p className="mb-2 h5">Joining Date</p> */}
+                  <small style={{ fontWeight: 600 }}>Completion Date</small>
+                  <br />
+                  <small>{employee.completionDate}</small>
+                  {/* <p className="text-muted mb-0">Income amounts</p> */}
+                </div>
+              )}
             </div>
           </p>
 

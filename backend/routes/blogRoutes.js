@@ -849,7 +849,7 @@ router.post("/add/new/blog", async (req, res) => {
     );
     res.json({ status: 1, msg: "Blog saved successfully.", data: status });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.send({ status: 0, msg: error.message });
   }
 });
