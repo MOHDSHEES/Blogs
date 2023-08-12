@@ -16,6 +16,9 @@ const Admin = () => {
   const [radio, setRadio] = useState("1");
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    onOptionChange(radio);
+  }, [employees]);
   // filter function
   function onOptionChange(radio) {
     // console.log("in");
