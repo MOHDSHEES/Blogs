@@ -240,7 +240,9 @@ const EmployeeOldTasks = (props) => {
         employees={props.employees}
         oldTask={oldTask}
         employee={props.data}
-        setFilteredEmployees={props.setFilteredEmployees}
+        // setFilteredEmployees={props.setFilteredEmployees}
+        onOptionChange={props.onOptionChange}
+        radio={props.radio}
         setEmployees={props.setEmployees}
         show={modalShow}
         onHide={() => setModalShow(false)}

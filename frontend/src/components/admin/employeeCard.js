@@ -8,7 +8,9 @@ const EmployeeCard = ({
   employee,
   setEmployees,
   employees,
-  setFilteredEmployees,
+  onOptionChange,
+  radio,
+  // setFilteredEmployees,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const [oldTasksModal, setOldTasksModal] = useState(false);
@@ -20,14 +22,7 @@ const EmployeeCard = ({
     const day = String(currentDate.getDate()).padStart(2, "0");
 
     const formattedDate = `${year}-${month}-${day}`;
-    // console.log(formattedDate);
-    const date =
-      new Date().toLocaleString("en-US", { month: "long" }) +
-      ", " +
-      new Date().getDate() +
-      ", " +
-      new Date().getFullYear();
-    console.log(date);
+    // console.log(date);
     if (window.confirm("Are you sure you want to terminate?") === true) {
       const { data } = await axios.post("/api/update/employees/admin", {
         id: employee._id,
@@ -37,7 +32,8 @@ const EmployeeCard = ({
       if (querry.status === data.status && data.status === 0) {
         const d = employees.filter((emp) => emp._id !== data._id);
         setEmployees(d);
-        setFilteredEmployees(d);
+        onOptionChange(radio);
+        // setFilteredEmployees(d);
       }
     }
     // console.log(data);
@@ -204,7 +200,9 @@ const EmployeeCard = ({
         employees={employees}
         setEmployees={setEmployees}
         // updateStatus={updateStatus}
-        setFilteredEmployees={setFilteredEmployees}
+        // setFilteredEmployees={setFilteredEmployees}
+        onOptionChange={onOptionChange}
+        radio={radio}
         isAdmin={true}
         show={oldTasksModal}
         assignDate={null}
@@ -214,7 +212,9 @@ const EmployeeCard = ({
       <TaskAssign
         employees={employees}
         employee={employee}
-        setFilteredEmployees={setFilteredEmployees}
+        onOptionChange={onOptionChange}
+        radio={radio}
+        // setFilteredEmployees={setFilteredEmployees}
         setEmployees={setEmployees}
         show={modalShow}
         onHide={() => setModalShow(false)}

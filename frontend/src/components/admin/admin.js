@@ -17,9 +17,11 @@ const Admin = () => {
   const [loading, setLoading] = useState(false);
 
   // filter function
-  function onOptionChange(e) {
-    setRadio(e.target.value);
-    if (e.target.value === "2") {
+  function onOptionChange(radio) {
+    // console.log("in");
+    // console.log(radio);
+    setRadio(radio);
+    if (radio === "2") {
       setLoading(true);
       const d = employees.filter(
         (emp) => emp.post === "Digital Marketing & SEO"
@@ -27,19 +29,19 @@ const Admin = () => {
 
       setLoading(false);
       setFilteredEmployees(d);
-    } else if (e.target.value === "3") {
+    } else if (radio === "3") {
       setLoading(true);
       const d = employees.filter((emp) => emp.post === "Content Writer");
       setLoading(false);
       setFilteredEmployees(d);
-    } else if (e.target.value === "4") {
+    } else if (radio === "4") {
       setLoading(true);
       const d = employees.filter(
         (emp) => emp.post === "Social Media Management"
       );
       setLoading(false);
       setFilteredEmployees(d);
-    } else if (e.target.value === "5") {
+    } else if (radio === "5") {
       setLoading(true);
       const d = employees.filter((emp) => emp.status === 0);
       setLoading(false);
@@ -103,7 +105,7 @@ const Admin = () => {
                       id="inlineRadio1"
                       value="1"
                       checked={radio === "1"}
-                      onChange={onOptionChange}
+                      onChange={() => onOptionChange("1")}
                     />
                     <label class="form-check-label" for="inlineRadio1">
                       All
@@ -117,7 +119,7 @@ const Admin = () => {
                       id="inlineRadio2"
                       value="2"
                       checked={radio === "2"}
-                      onChange={onOptionChange}
+                      onChange={() => onOptionChange("2")}
                     />
                     <label class="form-check-label" for="inlineRadio2">
                       Digital Marketing & SEO
@@ -131,7 +133,7 @@ const Admin = () => {
                       id="inlineRadio3"
                       value="3"
                       checked={radio === "3"}
-                      onChange={onOptionChange}
+                      onChange={() => onOptionChange("3")}
                     />
                     <label class="form-check-label" for="inlineRadio3">
                       Content Writer
@@ -145,7 +147,7 @@ const Admin = () => {
                       id="inlineRadio4"
                       value="4"
                       checked={radio === "4"}
-                      onChange={onOptionChange}
+                      onChange={() => onOptionChange("4")}
                     />
                     <label class="form-check-label" for="inlineRadio4">
                       Social Media Management
@@ -159,7 +161,7 @@ const Admin = () => {
                       id="inlineRadio5"
                       value="5"
                       checked={radio === "5"}
-                      onChange={onOptionChange}
+                      onChange={() => onOptionChange("5")}
                     />
                     <label class="form-check-label" for="inlineRadio5">
                       Former Employees
@@ -175,7 +177,9 @@ const Admin = () => {
                         return radio === "5" ? (
                           <EmployeeCard
                             setEmployees={setEmployees}
-                            setFilteredEmployees={setFilteredEmployees}
+                            // setFilteredEmployees={setFilteredEmployees}
+                            onOptionChange={(props) => onOptionChange(props)}
+                            radio={radio}
                             employees={employees}
                             key={employee._id}
                             employee={employee}
@@ -184,7 +188,9 @@ const Admin = () => {
                           employee.status === 1 && (
                             <EmployeeCard
                               setEmployees={setEmployees}
-                              setFilteredEmployees={setFilteredEmployees}
+                              // setFilteredEmployees={setFilteredEmployees}
+                              onOptionChange={(props) => onOptionChange(props)}
+                              radio={radio}
                               employees={employees}
                               key={employee._id}
                               employee={employee}

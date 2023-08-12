@@ -39,8 +39,9 @@ const TaskAssign = (props) => {
               return data.data;
             } else return c;
           });
-          props.setFilteredEmployees(updatedData);
+          // props.setFilteredEmployees(updatedData);
           props.setEmployees(updatedData);
+          props.onOptionChange(props.radio);
           closeMessage(messageApi, data.msg, "success");
           props.onHide();
         } else {
@@ -63,8 +64,9 @@ const TaskAssign = (props) => {
               return data.data;
             } else return c;
           });
-          props.setFilteredEmployees(updatedData);
+          // props.setFilteredEmployees(updatedData);
           props.setEmployees(updatedData);
+          props.onOptionChange(props.radio);
           closeMessage(messageApi, data.msg, "success");
           props.onHide();
         } else {
@@ -99,8 +101,9 @@ const TaskAssign = (props) => {
           return data.data;
         } else return c;
       });
-      props.setFilteredEmployees(updatedData);
+      // props.setFilteredEmployees(updatedData);
       props.setEmployees(updatedData);
+      props.onOptionChange(props.radio);
 
       closeMessage(messageApi, data.msg, "success");
       props.onHide();
@@ -132,8 +135,9 @@ const TaskAssign = (props) => {
             return data.data;
           } else return c;
         });
-        props.setFilteredEmployees(updatedData);
+        // props.setFilteredEmployees(updatedData);
         props.setEmployees(updatedData);
+        props.onOptionChange(props.radio);
 
         props.onHide();
 
