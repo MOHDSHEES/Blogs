@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 
-function Autocomplete({ suggestions, searchHandler }) {
+function Autocomplete({
+  suggestions,
+  searchHandler,
+  placeholder = "Enter title to search...",
+}) {
   // console.log(suggestions);
   // hook for storing filtered suggestions
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
@@ -125,7 +129,7 @@ function Autocomplete({ suggestions, searchHandler }) {
           <input
             type="text"
             className="form-control "
-            placeholder="Enter title to search..."
+            placeholder={placeholder}
             // aria-label="Recipient's username"
             aria-describedby="button-search"
             onChange={onChange}

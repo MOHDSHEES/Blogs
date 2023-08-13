@@ -52,31 +52,67 @@ const Draft = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [user, setuser] = useState(null);
 
-  function onOptionChange(e) {
-    setRadio(e.target.value);
-    if (e.target.value === "2") {
+  function filter(value, flag) {
+    if (value === "2") {
       setLoading(true);
-      const d = allBlogs.filter((task) => task.status === "Inactive");
+      if (flag && checked) {
+        const d = writerBlog.filter((task) => task.status === "Inactive");
+        setfilteredData(d);
+      } else {
+        const d = allBlogs.filter((task) => task.status === "Inactive");
+        setfilteredData(d);
+      }
       setLoading(false);
-      setfilteredData(d);
-    } else if (e.target.value === "3") {
+      // setfilteredData(d);
+    } else if (value === "3") {
       setLoading(true);
-      const d = allBlogs.filter((task) => task.status === "Active");
+      if (flag && checked) {
+        // console.log("in");
+        const d = writerBlog.filter((task) => task.status === "Active");
+        setfilteredData(d);
+      } else {
+        // console.log("out");
+        const d = allBlogs.filter((task) => task.status === "Active");
+        setfilteredData(d);
+      }
+      // const d = allBlogs.filter((task) => task.status === "Active");
       setLoading(false);
-      setfilteredData(d);
-    } else if (e.target.value === "4") {
+      // setfilteredData(d);
+    } else if (value === "4") {
       setLoading(true);
-      const d = allBlogs.filter(
-        (task) =>
-          (task.activationRequest.slice(-1) === "1" ||
-            task.activationRequest === "true") &&
-          task.status === "Inactive"
-      );
+
+      if (flag && checked) {
+        const d = writerBlog.filter(
+          (task) =>
+            (task.activationRequest.slice(-1) === "1" ||
+              task.activationRequest === "true") &&
+            task.status === "Inactive"
+        );
+        setfilteredData(d);
+      } else {
+        const d = allBlogs.filter(
+          (task) =>
+            (task.activationRequest.slice(-1) === "1" ||
+              task.activationRequest === "true") &&
+            task.status === "Inactive"
+        );
+        setfilteredData(d);
+      }
       setLoading(false);
-      setfilteredData(d);
+      // setfilteredData(d);
     } else {
       setLoading(false);
-      setfilteredData(allBlogs);
+      if (checked && flag) setfilteredData(writerBlog);
+      else setfilteredData(allBlogs);
+    }
+  }
+
+  function onOptionChange(fl, e) {
+    if (e) {
+      setRadio(e.target.value);
+      filter(e.target.value, fl);
+    } else {
+      filter("1", fl);
     }
   }
 
@@ -227,8 +263,6 @@ const Draft = () => {
     }
   }
 
-  //
-
   const [allBlogs, setAllBlogs] = useState(null);
   // console.log(allBlogs);
   let navigate = useNavigate();
@@ -279,7 +313,49 @@ const Draft = () => {
       }
     }
   };
+  const [checked, setChecked] = useState(false);
+  const [writers, setWriters] = useState([]);
+  const [writerBlog, setWriterBlog] = useState(null);
+  useEffect(() => {
+    if (checked && !writers.length) {
+      (async () => {
+        const { data } = await axios.post("/api/find/writer/names");
 
+        if (data && data.status === 200) {
+          setWriters(data.data);
+        }
+      })();
+    }
+  }, [checked, writers]);
+  async function WriterBlogsSearch(e, search) {
+    e.preventDefault();
+    const parenthesesRegex = /\(([^)]+)\)/;
+
+    const match = search.match(parenthesesRegex);
+    if (match && match.length) {
+      const { data } = await axios.post("/api/find/writer/blogs", {
+        email: match[1],
+      });
+      if (data.status === 200) {
+        setWriterBlog(data.blogs);
+        setRadio("1");
+        setfilteredData(data.blogs);
+      }
+    } else {
+      closeMessage(
+        messageApi,
+        "Something went wrong,Please try again later.",
+        "error"
+      );
+    }
+  }
+  function toggleSwitch() {
+    if (checked) {
+      setRadio("1");
+      onOptionChange(0);
+    }
+    setChecked(!checked);
+  }
   return (
     <div className="body">
       {contextHolder}
@@ -303,6 +379,37 @@ const Draft = () => {
           >
             Write a new Blog?
           </a>
+          {isAdmin && (
+            <div className="user-blogs-switch-container">
+              <div
+                class="form-check form-switch user-blogs-switch "
+                style={{ paddingLeft: "0px" }}
+              >
+                <label class="form-check-label" for="flexSwitchCheckChecked">
+                  Search for particular Writer:
+                </label>
+                <input
+                  class="form-check-input"
+                  style={{ marginLeft: "8px" }}
+                  type="checkbox"
+                  onClick={toggleSwitch}
+                  id="flexSwitchCheckChecked"
+                  checked={checked}
+                />
+              </div>
+              <div
+                className={`user-blogs-switch-input ${
+                  checked ? "input-expanded" : ""
+                }`}
+              >
+                <Autocomplete
+                  searchHandler={WriterBlogsSearch}
+                  suggestions={writers}
+                  placeholder="Enter name of Content Writer to search the blogs"
+                />
+              </div>
+            </div>
+          )}
           {updateFlag === 1 && (
             <div className="mt-4 p-2">
               {allBlogs && allBlogs.length !== 0 && (
@@ -315,7 +422,7 @@ const Draft = () => {
                       id="inlineRadio1"
                       value="1"
                       checked={radio === "1"}
-                      onChange={onOptionChange}
+                      onChange={(e) => onOptionChange(1, e)}
                     />
                     <label class="form-check-label" for="inlineRadio1">
                       All
@@ -329,7 +436,7 @@ const Draft = () => {
                       id="inlineRadio2"
                       value="2"
                       checked={radio === "2"}
-                      onChange={onOptionChange}
+                      onChange={(e) => onOptionChange(1, e)}
                     />
                     <label class="form-check-label" for="inlineRadio2">
                       Inactive
@@ -343,7 +450,7 @@ const Draft = () => {
                       id="inlineRadio3"
                       value="3"
                       checked={radio === "3"}
-                      onChange={onOptionChange}
+                      onChange={(e) => onOptionChange(1, e)}
                     />
                     <label class="form-check-label" for="inlineRadio3">
                       Active
@@ -357,7 +464,7 @@ const Draft = () => {
                       id="inlineRadio4"
                       value="4"
                       checked={radio === "4"}
-                      onChange={onOptionChange}
+                      onChange={(e) => onOptionChange(1, e)}
                     />
                     <label class="form-check-label" for="inlineRadio4">
                       Activation Request's

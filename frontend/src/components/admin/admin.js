@@ -16,13 +16,13 @@ const Admin = () => {
   const [radio, setRadio] = useState("1");
   const [loading, setLoading] = useState(false);
 
+  // console.log(radio);
   useEffect(() => {
-    onOptionChange(radio);
+    if (employees && employees.length) onOptionChange(radio);
   }, [employees]);
   // filter function
   function onOptionChange(radio) {
     // console.log("in");
-    // console.log(radio);
     setRadio(radio);
     if (radio === "2") {
       setLoading(true);
@@ -54,7 +54,6 @@ const Admin = () => {
       setFilteredEmployees(employees);
     }
   }
-
   const [adminName, setAdminName] = useState(null);
   useEffect(() => {
     (async () => {

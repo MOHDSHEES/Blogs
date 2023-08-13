@@ -8,7 +8,9 @@ const AllBlogs = ({ blog, updateForm, adminPannel }) => {
   let activationRequest = false;
   let date = null;
   if (
-    (blog.activationRequest && blog.activationRequest.slice(-1) === "1") ||
+    (blog &&
+      blog.activationRequest &&
+      blog.activationRequest.slice(-1) === "1") ||
     blog.activationRequest.slice(-1) === "0"
   ) {
     activationRequest = blog.activationRequest.slice(-1) === "1" ? true : false;
@@ -16,7 +18,10 @@ const AllBlogs = ({ blog, updateForm, adminPannel }) => {
       date = blog.activationRequest.slice(4, 24);
     }
   } else {
-    activationRequest = blog.activationRequest === "true" ? true : false;
+    activationRequest =
+      blog && blog.activationRequet && blog.activationRequest === "true"
+        ? true
+        : false;
   }
 
   const [expanded, setExpanded] = useState(false);

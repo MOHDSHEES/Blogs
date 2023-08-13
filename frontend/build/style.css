@@ -625,3 +625,24 @@ p:empty {
     max-height: 230px;
   }
 }
+
+.user-blogs-switch-container {
+  background-color: white;
+  padding: 10px;
+  /* padding-left: 0px; */
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.user-blogs-switch {
+  font-size: 14px;
+}
+.user-blogs-switch-input {
+  height: 0;
+  margin-top: 5px;
+  overflow: hidden;
+  transition: height 0.5s ease;
+}
+.input-expanded {
+  height: 50px;
+}

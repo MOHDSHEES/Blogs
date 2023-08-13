@@ -25,6 +25,49 @@ import {
 
 const router = express.Router();
 
+router.post("/find/writer/blogs", async (req, res) => {
+  try {
+    const user = await Users.findOne({ email: req.body.email });
+    if (user && user.blog && user.blog.length) {
+      const resu = await UBlogs.find({ id: { $in: user.blog } });
+      res.json({ blogs: resu, user: user, status: 200 });
+    } else {
+      res.json({ blogs: [], user: user, status: 200 });
+    }
+
+    // console.log(data);
+    // if (newUser._id) {
+    //   res.json({ status: 200, msg: "Successfully Registered" });
+    // } else
+    //   res.json({ status: 500, msg: "Something went wrong try again later." });
+    // // res.json(user);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
+// find names of content writers for search input
+router.post("/find/writer/names", async (req, res) => {
+  try {
+    const user = await Users.find({}, { fname: 1, lname: 1, _id: 0, email: 1 });
+    let data = [];
+    user.map((us) =>
+      data.push(
+        us.fname
+          ? us.fname + " " + us.lname + " (" + us.email + ")"
+          : us.lname + " (" + us.email + ")"
+      )
+    );
+    // console.log(data);
+    res.json({ data: data, status: 200 });
+    // if (newUser._id) {
+    //   res.json({ status: 200, msg: "Successfully Registered" });
+    // } else
+    //   res.json({ status: 500, msg: "Something went wrong try again later." });
+    // // res.json(user);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // update employee by admin
 router.post("/update/employees/admin", async (req, res) => {
   try {
