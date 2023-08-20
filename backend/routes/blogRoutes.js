@@ -22,6 +22,7 @@ import {
   registerEmployee,
   sendotp,
 } from "./emailTemplates.js";
+import TempBlogs from "../models/tempUBlogModel.js";
 
 const router = express.Router();
 
@@ -608,11 +609,19 @@ router.post("/find/ublog/all", verifyToken, async (req, res) => {
     );
     // console.log(user.blog);
     if (user.isAdmin) {
-      const resu = await UBlogs.find({});
-      res.json({ blogs: resu, user: user });
+      const re = await TempBlogs.find({});
+      const tempBlogIds = re.map((blog) => blog.id);
+      const resu = await UBlogs.find({ id: { $nin: tempBlogIds } });
+
+      res.json({ blogs: [...re, ...resu], user: user });
     } else {
-      const resu = await UBlogs.find({ id: { $in: user.blog } });
-      res.json({ blogs: resu, user: user });
+      const re = await TempBlogs.find({ id: { $in: user.blog } });
+      const tempBlogIds = re.map((blog) => blog.id);
+      const resu = await UBlogs.find({
+        id: { $in: user.blog, $nin: tempBlogIds },
+      });
+
+      res.json({ blogs: [...re, ...resu], user: user });
     }
     // let trending = resu.map((a) => a.title);
     // console.log(resu);
@@ -684,7 +693,7 @@ router.post("/find/data/homepage", async (req, res) => {
 // find ublogs with status
 router.post("/find/ublog/status", async (req, res) => {
   try {
-    const resu = await UBlogs.find({ status: req.body.status });
+    const resu = await TempBlogs.find({ status: req.body.status });
     res.json(resu);
   } catch (error) {
     res.send({ msg: error.message });
@@ -703,16 +712,33 @@ router.post("/find/blog/status", async (req, res) => {
 // update ublogs isActive
 router.post("/update/ublog/status", verifyToken, async (req, res) => {
   try {
-    const resu = await UBlogs.updateMany(
-      { _id: { $in: req.body.id } },
-      {
-        status: req.body.status,
-        "activationDetails.activatedBy": req.body.adminName,
-        "activationDetails.activatedDate": new Date(),
-      }
-    );
+    // const resu = await UBlogs.updateMany(
+    //   { _id: { $in: req.body.id } },
+    //   {
+    //     status: req.body.status,
+    //     "activationDetails.activatedBy": req.body.adminName,
+    //     "activationDetails.activatedDate": new Date(),
+    //   }
+    // )
 
-    if (resu.modifiedCount && resu.modifiedCount) {
+    const bl = req.body.blog;
+    const blog = {
+      ...bl,
+      status: req.body.status,
+      "activationDetails.activatedBy": req.body.adminName,
+      "activationDetails.activatedDate": new Date(),
+    };
+    const resu = await UBlogs.findOneAndUpdate(
+      { _id: { $in: req.body.id } },
+      blog,
+      { upsert: true, new: true }
+    );
+    const removed = await TempBlogs.findOneAndRemove({
+      _id: { $in: req.body.id },
+    });
+    // console.log(resu);
+    // if (resu.modifiedCount && resu.modifiedCount) {
+    if (resu && resu._id) {
       if (req.body.status === "Active") {
         // adding blog to homepage recent
         const r = await HomepageData.updateOne(
@@ -868,7 +894,7 @@ router.post("/add/new/blog", async (req, res) => {
       ", " +
       new Date().getFullYear();
 
-    const blog = new UBlogs({
+    const blog = new TempBlogs({
       // id: id,
       title: req.body.metaData.title,
       mainImg: req.body.metaData.mainImg,
@@ -1119,9 +1145,10 @@ router.post("/update/new/blog", async (req, res) => {
       ", " +
       new Date().getFullYear();
     // console.log(date);
-    const updated = await UBlogs.findOneAndUpdate(
+    const updated = await TempBlogs.findOneAndUpdate(
       { id: req.body.id },
       {
+        id: req.body.id,
         title: req.body.metaData.title,
         mainImg: req.body.metaData.mainImg,
         description: req.body.metaData.description,
@@ -1135,6 +1162,7 @@ router.post("/update/new/blog", async (req, res) => {
       },
       {
         new: true,
+        upsert: true,
       }
     );
     // console.log(updated);
