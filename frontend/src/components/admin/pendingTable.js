@@ -38,7 +38,7 @@ const PendingTable = ({ adminName }) => {
     });
     if (data && data.status === 200) {
       closeMessage(messageApi, data.msg, "success");
-      setBlog(blog.filter((bl) => bl._id !== id));
+      setBlog(blog.filter((bl) => bl.id !== id));
     } else if (data && data.status === 404) {
       closeMessage(messageApi, data.msg, "error");
       navigate("/login");
@@ -70,7 +70,7 @@ const PendingTable = ({ adminName }) => {
                   <td>
                     <button
                       disabled={disable}
-                      onClick={() => statusHandler(bl._id, "Active", bl)}
+                      onClick={() => statusHandler(bl.id, "Active", bl)}
                       type="button"
                       class="btn btn-primary"
                     >

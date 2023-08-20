@@ -728,13 +728,20 @@ router.post("/update/ublog/status", verifyToken, async (req, res) => {
       "activationDetails.activatedBy": req.body.adminName,
       "activationDetails.activatedDate": new Date(),
     };
+
+    delete blog._id;
+    // console.log(blog);
     const resu = await UBlogs.findOneAndUpdate(
-      { _id: { $in: req.body.id } },
+      { id: { $in: req.body.id } },
       blog,
-      { upsert: true, new: true }
+      {
+        upsert: true,
+        new: true,
+      }
     );
+    // console.log(resu);
     const removed = await TempBlogs.findOneAndRemove({
-      _id: { $in: req.body.id },
+      id: { $in: req.body.id },
     });
     // console.log(resu);
     // if (resu.modifiedCount && resu.modifiedCount) {
