@@ -174,10 +174,13 @@ function App() {
           {/* <Route path="/add" element={<Form cate={categories} />} />
         <ProtectedRoute path="/add" categories={categories} /> */}
           <Route path="/edit" element={<BlogEditor />} />
-          <Route path="/add" element={<ProtectedRoute />}>
+          <Route path="/add" element={<ProtectedRoute token="token" />}>
             <Route path="/add" element={<Form />} />
           </Route>
-          <Route path="/admin" element={<ProtectedRoute />}>
+          <Route
+            path="/admin"
+            element={<ProtectedRoute token="employeeToken" />}
+          >
             <Route path="/admin" element={<Admin />} />
           </Route>
           <Route

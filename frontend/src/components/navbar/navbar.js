@@ -81,14 +81,14 @@ const NavBar = ({ searchHandler }) => {
                   // style={{ maxHeight: "100px" }}
                   // navbarScroll
                 >
-                  {/* <Nav.Link
-                    onClick={() => setExpanded(false)}
-                    as={NavLink}
+                  <Nav.Link
+                    // onClick={() => setExpanded(false)}
+                    // as={NavLink}
                     className="nav-item "
-                    to="/"
+                    href="https://www.offtheweb.in/"
                   >
-                    Home
-                  </Nav.Link> */}
+                    OFFTHEWEB
+                  </Nav.Link>
                   {/* <Nav.Link
                     onClick={() => setExpanded(false)}
                     as={NavLink}

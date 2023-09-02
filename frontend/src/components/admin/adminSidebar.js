@@ -22,7 +22,7 @@ const AdminSidebar = ({ setTab, adminLevel }) => {
   let navigate = useNavigate();
   function logoutHandler() {
     localStorage.removeItem("token");
-    navigate("/", { replace: true });
+    navigate("/employee/login", { replace: true });
   }
   const [modalShow, setModalShow] = useState(false);
   return (

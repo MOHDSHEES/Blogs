@@ -7,8 +7,8 @@ import { useContext } from "react";
 import { globalContext } from "../../context";
 // import axios from "axios";
 const Topbar = () => {
-  const { recentBlogs } = useContext(globalContext);
-  const [blogs, setblogs] = useState(null);
+  // const { recentBlogs } = useContext(globalContext);
+  // const [blogs, setblogs] = useState(null);
   // const [loading, setloading] = useState(false);
   // useEffect(() => {
   //   (async () => {
@@ -20,16 +20,19 @@ const Topbar = () => {
   //   })();
   // }, []);
 
-  useEffect(() => {
-    setblogs(recentBlogs);
-  }, [recentBlogs]);
+  // useEffect(() => {
+  //   setblogs(recentBlogs);
+  // }, [recentBlogs]);
 
   // console.log(trend);
   return (
     <div>
       <div class="container-fluid">
-        <div class="row align-items-center bg-light px-lg-5">
-          <div class="col-12 col-md-8">
+        <div
+          class="row align-items-center bg-light px-lg-5"
+          style={{ justifyContent: "flex-end" }}
+        >
+          {/* <div class="col-12 col-md-8">
             <div
               style={{ overflow: "hidden" }}
               class="d-flex justify-content-between align-items-center"
@@ -76,23 +79,8 @@ const Topbar = () => {
                 )}
               </div>
 
-              {/* <div
-                class="owl-carousel owl-carousel-1 tranding-carousel position-relative d-inline-flex align-items-center ml-3"
-                style={{ width: "calc(100% - 100px)", paddingLeft: "90px" }}
-              >
-                <div class="text-truncate">
-                  <a class="text-secondary" href="">
-                    The impact of artificial intelligence on the job market
-                  </a>
-                </div>
-                <div class="text-truncate">
-                  <a class="text-secondary" href="">
-                    The future of cybersecurity in the age of remote work
-                  </a>
-                </div>
-              </div> */}
             </div>
-          </div>
+          </div> */}
           <div class="col-md-4 text-right d-none d-md-block">
             {new Date().toLocaleString("en-US", { weekday: "long" })},{" "}
             {new Date().toLocaleString("en-US", { month: "long" })},{" "}

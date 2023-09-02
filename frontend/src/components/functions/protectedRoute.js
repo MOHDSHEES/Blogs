@@ -10,9 +10,9 @@ import { Outlet, Navigate } from "react-router-dom";
 //   //   return decoded;
 // };
 // console.log(verifyToken());
-const ProtectedRoute = () => {
+const ProtectedRoute = ({ token }) => {
   //   console.log(localStorage.getItem("token"))
-  return localStorage.getItem("token") ? (
+  return localStorage.getItem(token) ? (
     // <Route {...rest} />
     <Outlet />
   ) : (
