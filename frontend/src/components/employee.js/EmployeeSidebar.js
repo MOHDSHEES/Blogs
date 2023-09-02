@@ -24,7 +24,7 @@ const EmployeeSidebar = ({ data }) => {
   function logoutHandler() {
     localStorage.removeItem("employeeToken");
     setEmployeeData(null);
-    navigate("/", { replace: true });
+    navigate("/employee/login", { replace: true });
   }
   // const [modalShow, setModalShow] = useState(false);
   return (
