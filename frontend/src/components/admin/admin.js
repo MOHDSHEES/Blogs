@@ -58,6 +58,7 @@ const Admin = () => {
   }
   const [adminName, setAdminName] = useState(null);
   const [adminLevel, setAdminLevel] = useState(10);
+  const [adminData, setAdminData] = useState(null);
   useEffect(() => {
     (async () => {
       const { data } = await axios.post("/api/authenticate/employee", {
@@ -71,6 +72,7 @@ const Admin = () => {
             ? data.user.fname + " " + data.user.lname
             : data.user.lname
         );
+        setAdminData(data.user);
         setAdmin(true);
         setAdminLevel(data.user.adminLevel && data.user.adminLevel);
       }
@@ -109,7 +111,12 @@ const Admin = () => {
   // console.log(employees);
   return (
     <div className="body">
-      <AdminSidebar isAdmin={admin} setTab={setTab} adminLevel={adminLevel} />
+      <AdminSidebar
+        adminData={adminData}
+        isAdmin={admin}
+        setTab={setTab}
+        adminLevel={adminLevel}
+      />
       {tab === 0 ? (
         <div className="col py-3" style={{ marginTop: "80px" }}>
           <PendingTable adminName={adminName} />

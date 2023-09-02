@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AddEmployee from "./addEmployee";
 
-const AdminSidebar = ({ setTab, adminLevel }) => {
+const AdminSidebar = ({ setTab, adminLevel, adminData }) => {
   const headerToggle = useRef();
   const Navbar = useRef();
   const bodyPd = useRef();
@@ -34,7 +34,18 @@ const AdminSidebar = ({ setTab, adminLevel }) => {
           </div>
 
           <div>
-            <Link className="btn btn-success" to="/edit">
+            <Link
+              className="btn btn-success"
+              to={`/employee/${adminData && adminData.employeeId}`}
+            >
+              Dashboard
+            </Link>
+
+            <Link
+              className="btn btn-success"
+              style={{ marginLeft: "10px" }}
+              to="/edit"
+            >
               Add Blog
             </Link>
 

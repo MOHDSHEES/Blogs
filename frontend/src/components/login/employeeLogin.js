@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { closeMessage } from "../functions/message";
@@ -40,6 +40,20 @@ const EmployeeLogin = ({ message }) => {
     }
     // console.log(data);
   }
+  async function validate() {
+    const { data } = await axios.post("/api/authenticate/employee", {
+      token: localStorage.getItem("employeeToken"),
+    });
+    // console.log(data);
+    if (data.status === 200) {
+      navigate(`/employee/${data.user.employeeId}`);
+    } else {
+      localStorage.removeItem("employeeToken");
+    }
+  }
+  useEffect(() => {
+    validate();
+  }, []);
   //   useEffect(() => {
   //     localStorage.removeItem("token");
   //   }, []);

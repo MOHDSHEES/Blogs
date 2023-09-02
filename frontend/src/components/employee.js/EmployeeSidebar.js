@@ -35,8 +35,16 @@ const EmployeeSidebar = ({ data }) => {
             <i class="bx bx-menu" ref={headerToggle} id="header-toggle"></i>
           </div>
           <div>
+            <Link className="btn btn-success" to="/edit">
+              Add Blog
+            </Link>
+
             {data && data.adminLevel <= 3 && (
-              <Link className="btn btn-success" to="/admin">
+              <Link
+                className="btn btn-success"
+                style={{ marginLeft: "10px" }}
+                to="/admin"
+              >
                 Admin
               </Link>
             )}
