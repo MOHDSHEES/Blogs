@@ -41,7 +41,12 @@ const EmployeeOldTasks = (props) => {
 
   const [oldTask, setOldTask] = useState(null);
   async function editTask(task) {
-    if (props.isAdmin && props.data.status) {
+    if (
+      props.isAdmin &&
+      props.data.status &&
+      props.adminLevel &&
+      (props.adminLevel === 1 || props.adminLevel < props.data.adminLevel)
+    ) {
       setOldTask(task);
       setModalShow(true);
     }

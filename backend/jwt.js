@@ -63,6 +63,7 @@ const getEmployeeToken = (user) => {
       post: user.post,
       joiningDate: user.joiningDate,
       jobType: user.jobType,
+      adminLevel: user.adminLevel,
     },
     process.env.JWT_SECRET,
     {

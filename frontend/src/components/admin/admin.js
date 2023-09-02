@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./adminSidebar";
 import { useState } from "react";
 import EmployeeCard from "./employeeCard";
+import AllBlogs from "../blogAdd/allBlogs";
+import AllBlogswithFilter from "../blogAdd/allBlogswithFilter";
 
 const Admin = () => {
   const [tab, setTab] = useState(0);
@@ -55,129 +57,164 @@ const Admin = () => {
     }
   }
   const [adminName, setAdminName] = useState(null);
+  const [adminLevel, setAdminLevel] = useState(10);
   useEffect(() => {
     (async () => {
-      const { data } = await axios.post("/api/authenticate", {
-        token: localStorage.getItem("token"),
+      const { data } = await axios.post("/api/authenticate/employee", {
+        token: localStorage.getItem("employeeToken"),
       });
-      if (!(data.status === 200 && data.user.isAdmin)) {
+      if (!(data.status === 200 && data.user.adminLevel <= 3)) {
         navigate("/");
-      } else if (data.status === 200 && data.user.isAdmin) {
+      } else if (data.status === 200 && data.user.adminLevel <= 3) {
         setAdminName(
           data.user.fname
             ? data.user.fname + " " + data.user.lname
             : data.user.lname
         );
         setAdmin(true);
+        setAdminLevel(data.user.adminLevel && data.user.adminLevel);
       }
     })();
   }, [navigate]);
 
+  const [loadingBlogs, setLoadingBlogs] = useState(false);
+  const [blogs, setBlogs] = useState([]);
+  async function allBlogs() {
+    setLoadingBlogs(true);
+    const { data } = await axios.post("/api/find/all/blogs", {
+      token: localStorage.getItem("employeeToken"),
+    });
+    setLoadingBlogs(false);
+    setBlogs(data.blogs);
+  }
+
   useEffect(() => {
-    (async () => {
-      const { data } = await axios.post("/api/find/employees");
-      setEmployees(data);
-      setFilteredEmployees(data);
-    })();
-  }, []);
+    if (tab === 2 && blogs.length === 0) {
+      allBlogs();
+    }
+  }, [tab]);
+
+  useEffect(() => {
+    if (admin && !employees) {
+      (async () => {
+        const { data } = await axios.post("/api/find/employees", {
+          adminLevel: adminLevel,
+        });
+        setEmployees(data);
+        setFilteredEmployees(data);
+      })();
+    }
+  }, [adminLevel, employees, admin]);
 
   // console.log(employees);
   return (
     <div className="body">
-      <AdminSidebar isAdmin={admin} setTab={setTab} />
+      <AdminSidebar isAdmin={admin} setTab={setTab} adminLevel={adminLevel} />
       {tab === 0 ? (
         <div className="col py-3" style={{ marginTop: "80px" }}>
           <PendingTable adminName={adminName} />
         </div>
-      ) : (
-        tab === 1 && (
-          <div style={{ marginTop: "80px" }}>
-            <section style={{ backgroundColor: "#f4f5f7" }}>
-              <div className="container py-2 ">
-                <div
-                  class="alert alert-primary employee-filter"
-                  role="alert"
-                  style={{ marginBottom: "25px" }}
-                >
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="inlineRadioOptions"
-                      id="inlineRadio1"
-                      value="1"
-                      checked={radio === "1"}
-                      onChange={() => onOptionChange("1")}
-                    />
-                    <label class="form-check-label" for="inlineRadio1">
-                      All
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="inlineRadioOptions"
-                      id="inlineRadio2"
-                      value="2"
-                      checked={radio === "2"}
-                      onChange={() => onOptionChange("2")}
-                    />
-                    <label class="form-check-label" for="inlineRadio2">
-                      Digital Marketing & SEO
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="inlineRadioOptions"
-                      id="inlineRadio3"
-                      value="3"
-                      checked={radio === "3"}
-                      onChange={() => onOptionChange("3")}
-                    />
-                    <label class="form-check-label" for="inlineRadio3">
-                      Content Writer
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="inlineRadioOptions"
-                      id="inlineRadio4"
-                      value="4"
-                      checked={radio === "4"}
-                      onChange={() => onOptionChange("4")}
-                    />
-                    <label class="form-check-label" for="inlineRadio4">
-                      Social Media Management
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="inlineRadioOptions"
-                      id="inlineRadio5"
-                      value="5"
-                      checked={radio === "5"}
-                      onChange={() => onOptionChange("5")}
-                    />
-                    <label class="form-check-label" for="inlineRadio5">
-                      Former Employees
-                    </label>
-                  </div>
+      ) : tab === 1 ? (
+        <div style={{ marginTop: "80px" }}>
+          <section style={{ backgroundColor: "#f4f5f7" }}>
+            <div className="container py-2 ">
+              <div
+                class="alert alert-primary employee-filter"
+                role="alert"
+                style={{ marginBottom: "25px" }}
+              >
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio1"
+                    value="1"
+                    checked={radio === "1"}
+                    onChange={() => onOptionChange("1")}
+                  />
+                  <label class="form-check-label" for="inlineRadio1">
+                    All
+                  </label>
                 </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio2"
+                    value="2"
+                    checked={radio === "2"}
+                    onChange={() => onOptionChange("2")}
+                  />
+                  <label class="form-check-label" for="inlineRadio2">
+                    Digital Marketing & SEO
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio3"
+                    value="3"
+                    checked={radio === "3"}
+                    onChange={() => onOptionChange("3")}
+                  />
+                  <label class="form-check-label" for="inlineRadio3">
+                    Content Writer
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio4"
+                    value="4"
+                    checked={radio === "4"}
+                    onChange={() => onOptionChange("4")}
+                  />
+                  <label class="form-check-label" for="inlineRadio4">
+                    Social Media Management
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio5"
+                    value="5"
+                    checked={radio === "5"}
+                    onChange={() => onOptionChange("5")}
+                  />
+                  <label class="form-check-label" for="inlineRadio5">
+                    Former Employees
+                  </label>
+                </div>
+              </div>
 
-                <div className="row d-flex justify-content-center align-items-center ">
-                  {loading
-                    ? "Loading..."
-                    : filteredEmployees &&
-                      filteredEmployees.map((employee) => {
-                        return radio === "5" ? (
+              <div className="row d-flex justify-content-center align-items-center ">
+                {loading
+                  ? "Loading..."
+                  : filteredEmployees &&
+                    filteredEmployees.map((employee) => {
+                      return radio === "5" ? (
+                        <EmployeeCard
+                          adminLevel={adminLevel}
+                          setEmployees={setEmployees}
+                          // setFilteredEmployees={setFilteredEmployees}
+                          onOptionChange={(props) => onOptionChange(props)}
+                          radio={radio}
+                          employees={employees}
+                          key={employee._id}
+                          employee={employee}
+                        />
+                      ) : (
+                        employee.status === 1 && (
                           <EmployeeCard
+                            adminLevel={adminLevel}
                             setEmployees={setEmployees}
                             // setFilteredEmployees={setFilteredEmployees}
                             onOptionChange={(props) => onOptionChange(props)}
@@ -186,25 +223,33 @@ const Admin = () => {
                             key={employee._id}
                             employee={employee}
                           />
-                        ) : (
-                          employee.status === 1 && (
-                            <EmployeeCard
-                              setEmployees={setEmployees}
-                              // setFilteredEmployees={setFilteredEmployees}
-                              onOptionChange={(props) => onOptionChange(props)}
-                              radio={radio}
-                              employees={employees}
-                              key={employee._id}
-                              employee={employee}
-                            />
-                          )
-                        );
-                      })}
-                  {/* <EmployeeCard  />
+                        )
+                      );
+                    })}
+                {/* <EmployeeCard  />
                 <EmployeeCard /> */}
-                </div>
               </div>
-            </section>
+            </div>
+          </section>
+        </div>
+      ) : (
+        tab === 2 && (
+          <div style={{ marginTop: "80px" }}>
+            {loadingBlogs ? (
+              "Loading..."
+            ) : (
+              <AllBlogswithFilter adminLevel={adminLevel} blogs={blogs} />
+            )}
+            {/* {loadingBlogs ? (
+              "Loading..."
+            ) : (
+              <>
+                {blogs.length > 0 &&
+                  blogs.map((bl) => {
+                    return <AllBlogs blog={bl} />;
+                  })}
+              </>
+            )} */}
           </div>
         )
       )}

@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { closeMessage, openMessage } from "./functions/message";
 import axios from "axios";
-import { globalContext } from "../context";
+// import { globalContext } from "../context";
 import { message } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Autocomplete from "./autocomplete/autocomplete";
 import AllBlogs from "./blogAdd/allBlogs";
 import EditorSidebar from "./editor/editorSidebar";
@@ -12,7 +12,14 @@ import Confirm from "./editor/confirm";
 
 const Draft = () => {
   const editorRef = useRef(null);
+  const location = useLocation();
 
+  // console.log(location.state);
+  useEffect(() => {
+    if (location.state) {
+      updateForm(location.state);
+    }
+  }, [location]);
   //   useEffect(() => {
   //     window.$("#staticBackdrop").modal("show"); // Show the modal on page render
   //   }, []);
@@ -55,55 +62,57 @@ const Draft = () => {
   function filter(value, flag) {
     if (value === "2") {
       setLoading(true);
-      if (flag && checked) {
-        const d = writerBlog.filter((task) => task.status === "Inactive");
-        setfilteredData(d);
-      } else {
-        const d = allBlogs.filter((task) => task.status === "Inactive");
-        setfilteredData(d);
-      }
+      // if (flag && checked) {
+      //   const d = writerBlog.filter((task) => task.status === "Inactive");
+      //   setfilteredData(d);
+      // } else {
+      const d = allBlogs.filter((task) => task.status === "Inactive");
+      setfilteredData(d);
+      // }
       setLoading(false);
       // setfilteredData(d);
     } else if (value === "3") {
       setLoading(true);
-      if (flag && checked) {
-        // console.log("in");
-        const d = writerBlog.filter((task) => task.status === "Active");
-        setfilteredData(d);
-      } else {
-        // console.log("out");
-        const d = allBlogs.filter((task) => task.status === "Active");
-        setfilteredData(d);
-      }
+      // if (flag && checked) {
+
+      //   const d = writerBlog.filter((task) => task.status === "Active");
+      //   setfilteredData(d);
+      // }
+
+      // console.log("out");
+      const d = allBlogs.filter((task) => task.status === "Active");
+      setfilteredData(d);
+
       // const d = allBlogs.filter((task) => task.status === "Active");
       setLoading(false);
       // setfilteredData(d);
     } else if (value === "4") {
       setLoading(true);
 
-      if (flag && checked) {
-        const d = writerBlog.filter(
-          (task) =>
-            (task.activationRequest.slice(-1) === "1" ||
-              task.activationRequest === "true") &&
-            task.status === "Inactive"
-        );
-        setfilteredData(d);
-      } else {
-        const d = allBlogs.filter(
-          (task) =>
-            (task.activationRequest.slice(-1) === "1" ||
-              task.activationRequest === "true") &&
-            task.status === "Inactive"
-        );
-        setfilteredData(d);
-      }
+      // if (flag && checked) {
+      //   const d = writerBlog.filter(
+      //     (task) =>
+      //       (task.activationRequest.slice(-1) === "1" ||
+      //         task.activationRequest === "true") &&
+      //       task.status === "Inactive"
+      //   );
+      //   setfilteredData(d);
+      // } else {
+      const d = allBlogs.filter(
+        (task) =>
+          (task.activationRequest.slice(-1) === "1" ||
+            task.activationRequest === "true") &&
+          task.status === "Inactive"
+      );
+      setfilteredData(d);
+      // }
       setLoading(false);
       // setfilteredData(d);
     } else {
       setLoading(false);
-      if (checked && flag) setfilteredData(writerBlog);
-      else setfilteredData(allBlogs);
+      // if (checked && flag) setfilteredData(writerBlog);
+      // else
+      setfilteredData(allBlogs);
     }
   }
 
@@ -313,49 +322,49 @@ const Draft = () => {
       }
     }
   };
-  const [checked, setChecked] = useState(false);
-  const [writers, setWriters] = useState([]);
-  const [writerBlog, setWriterBlog] = useState(null);
-  useEffect(() => {
-    if (checked && !writers.length) {
-      (async () => {
-        const { data } = await axios.post("/api/find/writer/names");
+  // const [checked, setChecked] = useState(false);
+  // const [writers, setWriters] = useState([]);
+  // const [writerBlog, setWriterBlog] = useState(null);
+  // useEffect(() => {
+  //   if (checked && !writers.length) {
+  //     (async () => {
+  //       const { data } = await axios.post("/api/find/writer/names");
 
-        if (data && data.status === 200) {
-          setWriters(data.data);
-        }
-      })();
-    }
-  }, [checked, writers]);
-  async function WriterBlogsSearch(e, search) {
-    e.preventDefault();
-    const parenthesesRegex = /\(([^)]+)\)/;
+  //       if (data && data.status === 200) {
+  //         setWriters(data.data);
+  //       }
+  //     })();
+  //   }
+  // }, [checked, writers]);
+  // async function WriterBlogsSearch(e, search) {
+  //   e.preventDefault();
+  //   const parenthesesRegex = /\(([^)]+)\)/;
 
-    const match = search.match(parenthesesRegex);
-    if (match && match.length) {
-      const { data } = await axios.post("/api/find/writer/blogs", {
-        email: match[1],
-      });
-      if (data.status === 200) {
-        setWriterBlog(data.blogs);
-        setRadio("1");
-        setfilteredData(data.blogs);
-      }
-    } else {
-      closeMessage(
-        messageApi,
-        "Something went wrong,Please try again later.",
-        "error"
-      );
-    }
-  }
-  function toggleSwitch() {
-    if (checked) {
-      setRadio("1");
-      onOptionChange(0);
-    }
-    setChecked(!checked);
-  }
+  //   const match = search.match(parenthesesRegex);
+  //   if (match && match.length) {
+  //     const { data } = await axios.post("/api/find/writer/blogs", {
+  //       email: match[1],
+  //     });
+  //     if (data.status === 200) {
+  //       setWriterBlog(data.blogs);
+  //       setRadio("1");
+  //       setfilteredData(data.blogs);
+  //     }
+  //   } else {
+  //     closeMessage(
+  //       messageApi,
+  //       "Something went wrong,Please try again later.",
+  //       "error"
+  //     );
+  //   }
+  // }
+  // function toggleSwitch() {
+  //   if (checked) {
+  //     setRadio("1");
+  //     onOptionChange(0);
+  //   }
+  //   setChecked(!checked);
+  // }
   return (
     <div className="body">
       {contextHolder}
@@ -379,7 +388,7 @@ const Draft = () => {
           >
             Write a new Blog?
           </a>
-          {isAdmin && (
+          {/* {isAdmin && (
             <div className="user-blogs-switch-container">
               <div
                 class="form-check form-switch user-blogs-switch "
@@ -409,7 +418,7 @@ const Draft = () => {
                 />
               </div>
             </div>
-          )}
+          )} */}
           {updateFlag === 1 && (
             <div className="mt-4 p-2">
               {allBlogs && allBlogs.length !== 0 && (

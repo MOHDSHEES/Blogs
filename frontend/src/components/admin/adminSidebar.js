@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AddEmployee from "./addEmployee";
 
-const AdminSidebar = ({ setTab }) => {
+const AdminSidebar = ({ setTab, adminLevel }) => {
   const headerToggle = useRef();
   const Navbar = useRef();
   const bodyPd = useRef();
@@ -68,23 +68,32 @@ const AdminSidebar = ({ setTab }) => {
                   {" "}
                   <i class="bx bxs-badge-check nav_icon"></i>
                   {/* <i class="bx bx-heading "></i> */}
-                  <span class="nav_name">Blogs for activation</span>{" "}
+                  <span class="nav_name">Inactive Blogs</span>{" "}
                 </Link>{" "}
               </div>
-              <div class="nav_list">
-                <Link onClick={() => setModalShow(true)} class="nav_link">
-                  {" "}
-                  <i class="bx bx-user-plus nav_icon"></i>{" "}
-                  {/* <i class="bx bx-heading "></i> */}
-                  <span class="nav_name">Add Employee/Intern</span>{" "}
-                </Link>{" "}
-              </div>
+              {adminLevel && adminLevel === 1 && (
+                <div class="nav_list">
+                  <Link onClick={() => setModalShow(true)} class="nav_link">
+                    {" "}
+                    <i class="bx bx-user-plus nav_icon"></i>{" "}
+                    {/* <i class="bx bx-heading "></i> */}
+                    <span class="nav_name">Add Employee/Intern</span>{" "}
+                  </Link>{" "}
+                </div>
+              )}
               <div class="nav_list">
                 <Link onClick={() => setTab(1)} class="nav_link">
                   {" "}
-                  <i class="bx bx-task nav_icon"></i>
+                  <i class="bx bxs-user-detail nav_icon"></i>
                   {/* <i class="bx bx-heading "></i> */}
                   <span class="nav_name">Assign Task</span>{" "}
+                </Link>{" "}
+              </div>
+              <div class="nav_list">
+                <Link onClick={() => setTab(2)} class="nav_link">
+                  {" "}
+                  <i class="bx bx-task nav_icon"></i>
+                  <span class="nav_name">All Blogs</span>{" "}
                 </Link>{" "}
               </div>
             </div>{" "}

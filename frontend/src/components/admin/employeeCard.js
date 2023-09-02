@@ -10,6 +10,7 @@ const EmployeeCard = ({
   employees,
   onOptionChange,
   radio,
+  adminLevel,
   // setFilteredEmployees,
 }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -65,7 +66,8 @@ const EmployeeCard = ({
             />
           </div>
 
-          {employee.status === 1 &&
+          {adminLevel === 1 &&
+            employee.status === 1 &&
             !["6222563006", "9870357609", "9197487964"].includes(
               employee.employeeId
             ) && (
@@ -162,15 +164,16 @@ const EmployeeCard = ({
           </div> */}
 
           <>
-            {employee.status === 1 && (
-              <button
-                type="button"
-                onClick={() => setModalShow(true)}
-                className="btn btn-success btn-rounded btn-lg"
-              >
-                Assign Task
-              </button>
-            )}
+            {employee.status === 1 &&
+              (adminLevel === 1 || adminLevel < employee.adminLevel) && (
+                <button
+                  type="button"
+                  onClick={() => setModalShow(true)}
+                  className="btn btn-success btn-rounded btn-lg"
+                >
+                  Assign Task
+                </button>
+              )}
             <button
               type="button"
               onClick={() => setOldTasksModal(true)}
@@ -208,6 +211,7 @@ const EmployeeCard = ({
         assignDate={null}
         onHide={() => setOldTasksModal(false)}
         data={employee}
+        adminLevel={adminLevel}
       />
       <TaskAssign
         employees={employees}

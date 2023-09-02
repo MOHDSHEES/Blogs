@@ -18,14 +18,23 @@ const AddEmployee = (props) => {
     joiningDate: "",
     post: "",
     jobType: "",
+    adminLevel: 10,
   });
   const Inputchange = (event) => {
     setValidated(false);
     const { name, value } = event.target;
-    setstate({
-      ...state,
-      [name]: value,
-    });
+    if (name === "adminLevel") {
+      if (value <= 10 && value % 1 === 0 && value !== 0) {
+        setstate({
+          ...state,
+          [name]: value,
+        });
+      }
+    } else
+      setstate({
+        ...state,
+        [name]: value,
+      });
   };
   function clear() {
     setstate({ email: "", joiningDate: "", post: "", jobType: "" });
@@ -67,7 +76,16 @@ const AddEmployee = (props) => {
 
     // console.log(data);
   }
-
+  const handleKeyDown = (event) => {
+    // Check if the pressed key is a dot (.)
+    if (
+      event.key === "." ||
+      event.key === "-" ||
+      (state.adminLevel === "" && event.key === "0")
+    ) {
+      event.preventDefault(); // Prevent the dot from being entered
+    }
+  };
   // console.log(state);
   //   async function verify(event) {
   //     console.log("in");
@@ -163,7 +181,25 @@ const AddEmployee = (props) => {
                 required
               />
               <Form.Control.Feedback type="invalid">
-                Please choose Joining Date .
+                Please choose Joining Date.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGridAddress2">
+              <Form.Label>
+                Enter Admin Level [min-1 (super Admin),max-10 (Not Admin)] *
+              </Form.Label>
+              <Form.Control
+                type="number"
+                name="adminLevel"
+                min="1"
+                max="10"
+                value={state.adminLevel}
+                onChange={Inputchange}
+                onKeyDown={handleKeyDown}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Please choose Joining Date.
               </Form.Control.Feedback>
             </Form.Group>
             {/* <Form.Control.Feedback type="invalid">

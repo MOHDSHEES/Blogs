@@ -25,6 +25,7 @@ const EmployeeRegister = ({ message }) => {
         setPost(data.post);
         setJoiningDate(data.joiningDate);
         setJobType(data.jobType);
+        setAdminLevel(data.adminLevel);
       }
     })();
   }, [token, navigate, message]);
@@ -33,6 +34,7 @@ const EmployeeRegister = ({ message }) => {
   const [joiningDate, setJoiningDate] = useState("");
   const [jobType, setJobType] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [adminLevel, setAdminLevel] = useState(10);
   const [state, setstate] = useState({
     name: "",
     gender: "",
@@ -54,6 +56,7 @@ const EmployeeRegister = ({ message }) => {
     const details = {
       ...state,
       email: email,
+      adminLevel: adminLevel,
       post: post.trim(),
       joiningDate: joiningDate,
       jobType: jobType,

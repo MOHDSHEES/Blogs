@@ -16,7 +16,7 @@ import ProgressBar from "../functions/progressBar";
 import { getWeekDatesFromDate } from "../functions/getweekdays";
 import FormatDate from "../functions/formatDate";
 
-const EmployeeProfile = () => {
+const EmployeeProfile = ({ setData }) => {
   const { setEmployeeData, messageApi } = useContext(globalContext);
   //   const [updatedData, setUpdatedData] = useState(null);
   const [employee, setEmployee] = useState("");
@@ -47,6 +47,7 @@ const EmployeeProfile = () => {
       // setLoading(false);
       if (data.status === 200) {
         setEmployee(data.user);
+        setData(data.user);
       } else {
         localStorage.removeItem("employeeToken");
         setEmployeeData(null);

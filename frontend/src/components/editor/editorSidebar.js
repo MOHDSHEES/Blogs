@@ -52,11 +52,11 @@ const EditorSidebar = ({
           </div>
 
           <div>
-            {isAdmin && (
+            {/* {isAdmin && (
               <Link className="btn btn-success" to="/admin">
                 Admin
               </Link>
-            )}
+            )} */}
             <button
               style={{ float: "right", marginLeft: "10px" }}
               className="btn btn-outline-primary"

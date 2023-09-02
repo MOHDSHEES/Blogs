@@ -144,7 +144,11 @@ router.post("/assign/task/employee", async (req, res) => {
     }
     let resu;
     if (emp) {
-      if (!weekDates.includes(emp.tasks && emp.tasks[0].assignDate)) {
+      if (
+        !weekDates.includes(
+          emp.tasks && emp.tasks[0] && emp.tasks[0].assignDate
+        )
+      ) {
         resu = await Employees.findOneAndUpdate(
           {
             email: req.body.email,
@@ -391,7 +395,10 @@ router.post("/update/task/status", async (req, res) => {
 // get all Employee
 router.post("/find/employees", async (req, res) => {
   try {
-    const employee = await Employees.find({});
+    // console.log(req.body.adminLevel);
+    const employee = await Employees.find({
+      adminLevel: { $gte: req.body.adminLevel },
+    });
 
     res.json(employee);
     // if (newUser._id) {
@@ -597,6 +604,20 @@ router.post("/authenticate", verifyToken, async (req, res) => {
   }
 });
 
+// all blogs for admin
+router.post("/find/all/blogs", verifyEmployeeToken, async (req, res) => {
+  try {
+    if (res.locals.data._id) {
+      const re = await TempBlogs.find({});
+      const tempBlogIds = re.map((blog) => blog.id);
+      const resu = await UBlogs.find({ id: { $nin: tempBlogIds } });
+      // const blogs = await UBlogs.find({});
+      res.json({ blogs: [...re, ...resu] });
+    }
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+});
 // all blogs for particular user for new editor
 router.post("/find/ublog/all", verifyToken, async (req, res) => {
   try {
@@ -608,27 +629,28 @@ router.post("/find/ublog/all", verifyToken, async (req, res) => {
       { password: 0 }
     );
     // console.log(user.blog);
-    if (user.isAdmin) {
-      const re = await TempBlogs.find({});
-      const tempBlogIds = re.map((blog) => blog.id);
-      const resu = await UBlogs.find({ id: { $nin: tempBlogIds } });
+    // if (user.isAdmin) {
+    //   const re = await TempBlogs.find({});
+    //   const tempBlogIds = re.map((blog) => blog.id);
+    //   const resu = await UBlogs.find({ id: { $nin: tempBlogIds } });
 
-      res.json({ blogs: [...re, ...resu], user: user });
-    } else {
-      const re = await TempBlogs.find({ id: { $in: user.blog } });
-      const tempBlogIds = re.map((blog) => blog.id);
-      const resu = await UBlogs.find({
-        id: { $in: user.blog, $nin: tempBlogIds },
-      });
+    //   res.json({ blogs: [...re, ...resu], user: user });
+    // } else {
+    const re = await TempBlogs.find({ id: { $in: user.blog } });
+    const tempBlogIds = re.map((blog) => blog.id);
+    const resu = await UBlogs.find({
+      id: { $in: user.blog, $nin: tempBlogIds },
+    });
 
-      res.json({ blogs: [...re, ...resu], user: user });
-    }
+    res.json({ blogs: [...re, ...resu], user: user });
+    // }
     // let trending = resu.map((a) => a.title);
     // console.log(resu);
   } catch (error) {
     res.send({ msg: error.message });
   }
 });
+
 // all blogs for particular user
 router.post("/find/blog/all", verifyToken, async (req, res) => {
   try {
@@ -1407,7 +1429,7 @@ router.post("/add/employee/sendemail", async (req, res) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
       res.status(500).send({
         success: false,
         message: "Something went wrong. Try again later",

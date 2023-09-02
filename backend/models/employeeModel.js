@@ -27,6 +27,7 @@ const employeeSchema = new mongoose.Schema({
     weekly: { type: Number, default: 10 },
   },
   tasks: [{}],
+  adminLevel: { type: Number, default: 10 },
 });
 
 // productsSchema.index({ name: "text", category: "text" });

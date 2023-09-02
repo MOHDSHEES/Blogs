@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { globalContext } from "../../context";
 
-const EmployeeSidebar = () => {
+const EmployeeSidebar = ({ data }) => {
   const { setEmployeeData } = useContext(globalContext);
   const headerToggle = useRef();
   const Navbar = useRef();
@@ -35,6 +35,11 @@ const EmployeeSidebar = () => {
             <i class="bx bx-menu" ref={headerToggle} id="header-toggle"></i>
           </div>
           <div>
+            {data && data.adminLevel <= 3 && (
+              <Link className="btn btn-success" to="/admin">
+                Admin
+              </Link>
+            )}
             <button
               style={{ float: "right", marginLeft: "10px" }}
               className="btn btn-outline-primary"

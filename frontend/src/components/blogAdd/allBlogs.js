@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import resizeImg from "../functions/resizeImg";
 
 const AllBlogs = ({ blog, updateForm, adminPannel }) => {
@@ -36,6 +37,7 @@ const AllBlogs = ({ blog, updateForm, adminPannel }) => {
         class="d-flex mb-3"
         onClick={toggleExpand}
         style={{
+          cursor: "pointer",
           borderRight: `4px solid ${activationRequest ? "green" : "red"}`,
         }}
       >
@@ -160,13 +162,21 @@ const AllBlogs = ({ blog, updateForm, adminPannel }) => {
             </small>
             <div className="allblogs-flex-item-last">
               {!adminPannel && (
-                <a
-                  href="#!"
+                <Link
+                  to="/edit"
+                  state={blog}
                   style={{ marginRight: "15px" }}
-                  onClick={updateForm}
+                  // onClick={updateForm}
                 >
                   Edit Blog
-                </a>
+                </Link>
+                // <a
+                //   href="#!"
+                //   style={{ marginRight: "15px" }}
+                //   onClick={updateForm}
+                // >
+                //   Edit Blog
+                // </a>
               )}
               <a
                 href={

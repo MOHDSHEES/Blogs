@@ -11,11 +11,15 @@ const PendingTable = ({ adminName }) => {
   const [blog, setBlog] = useState([]);
   const [disable, setDisable] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
+      setLoading(true);
+      // console.log("in");
       const { data } = await axios.post("/api/find/ublog/status", {
         status: "Inactive",
       });
+      setLoading(false);
       setBlog(data);
     })();
   }, []);
@@ -50,7 +54,9 @@ const PendingTable = ({ adminName }) => {
   return (
     <div class="table-responsive">
       {contextHolder}
-      {blog && blog.length > 0 ? (
+      {loading ? (
+        "Loading..."
+      ) : blog && blog.length > 0 ? (
         <table class="table ">
           <thead>
             <tr class="table-info">
