@@ -129,8 +129,8 @@ const Draft = () => {
   async function editBlog() {
     setFlag(1);
     setUpdateFlag(1);
-    const { data } = await axios.post("/api/blog/updated/titles");
-    setTitles(data);
+    // const { data } = await axios.post("/api/blog/updated/titles");
+    // setTitles(data);
   }
 
   async function saveUpdate(props) {
@@ -377,9 +377,9 @@ const Draft = () => {
       />
       {flag ? (
         <div style={{ marginTop: "80px" }}>
-          {isAdmin && (
+          {/* {isAdmin && (
             <Autocomplete searchHandler={searchHandler} suggestions={titles} />
-          )}
+          )} */}
           <a
             onClick={newBlog}
             href="#!"

@@ -4,6 +4,7 @@ import { closeMessage } from "../functions/message";
 import { message } from "antd";
 import axios from "axios";
 import AllBlogs from "./allBlogs";
+import { useNavigate } from "react-router-dom";
 
 const AllBlogswithFilter = ({ adminLevel, blogs }) => {
   const [radio, setRadio] = useState("1");
@@ -117,6 +118,7 @@ const AllBlogswithFilter = ({ adminLevel, blogs }) => {
     }
   }
 
+  const [titles, setTitles] = useState([]);
   function toggleSwitch() {
     if (checked) {
       setRadio("1");
@@ -124,9 +126,32 @@ const AllBlogswithFilter = ({ adminLevel, blogs }) => {
     }
     setChecked(!checked);
   }
+  const navigate = useNavigate();
+  async function searchHandler(e, search) {
+    e.preventDefault();
+    const { data } = await axios.post("/api/find/updated/blog", {
+      title: search,
+    });
+    if (data.length) {
+      //   updateForm(data[0]);
+      navigate("/edit", { state: data[0] });
+    } else {
+      closeMessage(messageApi, "Blog not Found", "error");
+    }
+  }
+  async function editBlog() {
+    // setFlag(1);
+    // setUpdateFlag(1);
+    const { data } = await axios.post("/api/blog/updated/titles");
+    setTitles(data);
+  }
+  useEffect(() => {
+    if (!titles.length) editBlog();
+  }, [titles]);
   return (
     <div>
       {contextHolder}
+      <Autocomplete searchHandler={searchHandler} suggestions={titles} />
       {adminLevel && adminLevel <= 3 && (
         <div className="user-blogs-switch-container">
           <div

@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { globalContext } from "../../context";
 import MetaInput from "./metaInput";
 // import Form from "./form";
 
@@ -10,6 +11,7 @@ const EditorSidebar = ({
   updateFlag,
   isAdmin,
 }) => {
+  const { employeeData } = useContext(globalContext);
   useEffect(() => {
     /*===== LINK ACTIVE =====*/
     const linkColor = document.querySelectorAll(".nav_link");
@@ -57,6 +59,23 @@ const EditorSidebar = ({
                 Admin
               </Link>
             )} */}
+            {employeeData ? (
+              <Link
+                // onClick={() => setExpanded(false)}
+                to={"/employee/" + employeeData.employeeId}
+                className="btn btn-success"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                // onClick={() => setExpanded(false)}
+                to="/employee/login"
+                className="btn btn-success"
+              >
+                Employee LogIn
+              </Link>
+            )}
             <button
               style={{ float: "right", marginLeft: "10px" }}
               className="btn btn-outline-primary"
@@ -70,7 +89,7 @@ const EditorSidebar = ({
           <nav class="nav">
             <div>
               {" "}
-              <a href="/" class="nav_logo">
+              <div class="nav_logo">
                 {" "}
                 <img
                   style={{ marginLeft: "-30px" }}
@@ -81,11 +100,12 @@ const EditorSidebar = ({
                 />
                 {/* <i class="bx bx-layer nav_logo-icon"></i>{" "} */}
                 <span class="nav_logo-name">Off The Web</span>{" "}
-              </a>
+              </div>
               <div class="nav_list">
                 {!updateFlag && (
                   <Link
                     // onClick={onClickM}
+
                     class="nav_link"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"

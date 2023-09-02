@@ -179,20 +179,22 @@ const Admin = () => {
                     Social Media Management
                   </label>
                 </div>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="inlineRadioOptions"
-                    id="inlineRadio5"
-                    value="5"
-                    checked={radio === "5"}
-                    onChange={() => onOptionChange("5")}
-                  />
-                  <label class="form-check-label" for="inlineRadio5">
-                    Former Employees
-                  </label>
-                </div>
+                {adminLevel && adminLevel === 1 && (
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio5"
+                      value="5"
+                      checked={radio === "5"}
+                      onChange={() => onOptionChange("5")}
+                    />
+                    <label class="form-check-label" for="inlineRadio5">
+                      Former Employees
+                    </label>
+                  </div>
+                )}
               </div>
 
               <div className="row d-flex justify-content-center align-items-center ">

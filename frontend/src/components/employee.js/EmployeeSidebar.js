@@ -53,7 +53,7 @@ const EmployeeSidebar = ({ data }) => {
           <nav class="nav">
             <div>
               {" "}
-              <Link to="/" class="nav_logo">
+              <div class="nav_logo">
                 {" "}
                 <img
                   style={{ marginLeft: "-30px" }}
@@ -63,7 +63,7 @@ const EmployeeSidebar = ({ data }) => {
                   height={70}
                 />
                 <span class="nav_logo-name">Off The Web</span>{" "}
-              </Link>
+              </div>
               {/* <div class="nav_list">
                 <Link onClick={() => setModalShow(true)} class="nav_link">
                   {" "}

@@ -136,9 +136,11 @@ function App() {
               path="/print"
               element={<PrintCertificate message={messageApi} />}
             /> */}
+
             <Route
               path="/"
-              element={<Homepage categoryData={categoryData} />}
+              // element={<Homepage categoryData={categoryData} />}
+              element={<Navigate to="/edit" />}
             />
             <Route path="/signup" element={<Signup message={messageApi} />} />
             <Route path="/login" element={<Login message={messageApi} />} />

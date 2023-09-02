@@ -51,7 +51,7 @@ const AdminSidebar = ({ setTab, adminLevel }) => {
           <nav class="nav">
             <div>
               {" "}
-              <a href="/" class="nav_logo">
+              <div class="nav_logo">
                 {" "}
                 <img
                   style={{ marginLeft: "-30px" }}
@@ -62,7 +62,7 @@ const AdminSidebar = ({ setTab, adminLevel }) => {
                 />
                 {/* <i class="bx bx-layer nav_logo-icon"></i>{" "} */}
                 <span class="nav_logo-name">Off The Web</span>{" "}
-              </a>
+              </div>
               <div class="nav_list">
                 <Link onClick={() => setTab(0)} class="nav_link">
                   {" "}

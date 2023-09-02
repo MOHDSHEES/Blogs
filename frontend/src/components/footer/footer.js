@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { globalContext } from "../../context";
 
 const Footer = () => {
-  const { categories: cate } = useContext(globalContext);
-  const [categories, setcategories] = useState(null);
-  useEffect(() => {
-    setcategories(cate);
-  }, [cate]);
+  // const { categories: cate } = useContext(globalContext);
+  // const [categories, setcategories] = useState(null);
+  // useEffect(() => {
+  //   setcategories(cate);
+  // }, [cate]);
   return (
     <div>
       <div class="container-fluid bg-light pt-5 px-sm-3 px-md-5">
@@ -65,7 +65,7 @@ const Footer = () => {
           <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Categories</h4>
             <div class="d-flex flex-wrap m-n1">
-              {categories &&
+              {/* {categories &&
                 categories.map((category, idx) => {
                   return (
                     <Link
@@ -76,7 +76,7 @@ const Footer = () => {
                       {category.category}
                     </Link>
                   );
-                })}
+                })} */}
               {/* <a href="#!" class="btn btn-sm btn-outline-secondary m-1">
                 Politics
               </a>

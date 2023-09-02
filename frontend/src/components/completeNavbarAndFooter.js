@@ -12,38 +12,38 @@ import Footer from "./footer/footer";
 const CompleteNavbarAndFooter = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
-  async function searchHandler(search) {
-    // e.preventDefault();
-    // console.log(search);
-    openMessage(messageApi, "Searching...");
-    const { data } = await axios.post("/api/find/blog", {
-      title: search,
-    });
-    // console.log(data);
-    if (data.length) {
-      closeMessage(messageApi, "Blog found", "success");
-      const blog = data[0];
-      navigate(
-        "/blog/" + data[0]._id + "/" + data[0].title.replace(/ /g, "-"),
-        {
-          state: blog,
-        }
-      );
-    } else {
-      closeMessage(
-        messageApi,
-        "Oops! Blog not found. Try searching another keyword.",
-        "error"
-      );
-      // setShow(true);
-    }
-  }
+  // async function searchHandler(search) {
+  //   // e.preventDefault();
+  //   // console.log(search);
+  //   openMessage(messageApi, "Searching...");
+  //   const { data } = await axios.post("/api/find/blog", {
+  //     title: search,
+  //   });
+  //   // console.log(data);
+  //   if (data.length) {
+  //     closeMessage(messageApi, "Blog found", "success");
+  //     const blog = data[0];
+  //     navigate(
+  //       "/blog/" + data[0]._id + "/" + data[0].title.replace(/ /g, "-"),
+  //       {
+  //         state: blog,
+  //       }
+  //     );
+  //   } else {
+  //     closeMessage(
+  //       messageApi,
+  //       "Oops! Blog not found. Try searching another keyword.",
+  //       "error"
+  //     );
+  //   }
+  // }
   // console.log(trend);
   return (
     <div>
       {contextHolder}
       <Topbar />
-      <NavBar searchHandler={searchHandler} />
+      {/* <NavBar searchHandler={searchHandler} /> */}
+      <NavBar />
       <Outlet />
       <Footer />
     </div>

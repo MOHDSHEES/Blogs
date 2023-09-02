@@ -81,22 +81,22 @@ const NavBar = ({ searchHandler }) => {
                   // style={{ maxHeight: "100px" }}
                   // navbarScroll
                 >
-                  <Nav.Link
+                  {/* <Nav.Link
                     onClick={() => setExpanded(false)}
                     as={NavLink}
                     className="nav-item "
                     to="/"
                   >
                     Home
-                  </Nav.Link>
-                  <Nav.Link
+                  </Nav.Link> */}
+                  {/* <Nav.Link
                     onClick={() => setExpanded(false)}
                     as={NavLink}
                     to="/categories"
                     className="nav-item "
                   >
                     Categories
-                  </Nav.Link>
+                  </Nav.Link> */}
                   {/* <Nav.Link href="#" className="nav-item ">
                     Single Blog
                   </Nav.Link> */}
