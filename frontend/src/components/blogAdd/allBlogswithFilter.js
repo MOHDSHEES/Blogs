@@ -248,7 +248,9 @@ const AllBlogswithFilter = ({ adminLevel, blogs }) => {
           ? "Loading..."
           : filteredData && filteredData.length !== 0
           ? filteredData.map((bl) => {
-              return <AllBlogs blog={bl} />;
+              return (
+                <AllBlogs blog={bl} adminPannel={false} fromAdmin={true} />
+              );
             })
           : "No Blogs"}
         {/* // {blogs.length > 0 &&

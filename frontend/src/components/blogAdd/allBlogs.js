@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import resizeImg from "../functions/resizeImg";
 
-const AllBlogs = ({ blog, updateForm, adminPannel }) => {
+const AllBlogs = ({ blog, adminPannel, fromAdmin }) => {
   // console.log(blog.activationRequest.slice(-1));
   // const borderColor = blog.activationRequest ? "green" : "red";
   // console.log(blog.activationRequest);
@@ -164,7 +164,7 @@ const AllBlogs = ({ blog, updateForm, adminPannel }) => {
               {!adminPannel && (
                 <Link
                   to="/edit"
-                  state={blog}
+                  state={{ ...blog, fromAdmin: fromAdmin }}
                   style={{ marginRight: "15px" }}
                   // onClick={updateForm}
                 >

@@ -14,10 +14,19 @@ const Draft = () => {
   const editorRef = useRef(null);
   const location = useLocation();
 
+  const [fromAdmin, setFromAdmin] = useState(false);
+  const [activationRequest, setactivationRequest] = useState(null);
+  const [updatedDate, setUpdatedDate] = useState(null);
   // console.log(location.state);
   useEffect(() => {
     if (location.state) {
+      setFlag(1);
       updateForm(location.state);
+      if (location.state.fromAdmin) {
+        setUpdatedDate(location.state.updatedDate);
+        setactivationRequest(location.state.updatedDate);
+        setFromAdmin(true);
+      }
     }
   }, [location]);
   //   useEffect(() => {
@@ -39,7 +48,7 @@ const Draft = () => {
     related: "",
     // id: null,
   });
-  const [titles, setTitles] = useState([]);
+  // const [titles, setTitles] = useState([]);
   //   const [mainImg, setmainImg] = useState("");
   //   const [keywords, setkeywords] = useState("");
   //   const [category, setcategory] = useState("");
@@ -140,11 +149,14 @@ const Draft = () => {
         "Blog will be Inactive until verified by Admin. Are you sure to update. \n";
       if (window.confirm(text) === true) {
         openMessage(messageApi, "Saving...");
+
         const { data } = await axios.post("/api/update/new/blog", {
           id: id,
           metaData: metaData,
           blog: state,
-          activationRequest: props,
+          fromAdmin: fromAdmin,
+          activationRequest: fromAdmin ? activationRequest : props,
+          updatedDate: updatedDate,
         });
         if (data && data.status === 1)
           closeMessage(messageApi, data.msg, "success");
@@ -259,18 +271,18 @@ const Draft = () => {
     window.$("#staticBackdrop").modal("show");
   }
 
-  async function searchHandler(e, search) {
-    e.preventDefault();
-    const { data } = await axios.post("/api/find/updated/blog", {
-      title: search,
-    });
-    if (data.length) {
-      updateForm(data[0]);
-    } else {
-      closeMessage(messageApi, "Blog not Found", "error");
-      reset();
-    }
-  }
+  // async function searchHandler(e, search) {
+  //   e.preventDefault();
+  //   const { data } = await axios.post("/api/find/updated/blog", {
+  //     title: search,
+  //   });
+  //   if (data.length) {
+  //     updateForm(data[0]);
+  //   } else {
+  //     closeMessage(messageApi, "Blog not Found", "error");
+  //     reset();
+  //   }
+  // }
 
   const [allBlogs, setAllBlogs] = useState(null);
   // console.log(allBlogs);

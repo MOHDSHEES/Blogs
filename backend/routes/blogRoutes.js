@@ -907,6 +907,7 @@ router.post("/add/category", async (req, res) => {
 router.post("/add/new/blog", async (req, res) => {
   try {
     // let nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
+    // let nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 10);
     // const id = req.body.metaData.id ? req.body.metaData.id : nanoid();
     let request;
     if (req.body.activationRequest) {
@@ -925,6 +926,12 @@ router.post("/add/new/blog", async (req, res) => {
 
     const blog = new TempBlogs({
       // id: id,
+      // id: {
+      //   type: String,
+      //   required: true,
+      //   default: () => nanoid(),
+      //   index: { unique: true },
+      // },
       title: req.body.metaData.title,
       mainImg: req.body.metaData.mainImg,
       description: req.body.metaData.description,
@@ -1155,45 +1162,69 @@ router.post("/delete/blog", async (req, res) => {
 
 //  Update new editor blog
 router.post("/update/new/blog", async (req, res) => {
-  // console.log(req.body.metaData.description);
-  // console.log(req.body.blog);
-
+  // console.log(req.body);
+  // console.log(req.body.fromAdmin);
   let request;
   if (req.body.activationRequest) {
     request = new Date() + req.body.activationRequest;
   } else {
     request = req.body.activationRequest;
   }
+
   try {
-    const date =
-      new Date().toLocaleString("en-US", { weekday: "long" }) +
-      ", " +
-      new Date().toLocaleString("en-US", { month: "long" }) +
-      ", " +
-      new Date().getDate() +
-      ", " +
-      new Date().getFullYear();
-    // console.log(date);
-    const updated = await TempBlogs.findOneAndUpdate(
-      { id: req.body.id },
-      {
-        id: req.body.id,
-        title: req.body.metaData.title,
-        mainImg: req.body.metaData.mainImg,
-        description: req.body.metaData.description,
-        category: req.body.metaData.category,
-        keywords: req.body.metaData.keywords,
-        related: req.body.metaData.related,
-        blog: req.body.blog,
-        updatedDate: date,
-        activationRequest: request,
-        status: "Inactive",
-      },
-      {
-        new: true,
-        upsert: true,
-      }
-    );
+    let updated;
+    if (req.body.fromAdmin) {
+      updated = await TempBlogs.findOneAndUpdate(
+        { id: req.body.id },
+        {
+          id: req.body.id,
+          title: req.body.metaData.title,
+          mainImg: req.body.metaData.mainImg,
+          description: req.body.metaData.description,
+          category: req.body.metaData.category,
+          keywords: req.body.metaData.keywords,
+          related: req.body.metaData.related,
+          blog: req.body.blog,
+          updatedDate: req.body.updatedDate,
+          activationRequest: req.body.activationRequest,
+          status: "Inactive",
+        },
+        {
+          new: true,
+          upsert: true,
+        }
+      );
+    } else {
+      const date =
+        new Date().toLocaleString("en-US", { weekday: "long" }) +
+        ", " +
+        new Date().toLocaleString("en-US", { month: "long" }) +
+        ", " +
+        new Date().getDate() +
+        ", " +
+        new Date().getFullYear();
+      // console.log(date);
+      updated = await TempBlogs.findOneAndUpdate(
+        { id: req.body.id },
+        {
+          id: req.body.id,
+          title: req.body.metaData.title,
+          mainImg: req.body.metaData.mainImg,
+          description: req.body.metaData.description,
+          category: req.body.metaData.category,
+          keywords: req.body.metaData.keywords,
+          related: req.body.metaData.related,
+          blog: req.body.blog,
+          updatedDate: date,
+          activationRequest: request,
+          status: "Inactive",
+        },
+        {
+          new: true,
+          upsert: true,
+        }
+      );
+    }
     // console.log(updated);
 
     // pull blog from homepage recent
