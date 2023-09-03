@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { globalContext } from "../../context";
+import jsPDF from "jspdf";
+import handleGeneratePdf from "../functions/certificate";
 
 const EmployeeSidebar = ({ data }) => {
   const { setEmployeeData } = useContext(globalContext);
@@ -25,6 +27,14 @@ const EmployeeSidebar = ({ data }) => {
     localStorage.removeItem("employeeToken");
     setEmployeeData(null);
     navigate("/employee/login", { replace: true });
+  }
+
+  function generateCertificate(data) {
+    const doc = new jsPDF({
+      format: [424.2, 601],
+      unit: "px",
+    });
+    handleGeneratePdf(doc, data);
   }
   // const [modalShow, setModalShow] = useState(false);
   return (
@@ -72,13 +82,25 @@ const EmployeeSidebar = ({ data }) => {
                 />
                 <span class="nav_logo-name">Off The Web</span>{" "}
               </div>
-              {/* <div class="nav_list">
-                <Link onClick={() => setModalShow(true)} class="nav_link">
-                  {" "}
-                  <i class="bx bx-user-plus nav_icon"></i>{" "}
-                  <span class="nav_name">Add Employee/Intern</span>{" "}
-                </Link>{" "}
-              </div> */}
+              <div class="nav_list">
+                {data && data.certificate && data.certificate.released && (
+                  <Link
+                    class="nav_link"
+                    onClick={() => generateCertificate(data)}
+                  >
+                    {/* <i class="fa-solid fa-certificate nav_icon"></i> */}
+                    <img
+                      style={{ marginLeft: "-2px" }}
+                      className="nav_icon"
+                      alt="certificate"
+                      src="/certificate-icon.png"
+                      height={23}
+                    />
+                    {/* <i class="fa-solid fa-file "></i> */}
+                    <span class="nav_name">Certificate of Completion</span>
+                  </Link>
+                )}
+              </div>
             </div>
           </nav>
         </div>

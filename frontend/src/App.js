@@ -6,13 +6,13 @@ import Homepage from "./components/homepage/homepage";
 import CompleteNavbarAndFooter from "./components/completeNavbarAndFooter";
 import axios from "axios";
 import CategoryPage from "./components/categoryPageComponents/categoryPage";
-import Contactform from "./components/contactComponent/contactform";
+// import Contactform from "./components/contactComponent/contactform";
 import MoreCategoriesPage from "./components/categoryPageComponents/moreCategoriesPage";
-import Terms from "./components/terms";
-import Advertise from "./components/advertise/advertise";
-import PrivacyPolicy from "./components/privacyPolicy";
+// import Terms from "./components/terms";
+// import Advertise from "./components/advertise/advertise";
+// import PrivacyPolicy from "./components/privacyPolicy";
 import { Analytics } from "@vercel/analytics/react";
-import Career from "./components/career/career";
+// import Career from "./components/career/career";
 import Signup from "./components/login/signup";
 import Login from "./components/login/login";
 import { message } from "antd";
@@ -132,10 +132,10 @@ function App() {
         {contextHolder}
         <Routes>
           <Route path="/" element={<CompleteNavbarAndFooter />}>
-            {/* <Route
+            <Route
               path="/print"
               element={<PrintCertificate message={messageApi} />}
-            /> */}
+            />
 
             <Route
               path="/"

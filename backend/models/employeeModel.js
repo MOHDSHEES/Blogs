@@ -28,6 +28,13 @@ const employeeSchema = new mongoose.Schema({
   },
   tasks: [{}],
   adminLevel: { type: Number, default: 10 },
+  certificate: {
+    name: { type: String },
+    issueDate: { type: String },
+    certificateNo: { type: String },
+    released: { type: Boolean, default: false },
+    guidence: { type: String },
+  },
 });
 
 // productsSchema.index({ name: "text", category: "text" });

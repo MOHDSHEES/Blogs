@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "Italianno";
+  src: url("https://fonts.googleapis.com/css2?family=Italianno&display=swap")
+    format("woff2");
+  /* Add the URL to the font file provided by Google Fonts */
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 :root {
   --header-height: 3rem;
@@ -362,24 +371,93 @@ a {
 }
 
 .certificate-container {
+  /* background-image: url("/certificate.jpg"); */
   position: relative;
-  height: 600px;
+  /* object-fit: contain; */
+  /* background-size: cover; */
+  /* width: 100%;
+  height: 100%; */
+  /* height: 600px; */
   width: 424px;
+}
+.certificate h3 {
+  color: #5e1b22;
+  font-weight: 700 !important;
+  font-size: 13px;
+}
+.certificate h6 {
+  font-weight: bold !important;
 }
 .certificate-container img {
   height: 600px;
   width: auto;
 }
+
 .certificate-data {
   position: absolute;
-  top: 280px;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-
+  font-family: "Italianno", cursive;
+  /* background-color: #999; */
+  top: 270px;
+  left: 50px;
+  text-align: center;
+  right: 50px;
+  /* width: 70%; */
+  /* left: 50%; */
+  /* transform: translateY(-50%) translateX(-50%); */
+  /* font-weight: 900 !important;
+  font-size: 40px !important; */
   /* left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto; */
+}
+.certificate-data h3 {
+  font-weight: 900 !important;
+  font-size: 40px !important;
+}
+
+.certificate-founder {
+  position: absolute;
+  bottom: 87px;
+  left: 120px;
+  font-size: 9px;
+}
+.certificate-founder-name {
+  position: absolute;
+  bottom: 105px;
+  color: #5e1b22;
+  left: 94px;
+  /* font-size: 13px; */
+}
+.certificate-manager-name {
+  position: absolute;
+  text-align: center;
+
+  width: 133px;
+  bottom: 105px;
+  right: 70px;
+  /* font-size: 13px; */
+}
+
+.certificate-manager {
+  position: absolute;
+  bottom: 87px;
+  right: 100px;
+  font-size: 9px;
+}
+.certificate-date-name {
+  position: absolute;
+  text-align: center;
+  /* background-color: #999; */
+  width: 80px;
+  bottom: 60px;
+  right: 170px;
+}
+.certificate-date {
+  position: absolute;
+  bottom: 40px;
+  right: 200px;
+  font-size: 9px;
 }
 .otp-input input {
   justify-content: center;

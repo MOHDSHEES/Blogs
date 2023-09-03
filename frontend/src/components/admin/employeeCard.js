@@ -3,6 +3,9 @@ import { useState } from "react";
 import EmployeeOldTasks from "../employee.js/employeeOldTasks";
 import TaskAssign from "./taskAssign";
 import axios from "axios";
+import { closeMessage } from "../functions/message";
+import { message } from "antd";
+// import { nanoid } from "nanoid";
 
 const EmployeeCard = ({
   employee,
@@ -15,6 +18,7 @@ const EmployeeCard = ({
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const [oldTasksModal, setOldTasksModal] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
   async function updateDetails(querry) {
     const currentDate = new Date();
 
@@ -40,11 +44,53 @@ const EmployeeCard = ({
     // console.log(data);
   }
 
+  const [disabled, setDisabled] = useState(false);
+  async function releaseCertificate(flag) {
+    const currentDate = new Date();
+
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Adding 1 to month since it's zero-based
+    const day = String(currentDate.getDate()).padStart(2, "0");
+
+    const formattedDate = `${year}-${month}-${day}`;
+    if (flag && !disabled) {
+      setDisabled(true);
+      const { data } = await axios.post("/api/update/employees/admin", {
+        id: employee._id,
+        data: {
+          certificate: {
+            name: employee.name,
+            issueDate: formattedDate,
+            released: true,
+            certificateNo: Math.floor(Math.random() * 9000000000) + 1000000000,
+          },
+        },
+      });
+      if (data.certificate.released === true) {
+        const d = employees.map((emp) => {
+          return emp._id === data._id ? data : emp;
+        });
+        closeMessage(messageApi, "Certificate issued successfully", "success");
+        setEmployees(d);
+        onOptionChange(radio);
+        setDisabled(false);
+        // setFilteredEmployees(d);
+      } else {
+        setDisabled(false);
+        closeMessage(
+          messageApi,
+          "Something went wrong,Please try again later",
+          "erro"
+        );
+      }
+    }
+  }
   return (
     <div
       className="col-sm employee-padding-0"
       style={{ maxWidth: "400px", minWidth: "290px", marginBottom: "25px" }}
     >
+      {contextHolder}
       <div className="card " style={{ borderRadius: "15px" }}>
         <div className="card-body text-center">
           <div className="mt-3 mb-4">
@@ -96,6 +142,17 @@ const EmployeeCard = ({
                         Terminate
                       </a>
                     </li>
+                    {employee.certificate && !employee.certificate.released && (
+                      <li>
+                        <a
+                          onClick={() => releaseCertificate(true)}
+                          class="dropdown-item"
+                          href="#!"
+                        >
+                          Release Certificate
+                        </a>
+                      </li>
+                    )}
                   </ul>
                 </div>
               </div>
