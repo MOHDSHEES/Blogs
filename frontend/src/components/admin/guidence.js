@@ -44,7 +44,7 @@ const Guidence = (props) => {
               >
                 <option selected>Select Manager</option>
                 <option value="Deepak Kumar">Deepak Kumar</option>
-                <option value="Anas Adnan">Anas Adnana</option>
+                <option value="Anas Adnan">Anas Adnan</option>
               </select>
               <button
                 className="btn btn-primary mt-3"
