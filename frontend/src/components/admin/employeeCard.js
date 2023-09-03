@@ -5,6 +5,7 @@ import TaskAssign from "./taskAssign";
 import axios from "axios";
 import { closeMessage } from "../functions/message";
 import { message } from "antd";
+import Guidence from "./guidence";
 // import { nanoid } from "nanoid";
 
 const EmployeeCard = ({
@@ -17,6 +18,7 @@ const EmployeeCard = ({
   // setFilteredEmployees,
 }) => {
   const [modalShow, setModalShow] = useState(false);
+  const [managerShow, setManagerShow] = useState(false);
   const [oldTasksModal, setOldTasksModal] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   async function updateDetails(querry) {
@@ -45,7 +47,9 @@ const EmployeeCard = ({
   }
 
   const [disabled, setDisabled] = useState(false);
-  async function releaseCertificate(flag) {
+
+  // function to release certificate
+  async function releaseCertificate(flag, manager) {
     const currentDate = new Date();
 
     const year = currentDate.getFullYear();
@@ -62,6 +66,7 @@ const EmployeeCard = ({
             name: employee.name,
             issueDate: formattedDate,
             released: true,
+            guidence: manager,
             certificateNo: Math.floor(Math.random() * 9000000000) + 1000000000,
           },
         },
@@ -80,11 +85,12 @@ const EmployeeCard = ({
         closeMessage(
           messageApi,
           "Something went wrong,Please try again later",
-          "erro"
+          "error"
         );
       }
     }
   }
+
   return (
     <div
       className="col-sm employee-padding-0"
@@ -145,7 +151,8 @@ const EmployeeCard = ({
                     {employee.certificate && !employee.certificate.released && (
                       <li>
                         <a
-                          onClick={() => releaseCertificate(true)}
+                          // onClick={() => releaseCertificate(true)}
+                          onClick={() => setManagerShow(true)}
                           class="dropdown-item"
                           href="#!"
                         >
@@ -279,6 +286,11 @@ const EmployeeCard = ({
         setEmployees={setEmployees}
         show={modalShow}
         onHide={() => setModalShow(false)}
+      />
+      <Guidence
+        show={managerShow}
+        onHide={() => setManagerShow(false)}
+        releaseCertificate={releaseCertificate}
       />
     </div>
   );

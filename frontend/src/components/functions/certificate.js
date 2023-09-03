@@ -24,7 +24,7 @@ const handleGeneratePdf = (doc, data) => {
 
   // doc.setFont("Italianno");
 
-  const imgData = "/certificate.png"; // Replace with your image URL
+  const imgData = "/certificate.webp"; // Replace with your image URL
   doc.addImage(
     imgData,
     "PNG",
@@ -118,7 +118,16 @@ const handleGeneratePdf = (doc, data) => {
   areaY = 413;
   areaX = 229;
   centerX = areaX + areaWidth / 2;
-  const imgUrl = "/anasSign.png";
+  let imgUrl;
+  if (
+    data.certificate.guidence &&
+    data.certificate.guidence === "Deepak Kumar"
+  ) {
+    imgUrl = "/deepakSign.png";
+  } else {
+    imgUrl = "/anasSign.png";
+  }
+
   // const backgroundColor = { r: 255, g: 0, b: 0 };
   // doc.setFillColor(backgroundColor.r, backgroundColor.g, backgroundColor.b);
   // doc.rect(areaX, areaY, areaWidth, areaHeight, "F");
@@ -133,7 +142,7 @@ const handleGeneratePdf = (doc, data) => {
   doc.setFont("Inter-Regular", "normal");
   doc.setTextColor(0, 0, 0);
   doc.setFontSize(13);
-  doc.text("Project Manager", centerX, areaY + areaHeight / 2, {
+  doc.text("Manager", centerX, areaY + areaHeight / 2, {
     align: "center",
   });
 
@@ -147,13 +156,19 @@ const handleGeneratePdf = (doc, data) => {
   doc.setFontSize(17);
   doc.setTextColor(94, 27, 34);
   doc.setFont("Roboto-Bold", "normal");
-  doc.text("2018-08-23", doc.internal.pageSize.getWidth() / 2, 530, {
-    align: "center",
-  });
+  doc.text(
+    `${data.certificate.issueDate}`,
+    doc.internal.pageSize.getWidth() / 2,
+    530,
+    {
+      align: "center",
+    }
+  );
 
   doc.setFontSize(15);
   doc.setTextColor(146, 45, 55);
   doc.setFont("Roboto-Bold", "normal");
+
   doc.text(
     `We are happy to certify that ${data.name} has`,
     doc.internal.pageSize.getWidth() / 2,
@@ -163,7 +178,7 @@ const handleGeneratePdf = (doc, data) => {
     }
   );
   doc.text(
-    `completed a three months internship with us as a`,
+    `completed a three months internship with OFFTHEWEB as a`,
     doc.internal.pageSize.getWidth() / 2,
     350,
     {
