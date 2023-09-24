@@ -732,7 +732,7 @@ router.post("/find/blog/status", async (req, res) => {
 });
 
 // update ublogs isActive
-router.post("/update/ublog/status", verifyToken, async (req, res) => {
+router.post("/update/ublog/status", verifyEmployeeToken, async (req, res) => {
   try {
     // const resu = await UBlogs.updateMany(
     //   { _id: { $in: req.body.id } },

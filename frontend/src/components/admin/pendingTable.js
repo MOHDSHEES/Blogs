@@ -36,7 +36,7 @@ const PendingTable = ({ adminName }) => {
     const { data } = await axios.post("/api/update/ublog/status", {
       id: [id],
       status: status,
-      token: localStorage.getItem("token"),
+      token: localStorage.getItem("employeeToken"),
       blog: bl,
       adminName: adminName,
     });
@@ -45,7 +45,7 @@ const PendingTable = ({ adminName }) => {
       setBlog(blog.filter((bl) => bl.id !== id));
     } else if (data && data.status === 404) {
       closeMessage(messageApi, data.msg, "error");
-      navigate("/login");
+      navigate("/");
     } else {
       closeMessage(messageApi, data.msg, "error");
     }

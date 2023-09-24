@@ -86,7 +86,7 @@ const handleGeneratePdf = (doc, data) => {
   doc.text(`Certificate.No: ${data.certificate.certificateNo}`, 300, 22);
   doc.setFontSize(9);
   doc.text(
-    `To verify the certificate, visit  "https://www.offtheweb.in/verify/${data.certificate.certificateNo}" .`,
+    `To verify the certificate, visit  " https://www.offtheweb.in/verify/${data.certificate.certificateNo} " .`,
     30,
     590
   );

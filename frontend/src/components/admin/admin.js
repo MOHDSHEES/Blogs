@@ -64,14 +64,11 @@ const Admin = () => {
       const { data } = await axios.post("/api/authenticate/employee", {
         token: localStorage.getItem("employeeToken"),
       });
+      // console.log(data);
       if (!(data.status === 200 && data.user.adminLevel <= 3)) {
         navigate("/");
       } else if (data.status === 200 && data.user.adminLevel <= 3) {
-        setAdminName(
-          data.user.fname
-            ? data.user.fname + " " + data.user.lname
-            : data.user.lname
-        );
+        setAdminName(data.user.name);
         setAdminData(data.user);
         setAdmin(true);
         setAdminLevel(data.user.adminLevel && data.user.adminLevel);

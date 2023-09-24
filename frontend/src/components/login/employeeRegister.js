@@ -91,7 +91,7 @@ const EmployeeRegister = ({ message }) => {
                   <div className="card-body p-4 p-md-5">
                     <div style={{ textAlign: "center" }}>
                       <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">
-                        Employee/Intern Registeration
+                        Employee/Intern Registration
                       </h3>
                     </div>
                     <div className="pb-3">
