@@ -22,6 +22,7 @@ const EmployeeProfile = ({ setData }) => {
   const [employee, setEmployee] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  // console.log(employee);
 
   //   useEffect(() => {
   //     if (updatedData) {
@@ -273,7 +274,9 @@ const EmployeeProfile = ({ setData }) => {
                       </div>
                       <small>Overall</small>
                     </div> */}
-                    {employee.score.preWeek &&
+                    {employee &&
+                      employee.score &&
+                      employee.score.preWeek &&
                       employee.score.preWeek !== -1 && (
                         <div
                           style={{

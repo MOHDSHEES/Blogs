@@ -54,12 +54,18 @@ const UpdateDetails = (props) => {
     if (data && data.status === 200) {
       closeMessage(messageApi, data.msg, "success");
       let oldData = props.data;
+      // console.log(data);
       let newData = data.details;
       //   console.log(newData);
       //   console.log(oldData);
       props.upDatedData({
         ...newData,
         _id: oldData._id,
+        adminLevel: oldData.adminLevel,
+        certificate: oldData.certificate,
+        profileImg: oldData.profileImg,
+        score: oldData.score,
+        status: oldData.status,
         employeeId: oldData.employeeId,
         tasks: oldData.tasks,
       });
