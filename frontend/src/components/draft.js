@@ -15,6 +15,7 @@ const Draft = () => {
   const location = useLocation();
 
   const [fromAdmin, setFromAdmin] = useState(false);
+
   const [activationRequest, setactivationRequest] = useState(null);
   const [updatedDate, setUpdatedDate] = useState(null);
   // console.log(location.state);
@@ -155,7 +156,7 @@ const Draft = () => {
           metaData: metaData,
           blog: state,
           fromAdmin: fromAdmin,
-          activationRequest: fromAdmin ? activationRequest : props,
+          activationRequest: props,
           updatedDate: updatedDate,
         });
         if (data && data.status === 1)
