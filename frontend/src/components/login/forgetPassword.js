@@ -38,7 +38,7 @@ const ForgetPassword = (props) => {
         closeMessage(messageApi, data.message, "success");
         props.onHide();
       } else {
-        closeMessage(messageApi, data.message, "success");
+        closeMessage(messageApi, data.message, "error");
         setError(data.message);
         setisValid(false);
       }

@@ -1446,7 +1446,7 @@ router.post("/add/employee/sendemail", async (req, res) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {
     to: data.email, // Change to your recipient
-    from: "official.offtheweb@gmail.com", // Change to your verified sender
+    from: { email: "official.offtheweb@gmail.com", name: "OFFTHEWEB" }, // Change to your verified sender
     subject: "Register",
     html: registerEmployee(data, token),
   };
@@ -1478,7 +1478,7 @@ router.post("/contact/sendemail", async (req, res) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {
     to: "mohd.shees101@gmail.com", // Change to your recipient
-    from: "official.offtheweb@gmail.com", // Change to your verified sender
+    from: { email: "official.offtheweb@gmail.com", name: "OFFTHEWEB" }, // Change to your verified sender
     subject: data.subject,
     html: contactForm(data),
   };
@@ -1515,7 +1515,7 @@ router.post("/forgetPassword", async (req, res) => {
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       const msg = {
         to: email, // Change to your recipient
-        from: "official.offtheweb@gmail.com", // Change to your verified sender
+        from: { email: "official.offtheweb@gmail.com", name: "OFFTHEWEB" }, // Change to your verified sender
         subject: "OFFTHEWEB PASSWORD",
         html: forgetPassword(token),
       };
@@ -1564,7 +1564,7 @@ router.post("/forgetPassword/employee", async (req, res) => {
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       const msg = {
         to: email, // Change to your recipient
-        from: "official.offtheweb@gmail.com", // Change to your verified sender
+        from: { email: "official.offtheweb@gmail.com", name: "OFFTHEWEB" }, // Change to your verified sender
         subject: "OFFTHEWEB PASSWORD",
         html: forgetEmployeePassword(token),
       };
@@ -1605,7 +1605,7 @@ router.post("/emailotp", async (req, res) => {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
       to: email, // Change to your recipient
-      from: "official.offtheweb@gmail.com", // Change to your verified sender
+      from: { email: "official.offtheweb@gmail.com", name: "OFFTHEWEB" }, // Change to your verified sender
       subject: "OTP for Email verification ",
       html: sendotp(OTP, email),
     };
