@@ -24,7 +24,7 @@ const blogSchema = new mongoose.Schema({
   comments: [],
   blog: { type: String, required: true },
   status: { type: String, default: "Inactive" },
-  user: { type: String, required: true },
+  user: { type: String },
   activationRequest: { type: String },
   activationDetails: {
     activatedBy: { type: String },
